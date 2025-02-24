@@ -20,30 +20,6 @@ build_property._RazorSourceGeneratorDebug =
 build_property.EffectiveAnalysisLevelStyle = 8.0
 build_property.EnableCodeStyleSeverity = 
 
-[C:/TotemADS/TotemPWA/Views/Home/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = VG90ZW1QV0FcVmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/TotemADS/TotemPWA/Views/Home/Privacy.cshtml]
-build_metadata.AdditionalFiles.TargetPath = VG90ZW1QV0FcVmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/TotemADS/TotemPWA/Views/Shared/Error.cshtml]
-build_metadata.AdditionalFiles.TargetPath = VG90ZW1QV0FcVmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/TotemADS/TotemPWA/Views/Shared/_ValidationScriptsPartial.cshtml]
-build_metadata.AdditionalFiles.TargetPath = VG90ZW1QV0FcVmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/TotemADS/TotemPWA/Views/_ViewImports.cshtml]
-build_metadata.AdditionalFiles.TargetPath = VG90ZW1QV0FcVmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/TotemADS/TotemPWA/Views/_ViewStart.cshtml]
-build_metadata.AdditionalFiles.TargetPath = VG90ZW1QV0FcVmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
 [C:/TotemADS/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -67,10 +43,6 @@ build_metadata.AdditionalFiles.CssScope =
 [C:/TotemADS/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
-
-[C:/TotemADS/TotemPWA/Views/Shared/_Layout.cshtml]
-build_metadata.AdditionalFiles.TargetPath = VG90ZW1QV0FcVmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = b-g9h3f3s83m
 
 [C:/TotemADS/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
