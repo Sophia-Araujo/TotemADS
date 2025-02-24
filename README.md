@@ -8,9 +8,10 @@ Totem de vendas de fast food
 
 | Cor               | Hexadecimal                                                |
 | ----------------- | ---------------------------------------------------------------- |
-| Cor exemplo       | ![#990000](https://colorhunt.co/palette/990000ff5b00d4d925ffee63) #990000 |
+| Cor exemplo       | ![#990000]([https://colorhunt.co/palette/990000ff5b00d4d925ffee63](https://colorhunt.co/palette/990000ff5b00d4d925ffee63)) #990000 |
+| Cor exemplo       | ![#990000]() #990000 |
 | Cor exemplo       | ![#FF5B00](https://via.placeholder.com/10/f8f8f8?text=+) #FF5B00 |
-| Cor exemplo       | ![#D4D925](https://via.placeholder.com/10/00b48a?text=+) #D4D925 |
+| Cor exemplo       | ![#D4D925](https:.//via.placeholder.com/10/00b48a?text=+) #D4D925 |
 | Cor exemplo       | ![#FFEE63](https://via.placeholder.com/10/00b48a?text=+) #FFEE63 |
 
 
