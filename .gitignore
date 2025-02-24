@@ -1,0 +1,33 @@
+# Compiled binary and build folders
+bin/
+obj/
+
+# User-specific files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Visual Studio and Rider specific files
+.vscode/
+.idea/
+*.code-workspace
+
+# NuGet packages
+*.nupkg
+**/packages/
+
+# Logs and debugging files
+*.log
+*.tlog
+
+
+# Node modules and frontend dependencies
+node_modules/
+
+# PWA build artifacts
+dist/
+
+# ASP.NET specific
+project.lock.json
+artifacts/
