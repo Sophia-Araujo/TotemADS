@@ -8,11 +8,11 @@ Totem de vendas de fast food
 
 | Cor               | Hexadecimal                                                |
 | ----------------- | ---------------------------------------------------------------- |
-| Cor exemplo       | ![#990000]()) #990000 |
-| Cor exemplo       | ![#990000]() #990000 |
-| Cor exemplo       | ![#FF5B00]() #FF5B00 |
-| Cor exemplo       | ![#D4D925]() #D4D925 |
-| Cor exemplo       | ![#FFEE63]() #FFEE63 |
+| Cor exemplo       | #990000 |
+| Cor exemplo       | #990000 |
+| Cor exemplo       | #FF5B00 |
+| Cor exemplo       | #D4D925 |
+| Cor exemplo       | #FFEE63 |
 
 
 ## Equipe :
