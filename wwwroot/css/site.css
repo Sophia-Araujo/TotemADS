@@ -1,46 +1,230 @@
-body {
-  font-family: Arial, sans-serif;
-  background: #f5f5f5;
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+.index1 {
+  background-color: #FDF3EB;
   margin: 0;
-  padding: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
 }
 
-.container {
+
+.content{
+  position: relative;
+  z-index: 3; /* Garante que fique acima das formas */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
-  background: linear-gradient(135deg, #a8cf45, #ff6600);
-  padding: 20px;
-  min-height: 100vh;
 }
 
+
+.shape1 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #C4D438; /* Verde claro */
+    clip-path: polygon(100% 4%, 100% 0%, 100% 0%, 50% 0%, 0% 0%, 8% 0%, 8% 0%, 0% 0%, 0% 20%, 0% 8%, 0% 8%, 0% 8%, 0% 86%, 100% 4%);
+    z-index: 0;
+}
+
+.shape2 {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #FF6700; /* Laranja */
+    clip-path: polygon(100% 4%, 100% 0%, 100% 0%, 78% 0%, 0% 0%, 100% 47%, 100% 44%, 100% 54%, 100% 76%, 100% 48%, 100% 43%, 100% 44%, 100% 43%, 100% 25%);
+    z-index: 0;
+}
 
 
 .logo {
+    width: 80%; 
+    z-index: 3;
+}
+
+.comidas {
   width: 100%;
-  margin-bottom: 0%;
+  z-index: 4;
 }
-
-h2 {
-  color: white;
-  font-size: 1.8em;
-  margin: 20px 0;
-}
-
-.food-images img {
-  width: 80px;
-  margin: 10px;
-}
-
+  
 .order-btn {
-  background: #ff6600;
-  color: white;
-  padding: 15px 30px;
-  border: none;
-  font-size: 1.2em;
-  cursor: pointer;
-  border-radius: 10px;
-  margin-top: 20px;
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    font-style: normal;
+    background: #ff6600;
+    width: 80%;
+    color: white;
+    padding: 10px 10px;
+    border: none;
+    font-size: 1.2em;
+    cursor: pointer;
+    border-radius: 20px;
+    margin-top: 20px;
+    z-index: 4;
+  }
+  
+  .order-btn:hover {
+    background: #C4D438;
+  }
+
+.texto{
+  color: #FDF3EB;
+    font-family: "Poppins", sans-serif;
+    font-size: 35px;
+    font-weight: 600;
+    font-style: normal;
+}
+  
+
+
+/*2º TELA*/
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
 }
 
-.order-btn:hover {
-  background: #cc5500;
+body {
+  background: #f8f8f8;
+}
+
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  background: white; /* Garante que o fundo do header não fique transparente */
+}
+
+header img {
+  width: 100%;
+  height: 23%;
+  object-fit: cover;
+  position: fixed;
+}
+
+main {
+  display: flex;
+  margin-top: 34%;
+}
+/* Sidebar fixa */
+.sidebar {
+  width: 20%;
+  background: white;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 20px;
+  position: fixed;
+  height: calc(100vh - 200px); /* Ajusta para ocupar toda a tela sem o header */
+  overflow-y: auto; /* Adiciona scroll se necessário */
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.category {
+  background: #f0f0f0;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  border: none;
+  padding: 5%;
+  margin: 7% 0% 7% 0%;
+  text-align: center;
+  cursor: pointer;
+  border-radius: 15%;
+  transition: 0.3s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1%;
+}
+
+.category img {
+  width: 80%;
+  height: 80%;
+}
+
+.category:hover {
+  background: #cddc39;
+}
+
+
+/* Menu */
+.menu {
+  margin-left: 20%;
+  overflow-y: hidden;
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+  padding: 2%;
+  margin-bottom: 9%;
+}
+
+.card {
+  background: white;
+  padding: 15px;
+  border-radius: 6%;
+  text-align: center;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  overflow-y: auto; /* Adiciona scroll se necessário */
+}
+
+.card img {
+  width: 70%;
+  height: 40%;
+}
+
+.add-to-cart {
+  background: #ff9800;
+  color: white;
+  border: none;
+  padding: 8px;
+  width: 100%;
+  cursor: pointer;
+  border-radius: 20px;
+  margin-top: 10px;
+}
+
+.add-to-cart:hover {
+  background: #C4D438;
+}
+
+/* Rodapé fixo */
+footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background: white;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  border-top: 2px solid #ccc;
+}
+
+.cart-button {
+  background: red;
+  border-radius: 20px;
+  color: white;
+  padding: 2%;
+  border: none;
+  cursor: pointer;
+}
+
+.checkout-button {
+  background: green;
+  color: white;
+  width: 15%;
+  border-radius: 20px;
+  border: none;
+  cursor: pointer;
 }
