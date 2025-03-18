@@ -10,7 +10,7 @@
 - A tela inicial deve exibir categorias organizadas (Lanches, Bebidas, Sobremesas etc.).  
 - O botão 'Iniciar Pedido' deve estar visível e acessível.  
 - O tempo de carregamento da tela não deve ultrapassar 4 segundos.  
-- Ícones e textos devem ser legíveis para diferentes tipos de usuários.  
+- Ícones e textos devem ser legíveis para diferentes tipos de usuários.
 
 ---  
 
