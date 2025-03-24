@@ -103,10 +103,6 @@
 **Acceptance Criteria (RF10)**  
 - Deve haver um botão para cancelar todo o pedido.  
 
----  
-Aqui está a formatação correta dos requisitos que você pediu:  
-
----
 
 ### **USER STORY: RF11 - EFETIVAÇÃO DO PEDIDO**  
 **Como** cliente  
@@ -253,7 +249,6 @@ Aqui está a formatação correta dos requisitos que você pediu:
 - O cliente deve visualizar o saldo de pontos disponível na interface.  
 - O sistema deve permitir o resgate de pontos de forma simples e intuitiva.
 - 
-# Requisitos Não Funcionais (RNF)
 
 # **Requisitos Não Funcionais (RNF)**  
 
