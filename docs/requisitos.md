@@ -5,8 +5,7 @@
 **Como** cliente  
 **Eu quero** visualizar uma tela inicial intuitiva  
 **Para** que eu possa iniciar meu pedido de forma fácil.  
-**Acceptance Criteria (RF01)**  
-- A tela inicial deve exibir categorias organizadas (Lanches, Bebidas, Sobremesas etc.).  
+**Acceptance Criteria (RF01)**   
 - O botão 'Iniciar Pedido' deve estar visível e acessível.  
 - O tempo de carregamento da tela não deve ultrapassar 4 segundos.  
 - Ícones e textos devem ser legíveis para diferentes tipos de usuários.
