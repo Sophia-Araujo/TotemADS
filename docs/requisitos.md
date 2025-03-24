@@ -113,7 +113,7 @@
 
 ---  
 
-### **USER STORY: RF12 - EMISSÃO DE NOTA FISCAL**  
+**USER STORY: RF12 - EMISSÃO DE NOTA FISCAL**  
 **Como** cliente  
 **Eu quero** receber minha nota fiscal  
 **Para** ter um comprovante de compra.  
@@ -122,7 +122,7 @@
 
 ---  
 
-### **USER STORY: RF13 - PAGAMENTO INTEGRADO**  
+**USER STORY: RF13 - PAGAMENTO INTEGRADO**  
 **Como** cliente  
 **Eu quero** pagar meu pedido de forma conveniente  
 **Para** concluir minha compra sem dificuldades.  
@@ -131,7 +131,7 @@
 
 ---  
 
-### **USER STORY: RF14 - IDENTIFICAÇÃO DO PEDIDO**  
+ **USER STORY: RF14 - IDENTIFICAÇÃO DO PEDIDO**  
 **Como** cliente  
 **Eu quero** saber como identificar meu pedido  
 **Para** pegá-lo quando estiver pronto.  
@@ -140,7 +140,7 @@
 
 ---  
 
-### **USER STORY: RF15 - MODO DALTÔNICO**  
+**USER STORY: RF15 - MODO DALTÔNICO**  
 **Como** cliente com daltonismo  
 **Eu quero** que o sistema tenha um modo daltônico  
 **Para** que eu possa visualizar os conteúdos com melhor contraste.  
@@ -151,7 +151,7 @@
 
 ---  
 
-### **USER STORY: RF16 - NAVEGAÇÃO POR CATEGORIAS**  
+**USER STORY: RF16 - NAVEGAÇÃO POR CATEGORIAS**  
 **Como** cliente  
 **Eu quero** navegar pelos produtos organizados por categorias  
 **Para** encontrar rapidamente os itens que desejo.  
@@ -162,7 +162,7 @@
 
 ---  
 
-### **USER STORY: RF17 - FILTROS NO MENU**  
+**USER STORY: RF17 - FILTROS NO MENU**  
 **Como** cliente  
 **Eu quero** poder aplicar filtros no menu  
 **Para** refinar minha busca e encontrar produtos específicos com mais facilidade.  
@@ -173,7 +173,7 @@
 
 ---  
 
-### **USER STORY: RF18 - PROGRESSO DO PEDIDO**  
+**USER STORY: RF18 - PROGRESSO DO PEDIDO**  
 **Como** cliente  
 **Eu quero** visualizar o progresso do meu pedido em tempo real  
 **Para** acompanhar cada etapa até a retirada.  
@@ -185,7 +185,7 @@
 
 ---
 
-### **USER STORY: RF19 - NOTIFICAÇÃO DE PEDIDO PRONTO**  
+**USER STORY: RF19 - NOTIFICAÇÃO DE PEDIDO PRONTO**  
 **Como** cliente  
 **Eu quero** ser notificado quando meu pedido estiver pronto  
 **Para** saber o momento exato de retirá-lo.  
@@ -196,7 +196,7 @@
 
 ---  
 
-### **USER STORY: RF20 - CADASTRO DE CATEGORIAS**  
+**USER STORY: RF20 - CADASTRO DE CATEGORIAS**  
 **Como** administrador  
 **Eu quero** cadastrar e gerenciar categorias e subcategorias de produtos  
 **Para** organizar melhor o cardápio e facilitar a navegação do cliente.  
@@ -207,7 +207,7 @@
 
 ---  
 
-### **USER STORY: RF21 - LIMITE DE INGREDIENTES**  
+**USER STORY: RF21 - LIMITE DE INGREDIENTES**  
 **Como** cliente  
 **Eu quero** ter um limite definido de ingredientes personalizáveis  
 **Para** garantir que meu pedido siga as regras do restaurante.  
@@ -218,7 +218,7 @@
 
 ---  
 
-### **USER STORY: RF22 - GERENCIAMENTO DO CARDÁPIO (ADMIN)**  
+**USER STORY: RF22 - GERENCIAMENTO DO CARDÁPIO (ADMIN)**  
 **Como** administrador  
 **Eu quero** adicionar, editar e remover itens do cardápio  
 **Para** manter o menu sempre atualizado.  
@@ -229,7 +229,7 @@
 
 ---  
 
-### **USER STORY: RF23 - RELATÓRIO DE VENDAS**  
+**USER STORY: RF23 - RELATÓRIO DE VENDAS**  
 **Como** administrador  
 **Eu quero** acessar relatórios de vendas e preferências dos clientes  
 **Para** entender melhor o desempenho dos produtos e otimizar o cardápio.  
@@ -240,7 +240,7 @@
 
 ---  
 
-### **USER STORY: RF24 - PROGRAMA DE FIDELIDADE**  
+**USER STORY: RF24 - PROGRAMA DE FIDELIDADE**  
 **Como** cliente  
 **Eu quero** acumular e resgatar pontos ao fazer pedidos  
 **Para** aproveitar benefícios e descontos no restaurante.  
@@ -252,7 +252,7 @@
 
 # **Requisitos Não Funcionais (RNF)**  
 
-### **USER STORY: RNF01 - TEMPO DE RESPOSTA**  
+**USER STORY: RNF01 - TEMPO DE RESPOSTA**  
 **Como** usuário  
 **Eu quero** que o sistema responda rapidamente  
 **Para** não perder tempo esperando.  
@@ -261,7 +261,7 @@
 
 ---
 
-### **USER STORY: RNF02 - INTERFACE INTUITIVA**  
+**USER STORY: RNF02 - INTERFACE INTUITIVA**  
 **Como** usuário  
 **Eu quero** uma interface simples e fácil de entender  
 **Para** que minha experiência seja agradável.  
@@ -270,7 +270,7 @@
 
 ---
 
-### **USER STORY: RNF03 - SEGURANÇA DE PAGAMENTO**  
+**USER STORY: RNF03 - SEGURANÇA DE PAGAMENTO**  
 **Como** usuário  
 **Eu quero** que meus dados bancários estejam protegidos  
 **Para** que eu possa pagar com segurança.  
@@ -279,7 +279,7 @@
 
 ---
 
-### **USER STORY: RNF04 - CONFORMIDADE COM LGPD**  
+**USER STORY: RNF04 - CONFORMIDADE COM LGPD**  
 **Como** usuário  
 **Eu quero** que meus dados sejam protegidos  
 **Para** que minha privacidade seja respeitada.  
@@ -288,7 +288,7 @@
 
 ---
 
-### **USER STORY: RNF05 - DEPLOY CONTÍNUO**  
+**USER STORY: RNF05 - DEPLOY CONTÍNUO**  
 **Como** desenvolvedor  
 **Eu quero** atualizações sem interrupção  
 **Para** que o sistema esteja sempre disponível.  
@@ -297,7 +297,7 @@
 
 ---
 
-### **USER STORY: RNF06 - PREVENÇÃO DE TRAVAMENTOS**  
+**USER STORY: RNF06 - PREVENÇÃO DE TRAVAMENTOS**  
 **Como** usuário  
 **Eu quero** que o sistema funcione sem travamentos  
 **Para** que minha experiência seja fluida e sem interrupções.  
@@ -306,7 +306,7 @@
 
 ---
 
-### **USER STORY: RNF07 - RESPONSIVIDADE**  
+**USER STORY: RNF07 - RESPONSIVIDADE**  
 **Como** usuário  
 **Eu quero** acessar o sistema em qualquer dispositivo  
 **Para** ter uma experiência consistente e fluida.  
@@ -315,7 +315,7 @@
 
 ---
 
-### **USER STORY: RNF08 - ESCALABILIDADE**  
+**USER STORY: RNF08 - ESCALABILIDADE**  
 **Como** administrador  
 **Eu quero** que o sistema suporte um grande número de usuários  
 **Para** garantir um bom desempenho mesmo com alta demanda.  
@@ -324,7 +324,7 @@
 
 ---
 
-### **USER STORY: RNF09 - DISPONIBILIDADE 24/7**  
+**USER STORY: RNF09 - DISPONIBILIDADE 24/7**  
 **Como** usuário  
 **Eu quero** acessar o sistema a qualquer momento  
 **Para** que eu possa utilizá-lo sempre que precisar.  
@@ -333,7 +333,7 @@
 
 ---
 
-### **USER STORY: RNF10 - PROTEÇÃO CONTRA ATAQUES**  
+**USER STORY: RNF10 - PROTEÇÃO CONTRA ATAQUES**  
 **Como** administrador  
 **Eu quero** que o sistema seja seguro contra ameaças  
 **Para** evitar acessos indevidos e vazamento de dados.  
@@ -342,7 +342,7 @@
 
 ---
 
-### **USER STORY: RNF11 - BACKUP E SINCRONIZAÇÃO**  
+**USER STORY: RNF11 - BACKUP E SINCRONIZAÇÃO**  
 **Como** administrador  
 **Eu quero** que o sistema tenha backups frequentes  
 **Para** evitar perda de dados em caso de falha.  
@@ -351,7 +351,7 @@
 
 ---
 
-### **USER STORY: RNF12 - INTERAÇÕES SONORAS E VISUAIS**  
+**USER STORY: RNF12 - INTERAÇÕES SONORAS E VISUAIS**  
 **Como** usuário  
 **Eu quero** que o sistema forneça feedback visual e sonoro  
 **Para** me ajudar a entender as ações realizadas.  
@@ -360,7 +360,7 @@
 
 ---
 
-### **USER STORY: RNF13 - PROTEÇÃO DE DADOS**  
+**USER STORY: RNF13 - PROTEÇÃO DE DADOS**  
 **Como** usuário  
 **Eu quero** que minhas informações sejam armazenadas de forma segura  
 **Para** evitar vazamento ou uso indevido.  
@@ -369,7 +369,7 @@
 
 ---
 
-### **USER STORY: RNF14 - USABILIDADE (UI/UX)**  
+**USER STORY: RNF14 - USABILIDADE (UI/UX)**  
 **Como** usuário  
 **Eu quero** que o sistema tenha uma experiência de uso intuitiva  
 **Para** facilitar a navegação e o uso das funcionalidades.  
@@ -378,7 +378,7 @@
 
 ---
 
-### **USER STORY: RNF15 - CAPACIDADE DE PROCESSAMENTO**  
+**USER STORY: RNF15 - CAPACIDADE DE PROCESSAMENTO**  
 **Como** administrador  
 **Eu quero** que o sistema suporte alto volume de transações  
 **Para** evitar lentidão ou falhas em momentos de pico.  
@@ -387,7 +387,7 @@
 
 ---
 
-### **USER STORY: RNF16 - MODO OFFLINE**  
+**USER STORY: RNF16 - MODO OFFLINE**  
 **Como** usuário  
 **Eu quero** que o sistema funcione parcialmente sem internet  
 **Para** evitar interrupções caso eu perca a conexão.  
@@ -396,7 +396,7 @@
 
 ---
 
-### **USER STORY: RNF17 - CACHE PARA CARREGAMENTO RÁPIDO**  
+**USER STORY: RNF17 - CACHE PARA CARREGAMENTO RÁPIDO**  
 **Como** usuário  
 **Eu quero** que o sistema carregue rapidamente  
 **Para** evitar esperas desnecessárias.  
@@ -405,7 +405,7 @@
 
 ---
 
-### **USER STORY: RNF18 - ANÁLISE DE USO E RELATÓRIOS**  
+**USER STORY: RNF18 - ANÁLISE DE USO E RELATÓRIOS**  
 **Como** administrador  
 **Eu quero** acessar métricas de uso do sistema  
 **Para** identificar melhorias e otimizar a experiência do usuário.  
@@ -414,7 +414,7 @@
 
 ---
 
-### **USER STORY: RNF19 - TEMPO DE INATIVIDADE**  
+**USER STORY: RNF19 - TEMPO DE INATIVIDADE**  
 **Como** usuário  
 **Eu quero** que o sistema volte à tela inicial automaticamente  
 **Para** evitar que pedidos abandonados fiquem na tela.  
