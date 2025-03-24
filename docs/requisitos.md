@@ -50,6 +50,7 @@
 **Eu quero** visualizar os produtos disponíveis com suas informações  
 **Para** que eu possa escolher o que comprar.  
 **Acceptance Criteria (RF05)**  
+- A tela deve exibir categorias organizadas (Lanches, Bebidas, Sobremesas etc.). 
 - Todos os produtos devem ser exibidos com imagem, preço e descrição.  
 - O usuário deve conseguir visualizar os detalhes do item antes de adicioná-lo ao carrinho.  
 
