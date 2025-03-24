@@ -251,5 +251,197 @@ Aqui está a formatação correta dos requisitos que você pediu:
 **Acceptance Criteria (RF24)**  
 - O sistema deve permitir login para vincular os pontos ao cliente.  
 - O cliente deve visualizar o saldo de pontos disponível na interface.  
-- O sistema deve permitir o resgate de pontos de forma simples e intuitiva.  
+- O sistema deve permitir o resgate de pontos de forma simples e intuitiva.
+- 
+# Requisitos Não Funcionais (RNF)
+
+## USER STORY: RNF01 TEMPO DE RESPOSTA  
+Como usuário  
+Eu quero que o sistema responda rapidamente  
+Para não perder tempo esperando.  
+
+**Acceptance Criteria (RNF01)**  
+• O carregamento de menus deve ocorrer em até 4 segundos.  
+
+---
+
+## USER STORY: RNF02 INTERFACE INTUITIVA  
+Como usuário  
+Eu quero uma interface simples e fácil de entender  
+Para que minha experiência seja agradável.  
+
+**Acceptance Criteria (RNF02)**  
+• A UI deve ser de fácil compreensão e uso.  
+
+---
+
+## USER STORY: RNF03 SEGURANÇA DE PAGAMENTO  
+Como usuário  
+Eu quero que meus dados bancários estejam protegidos  
+Para que eu possa pagar com segurança.  
+
+**Acceptance Criteria (RNF03)**  
+• O sistema deve garantir proteção contra fraudes e segurança nos dados bancários.  
+
+---
+
+## USER STORY: RNF04 CONFORMIDADE COM LGPD  
+Como usuário  
+Eu quero que meus dados sejam protegidos  
+Para que minha privacidade seja respeitada.  
+
+**Acceptance Criteria (RNF04)**  
+• O sistema deve garantir privacidade e proteção de dados conforme a LGPD.  
+
+---
+
+## USER STORY: RNF05 DEPLOY CONTÍNUO  
+Como desenvolvedor  
+Eu quero atualizações sem interrupção  
+Para que o sistema esteja sempre disponível.  
+
+**Acceptance Criteria (RNF05)**  
+• As atualizações devem ser implementadas sem downtime.  
+
+---
+
+## USER STORY: RNF06 PREVENÇÃO DE TRAVAMENTOS  
+Como usuário  
+Eu quero que o sistema funcione sem travamentos  
+Para que minha experiência seja fluida e sem interrupções.  
+
+**Acceptance Criteria (RNF06)**  
+• O sistema deve detectar e prevenir falhas críticas que possam travar a interface.  
+
+---
+
+## USER STORY: RNF07 RESPONSIVIDADE  
+Como usuário  
+Eu quero acessar o sistema em qualquer dispositivo  
+Para que eu tenha uma experiência consistente.  
+
+**Acceptance Criteria (RNF07)**  
+• O sistema deve ser um PWA e funcionar em diferentes dispositivos.  
+
+---
+
+## USER STORY: RNF08 ESCALABILIDADE  
+Como administrador  
+Eu quero que o sistema suporte um grande número de usuários  
+Para que o desempenho não seja prejudicado.  
+
+**Acceptance Criteria (RNF08)**  
+• O sistema deve manter a performance ao aumentar a carga de acessos.  
+
+---
+
+## USER STORY: RNF09 DISPONIBILIDADE 24/7  
+Como usuário  
+Eu quero acessar o sistema a qualquer hora  
+Para que eu possa usá-lo sempre que necessário.  
+
+**Acceptance Criteria (RNF09)**  
+• O sistema deve ter uma disponibilidade mínima de 99,9%.  
+
+---
+
+## USER STORY: RNF10 PROTEÇÃO CONTRA ATAQUES  
+Como administrador  
+Eu quero que o sistema seja seguro contra ameaças  
+Para evitar acessos indevidos e vazamento de dados.  
+
+**Acceptance Criteria (RNF10)**  
+• O sistema deve implementar medidas contra injeção SQL, XSS e outros ataques.  
+
+---
+
+## USER STORY: RNF11 BACKUP E SINCRONIZAÇÃO  
+Como administrador  
+Eu quero que o sistema tenha backups frequentes  
+Para garantir que os dados estejam seguros em caso de falha.  
+
+**Acceptance Criteria (RNF11)**  
+• O sistema deve realizar backups automáticos em intervalos regulares.  
+• Os dados devem ser sincronizados automaticamente com o servidor.  
+
+---
+
+## USER STORY: RNF12 INTERAÇÕES SONORAS E VISUAIS  
+Como usuário  
+Eu quero que o sistema forneça feedback visual e sonoro  
+Para me ajudar a identificar ações realizadas.  
+
+**Acceptance Criteria (RNF12)**  
+• Sons e animações devem ser ativados por padrão, mas com opção de desativação.  
+
+---
+
+## USER STORY: RNF13 PROTEÇÃO DE DADOS  
+Como usuário  
+Eu quero que minhas informações sejam armazenadas de forma segura  
+Para evitar vazamento ou uso indevido.  
+
+**Acceptance Criteria (RNF13)**  
+• Todos os dados sensíveis devem ser armazenados com criptografia.  
+
+---
+
+## USER STORY: RNF14 USABILIDADE (UI/UX)  
+Como usuário  
+Eu quero que o sistema tenha uma experiência de uso intuitiva  
+Para que eu possa navegar facilmente.  
+
+**Acceptance Criteria (RNF14)**  
+• O design deve seguir boas práticas de UI/UX para acessibilidade.  
+
+---
+
+## USER STORY: RNF15 CAPACIDADE DE PROCESSAMENTO  
+Como administrador  
+Eu quero que o sistema suporte alto volume de transações  
+Para evitar lentidão ou falhas em momentos de pico.  
+
+**Acceptance Criteria (RNF15)**  
+• O sistema deve suportar múltiplos acessos simultâneos sem perda de desempenho.  
+
+---
+
+## USER STORY: RNF16 MODO OFFLINE  
+Como usuário  
+Eu quero poder usar o sistema mesmo sem internet  
+Para garantir que minha experiência não seja interrompida.  
+
+**Acceptance Criteria (RNF16)**  
+• O sistema deve permitir operações mínimas sem conexão, com sincronização posterior.  
+
+---
+
+## USER STORY: RNF17 CACHE PARA CARREGAMENTO RÁPIDO  
+Como usuário  
+Eu quero que o sistema carregue rapidamente  
+Para evitar esperas desnecessárias.  
+
+**Acceptance Criteria (RNF17)**  
+• O sistema deve utilizar cache para otimizar o tempo de carregamento.  
+
+---
+
+## USER STORY: RNF18 ANÁLISE DE USO E RELATÓRIOS  
+Como administrador  
+Eu quero acessar métricas de uso do sistema  
+Para identificar melhorias e otimizar a experiência do usuário.  
+
+**Acceptance Criteria (RNF18)**  
+• O sistema deve coletar e exibir estatísticas de uso para análise de desempenho.  
+
+---
+
+## USER STORY: RNF19 TEMPO DE INATIVIDADE  
+Como usuário  
+Eu quero que o sistema volte à tela inicial automaticamente  
+Para garantir que pedidos abandonados não fiquem na tela.  
+
+**Acceptance Criteria (RNF19)**  
+• O sistema deve retornar automaticamente à tela inicial após 1 minuto de inatividade.  
+
 
