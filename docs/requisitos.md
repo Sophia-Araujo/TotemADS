@@ -1,5 +1,5 @@
 *USER STORIES E CRITÉRIOS DE ACEITAÇÃO* 
-
+# **Requisitos Funcionais (RF)**  
 ---  
 
 **USER STORY: RF01 - TELA DE INÍCIO**  
