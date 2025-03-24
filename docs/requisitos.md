@@ -71,8 +71,9 @@
 **Eu quero** adicionar produtos ao carrinho  
 **Para** que eu possa comprar múltiplos itens antes de finalizar o pedido.  
 **Acceptance Criteria (RF07)**  
-- Deve existir um botão visível para adicionar itens ao carrinho.  
-- O carrinho deve atualizar automaticamente quando um item for adicionado.  
+- Deve existir um botão visível para adicionar itens ao carrinho.
+- A tela do carrinho deverá ter um botão para remover ou alterar a quantidade de cada item.
+- O carrinho deve atualizar, ou seja, recalcular o valor automaticamente quando um item for adicionado.  
 
 ---  
 
@@ -117,7 +118,9 @@
 **Eu quero** receber minha nota fiscal  
 **Para** ter um comprovante de compra.  
 **Acceptance Criteria (RF12)**  
-- O sistema deve perguntar se o cliente deseja incluir CPF.  
+- O sistema deve perguntar se o cliente deseja incluir CPF.
+- A nota deve ser gerada automaticamente após o pagamento.
+- o cliente pode optar por não informar o CPF.
 
 ---  
 
@@ -270,11 +273,13 @@
 ---
 
 **USER STORY: RNF03 - SEGURANÇA DE PAGAMENTO**  
-**Como** usuário  
-**Eu quero** que meus dados bancários estejam protegidos  
-**Para** que eu possa pagar com segurança.  
+**Como** cliente  
+**Eu quero** que meus dados bancários estejam protegidos
+**Para** que eu possa pagar com segurança, me sentindo seguro contra fraudes e clonagens de dados bancários.  
 **Acceptance Criteria (RNF03)**  
-- O sistema deve usar criptografia nos pagamentos.  
+- O sistema deve usar criptografia nos pagamentos.
+- Há verificação entre o sistema e o banco para garantir a legitimidade da transação
+- Os dados sensíveis do cliente não derverá ser armazenado sem autorização 
 
 ---
 
@@ -288,11 +293,13 @@
 ---
 
 **USER STORY: RNF05 - DEPLOY CONTÍNUO**  
-**Como** desenvolvedor  
-**Eu quero** atualizações sem interrupção  
-**Para** que o sistema esteja sempre disponível.  
+**Como** admistrador  
+**Eu quero** que sejam implementadas novos recursos e correções
+**Para** que o sistema esteja sempre disponível, com novas atualizações.  
 **Acceptance Criteria (RNF05)**  
-- As atualizações devem ser implementadas sem downtime.  
+- As atualizações devem ser implementadas sem downtime.
+- As atualizações devem ser testadas ANTES para garantir a estabilidade
+- As atualizações deverão estar protegidas com ataques (SQL, Injection, etc)  
 
 ---
 
@@ -343,10 +350,12 @@
 
 **USER STORY: RNF11 - BACKUP E SINCRONIZAÇÃO**  
 **Como** administrador  
-**Eu quero** que o sistema tenha backups frequentes  
+**Eu quero** que o sistema tenha backups frequentes e regulares dos dados
 **Para** evitar perda de dados em caso de falha.  
 **Acceptance Criteria (RNF11)**  
-- O sistema deve realizar backups automáticos e sincronização com o servidor.  
+- O sistema deve realizar backups automáticos e sincronização com o servidor.
+- Haverá sincronização automática dos dados entre dispositivos
+- Em caso de falhas os dados deverão ser recuperados do último backup.
 
 ---
 
@@ -414,11 +423,12 @@
 ---
 
 **USER STORY: RNF19 - TEMPO DE INATIVIDADE**  
-**Como** usuário  
-**Eu quero** que o sistema volte à tela inicial automaticamente  
-**Para** evitar que pedidos abandonados fiquem na tela.  
+**Como** administrador  
+**Eu quero** que o sistema volte à tela inicial automaticamente após um periodo de inatividade.  
+**Para** evitar que pedidos abandonados fiquem na tela atrapalhando os próximos clientes.  
 **Acceptance Criteria (RNF19)**  
-- O sistema deve retornar automaticamente à tela inicial após 1 minuto de inatividade.  
+- O sistema deve retornar automaticamente à tela inicial após 1 minuto de inatividade.
+- Deverá haver uma contagem regressiva visivel antes do redirecionamento para evitar perdas de progresso de pedidos  
   
 
 
