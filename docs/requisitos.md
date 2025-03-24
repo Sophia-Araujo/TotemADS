@@ -103,7 +103,7 @@
 - Deve haver um botão para cancelar todo o pedido.  
 
 
-### **USER STORY: RF11 - EFETIVAÇÃO DO PEDIDO**  
+**USER STORY: RF11 - EFETIVAÇÃO DO PEDIDO**  
 **Como** cliente  
 **Eu quero** confirmar meu pedido  
 **Para** que ele seja enviado para a cozinha.  
