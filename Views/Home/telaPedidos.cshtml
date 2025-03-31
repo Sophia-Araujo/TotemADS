@@ -13,7 +13,6 @@
     <header>
         <img src="/image/banner-pag1.jpg" alt="Banner de Hambúrguer">
     </header>
-
     <main>
             <aside class="sidebarlateral">
                 <button class="category active">
@@ -66,11 +65,70 @@
            
             <div class="card">
                 <img src="/image/Buguer-404.png" alt="Burger 404">
-                <h3>Burger 404</h3>
+                <h3>Burger Teste</h3>
                 <p>R$ 24,90</p>
                 <p>Pão brioche, queijo cheddar cremoso...</p>
-                <button class="add-to-cart">Adicionar</button>
+                <button onclick="openModal('modal-container-Burguer-404')" class="add-to-cart">Adicionar</button>
             </div>
+            <div id="modal-container-Burguer-404" class="modal-container">
+                <div class="modal">
+                    <button class="fechar" id="fechar">X</button>
+                    <div class="modal-content">
+                        <h2 id="modal-title" class="modal-title">C# Burguer</h2>
+                        <p id="modal-description" class="modal-description">Pão, carne, alface, tomate, bacon, cebola e maionese.</p>
+                        <img id="modal-image" src="/image/Buguer-404.png" alt="C# Burguer" class="modal-image">
+                        <div class="ingredient-list">
+                            <div class="ingredient">
+                                <span>Pão</span>
+                                <span>1x</span>
+                                <button class="decrease">-</button>
+                                <button class="increase">+</button>
+                            </div>
+                            <div class="ingredient">
+                                <span>Carne</span>
+                                <span>1x</span>
+                                <button class="decrease">-</button>
+                                <button class="increase">+</button>
+                            </div>
+                            <div class="ingredient">
+                                <span>Alface</span>
+                                <span>1x</span>
+                                <button class="decrease">-</button>
+                                <button class="increase">+</button>
+                            </div>
+                            <div class="ingredient">
+                                <span>Tomate</span>
+                                <span>1x</span>
+                                <button class="decrease">-</button>
+                                <button class="increase">+</button>
+                            </div>
+                            <div class="ingredient">
+                                <span>Bacon</span>
+                                <span>1x</span>
+                                <button class="decrease">-</button>
+                                <button class="increase">+</button>
+                            </div>
+                            <div class="ingredient">
+                                <span>Cebola</span>
+                                <span>1x</span>
+                                <button class="decrease">-</button>
+                                <button class="increase">+</button>
+                            </div>
+                            <div class="ingredient">
+                                <span>Maionese</span>
+                                <span>1x</span>
+                                <button class="decrease">-</button>
+                                <button class="increase">+</button>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="voltar">Voltar</button>
+                            <button class="adicionar">Adicionar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
 
             <div class="card">
                 <img src="/image/Hello-World-Veggie.png" alt="Burger 404">

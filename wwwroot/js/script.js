@@ -15,3 +15,16 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 });
+
+function openModal(modalId) {
+    const modalContainer = document.getElementById(modalId);
+    modalContainer.classList.add('mostrar');
+}
+
+document.querySelectorAll('.modal-container').forEach(modal => {
+    modal.addEventListener('click', (e) => {
+        if (e.target.classList.contains('modal-container') || e.target.classList.contains('fechar')) {
+            modal.classList.remove('mostrar');
+        }
+    });
+});
