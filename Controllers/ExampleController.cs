@@ -4,11 +4,11 @@ using TotemPWA.Models;
 
 namespace TotemPWA.Controllers;
 
-public class HomeController : Controller
+public class ExemploController : Controller
 {
-    private readonly ILogger<HomeController> _logger;
+    private readonly ILogger<ExemploController> _logger;
 
-    public HomeController(ILogger<HomeController> logger)
+    public ExemploController(ILogger<ExemploController> logger)
     {
         _logger = logger;
     }
@@ -17,21 +17,15 @@ public class HomeController : Controller
     {
         return View();
     }
-
-    public IActionResult telaPedidos()
+    
+    [HttpPost]
+    public IActionResult Receive(string name)
     {
+        ViewBag.nome = name;
         return View();
     }
 
-    public IActionResult telaOpcoes()
-    {
-        return View();
-    }
 
-    public IActionResult Pagamentos()
-    {
-        return View();
-    }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
