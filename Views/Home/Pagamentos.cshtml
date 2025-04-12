@@ -1,3 +1,56 @@
 @{
-    Layout = "~/Views/Shared/_LayoutPagamentos.cshtml";
+    Layout = "_LayoutPagamentos";
 }
+
+<header>
+    <div class="logo-banner">
+        <img src="/image/img-pagamento.png" alt="Banner Pagamento" class="banner">
+        <img src="/image/logo2.png" alt="Logo" class="logo-pagamento">
+    </div>
+</header>
+
+<main>
+    <div class="pagamento-container">
+        <div class="topo">
+            <p class="preco-texto">Preço: <span class="preco">R$: 83,80</span></p>
+        </div>
+
+        <h2>Escolha a forma de pagamento:</h2>
+
+        <div class="formas">
+            <div class="forma selecionado" onclick="selecionar(this)">
+                <img src="/image/opc_cartao.png" alt="Cartão">
+                <span>Cartão</span>
+            </div>
+            <div class="forma" onclick="selecionar(this)">
+                <img src="/image/opc_pix.png" alt="Pix">
+                <span>Pix</span>
+            </div>
+            <div class="forma" onclick="selecionar(this)">
+                <img src="/image/opc_carteiradigital.png" alt="Digital">
+                <span>Digital</span>
+            </div>
+            <div class="forma" onclick="selecionar(this)">
+                <img src="/image/opc_Qrcode.png" alt="QR Code">
+                <span>QRcode</span>
+            </div>
+            <div class="forma" onclick="selecionar(this)">
+                <img src="/image/opc_googlePay.png" alt="Google Pay">
+                <span>Google Pay</span>
+            </div>
+            <div class="forma" onclick="selecionar(this)">
+                <img src="/image/opc_applePay.png" alt="Apple Pay">
+                <span>Apple Pay</span>
+            </div>
+        </div>
+
+        <button class="confirmar">Confirmar</button>
+    </div>
+</main>
+
+<script>
+    function selecionar(elemento) {
+        document.querySelectorAll('.forma').forEach(el => el.classList.remove('selecionado'));
+        elemento.classList.add('selecionado');
+    }
+</script>

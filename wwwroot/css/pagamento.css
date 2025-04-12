@@ -1,0 +1,117 @@
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: #fff;
+    overflow-x: hidden;
+}
+
+.logo-banner {
+    position: relative;
+    width: 100%;
+}
+
+.banner {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.logo-pagamento {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    width: 60px;
+    height: auto;
+    z-index: 2;
+}
+
+main {
+    background: #fff;
+    border-radius: 30px 30px 0 0;
+    padding: 20px;
+    margin-top: -30px;
+    text-align: center;
+}
+
+.pagamento-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.topo {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.preco-texto {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.preco {
+    color: #ff6600;
+}
+
+h2 {
+    font-size: 22px;
+    margin-bottom: 10px;
+}
+
+.formas {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.forma {
+    width: 120px;
+    height: 130px;
+    background: #f2f2f2;
+    border-radius: 18px;
+    padding: 12px;
+    cursor: pointer;
+    border: 3px solid transparent;
+    transition: border 0.3s, background 0.3s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.forma img {
+    width: 56px;
+    height: 56px;
+    margin-bottom: 10px;
+}
+
+.forma span {
+    font-size: 14px;
+    font-weight: 600;
+    color: #333;
+}
+
+.forma.selecionado {
+    border: 3px solid #ff6600;
+    background-color: #fff4eb;
+}
+
+.confirmar {
+    width: 90%;
+    max-width: 300px;
+    background-color: #ff6600;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 14px;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.confirmar:hover {
+    background-color: #e55b00;
+}
