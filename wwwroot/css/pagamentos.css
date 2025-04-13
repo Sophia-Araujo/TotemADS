@@ -1,43 +1,59 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
 body {
     margin: 0;
-    font-family: 'Poppins', sans-serif;
     background: #fff;
-    overflow-x: hidden;
+    overflow: hidden;
+    height: 100vh;
+    width: 100vw;
 }
 
 .logo-banner {
     position: relative;
     width: 100%;
+    height: 28vh; /* altura do banner ajustável */
+    overflow: hidden;
 }
 
 .banner {
     width: 100%;
-    height: auto;
+    height: 100%;
+    object-fit: cover;
     display: block;
 }
 
 .logo-pagamento {
     position: absolute;
-    top: 20px;
-    left: 20px;
-    width: 60px;
+    top: 2vh;
+    left: 2vh;
+    width: 7vh;
     height: auto;
     z-index: 2;
 }
 
 main {
+    position: relative;
     background: #fff;
     border-radius: 30px 30px 0 0;
-    padding: 20px;
-    margin-top: -30px;
-    text-align: center;
+    padding: 3vh 4vw;
+    margin-top: -2vh;
+    z-index: 2;
+    height: calc(100vh - 23vh); /* 100% - altura do banner visível */
+    overflow-y: auto;
 }
 
 .pagamento-container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 20px;
+    gap: 3.5vh;
 }
 
 .topo {
@@ -47,7 +63,7 @@ main {
 }
 
 .preco-texto {
-    font-size: 20px;
+    font-size: 1.4rem;
     font-weight: bold;
 }
 
@@ -56,22 +72,24 @@ main {
 }
 
 h2 {
-    font-size: 22px;
-    margin-bottom: 10px;
+    font-size: 1.5rem;
+    margin-bottom: 1vh;
 }
 
 .formas {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
+    gap: 2vh;
+    justify-items: center;
+    width: 100%;
 }
 
 .forma {
-    width: 120px;
-    height: 130px;
+    width: 15rem;
+    height: 16rem;
     background: #f2f2f2;
-    border-radius: 18px;
-    padding: 12px;
+    border-radius: 1rem;
+    padding: 1rem;
     cursor: pointer;
     border: 3px solid transparent;
     transition: border 0.3s, background 0.3s;
@@ -82,15 +100,16 @@ h2 {
 }
 
 .forma img {
-    width: 56px;
-    height: 56px;
-    margin-bottom: 10px;
+    width: 14rem;
+    height: 14rem;
+    margin-bottom: 0.8rem;
 }
 
 .forma span {
-    font-size: 14px;
+    font-size: 0.9rem;
     font-weight: 600;
     color: #333;
+    text-align: center;
 }
 
 .forma.selecionado {
@@ -103,13 +122,14 @@ h2 {
     max-width: 300px;
     background-color: #ff6600;
     color: white;
-    font-size: 20px;
+    font-size: 1.2rem;
     font-weight: bold;
-    padding: 14px;
+    padding: 1rem;
     border: none;
     border-radius: 30px;
     cursor: pointer;
     transition: background 0.3s;
+    margin-top: 2vh;
 }
 
 .confirmar:hover {
