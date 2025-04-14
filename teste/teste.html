@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Teclado Virtual</title>
+  <link href="https://fonts.googleapis.com/css2?family=Tilt+Warp&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: 'Arial', sans-serif;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background: #eee;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .popup {
+      width: 400px;
+      background: white;
+      padding: 30px 0px 0px 0px;
+      border-radius: 25px;
+      position: relative;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      text-align: center;
+      font-family: 'Tilt Warp', cursive;
+    }
+
+    .popup h2 {
+      margin: 0 0 20px;
+      font-size: clamp(8px, 4vw, 15px);
+      color:#655959;
+    }
+
+    .popup input {
+      width: 70%;
+      padding: 15px;
+      border-radius: 15px;
+      font-size: 20px;
+      border:1px solid black;
+      box-shadow: 0 6px 10px rgba(0,0,0,0.1);
+      margin-bottom: 10px;
+    }
+
+    .popup small {
+      display: block;
+      margin: 10px 0;
+      color: #655959;
+      font-family: 'Arial', sans-serif;
+      
+    }
+
+    .popup button.confirmar {
+      background: #d5f721;
+      color: white;
+      font-weight: bold;
+      border: none;
+      border-radius: 15px;
+      padding: 12px 30px;
+      font-size: 18px;
+      margin-bottom: 20px;
+      cursor: pointer;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 0px;
+      right: 0px;
+      background: orange;
+      color: white;
+      font-weight: bold;
+      border: none;
+      border-bottom-left-radius: 15px;
+      border-top-right-radius:15px;
+      width: 45px;
+      height: 45px;
+      font-size: 27px;
+      cursor: pointer;
+    }
+
+    .keyboard-container {
+      background: #ddd;
+      padding: 15px 10px;
+      margin-top: 10px;
+      font-family: 'Arial', sans-serif;
+      width: 100%;
+      height: 100%;
+    }
+
+    .keyboard-row {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 8px;
+      gap: 5px;
+      width: 100%;
+    }
+
+    .key {
+      background: white;
+      border: none;
+      border-radius: 12px;
+      padding: 12px 0;
+      min-width: 35px;
+      max-width: 35px;
+      text-align: center;
+      font-size: 16px;
+      cursor: pointer;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      flex-shrink: 0;
+    }
+
+    .key.shift {
+      background: #bbb;
+      width: 50px;
+      font-weight: bold;
+    }
+
+    .key.shift.active {
+      color: blue;
+    }
+
+    .key.delete {
+      background: #fff;
+      width: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .key.space {
+      width: 100%;
+      max-width: 100% !important;
+      padding: 12px;
+      font-size: 16px;
+    }
+
+    #row5 {
+      justify-content: stretch;
+      padding: 0 10px;
+    }
+
+    .keyboard-row.middle-offset {
+      padding: 0 20px;
+    }
+
+    @media (max-width: 430px) {
+      .popup {
+        width: 95%;
+      }
+
+      .key {
+        min-width: 28px;
+        max-width: 28px;
+        font-size: 14px;
+      }
+
+      .key.shift, .key.delete {
+        width: 38px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="popup">
+    <button class="close-btn">X</button>
+    <h2>DIGITE SEU CUPOM</h2>
+    <input type="text" id="input" readonly />
+    <small>*sujeito a invalidez ou expiração</small>
+    <button class="confirmar">Confirmar</button>
+
+    <div class="keyboard-container">
+      <div class="keyboard-row" id="row1"></div>
+      <div class="keyboard-row" id="row2"></div>
+      <div class="keyboard-row middle-offset" id="row3"></div>
+      <div class="keyboard-row" id="row4"></div>
+      <div class="keyboard-row" id="row5"></div>
+    </div>
+  </div>
+
+  <script>
+    const input = document.getElementById('input');
+    const row1 = document.getElementById('row1');
+    const row2 = document.getElementById('row2');
+    const row3 = document.getElementById('row3');
+    const row4 = document.getElementById('row4');
+    const row5 = document.getElementById('row5');
+
+    const keysRow1 = ['1','2','3','4','5','6','7','8','9','0'];
+    const keysRow2 = ['Q','W','E','R','T','Y','U','I','O','P'];
+    const keysRow3 = ['A','S','D','F','G','H','J','K','L'];
+    const keysRow4 = ['Z','X','C','V','B','N','M'];
+
+    let isUpper = true;
+
+    function createKey(char) {
+      const key = document.createElement('button');
+      key.classList.add('key');
+      key.textContent = isUpper ? char.toUpperCase() : char.toLowerCase();
+      key.onclick = () => input.value += key.textContent;
+      return key;
+    }
+
+    function renderKeyboard() {
+      row1.innerHTML = '';
+      row2.innerHTML = '';
+      row3.innerHTML = '';
+      row4.innerHTML = '';
+
+      keysRow1.forEach(char => row1.appendChild(createKey(char)));
+      keysRow2.forEach(char => row2.appendChild(createKey(char)));
+      keysRow3.forEach(char => row3.appendChild(createKey(char)));
+
+      const shiftKey = document.createElement('button');
+      shiftKey.classList.add('key', 'shift');
+      if (isUpper) shiftKey.classList.add('active');
+      shiftKey.innerHTML = '⇧';
+      shiftKey.onclick = () => {
+        isUpper = !isUpper;
+        renderKeyboard();
+      };
+
+      const deleteKey = document.createElement('button');
+      deleteKey.classList.add('key', 'delete');
+      deleteKey.innerHTML = '⌫';
+      deleteKey.onclick = () => input.value = input.value.slice(0, -1);
+
+      row4.appendChild(shiftKey);
+      keysRow4.forEach(char => row4.appendChild(createKey(char)));
+      row4.appendChild(deleteKey);
+
+      const space = document.createElement('button');
+      space.classList.add('key', 'space');
+      space.textContent = 'espaço';
+      space.onclick = () => input.value += ' ';
+
+      row5.innerHTML = '';
+      row5.appendChild(space);
+    }
+
+    renderKeyboard();
+    
+  </script>
+</body>
+</html>
