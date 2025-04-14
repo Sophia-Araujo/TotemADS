@@ -39,7 +39,7 @@
     background: white;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 15px;
     padding: 20px;
     position: fixed;
     height: calc(100vh - 200px); /* Ajusta para ocupar toda a tela sem o header */
@@ -52,7 +52,7 @@
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
     border: none;
     padding: 5%;
-    margin: 7% 0% 7% 0%;
+    margin: 14% 0% -1% 0%;
     text-align: center;
     cursor: pointer;
     border-radius: 15%;
@@ -69,13 +69,13 @@
   }
   
   .category:hover {
-    background: #cddc39;
+    border-color: #cddc39 10px solid !important;
   }
   
   
   /* Menu */
   .menu {
-    margin-top: 5%;
+    margin-top: 8%;
     margin-left: 20%;
     overflow-y: hidden;
     flex: 1;
@@ -147,6 +147,7 @@
   
    /* Sidebar  */
    .sidebar{
+    margin-top: 3%;
     width: 80%;
     height: 4%;
     background: white;
@@ -296,4 +297,66 @@
   border: none;
   border-radius: 20px;
   cursor: pointer;
+}
+  
+ footer.resumo-compra {
+  position: fixed;
+  bottom: 0;
+  width: 80%;
+  margin-left: 20%;
+  border-radius: 0 16px 0 0;
+  background: rgb(255, 255, 255);
+  box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.1);
+  padding: 10px 20px;
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+}
+
+.resumo p {
+  font-size: 20px;
+  margin-bottom: 4px;
+}
+
+.resumo .total {
+  font-weight: bold;
+  font-size: 22px;
+  color: #e74c3c;
+}
+
+.acoes {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: end;
+  width: 50%;
+}
+
+.acoes button {
+  /* margin-right: 20%;
+  margin-left: 70%; */
+  border: none;
+  width: 10rem;
+  height: 50px;
+  padding: 15px 14px;
+  border-radius: 14px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn-editar {
+  background: #f0f0f0;
+  color: #333;
+}
+
+.btn-pagar {
+  background: #ff6600;
+  color: white;
+}
+
+.btn-cancelar {
+  background: #e74c3c;
+  color: white;
 }
