@@ -115,10 +115,6 @@ h2 {
     text-align: center;
 }
 
-.forma.selecionado {
-    border: 3px solid #ff6600;
-    background-color: #fff4eb;
-}
 
 .confirmar {
     width: 90%;
@@ -139,38 +135,70 @@ h2 {
     background-color: #e55b00;
 }
 
-.popup {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
+.opcoes-cartao {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
     width: 100%;
-    height: 100%;
-    background-color: rgba(0,0,0,0.6);
-    z-index: 999;
-    justify-content: center;
-    align-items: center;
 }
 
-.popup-conteudo {
-    background-color: white;
-    padding: 20px 30px;
-    border-radius: 12px;
-    text-align: center;
-    box-shadow: 0 0 20px rgba(0,0,0,0.3);
-    font-size: 1.1rem;
+.titulo-opcao {
+    font-weight: bold;
+    font-size: 1.5rem;
+    color: #5E5E5E;
+    margin: 1.5vh 0 1vh 0;
 }
 
-#fechar-popup {
-    margin-top: 15px;
-    padding: 8px 16px;
-    background-color: #ff6600;
-    color: white;
-    border: none;
-    border-radius: 6px;
+.botoes-pagamento {
+    display: grid;
+    gap: 1rem;
+    width: 100%;
+}
+
+.opcao-btn {
+    flex: 1;
+    padding: 1rem;
+    border-radius: 10px;
+    border: 2px solid #ccc;
+    background-color: #f0f0f0;
+    font-weight: bold;
+    color: #333;
     cursor: pointer;
+    transition: 0.3s ease;
 }
 
-#fechar-popup:hover {
-    background-color: #e55b00;
+.opcao-btn.selecionado {
+    border-color: #ff6600;
+    background-color: #fff2e6;
+}
+
+.opcao-btn:hover {
+    background-color: #f7f7f7;
+}
+
+.usar-pontos {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #fff;
+    border: 2px solid #ff6600;
+    padding: 1.2rem;
+    border-radius: 15px;
+    width: 100%;
+}
+
+.pontos-texto {
+    font-size: 1.5rem;
+    line-height: 1.5;
+    color: #5E5E5E;
+}
+
+.icone-pontos {
+    width: 3.2rem;
+}
+
+.usar-pontos.selecionado {
+    background-color: #fff2e6;
+    border-color: #ff6600;
+    box-shadow: 0 0 10px rgba(255, 102, 0, 0.3);
 }
