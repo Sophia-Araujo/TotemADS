@@ -28,7 +28,22 @@ public class HomeController : Controller
         return View();
     }
 
-    public IActionResult telaEscolha()
+    public IActionResult carregamento()
+    {
+        return View();
+    }
+
+    public IActionResult telaCpf()
+    {
+        return View();
+    }
+
+     public IActionResult telaNome()
+    {
+        return View();
+    }
+
+    public IActionResult telaTipoPedido()
     {
         return View();
     }
