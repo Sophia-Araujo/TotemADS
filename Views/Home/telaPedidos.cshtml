@@ -170,8 +170,69 @@
 
             <!-- Adicione mais cards aqui -->
         </section>
+
     </main>
 
+    <div id="popup" class="popup-overlay" style="display: none;">
+        <div class="popup-content">
+            <h2>C# burguer</h2>
+            <p class="descricao-burguer">Pão, carne, alface, tomate, bacon, cebola e maionese.</p>
+
+            <div class="popup-main">
+                <img src="/image/burguer1.png" alt="C# Burguer" class="popup-img">
+                
+                <div class="ingredientes">
+                    <div class="ingrediente">
+                        <span>Pão</span>
+                        <span class="quantidade">1x</span>
+                        <button class="menos">−</button>
+                        <button class="mais">+</button>
+                    </div>
+                    <div class="ingrediente">
+                        <span>Carne</span>
+                        <span class="quantidade">1x</span>
+                        <button class="menos">−</button>
+                        <button class="mais">+</button>
+                    </div>
+                    <div class="ingrediente">
+                        <span>Alface</span>
+                        <span class="quantidade">1x</span>
+                        <button class="menos">−</button>
+                        <button class="mais">+</button>
+                    </div>
+                    <div class="ingrediente">
+                        <span>Tomate</span>
+                        <span class="quantidade">1x</span>
+                        <button class="menos">−</button>
+                        <button class="mais">+</button>
+                    </div>
+                    <div class="ingrediente">
+                        <span>Bacon</span>
+                        <span class="quantidade">1x</span>
+                        <button class="menos">−</button>
+                        <button class="mais">+</button>
+                    </div>
+                    <div class="ingrediente">
+                        <span>Cebola</span>
+                        <span class="quantidade">1x</span>
+                        <button class="menos">−</button>
+                        <button class="mais">+</button>
+                    </div>
+                    <div class="ingrediente">
+                        <span>Maionese</span>
+                        <span class="quantidade">1x</span>
+                        <button class="menos">−</button>
+                        <button class="mais">+</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="popup-buttons">
+                <button id="voltar" class="btn-voltar">Voltar</button>
+                <button class="btn-adicionar-popup">Adicionar</button>
+            </div>
+        </div>
+    </div>
     <footer>
         <div class="cart-info">
             <p>Total de itens: <span id="cart-count">0</span></p>
@@ -181,6 +242,6 @@
         <button class="checkout-button">Pronto!</button>
     </footer>
 
-    <script src="script.js"></script>
+    <script src="/js/script.js"></script>
 </body>
 </html>
