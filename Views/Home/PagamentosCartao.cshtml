@@ -19,10 +19,12 @@
             <div class="forma selecionado">
                 <img src="/image/opc_cartao.png" alt="Cartão">
             </div>
-              <p class="titulo-opcao">Forma de pagamento</p>
-            <div class="botoes-pagamento">
-                <button class="opcao-btn selecionado">Crédito</button>
-                <button class="opcao-btn">Débito</button>
+            <div>
+                <p class="titulo-opcao">Forma de pagamento</p>
+                <div class="botoes-pagamento">
+                    <button class="opcao-btn selecionado">Crédito</button>
+                    <button class="opcao-btn">Débito</button>
+                </div>
             </div>
         </div>
 
@@ -31,20 +33,28 @@
                 <strong>Usar pontos?</strong><br />
                 Você possui 50 pontos disponíveis
             </div>
-            <img src="/image/icone_pontos.png" alt="Ícone de pontos" class="icone-pontos">
+            <img src="/image/pontos.png" alt="Ícone de pontos" class="icone-pontos">
         </div>
 
         <button class="confirmar">Confirmar</button>
     </div>
 
-    <script>
+   <script>
     const usarPontos = document.querySelector('.usar-pontos');
 
     usarPontos.addEventListener('click', () => {
         usarPontos.classList.toggle('selecionado');
     });
-</script>
 
+    const botoesOpcao = document.querySelectorAll('.opcao-btn');
+
+    botoesOpcao.forEach(botao => {
+        botao.addEventListener('click', () => {
+            botoesOpcao.forEach(btn => btn.classList.remove('selecionado'));
+            botao.classList.add('selecionado');
+        });
+    });
+</script>
 
 
 </main>

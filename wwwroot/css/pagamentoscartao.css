@@ -81,7 +81,7 @@ h2 {
 
 .formas {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: 1fr 2fr;
     gap: 2vh;
     justify-items: center;
     width: 100%;
@@ -194,7 +194,7 @@ h2 {
 }
 
 .icone-pontos {
-    width: 3.2rem;
+    width: 200px;
 }
 
 .usar-pontos.selecionado {
