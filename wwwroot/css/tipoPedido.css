@@ -1,0 +1,136 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    font-family: 'Poppins', sans-serif;
+    background: white;
+    overflow: hidden;
+}
+
+.fundo {
+    position: absolute;
+    width: 100%;
+    height: 100vh;
+}
+
+/* Faixa Laranja fina no topo */
+.faixa-laranja {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 90px;
+    width: 100%;
+    background-color: #FF5C00;
+    z-index: 1;
+}
+
+/* Faixa verde com corte inclinado */
+.faixa-verde {
+    position: absolute;
+    top: 15px;
+    left: 0;
+    width: 100%;
+    height: 40%;
+    background-color: #BCD84F;
+    z-index: 0;
+    clip-path: polygon(0 0, 100% 0, 100% 40%, 60% 85%, 0 90%);
+}
+
+/* Logo centralizada dentro da faixa verde */
+.logo {
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 200px;
+    z-index: 5;
+}
+
+/* Formulário de opções */
+.formulario-opcoes {
+    position: relative;
+    z-index: 10;
+    margin-top: 50vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: 'Poppins', sans-serif;
+    color: #4f4a4a;
+}
+
+.titulo {
+    font-weight: bold;
+    font-size: 2.5rem;
+    margin-bottom: 25px;
+}
+
+.opcoes {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-bottom: 50px;
+    flex-wrap: wrap;
+}
+
+.opcao {
+    border: 2px solid #ccc;
+    border-radius: 15px;
+    padding: 20px 30px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 2rem;
+    color: #4f4a4a;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.opcao img {
+    width: 150px;
+    height: 150px;
+    margin-bottom: 10px;
+    pointer-events: none;
+}
+
+.opcao input[type="radio"] {
+    display: none;
+}
+
+/* Selecionado */
+.opcao input[type="radio"]:checked ~ img {
+    filter: brightness(0) saturate(100%) invert(29%) sepia(99%) saturate(749%) hue-rotate(360deg) brightness(99%) contrast(108%);
+}
+
+.opcao input[type="radio"]:checked ~ span {
+    font-weight: bold;
+    color: #FF5C00;
+}
+
+/* Hover geral */
+.opcao:hover {
+    border: 3px solid #FF5C00;
+}
+
+/* Quando estiver selecionado */
+.opcao input[type="radio"]:checked ~ span,
+.opcao input[type="radio"]:checked ~ img {
+    border: none;
+}
+
+.formulario-opcoes button {
+    background-color: #FF5C00;
+    color: white;
+    border: none;
+    padding: 15px 40px;
+    border-radius: 15px;
+    font-size: 2.5rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.formulario-opcoes button:hover {
+    background-color: #e24e00;
+}

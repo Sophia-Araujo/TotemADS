@@ -28,6 +28,26 @@ public class HomeController : Controller
         return View();
     }
 
+    public IActionResult carregamento()
+    {
+        return View();
+    }
+
+    public IActionResult telaCpf()
+    {
+        return View();
+    }
+
+     public IActionResult telaNome()
+    {
+        return View();
+    }
+
+    public IActionResult telaTipoPedido()
+    {
+        return View();
+    }
+
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
