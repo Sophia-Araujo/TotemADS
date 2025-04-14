@@ -1,0 +1,117 @@
+@{
+    Layout = "_LayoutItensPedidos";
+    ViewBag.Title = "Itens do Pedido";
+}
+
+@section Scripts {
+    <script src="#"></script>
+}
+
+<!-- Botão de cupom -->
+<button id="btnCupom" class="btn-cupom">
+    <span>🧾</span> Tem um cupom
+</button>
+
+<!-- Título -->
+<div class="titulo">
+    <h1>Lanches</h1>
+</div>
+
+<!-- Lista de lanches -->
+<div class="VisualizaItensPedidos">
+    <div class="card-pedido">
+        <div class="card-conteudo"> <!-- Esse é o novo wrapper que alinha lado a lado -->
+            <div class="info-lanche">
+                <img src="~/image/burguer1.png" alt="Java Bife" />
+                <h2 class="nomePedido">Java Bife</h2>
+                <h3 class="precoPedido">R$: 34,90</h3>
+                <p class="descricaoPedido">Pão, carne, alface, tomate, bacon, cebola e maionese.</p>
+            </div>
+
+            <div class="ingredientesPedido">
+                <ul class="ingredientesPedidoLista">
+                    <li>Pão <span>1x</span></li>
+                    <li>Carne <span>1x</span></li>
+                    <li>Alface <span>1x</span></li>
+                    <li>Tomate <span>1x</span></li>
+                    <li>Bacon <span>1x</span></li>
+                    <li>Cebola <span>1x</span></li>
+                    <li>Maionese <span>1x</span></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="VisualizaItensPedidos">
+    <div class="card-pedido">
+        <div class="card-conteudo"> <!-- Esse é o novo wrapper que alinha lado a lado -->
+            <div class="info-lanche">
+                <img src="~/image/burguer1.png" alt="Java Bife" />
+                <h2 class="nomePedido">Java Bife</h2>
+                <h3 class="precoPedido">R$: 34,90</h3>
+                <p class="descricaoPedido">Pão, carne, alface, tomate, bacon, cebola e maionese.</p>
+            </div>
+
+            <div class="ingredientesPedido">
+                <ul class="ingredientesPedidoLista">
+                    <li>Pão <span>1x</span></li>
+                    <li>Carne <span>1x</span></li>
+                    <li>Alface <span>1x</span></li>
+                    <li>Tomate <span>1x</span></li>
+                    <li>Bacon <span>1x</span></li>
+                    <li>Cebola <span>1x</span></li>
+                    <li>Maionese <span>1x</span></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="VisualizaItensPedidos">
+    <div class="card-pedido">
+        <div class="card-conteudo"> <!-- Esse é o novo wrapper que alinha lado a lado -->
+            <div class="info-lanche">
+                <img src="~/image/burguer1.png" alt="Java Bife" />
+                <h2 class="nomePedido">Java Bife</h2>
+                <h3 class="precoPedido">R$: 34,90</h3>
+                <p class="descricaoPedido">Pão, carne, alface, tomate, bacon, cebola e maionese.</p>
+            </div>
+
+            <div class="ingredientesPedido">
+                <ul class="ingredientesPedidoLista">
+                    <li>Pão <span>1x</span></li>
+                    <li>Carne <span>1x</span></li>
+                    <li>Alface <span>1x</span></li>
+                    <li>Tomate <span>1x</span></li>
+                    <li>Bacon <span>1x</span></li>
+                    <li>Cebola <span>1x</span></li>
+                    <li>Maionese <span>1x</span></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Resumo dos pedidos -->
+<div class="resumo">
+    <div class="total-lista">
+        <div class="total-item">
+            <span>Lanches 2 x</span>
+            <span>R$: 73,80</span>
+        </div>
+        <div class="total-item">
+            <span>Bebidas 1 x</span>
+            <span>R$: 10,00</span>
+        </div>
+        <div class="total-item total">
+            <span>Total:</span>
+            <span>R$: 83,80</span>
+        </div>
+    </div>
+
+    <div class="acoes">
+        <button class="botao-cancelar">Cancelar</button>
+        <button class="botao-pagar">Pagar R$: 83,80</button>
+    </div>
+</div>
