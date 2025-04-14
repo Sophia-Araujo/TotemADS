@@ -37,8 +37,8 @@
                     <span>Extras</span>
                 </button>
                 <button class="category">
-                    <img src="/image/molhos.png" alt="Molhos">
-                    <span>Molhos</span>
+                    <img src="/image/promocao.png" alt="Promoções">
+                    <span>Promoções</span>
                 </button>
             </aside>
             
@@ -172,14 +172,20 @@
         </section>
     </main>
 
-    <footer>
-        <div class="cart-info">
-            <p>Total de itens: <span id="cart-count">0</span></p>
-            <p>Total do pedido: R$ <span id="cart-total">0</span></p>
+    <footer class="resumo-compra">
+        <div class="resumo">
+            <p>Lanches 2x <span>R$: 73,80</span></p>
+            <p>Bebidas 1x <span>R$: 10,00</span></p>
+            <p>Sobremesas 2x <span>R$: 15,90</span></p>
+            <p class="total">Total: <span>R$: 99,70</span></p>
         </div>
-        <button class="cart-button" onclick="window.location.href='/Home/telaOpcoes'">🛒 Ver Carrinho</button>
-        <button class="checkout-button">Pronto!</button>
+        <div class="acoes">
+            <button class="btn-editar">editar pedido</button>
+            <button class="btn-pagar">Pagar R$: 83,80</button>
+            <button class="btn-cancelar">Cancelar</button>
+        </div>
     </footer>
+
 
     <script src="script.js"></script>
 </body>
