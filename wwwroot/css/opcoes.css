@@ -28,22 +28,25 @@ header {
 
 header img {
     width: 100%;
-    height: 140%;
+    height: 200%;
     object-fit: cover;
 }
 
 /* Estilizando o menu principal */
 main {
     position: relative;
-    background: white;
+    background: rgb(255, 255, 255);
     text-align: center;
     border-radius: 30px 30px 0 0; /* Arredonda apenas a parte superior */
     width: 100%;
-    height: 100%;
-    margin-top: -30px; /* Faz a sobreposição do fundo branco no banner */
+    height: 52rem;
+    margin-top: -10%; /* Faz a sobreposição do fundo branco no banner */
     box-shadow: 0px 4px 10px rgba(100, 99, 99, 0.1);
     padding: 20px;
     z-index: 2; /* Mantém na frente da imagem */
+}
+a{
+    text-decoration: none;
 }
 
 h2 {
@@ -54,7 +57,7 @@ h2 {
 /* Grid de categorias */
 .categories {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: 20px;
     justify-items: center;
     padding: 10px;
@@ -63,12 +66,12 @@ h2 {
 /* Cada categoria */
 .category {
     background: #fff;
-    padding: 15px;
+    padding: 15px 0 15px 0;
     border-radius: 20px;
     text-align: center;
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.222);
     transition: 0.3s;
-    width: 100%;
+    width: 106%;
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -77,8 +80,7 @@ h2 {
 }
 
 .category img {
-    width: 60%;
-    height: 60%;
+    width: 50%;
     object-fit: cover;
     margin-bottom: 5px;
 }
@@ -92,32 +94,5 @@ h2 {
 .category:hover {
     background: #ebebeb;
   }
-/* Promoções destacadas */
-.promo {
-    display: flex;
-    grid-column: span 3;
-    align-items: center;
-    justify-content: center;
-    background: #ffffff; /* Fundo branco para parecer mais clean */
-    border-radius: 10px;
-    padding: 10px 20px;
-    width: 100%;
-    height: 100%;
-    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.196); /* Sombra leve */
-}
-
-/* Estilizando o texto "Promoções" */
-.promo p {
-    color: #ff6600; /* Laranja vibrante */
-    font-weight: bold;
-    font-size: 40px;
-    margin-right: 20px; /* Espaço entre o texto e a imagem */
-}
-
-/* Ajustando a imagem */
-.promo img {
-    width: 70%; /* Aumentando o tamanho da imagem */
-    height: auto;
-}
 
 

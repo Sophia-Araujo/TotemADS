@@ -18,8 +18,8 @@ Totem de vendas de fast food
 ## Equipe :
 
 - [Ronaldo Araujo](https://github.com/elronyjunior)
-- [Isadora Corrêa](https://github.com/Isadora5959)
+- [Isadora Correa](https://github.com/Isadora5959)
 - [Sophia Araujo](https://github.com/Sophia-Araujo)
 - [Rafaela Riganti](https://github.com/rafaelariganti)
-- [Mike](https://github.com/mkrosz)
+- [Mike Franguelli](https://github.com/mkrosz)
 

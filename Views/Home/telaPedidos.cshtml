@@ -1,5 +1,5 @@
 @{
-    Layout = "_WelcomeLayout";
+    Layout = "_LayoutPedidos";
 }
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -7,7 +7,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cardápio de Hambúrgueres</title>
-    <link rel="stylesheet" href="./css/site.css">
+    <link rel="stylesheet" href="./css/pedidos.css">
 </head>
 <body>
     <header>
@@ -15,7 +15,7 @@
     </header>
 
     <main>
-            <aside class="sidebar">
+            <aside class="sidebarlateral">
                 <button class="category active">
                     <img src="/image/lanche.png" alt="Lanches">
                     <span>Lanches</span>
@@ -37,12 +37,33 @@
                     <span>Extras</span>
                 </button>
                 <button class="category">
-                    <img src="/image/molhos.png" alt="Molhos">
-                    <span>Molhos</span>
+                    <img src="/image/promocao.png" alt="Promoções">
+                    <span>Promoções</span>
                 </button>
             </aside>
+            
+               <aside class="sidebar">
+                <button class="cate">
+                    <span>CARNE</span>
+                </button>
+                <button class="cate">
+                    <span>ESPECIAIS</span>
+                </button>
+                <button class="cate">
+                    <span>FRANGO</span>
+                </button>
+                <button class="cate">
+                    <span>VEGETARIANOS</span>
+                </button>
+                <button class="cate">
+                    <span>VEGANOS</span>
+                </button>
+              
+            </aside>
+
 
         <section class="menu">
+           
             <div class="card">
                 <img src="/image/Buguer-404.png" alt="Burger 404">
                 <h3>Burger 404</h3>
@@ -149,17 +170,95 @@
 
             <!-- Adicione mais cards aqui -->
         </section>
+
     </main>
 
+<<<<<<< HEAD
+    <div id="popup" class="popup-overlay" style="display: none;">
+        <div class="popup-content">
+            <h2>C# burguer</h2>
+            <p class="descricao-burguer">Pão, carne, alface, tomate, bacon, cebola e maionese.</p>
+
+            <div class="popup-main">
+                <img src="/image/burguer1.png" alt="C# Burguer" class="popup-img">
+                
+                <div class="ingredientes">
+                    <div class="ingrediente">
+                        <span>Pão</span>
+                        <span class="quantidade">1x</span>
+                        <button class="menos">−</button>
+                        <button class="mais">+</button>
+                    </div>
+                    <div class="ingrediente">
+                        <span>Carne</span>
+                        <span class="quantidade">1x</span>
+                        <button class="menos">−</button>
+                        <button class="mais">+</button>
+                    </div>
+                    <div class="ingrediente">
+                        <span>Alface</span>
+                        <span class="quantidade">1x</span>
+                        <button class="menos">−</button>
+                        <button class="mais">+</button>
+                    </div>
+                    <div class="ingrediente">
+                        <span>Tomate</span>
+                        <span class="quantidade">1x</span>
+                        <button class="menos">−</button>
+                        <button class="mais">+</button>
+                    </div>
+                    <div class="ingrediente">
+                        <span>Bacon</span>
+                        <span class="quantidade">1x</span>
+                        <button class="menos">−</button>
+                        <button class="mais">+</button>
+                    </div>
+                    <div class="ingrediente">
+                        <span>Cebola</span>
+                        <span class="quantidade">1x</span>
+                        <button class="menos">−</button>
+                        <button class="mais">+</button>
+                    </div>
+                    <div class="ingrediente">
+                        <span>Maionese</span>
+                        <span class="quantidade">1x</span>
+                        <button class="menos">−</button>
+                        <button class="mais">+</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="popup-buttons">
+                <button id="voltar" class="btn-voltar">Voltar</button>
+                <button class="btn-adicionar-popup">Adicionar</button>
+            </div>
+        </div>
+    </div>
     <footer>
         <div class="cart-info">
             <p>Total de itens: <span id="cart-count">0</span></p>
             <p>Total do pedido: R$ <span id="cart-total">0</span></p>
+=======
+    <footer class="resumo-compra">
+        <div class="resumo">
+            <p>Lanches 2x <span>R$: 73,80</span></p>
+            <p>Bebidas 1x <span>R$: 10,00</span></p>
+            <p>Sobremesas 2x <span>R$: 15,90</span></p>
+            <p class="total">Total: <span>R$: 99,70</span></p>
         </div>
-        <button class="cart-button" onclick="window.location.href='/Home/telaOpcoes'">🛒 Ver Carrinho</button>
-        <button class="checkout-button">Pronto!</button>
+        <div class="acoes">
+            <button class="btn-editar">editar pedido</button>
+            <button class="btn-pagar">Pagar R$: 83,80</button>
+            <button class="btn-cancelar">Cancelar</button>
+>>>>>>> feature-isadora
+        </div>
     </footer>
 
+<<<<<<< HEAD
+    <script src="/js/script.js"></script>
+=======
+
     <script src="script.js"></script>
+>>>>>>> feature-isadora
 </body>
 </html>

@@ -28,15 +28,42 @@ public class HomeController : Controller
         return View();
     }
 
+<<<<<<< HEAD
     public IActionResult Pagamentos()
+=======
+    public IActionResult carregamento()
+>>>>>>> d0fb7db75d422a544b225df8e5423cba14bc0f89
     {
         return View();
     }
 
+<<<<<<< HEAD
     public IActionResult PagamentosCartao()
     {
         return View();
     }
+=======
+    public IActionResult telaCpf()
+    {
+        return View();
+    }
+
+     public IActionResult telaNome()
+    {
+        return View();
+    }
+
+    public IActionResult telaTipoPedido()
+    {
+        return View();
+    }
+
+        public IActionResult telaItensPedidos()
+    {
+        return View();
+    }
+
+>>>>>>> d0fb7db75d422a544b225df8e5423cba14bc0f89
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()

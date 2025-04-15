@@ -1,0 +1,62 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    font-family: 'Poppins', sans-serif;
+    overflow: hidden;
+  }
+  
+  .fundo {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    background: white;
+  }
+  
+  /* LOGO */
+  .logo {
+    position: absolute;
+    top: 100px;
+    left: 52%;
+    transform: translateX(-50%);
+    width: 550px;
+    z-index: 10;
+  }
+  
+  /* TEXTO */
+  .mensagem {
+    position: absolute;
+    bottom: 90px;
+    width: 100%;
+    text-align: center;
+    color: #FF5C00;
+    font-weight: 700;
+    font-size: 2rem;
+    z-index: 10;
+  }
+  
+  /* LARANJA */
+  .faixa-laranja {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 40%;
+    background-color: #FF5C00;
+    z-index: 5;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 50%);
+  }
+  
+  /* VERDE */
+  .faixa-verde {
+    position: absolute;
+    top: 20%;
+    left: 0;
+    width: 100%;
+    height: 60%;
+    background-color: #BCD84F;
+    z-index: 1;
+    clip-path: polygon(0 0, 100% 33%, 100% 65%, 83% 80%, 0 70%);
+  }
+  
