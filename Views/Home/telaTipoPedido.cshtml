@@ -1,0 +1,29 @@
+@{
+    Layout = "_TipoPedidoLayout";
+}
+<div class="fundo">
+    <img src="~/image/logo-reduzido.png" alt="ADS Burguer" class="logo">
+
+    <form class="formulario-opcoes">
+        <label class="titulo">Selecione uma opção:</label>
+
+        <div class="opcoes">
+            <label class="opcao">
+                <input type="radio" name="tipoPedido" value="viagem">
+                <img src="~/image/paraviagem.png" alt="Para viagem">
+                <span>Para viagem</span>
+            </label>
+
+            <label class="opcao">
+                <input type="radio" name="tipoPedido" value="comerAqui">
+                <img src="~/image/comeraqui.png" alt="Comer aqui">
+                <span>Comer aqui</span>
+            </label>
+        </div>
+
+        <button type="submit">Confirmar</button>
+    </form>
+
+    <div class="faixa-laranja"></div>
+    <div class="faixa-verde"></div>
+</div>
