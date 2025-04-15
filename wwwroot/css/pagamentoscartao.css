@@ -40,7 +40,7 @@ body {
 
 main {
     position: relative;
-    background: #fff;
+    background: #F6F6F6;
     border-radius: 30px 30px 0 0;
     padding: 3vh 4vw;
     margin-top: -2vh;
@@ -93,7 +93,6 @@ h2 {
     background: #f2f2f2;
     border-radius: 1rem;
     padding: 1rem;
-    cursor: pointer;
     border: 3px solid transparent;
     transition: border 0.3s, background 0.3s;
     display: flex;
@@ -160,16 +159,17 @@ h2 {
     padding: 1rem;
     border-radius: 10px;
     border: 2px solid #ccc;
-    background-color: #f0f0f0;
+    background-color: #FFFFFF;
     font-weight: bold;
     color: #333;
     cursor: pointer;
     transition: 0.3s ease;
+    font-size: 1.5rem;
 }
 
 .opcao-btn.selecionado {
     border-color: #ff6600;
-    background-color: #fff2e6;
+    background-color: #FFFFFF;
 }
 
 .opcao-btn:hover {
@@ -180,7 +180,7 @@ h2 {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: #fff;
+    background: #FFFFFF;
     border: 2px solid #ff6600;
     padding: 1.2rem;
     border-radius: 15px;
@@ -201,4 +201,29 @@ h2 {
     background-color: #fff2e6;
     border-color: #ff6600;
     box-shadow: 0 0 10px rgba(255, 102, 0, 0.3);
+}
+
+.opcao-btn {
+    width: 30rem;
+    background: #FFFFFF;
+    border-radius: 1rem;
+    padding: 1rem;
+    cursor: pointer;
+    border: 3px solid transparent;
+    transition: border 0.3s, background 0.3s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.caixa{
+    background: #f2f2f2;
+    border-radius: 1rem;
+    border: 3px solid transparent;
+    transition: border 0.3s, background 0.3s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }

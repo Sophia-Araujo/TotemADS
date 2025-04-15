@@ -9,7 +9,7 @@
 
 body {
     margin: 0;
-    background: #fff;
+    background: #F6F6F6;
     overflow: hidden;
     height: 100vh;
     width: 100vw;
@@ -40,7 +40,7 @@ body {
 
 main {
     position: relative;
-    background: #fff;
+    background: #F6F6F6;
     border-radius: 30px 30px 0 0;
     padding: 3vh 4vw;
     margin-top: -2vh;
@@ -84,13 +84,12 @@ h2 {
     grid-template-columns: repeat(3, 1fr);
     gap: 2vh;
     justify-items: center;
-    width: 100%;
 }
 
 .forma {
     width: 15rem;
     height: 16rem;
-    background: #f2f2f2;
+    background: #FFFFFF;
     border-radius: 1rem;
     padding: 1rem;
     cursor: pointer;
@@ -103,9 +102,10 @@ h2 {
 }
 
 .forma img {
-    width: 14rem;
-    height: 14rem;
+    width: 12rem;
+    height: 12rem;
     margin-bottom: 0.8rem;
+    object-fit: contain;
 }
 
 .forma span {
