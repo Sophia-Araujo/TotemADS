@@ -1,0 +1,176 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+body {
+    margin: 0;
+    background: #F6F6F6;
+    overflow: hidden;
+    height: 100vh;
+    width: 100vw;
+}
+
+.logo-banner {
+    position: relative;
+    width: 100%;
+    height: 28vh; /* altura do banner ajustável */
+    overflow: hidden;
+}
+
+.banner {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.logo-pagamento {
+    position: absolute;
+    top: 2vh;
+    left: 2vh;
+    width: 7vh;
+    height: auto;
+    z-index: 2;
+}
+
+main {
+    position: relative;
+    background: #F6F6F6;
+    border-radius: 30px 30px 0 0;
+    padding: 3vh 4vw;
+    margin-top: -2vh;
+    z-index: 2;
+    height: calc(100vh - 23vh); /* 100% - altura do banner visível */
+    overflow-y: auto;
+}
+
+.pagamento-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3.5vh;
+}
+
+.topo {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.preco-texto {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #5E5E5E;
+}
+
+.preco {
+    color: #ff6600;
+}
+
+h2 {
+    font-size: 29px;
+    margin-bottom: 1vh;
+    margin-right: 20vh;
+    color: #5E5E5E;
+}
+
+.formas {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2vh;
+    justify-items: center;
+}
+
+.forma {
+    width: 15rem;
+    height: 16rem;
+    background: #FFFFFF;
+    border-radius: 1rem;
+    padding: 1rem;
+    cursor: pointer;
+    border: 3px solid transparent;
+    transition: border 0.3s, background 0.3s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.forma img {
+    width: 12rem;
+    height: 12rem;
+    margin-bottom: 0.8rem;
+    object-fit: contain;
+}
+
+.forma span {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #333;
+    text-align: center;
+}
+
+.forma.selecionado {
+    border: 3px solid #ff6600;
+    background-color: #fff4eb;
+}
+
+.confirmar {
+    width: 90%;
+    max-width: 950px;
+    background-color: #ff6600;
+    color: white;
+    font-size: 2rem;
+    font-weight: bold;
+    padding: 1rem;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: background 0.3s;
+    margin-top: 2vh;
+}
+
+.confirmar:hover {
+    background-color: #e55b00;
+}
+
+.popup {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.6);
+    z-index: 999;
+    justify-content: center;
+    align-items: center;
+}
+
+.popup-conteudo {
+    background-color: white;
+    padding: 20px 30px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 0 20px rgba(0,0,0,0.3);
+    font-size: 1.1rem;
+}
+
+#fechar-popup {
+    margin-top: 15px;
+    padding: 8px 16px;
+    background-color: #ff6600;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+#fechar-popup:hover {
+    background-color: #e55b00;
+}

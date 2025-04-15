@@ -28,7 +28,19 @@ public class HomeController : Controller
         return View();
     }
 
+    public IActionResult Pagamentos()
+      {
+        return View();
+    }
+
     public IActionResult carregamento()
+
+    {
+        return View();
+    }
+
+
+    public IActionResult PagamentosCartao()
     {
         return View();
     }
