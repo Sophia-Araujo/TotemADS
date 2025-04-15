@@ -1,5 +1,5 @@
 @{
-    Layout = "_WelcomeLayout";
+    Layout = "_LayoutPedidos";
 }
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -7,7 +7,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cardápio de Hambúrgueres</title>
-    <link rel="stylesheet" href="./css/site.css">
+    <link rel="stylesheet" href="./css/pedidos.css">
 </head>
 <body>
     <header>
@@ -15,7 +15,7 @@
     </header>
 
     <main>
-            <aside class="sidebar">
+            <aside class="sidebarlateral">
                 <button class="category active">
                     <img src="/image/lanche.png" alt="Lanches">
                     <span>Lanches</span>
@@ -41,8 +41,29 @@
                     <span>Molhos</span>
                 </button>
             </aside>
+            
+               <aside class="sidebar">
+                <button class="cate">
+                    <span>CARNE</span>
+                </button>
+                <button class="cate">
+                    <span>ESPECIAIS</span>
+                </button>
+                <button class="cate">
+                    <span>FRANGO</span>
+                </button>
+                <button class="cate">
+                    <span>VEGETARIANOS</span>
+                </button>
+                <button class="cate">
+                    <span>VEGANOS</span>
+                </button>
+              
+            </aside>
+
 
         <section class="menu">
+           
             <div class="card">
                 <img src="/image/Buguer-404.png" alt="Burger 404">
                 <h3>Burger 404</h3>
