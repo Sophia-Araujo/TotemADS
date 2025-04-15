@@ -28,6 +28,11 @@ public class HomeController : Controller
         return View();
     }
 
+    public IActionResult modalCupom()
+    {
+        return View();
+    }
+
     public IActionResult Pagamentos()
       {
         return View();
@@ -61,6 +66,7 @@ public class HomeController : Controller
     }
 
      public IActionResult telaItensPedidos()
+
     {
         return View();
     }
