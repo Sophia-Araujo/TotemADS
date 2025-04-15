@@ -29,14 +29,19 @@ public class HomeController : Controller
     }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     public IActionResult Pagamentos()
 =======
     public IActionResult carregamento()
 >>>>>>> d0fb7db75d422a544b225df8e5423cba14bc0f89
+=======
+    public IActionResult modalCupom()
+>>>>>>> feature/feature-ronaldo
     {
         return View();
     }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
     public IActionResult PagamentosCartao()
     {
@@ -64,6 +69,8 @@ public class HomeController : Controller
     }
 
 >>>>>>> d0fb7db75d422a544b225df8e5423cba14bc0f89
+=======
+>>>>>>> feature/feature-ronaldo
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
