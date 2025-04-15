@@ -28,13 +28,13 @@ public class HomeController : Controller
         return View();
     }
 
+
     public IActionResult Pagamentos()
-      {
+    {
         return View();
     }
 
     public IActionResult carregamento()
-
     {
         return View();
     }
@@ -60,7 +60,8 @@ public class HomeController : Controller
         return View();
     }
 
-     public IActionResult telaItensPedidos()
+
+    public IActionResult telaItensPedidos()
     {
         return View();
     }
