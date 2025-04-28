@@ -52,7 +52,11 @@
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
     border: none;
     padding: 5%;
+<<<<<<< HEAD
     margin: 14% 0% -1% 0%;
+=======
+    margin: 15% 0% 7% 0%;
+>>>>>>> feature/feature-rafaela
     text-align: center;
     cursor: pointer;
     border-radius: 15%;

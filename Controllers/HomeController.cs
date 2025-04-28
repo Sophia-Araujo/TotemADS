@@ -33,37 +33,7 @@ public class HomeController : Controller
         return View();
     }
 
-    public IActionResult carregamento()
-    {
-        return View();
-    }
-
-    public IActionResult modalCupom()
-    {
-        return View();
-    }
-
     public IActionResult PagamentosCartao()
-    {
-        return View();
-    }
-
-    public IActionResult telaCpf()
-    {
-        return View();
-    }
-
-     public IActionResult telaNome()
-    {
-        return View();
-    }
-
-    public IActionResult telaTipoPedido()
-    {
-        return View();
-    }
-
-        public IActionResult telaItensPedidos()
     {
         return View();
     }
