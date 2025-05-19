@@ -29,8 +29,6 @@ public class HomeController : Controller
     }
 
     public IActionResult carregamento()
-
-
     {
         return View();
     }
@@ -55,7 +53,6 @@ public class HomeController : Controller
     }
 
     public IActionResult telaTipoPedido()
-
     {
         return View();
     }
