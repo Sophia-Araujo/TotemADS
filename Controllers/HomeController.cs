@@ -28,7 +28,11 @@ public class HomeController : Controller
         return View();
     }
 
+<<<<<<< HEAD
        public IActionResult telaItensPedidos()
+=======
+    public IActionResult modalCupom()
+>>>>>>> e46a44b69153bb6a7735f37d51724ea6cd026064
     {
         return View();
     }
@@ -65,16 +69,6 @@ public class HomeController : Controller
         return View();
     }
 
-
-    public IActionResult modalCupom()
-    {
-        return View();
-    }
-
-    public IActionResult PagamentosCartao()
-    {
-        return View();
-    }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
