@@ -28,6 +28,10 @@ public class HomeController : Controller
         return View();
     }
 
+       public IActionResult telaItensPedidos()
+    {
+        return View();
+    }
 
     public IActionResult Pagamentos()
       {
@@ -54,11 +58,6 @@ public class HomeController : Controller
         return View();
     }
 
-
-    public IActionResult telaItensPedidos()
-    {
-        return View();
-    }
 
     public IActionResult telaTipoPedido()
 
