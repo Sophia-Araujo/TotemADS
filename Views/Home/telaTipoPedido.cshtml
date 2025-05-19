@@ -2,27 +2,21 @@
     Layout = "_TipoPedidoLayout";
 }
 <div class="fundo">
-    <img src="~/image/logo-reduzido.png" alt="ADS Burguer" class="logo">
+    <img src="@Url.Content("~/image/logo-reduzido.png")" alt="ADS Burguer" class="logo">
 
-<<<<<<< HEAD
-    <form class="formulario-opcoes" action="/Home/telaOpcoes">
-=======
-
-    <form class="formulario-opcoes" action="/Home/telaOpcoes">
-
->>>>>>> e46a44b69153bb6a7735f37d51724ea6cd026064
+   <form asp-action="telaOpcoes" asp-controller="Home" class="formulario-opcoes">
         <label class="titulo">Selecione uma opção:</label>
 
         <div class="opcoes">
             <label class="opcao">
                 <input type="radio" name="tipoPedido" value="viagem">
-                <img src="~/image/paraviagem.png" alt="Para viagem">
+                <img src="@Url.Content("~/image/paraviagem.png")" alt="Para viagem">
                 <span>Para viagem</span>
             </label>
 
             <label class="opcao">
                 <input type="radio" name="tipoPedido" value="comerAqui">
-                <img src="~/image/comeraqui.png" alt="Comer aqui">
+                <img src="@Url.Content("~/image/comeraqui.png")" alt="Comer aqui">
                 <span>Comer aqui</span>
             </label>
         </div>
