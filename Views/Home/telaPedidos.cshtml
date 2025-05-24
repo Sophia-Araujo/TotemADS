@@ -53,6 +53,25 @@
             </button>
         </aside>
 
+        <!-- SIDEBAR DE FILTRO -->
+        <aside class="sidebar">
+            <button class="cate">
+                <span>CARNE</span>
+            </button>
+            <button class="cate">
+                <span>ESPECIAIS</span>
+            </button>
+            <button class="cate">
+                <span>FRANGO</span>
+            </button>
+            <button class="cate">
+                <span>VEGETARIANOS</span>
+            </button>
+            <button class="cate">
+                <span>VEGANOS</span>
+            </button>
+        </aside>
+
         <section class="content">
 
             <!-- LANCHES -->
@@ -183,6 +202,68 @@
                         <p>R$ 19,90</p>
                         <p>Lanche especial com desconto!</p>
                         <button class="add-to-cart">Adicionar</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- POPUP INGREDIENTES -->
+            <div id="popup" class="popup-overlay" style="display: none;">
+                <div class="popup-content">
+                    <h2>C# burguer</h2>
+                    <p class="descricao-burguer">Pão, carne, alface, tomate, bacon, cebola e maionese.</p>
+
+                    <div class="popup-main">
+                        <img src="/image/burguer1.png" alt="C# Burguer" class="popup-img">
+
+                        <div class="ingredientes">
+                            <div class="ingrediente">
+                                <span>Pão</span>
+                                <span class="quantidade">1x</span>
+                                <button class="menos">−</button>
+                                <button class="mais">+</button>
+                            </div>
+                            <div class="ingrediente">
+                                <span>Carne</span>
+                                <span class="quantidade">1x</span>
+                                <button class="menos">−</button>
+                                <button class="mais">+</button>
+                            </div>
+                            <div class="ingrediente">
+                                <span>Alface</span>
+                                <span class="quantidade">1x</span>
+                                <button class="menos">−</button>
+                                <button class="mais">+</button>
+                            </div>
+                            <div class="ingrediente">
+                                <span>Tomate</span>
+                                <span class="quantidade">1x</span>
+                                <button class="menos">−</button>
+                                <button class="mais">+</button>
+                            </div>
+                            <div class="ingrediente">
+                                <span>Bacon</span>
+                                <span class="quantidade">1x</span>
+                                <button class="menos">−</button>
+                                <button class="mais">+</button>
+                            </div>
+                            <div class="ingrediente">
+                                <span>Cebola</span>
+                                <span class="quantidade">1x</span>
+                                <button class="menos">−</button>
+                                <button class="mais">+</button>
+                            </div>
+                            <div class="ingrediente">
+                                <span>Maionese</span>
+                                <span class="quantidade">1x</span>
+                                <button class="menos">−</button>
+                                <button class="mais">+</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="popup-buttons">
+                        <button id="voltar" class="btn-voltar">Voltar</button>
+                        <button class="btn-adicionar-popup">Adicionar</button>
                     </div>
                 </div>
             </div>
