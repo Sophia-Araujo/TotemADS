@@ -14,7 +14,6 @@ Cada botão contém o atributo `data-category` que corresponde ao `id` de uma `s
 - `.active`: classe que estiliza o botão atualmente selecionado.
 - `data-category`: atributo utilizado para associar o botão com a seção correspondente.
 - `#banner-image`: id da imagem do banner que muda conforme a categoria.
-
 ---
 **MENU DE FILTRO (SIDEBAR)**  
 
@@ -26,7 +25,6 @@ Cada botão possui a classe `.cate`. Esses botões estão previstos para impleme
 
 ***Classes e Ids:***  
 - `.cate`: classe dos botões de filtro lateral.
-
 ---
 
 **SEÇÕES DE MENU**  
@@ -42,7 +40,6 @@ Cada categoria está dentro de uma `div` com a classe `.menu-section` e um `id` 
 - `id="lanches"`, `id="combos"`, etc.: identificadores das categorias.
 - `.card`: representa um item do cardápio.
 - `.add-to-cart`: botão para adicionar item ao carrinho.
-
 ---
 
 **POPUP DE INGREDIENTES**  
@@ -59,7 +56,6 @@ O popup é exibido como um `div` com `id="popup"` e inicialmente `display: none`
 - `.popup-content`: conteúdo do popup.
 - `.ingrediente`: cada item com controle de quantidade.
 - `.menos`, `.mais`: botões de ajuste de quantidade.
-
 ---
 
 **RESUMO DA COMPRA**  
@@ -76,7 +72,6 @@ Os botões de `Visualizar`, `Pagar` e `Cancelar` direcionam cada um para suas re
 - `.btn-editar`: botão para editar.
 - `.btn-pagar`: botão para pagar.
 - `.btn-cancelar`: botão para cancelar.
-
 ---
 
 **BANNER DINÂMICO**  
