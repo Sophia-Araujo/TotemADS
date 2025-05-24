@@ -1,244 +1,264 @@
 @{
     Layout = "_LayoutPedidos";
 }
+<!DOCTYPE html>
+<html lang="pt-BR">
 
-  
-<header>
-        <img src="/image/banner-pag1.jpg" alt="Banner de Hambúrguer">
-</header>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cardápio</title>
+    <link rel="stylesheet" href="./css/pedidos.css">
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
 
-<main>
-         <aslass="sidebarlateral">
-            ton class="category active">
-            <img src="/image/lanche.png" alt="Lanches">
-            <span>Lanches</span>
-            tton>
-         <buton class="category">
-            <img src="/image/combo.png" alt="Combos">
-            <span>Combos</span>
-        </button>
-            ton class="category">
-            <img src="/image/milkshake.png" alt="Sobremesas">
-            <span>Sobremesas</span>
-            tton>
-         <buton class="category">
-            <img src="/image/bebidas.png" alt="Bebidas">
-            <span>Bebidas</span>
-        </button>
-            ton class="category">
-            <img src="/image/extras.png" alt="Extras">
-            <span>Extras</span>
-            tton>
-          <bton class="category">
-            <img src="/image/promocao.png" alt="Promoções">
-            <span>Promoções</span>
-    </button>
-   <side>
-        
-            e class="sidebar">
-        <button class="cate">
-            <span>CARNE</span>
-            tton>
-        <button class="cate">
-            <span>ESPECIAIS</span>
-           <tton>
-        <button class="cate">
-            <span>FRANGO</span>
-         </btton>
-        <button class="cate">
-            <span>VEGETARIANOS</span>
-        </button>
-        <button class="cate">
-      <span>VEGANOS</span>
-        </button>
-              
-            </aside>
+        .category.active {
+            background-color: #f0f0f0;
+        }
+    </style>
+</head>
 
+<body>
+    <header>
+        <img src="/image/banner-pag1.jpg" id="banner-image" alt="Banner de Hambúrguer">
+    </header>
 
-        tion class="menu">
-         
-          <d class="card">
-            <img src="/image/Buguer-404.png" alt="Burger 404">
-            <h3>Burger 404</h3>
-            <p>R$ 24,90</p>
-            <p>Pão brioche, queijo cheddar cremoso...</p>
-                <button class="add-to-cart">Adicionar</button>
-        </div>
+    <main>
+        <aside class="sidebarlateral">
+            <button class="category active" data-category="lanches">
+                <img src="/image/lanche.png" alt="Lanches">
+                <span>Lanches</span>
+            </button>
+            <button class="category" data-category="combos">
+                <img src="/image/combo.png" alt="Combos">
+                <span>Combos</span>
+            </button>
+            <button class="category" data-category="sobremesas">
+                <img src="/image/milkshake.png" alt="Sobremesas">
+                <span>Sobremesas</span>
+            </button>
+            <button class="category" data-category="bebidas">
+                <img src="/image/bebidas.png" alt="Bebidas">
+                <span>Bebidas</span>
+            </button>
+            <button class="category" data-category="extras">
+                <img src="/image/extras.png" alt="Extras">
+                <span>Extras</span>
+            </button>
+            <button class="category" data-category="promocoes">
+                <img src="/image/promocao.png" alt="Promoções">
+                <span>Promoções</span>
+            </button>
+        </aside>
 
-         <di class="card">
-            <img src="/image/Hello-World-Veggie.png" alt="Burger 404">
-            <h3>Burger 404</h3>
-            <p>R$ 24,90</p>
-            <p>Pão brioche, queijo cheddar cremoso...</p>
-                <button class="add-to-cart">Adicionar</button>
-        </div>
+        <section class="content">
 
-             class="card">
-            <img src="/image/Looping-Duplo.png" alt="Burger 404">
-            <h3>Burger 404</h3>
-            <p>R$ 24,90</p>
-            <p>Pão brioche, queijo cheddar cremoso...</p>
-                <button class="add-to-cart">Adicionar</button>
-        </div>
-
-        <div class="card">
-            <img src="/image/Backend-Brisket.png" alt="Burger 404">
-            <h3>Burger 404</h3>
-            <p>R$ 24,90</p>
-            <p>Pão brioche, queijo cheddar cremoso...</p>
-                <button class="add-to-cart">Adicionar</button>
-        </div>
-
-           < class="card">
-            <img src="/image/Frontend-BBQ.png" alt="Burger 404">
-            <h3>Burger 404</h3>
-            <p>R$ 24,90</p>
-            <p>Pão brioche, queijo cheddar cremoso...</p>
-                <button class="add-to-cart">Adicionar</button>
-        </div>
-
-          <d class="card">
-            <img src="/image/DevOps-Bacon.png" alt="Burger 404">
-            <h3>Burger 404</h3>
-            <p>R$ 24,90</p>
-            <p>Pão brioche, queijo cheddar cremoso...</p>
-                <button class="add-to-cart">Adicionar</button>
-        </div>
-
-         <di class="card">
-            <img src="/image/Byte-Burger.png" alt="Full Stack Burger">
-            <h3>Full Stack Burger</h3>
-            <p>R$ 29,90</p>
-            <p>Pão australiano, dois hambúrgueres 150g...</p>
-                <button class="add-to-cart">Adicionar</button>
-        </div>
-
-             class="card">
-            <img src="/image/Refatorado-Melt.png" alt="Full Stack Burger">
-            <h3>Full Stack Burger</h3>
-            <p>R$ 29,90</p>
-            <p>Pão australiano, dois hambúrgueres 150g...</p>
-                <button class="add-to-cart">Adicionar</button>
-        </div>
-
-        <div class="card">
-            <img src="/image/burguer2.png" alt="Full Stack Burger">
-            <h3>Full Stack Burger</h3>
-            <p>R$ 29,90</p>
-            <p>Pão australiano, dois hambúrgueres 150g...</p>
-                <button class="add-to-cart">Adicionar</button>
-        </div>
-
-           < class="card">
-            <img src="/image/burguer3.png" alt="Full Stack Burger">
-            <h3>Full Stack Burger</h3>
-            <p>R$ 29,90</p>
-            <p>Pão australiano, dois hambúrgueres 150g...</p>
-                <button class="add-to-cart">Adicionar</button>
-        </div>
-
-         <di class="card">
-            <img src="/image/burguer4.png" alt="Full Stack Burger">
-            <h3>Full Stack Burger</h3>
-            <p>R$ 29,90</p>
-            <p>Pão australiano, dois hambúrgueres 150g...</p>
-                <button class="add-to-cart">Adicionar</button>
-        </div>
-
-         <di class="card">
-            <img src="/image/burguer1.png" alt="Full Stack Burger">
-            <h3>Full Stack Burger</h3>
-            <p>R$ 29,90</p>
-            <p>Pão australiano, dois hambúrgueres 150g...</p>
-                <button class="add-to-cart">Adicionar</button>
-        </div>
-
-           < class="card">
-            <img src="/image/burguer5.png" alt="Full Stack Burger">
-            <h3>Full Stack Burger</h3>
-            <p>R$ 29,90</p>
-            <p>Pão australiano, dois hambúrgueres 150g...</p>
-                <button class="add-to-cart">Adicionar</button>
-        </div>
-    </section>
-
-    </main>
- <div id="popup" class="popup-overlay" style="display: none;">
-    <div class="popup-content">
-        <h2>C# burguer</h2>
-        <p class="descricao-burguer">Pão, carne, alface, tomate, bacon, cebola e maionese.</p>
-
-        <div class="popup-main">
-            <img src="/image/burguer1.png" alt="C# Burguer" class="popup-img">
-            
-                <div class="ingredientes">
-                <div class="ingrediente">
-       
-                 <span>Pão</span>
-                        <span class="quantidade">1x</span>
-                        <button class="menos">−</button>
-                        <button class="mais">+</button>
+            <!-- LANCHES -->
+            <div class="menu-section" id="lanches">
+                <h2>Lanches</h2>
+                <div class="menu">
+                    <div class="card">
+                        <img src="/image/Buguer-404.png" alt="Burger 404">
+                        <h3>Burger 404</h3>
+                        <p>R$ 24,90</p>
+                        <p>Pão brioche, queijo cheddar cremoso...</p>
+                        <button class="add-to-cart">Adicionar</button>
                     </div>
-                    <div class="ingrediente">
-                        <span>Carne</span>
-                        <span class="quantidade">1x</span>
-                        <button class="menos">−</button>
-                        <button class="mais">+</button>
+
+                    <div class="card">
+                        <img src="/image/Buguer-404.png" alt="Burger 404">
+                        <h3>Burger 404</h3>
+                        <p>R$ 24,90</p>
+                        <p>Pão brioche, queijo cheddar cremoso...</p>
+                        <button class="add-to-cart">Adicionar</button>
                     </div>
-                    <div class="ingrediente">
-                        <span>Alface</span>
-                        <span class="quantidade">1x</span>
-                        <button class="menos">−</button>
-                        <button class="mais">+</button>
+
+                    <div class="card">
+                        <img src="/image/Buguer-404.png" alt="Burger 404">
+                        <h3>Burger 404</h3>
+                        <p>R$ 24,90</p>
+                        <p>Pão brioche, queijo cheddar cremoso...</p>
+                        <button class="add-to-cart">Adicionar</button>
                     </div>
-                    <div class="ingrediente">
-                        <span>Tomate</span>
-                        <span class="quantidade">1x</span>
-                        <button class="menos">−</button>
-                        <button class="mais">+</button>
+
+                    <div class="card">
+                        <img src="/image/Buguer-404.png" alt="Burger 404">
+                        <h3>Burger 404</h3>
+                        <p>R$ 24,90</p>
+                        <p>Pão brioche, queijo cheddar cremoso...</p>
+                        <button class="add-to-cart">Adicionar</button>
                     </div>
-                    <div class="ingrediente">
-                        <span>Bacon</span>
-                        <span class="quantidade">1x</span>
-                        <button class="menos">−</button>
-                        <button class="mais">+</button>
+
+                    <div class="card">
+                        <img src="/image/Buguer-404.png" alt="Burger 404">
+                        <h3>Burger 404</h3>
+                        <p>R$ 24,90</p>
+                        <p>Pão brioche, queijo cheddar cremoso...</p>
+                        <button class="add-to-cart">Adicionar</button>
                     </div>
-                    <div class="ingrediente">
-                        <span>Cebola</span>
-                        <span class="quantidade">1x</span>
-                        <button class="menos">−</button>
-                        <button class="mais">+</button>
+
+                    <div class="card">
+                        <img src="/image/Buguer-404.png" alt="Burger 404">
+                        <h3>Burger 404</h3>
+                        <p>R$ 24,90</p>
+                        <p>Pão brioche, queijo cheddar cremoso...</p>
+                        <button class="add-to-cart">Adicionar</button>
                     </div>
-                    <div class="ingrediente">
-                        <span>Maionese</span>
-                        <span class="quantidade">1x</span>
-                        <button class="menos">−</button>
-                        <button class="mais">+</button>
+
+                    <div class="card">
+                        <img src="/image/Buguer-404.png" alt="Burger 404">
+                        <h3>Burger 404</h3>
+                        <p>R$ 24,90</p>
+                        <p>Pão brioche, queijo cheddar cremoso...</p>
+                        <button class="add-to-cart">Adicionar</button>
                     </div>
                 </div>
             </div>
 
-            <div class="popup-buttons">
-                <button id="voltar" class="btn-voltar">Voltar</button>
-                <button class="btn-adicionar-popup">Adicionar</button>
+            <!-- COMBOS -->
+            <div class="menu-section" id="combos">
+                <h2>Combos</h2>
+                <div class="menu">
+                    <div class="card">
+                        <img src="/image/combo1.png" alt="Combo Clássico">
+                        <h3>Combo Clássico</h3>
+                        <p>R$ 39,90</p>
+                        <p>Hambúrguer + Batata + Refrigerante</p>
+                        <button class="add-to-cart">Adicionar</button>
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
-    
 
-    <footer class="resumo-compra">
-        <div class="resumo">
-            <p>Lanches 2x <span>R$: 73,80</span></p>
-            <p>Bebidas 1x <span>R$: 10,00</span></p>
-            <p>Sobremesas 2x <span>R$: 15,90</span></p>
-            <p class="total">Total: <span>R$: 99,70</span></p>
-        </div>
-        <div class="acoes">
-            <button class="btn-editar"  onclick="window.location.href='#'">Editar pedido</button>
-            <button class="btn-pagar" onclick="window.location.href='/Home/telaItensPedidos'">Pagar R$: 83,80</button>
-            <button class="btn-cancelar">Cancelar</button>
-        </div>
-    </footer>
+            <!-- SOBREMESAS -->
+            <div class="menu-section" id="sobremesas">
+                <h2>Sobremesas</h2>
+                <div class="menu">
+                    <div class="card">
+                        <img src="/image/sobremesa1.png" alt="Milkshake Chocolate">
+                        <h3>Milkshake Chocolate</h3>
+                        <p>R$ 12,90</p>
+                        <p>Delicioso milkshake de chocolate cremoso.</p>
+                        <button class="add-to-cart">Adicionar</button>
+                    </div>
+                </div>
+            </div>
 
-    <script src="/js/script.js"></script>
+            <!-- BEBIDAS -->
+            <div class="menu-section" id="bebidas">
+                <h2>Bebidas</h2>
+                <div class="menu">
+                    <div class="card">
+                        <img src="/image/refrigerante.png" alt="Refrigerante">
+                        <h3>Refrigerante</h3>
+                        <p>R$ 6,00</p>
+                        <p>Lata 350ml, diversos sabores.</p>
+                        <button class="add-to-cart">Adicionar</button>
+                    </div>
+                </div>
+            </div>
 
+            <!-- EXTRAS -->
+            <div class="menu-section" id="extras">
+                <h2>Extras</h2>
+                <div class="menu">
+                    <div class="card">
+                        <img src="/image/batata.png" alt="Batata Frita">
+                        <h3>Batata Frita</h3>
+                        <p>R$ 8,00</p>
+                        <p>Porção média de batata frita crocante.</p>
+                        <button class="add-to-cart">Adicionar</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PROMOÇÕES -->
+            <div class="menu-section final" id="promocoes">
+                <h2>Promoções</h2>
+                <div class="menu">
+                    <div class="card">
+                        <img src="/image/promo1.png" alt="Promoção do Dia">
+                        <h3>Promoção do Dia</h3>
+                        <p>R$ 19,90</p>
+                        <p>Lanche especial com desconto!</p>
+                        <button class="add-to-cart">Adicionar</button>
+                    </div>
+                </div>
+            </div>
+
+            <footer class="resumo-compra">
+                <div class="resumo">
+                    <p>Lanches 2x <span>R$: 73,80</span></p>
+                    <p>Bebidas 1x <span>R$: 10,00</span></p>
+                    <p>Sobremesas 2x <span>R$: 15,90</span></p>
+                    <p class="total">Total: <span>R$: 99,70</span></p>
+                </div>
+                <div class="acoes">
+                    <button class="btn-editar">Editar pedido</button>
+                    <button class="btn-pagar" onclick="window.location.href='/Home/telaItensPedidos'">Pagar R$:
+                        83,80</button>
+                    <button class="btn-cancelar">Cancelar</button>
+                </div>
+            </footer>
+
+            <script>
+                const sections = document.querySelectorAll('.menu-section');
+                const categoryLinks = document.querySelectorAll('.category');
+                const bannerImage = document.getElementById('banner-image');
+
+                const bannerImages = {
+                    lanches: '/image/banner-pag1.jpg',
+                    combos: '/image/banner-combos.jpg',
+                    sobremesas: '/image/banner-sobremesas.jpg',
+                    bebidas: '/image/banner-bebidas.jpg',
+                    extras: '/image/banner-extras.jpg',
+                    promocoes: '/image/banner-promocoes.jpg'
+                };
+
+                const scrollOffset = 150;
+                function updateBanner(category) {
+                    if (bannerImages[category]) {
+                        bannerImage.src = bannerImages[category];
+                    }
+                }
+
+                categoryLinks.forEach(link => {
+                    link.addEventListener('click', () => {
+                        const category = link.getAttribute('data-category');
+                        const section = document.getElementById(category);
+                        if (section) {
+                            section.scrollIntoView({ behavior: 'smooth' });
+                            updateBanner(category);
+                        }
+                    });
+                });
+
+                window.addEventListener('scroll', () => {
+                    let current = '';
+
+                    sections.forEach(section => {
+                        const sectionTop = section.offsetTop - scrollOffset;;
+                        const sectionHeight = section.offsetHeight;
+                        if (pageYOffset >= sectionTop - sectionHeight / 3) {
+                            current = section.getAttribute('id');
+                        }
+                    });
+
+                    categoryLinks.forEach(link => {
+                        link.classList.remove('active');
+                        if (link.getAttribute('data-category') === current) {
+                            link.classList.add('active');
+                        }
+                    });
+
+                    if (current) {
+                        updateBanner(current);
+                    }
+                });
+            </script>
+
+            <script src="/js/script.js"></script>
+</body>
+
+</html>

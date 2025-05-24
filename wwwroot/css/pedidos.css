@@ -3,193 +3,215 @@
 
 /*2º TELA*/
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: "Poppins", sans-serif;
-  }
-  
-  body {
-    background: #f8f8f8;
-  }
-  
-  header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 1000;
-    background: white; /* Garante que o fundo do header não fique transparente */
-  }
-  
-  header img {
-    width: 100%;
-    height: 23%;
-    object-fit: cover;
-    position: fixed;
-  }
-  
-  main {
-    display: flex;
-    margin-top: 34%;
-  }
-  /* Sidebar fixa */
-  .sidebarlateral {
-    width: 20%;
-    background: white;
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    padding: 20px;
-    position: fixed;
-    height: calc(100vh - 200px); /* Ajusta para ocupar toda a tela sem o header */
-    overflow-y: auto; /* Adiciona scroll se necessário */
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-  }
-  
-  .category {
-    background: #f0f0f0;
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-    border: none;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
 
-    padding: 3%;
-    margin: 30% 0% -1% 0%;
-    padding: 5%;
-    margin: 15% 0% 7% 0%;
-    text-align: center;
-    cursor: pointer;
-    border-radius: 15%;
-    transition: 0.3s;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1%;
-  }
-  
-  .category img {
-    width: 80%;
-    height: 80%;
-  }
-  
-  .category:hover {
-    border-color: #cddc39 10px solid !important;
-  }
-  
-  
-  /* Menu */
-  .menu {
-    margin-top: 10%;
-    margin-top: 8%;
-    margin-left: 20%;
-    overflow-y: hidden;
-    flex: 1;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 15px;
-    padding: 2%;
-    margin-bottom: 9%;
-  }
-  
-  .card {
-    background: white;
-    padding: 15px;
-    border-radius: 6%;
-    text-align: center;
-    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-    overflow-y: auto; /* Adiciona scroll se necessário */
-  }
-  
-  .card img {
-    width: 70%;
-    height: 40%;
-  }
-  
-  .add-to-cart {
-    background: #ff9800;
-    color: white;
-    border: none;
-    padding: 8px;
-    width: 100%;
-    cursor: pointer;
-    border-radius: 20px;
-    margin-top: 10px;
-  }
-  
-  .add-to-cart:hover {
-    background: #C4D438;
-  }
-  
-  /* Rodapé fixo */
-  footer {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    background: white;
-    display: flex;
-    justify-content: space-between;
-    padding: 10px;
-    border-top: 2px solid #ccc;
-  }
-  
-  .cart-button {
-    background: red;
-    border-radius: 20px;
-    color: white;
-    padding: 2%;
-    border: none;
-    cursor: pointer;
-  }
-  
-  .checkout-button {
-    background: green;
-    color: white;
-    width: 15%;
-    border-radius: 20px;
-    border: none;
-    cursor: pointer;
-  }
-  
-   /* Sidebar  */
-   .sidebar{
-    margin-top: 3%;
-    width: 80%;
-    height: 4%;
-    background: white;
-    display: flex;
-    flex-direction:row;
-    gap: 10px;
-    margin-left: 20%;
-    position: fixed;
-    align-items: center;
-    overflow-x: auto; /* Adiciona scroll se necessário */
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-    overflow-x: scroll;
-    overflow-y: hidden;
-    white-space: nowrap;
-  }
-  
-  .cate {
-    background: white;
-    margin-left: 2%;
-    border: none;
-    padding: 1%;
-    text-align: center;
-    cursor: pointer;
-    border-radius: 15%;
-    transition: 0.3s;
-    align-items: center;
-    display: inline-block;
+body {
+  background: #f8f8f8;
+}
 
-  }
-  
-  
- .sidebar span{
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  background: white;
+  /* Garante que o fundo do header não fique transparente */
+}
+
+header img {
+  width: 100%;
+  height: 23%;
+  object-fit: cover;
+  position: fixed;
+}
+
+main {
+  display: flex;
+  margin-top: 34%;
+}
+
+/* Sidebar fixa */
+.sidebarlateral {
+  width: 20%;
+  background: white;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 20px;
+  position: fixed;
+  height: calc(100vh - 200px);
+  /* Ajusta para ocupar toda a tela sem o header */
+  overflow-y: auto;
+  /* Adiciona scroll se necessário */
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.category {
+  background: #f0f0f0;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  border: none;
+
+  padding: 3%;
+  margin: 30% 0% -1% 0%;
+  padding: 5%;
+  margin: 15% 0% 7% 0%;
+  text-align: center;
+  cursor: pointer;
+  border-radius: 15%;
+  transition: 0.3s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1%;
+}
+
+.category img {
+  width: 80%;
+  height: 80%;
+}
+
+.category:hover {
+  border-color: #cddc39 10px solid !important;
+}
+
+.menu-section {
+  scroll-margin-top: 17.5rem;
+  margin-bottom: 2rem;
+}
+
+.menu-section.final {
+  padding-bottom: 150px;
+}
+
+.menu-section h2 {
+  font-size: 1.5rem;
+  margin-bottom: -0.5rem;
+  padding-top: 2.5rem;
+  padding-left: 12rem;
+  color: #333;
+}
+
+/* Menu */
+.menu {
+  margin-top: 1%;
+  margin-bottom: 1%;
+  margin-left: 20%;
+  overflow-y: hidden;
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  padding: 2%;
+
+}
+
+.card {
+  background: white;
+  padding: 15px;
+  border-radius: 6%;
+  text-align: center;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  overflow-y: auto;
+  /* Adiciona scroll se necessário */
+}
+
+.card img {
+  width: 70%;
+  height: 40%;
+}
+
+.add-to-cart {
+  background: #ff9800;
+  color: white;
+  border: none;
+  padding: 8px;
+  width: 100%;
+  cursor: pointer;
+  border-radius: 20px;
+  margin-top: 10px;
+}
+
+.add-to-cart:hover {
+  background: #C4D438;
+}
+
+/* Rodapé fixo */
+footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background: white;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  border-top: 2px solid #ccc;
+}
+
+.cart-button {
+  background: red;
+  border-radius: 20px;
+  color: white;
+  padding: 2%;
+  border: none;
+  cursor: pointer;
+}
+
+.checkout-button {
+  background: green;
+  color: white;
+  width: 15%;
+  border-radius: 20px;
+  border: none;
+  cursor: pointer;
+}
+
+/* Sidebar  */
+.sidebar {
+  margin-top: 3%;
+  width: 80%;
+  height: 4%;
+  background: white;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  margin-left: 20%;
+  position: fixed;
+  align-items: center;
+  overflow-x: auto;
+  /* Adiciona scroll se necessário */
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  overflow-x: scroll;
+  overflow-y: hidden;
+  white-space: nowrap;
+}
+
+.cate {
+  background: white;
+  margin-left: 2%;
+  border: none;
+  padding: 1%;
+  text-align: center;
+  cursor: pointer;
+  border-radius: 15%;
+  transition: 0.3s;
+  align-items: center;
+  display: inline-block;
+
+}
+
+
+.sidebar span {
   font-size: 18px;
   color: #e67e22;
   font-weight: bold;
- }
-  
- .popup-overlay {
+}
+
+.popup-overlay {
   position: fixed;
   top: 0;
   left: 0;
@@ -302,8 +324,8 @@
   border-radius: 20px;
   cursor: pointer;
 }
-  
- footer.resumo-compra {
+
+footer.resumo-compra {
   position: fixed;
   bottom: 0;
   width: 80%;
@@ -362,5 +384,5 @@
 
 .btn-cancelar {
   background: #e74c3c;
-  color: white;
+  color: white;
 }
