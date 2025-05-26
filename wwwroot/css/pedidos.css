@@ -3,186 +3,393 @@
 
 /*2º TELA*/
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: "Poppins", sans-serif;
-  }
-  
-  body {
-    background: #f8f8f8;
-  }
-  
-  header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 1000;
-    background: white; /* Garante que o fundo do header não fique transparente */
-  }
-  
-  header img {
-    width: 100%;
-    height: 23%;
-    object-fit: cover;
-    position: fixed;
-  }
-  
-  main {
-    display: flex;
-    margin-top: 34%;
-  }
-  /* Sidebar fixa */
-  .sidebarlateral {
-    width: 20%;
-    background: white;
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    padding: 20px;
-    position: fixed;
-    height: calc(100vh - 200px); /* Ajusta para ocupar toda a tela sem o header */
-    overflow-y: auto; /* Adiciona scroll se necessário */
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-  }
-  
-  .category {
-    background: #f0f0f0;
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-    border: none;
-    padding: 5%;
-    margin: 15% 0% 7% 0%;
-    text-align: center;
-    cursor: pointer;
-    border-radius: 15%;
-    transition: 0.3s;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1%;
-  }
-  
-  .category img {
-    width: 80%;
-    height: 80%;
-  }
-  
-  .category:hover {
-    background: #cddc39;
-  }
-  
-  
-  /* Menu */
-  .menu {
-    margin-top: 8%;
-    margin-left: 20%;
-    overflow-y: hidden;
-    flex: 1;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 15px;
-    padding: 2%;
-    margin-bottom: 9%;
-  }
-  
-  .card {
-    background: white;
-    padding: 15px;
-    border-radius: 6%;
-    text-align: center;
-    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-    overflow-y: auto; /* Adiciona scroll se necessário */
-  }
-  
-  .card img {
-    width: 70%;
-    height: 40%;
-  }
-  
-  .add-to-cart {
-    background: #ff9800;
-    color: white;
-    border: none;
-    padding: 8px;
-    width: 100%;
-    cursor: pointer;
-    border-radius: 20px;
-    margin-top: 10px;
-  }
-  
-  .add-to-cart:hover {
-    background: #C4D438;
-  }
-  
-  /* Rodapé fixo */
-  footer {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    background: white;
-    display: flex;
-    justify-content: space-between;
-    padding: 10px;
-    border-top: 2px solid #ccc;
-  }
-  
-  .cart-button {
-    background: red;
-    border-radius: 20px;
-    color: white;
-    padding: 2%;
-    border: none;
-    cursor: pointer;
-  }
-  
-  .checkout-button {
-    background: green;
-    color: white;
-    width: 15%;
-    border-radius: 20px;
-    border: none;
-    cursor: pointer;
-  }
-  
-   /* Sidebar  */
-   .sidebar{
-    margin-top: 3%;
-    width: 80%;
-    height: 4%;
-    background: white;
-    display: flex;
-    flex-direction:row;
-    gap: 10px;
-    margin-left: 20%;
-    position: fixed;
-    align-items: center;
-    overflow-x: auto; /* Adiciona scroll se necessário */
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-    overflow-x: scroll;
-    overflow-y: hidden;
-    white-space: nowrap;
-  }
-  
-  .cate {
-    background: white;
-    margin-left: 2%;
-    border: none;
-    padding: 1%;
-    text-align: center;
-    cursor: pointer;
-    border-radius: 15%;
-    transition: 0.3s;
-    align-items: center;
-    display: inline-block;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
 
-  }
-  
-  
- .sidebar span{
+body {
+  background: #f8f8f8;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  background: white;
+  /* Garante que o fundo do header não fique transparente */
+}
+
+header img {
+  width: 100%;
+  height: 23%;
+  object-fit: cover;
+  position: fixed;
+}
+
+main {
+  display: flex;
+  margin-top: 34%;
+}
+
+/* Sidebar fixa */
+.sidebarlateral {
+  width: 20%;
+  background: white;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 20px;
+  position: fixed;
+  height: calc(100vh - 200px);
+  /* Ajusta para ocupar toda a tela sem o header */
+  overflow-y: auto;
+  /* Adiciona scroll se necessário */
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.category {
+  background: #f0f0f0;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  border: none;
+
+  padding: 3%;
+  margin: 30% 0% -1% 0%;
+  padding: 5%;
+  margin: 15% 0% 7% 0%;
+  text-align: center;
+  cursor: pointer;
+  border-radius: 15%;
+  transition: 0.3s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1%;
+}
+
+.category img {
+  width: 80%;
+  height: 80%;
+}
+
+.category:hover {
+  border-color: #cddc39 10px solid !important;
+}
+
+.category.active {
+  background-color: #F0F0F0;
+}
+
+.menu-section {
+  scroll-margin-top: 17.5rem;
+  margin-bottom: 2rem;
+}
+
+.menu-section.final {
+  padding-bottom: 150px;
+}
+
+.menu-section h2 {
+  font-size: 1.5rem;
+  margin-bottom: -0.5rem;
+  padding-top: 2.5rem;
+  padding-left: 12rem;
+  color: #333;
+}
+
+/* Menu */
+.menu {
+  margin-top: 1%;
+  margin-bottom: 1%;
+  margin-left: 20%;
+  overflow-y: hidden;
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  padding: 2%;
+
+}
+
+.card {
+  background: white;
+  padding: 15px;
+  border-radius: 6%;
+  text-align: center;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  overflow-y: auto;
+}
+
+.card img {
+  width: 70%;
+  height: 40%;
+}
+
+.add-to-cart {
+  background: #ff9800;
+  color: white;
+  border: none;
+  padding: 8px;
+  width: 100%;
+  cursor: pointer;
+  border-radius: 20px;
+  margin-top: 10px;
+}
+
+.add-to-cart:hover {
+  background: #C4D438;
+}
+
+/* Rodapé fixo */
+footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background: white;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  border-top: 2px solid #ccc;
+}
+
+.cart-button {
+  background: red;
+  border-radius: 20px;
+  color: white;
+  padding: 2%;
+  border: none;
+  cursor: pointer;
+}
+
+.checkout-button {
+  background: green;
+  color: white;
+  width: 15%;
+  border-radius: 20px;
+  border: none;
+  cursor: pointer;
+}
+
+/* Sidebar  */
+.sidebar {
+  margin-top: 3%;
+  width: 80%;
+  height: 4%;
+  background: white;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  margin-left: 20%;
+  position: fixed;
+  align-items: center;
+  overflow-x: auto;
+  /* Adiciona scroll se necessário */
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  overflow-x: scroll;
+  overflow-y: hidden;
+  white-space: nowrap;
+}
+
+.cate {
+  background: white;
+  margin-left: 2%;
+  border: none;
+  padding: 1%;
+  text-align: center;
+  cursor: pointer;
+  border-radius: 15%;
+  transition: 0.3s;
+  align-items: center;
+  display: inline-block;
+
+}
+
+
+.sidebar span {
   font-size: 18px;
   color: #e67e22;
   font-weight: bold;
- }
-  
-  
+}
+
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.popup-content {
+  background: white;
+  border-radius: 50px 50px 0px 0px;
+  margin-top: 90%;
+  margin-bottom: 5%;
+  padding: 30px;
+  width: 100%;
+  height: 50%;
+  max-width: 100%;
+  text-align: center;
+}
+
+.popup-content h2 {
+  color: #f97316;
+  font-size: 30px;
+}
+
+.popup-content .descricao-burguer {
+  color: #999;
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+.popup-main {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.popup-img {
+  width: 180px;
+  height: auto;
+  border-radius: 10px;
+}
+
+.ingredientes {
+  flex: 1;
+  margin-left: 20px;
+}
+
+.ingrediente {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 8px 0;
+}
+
+.ingrediente span {
+  flex: 1;
+  text-align: left;
+  font-weight: 500;
+  font-size: 30px;
+}
+
+.ingrediente .quantidade {
+  text-align: center;
+  width: 80px;
+}
+
+.ingrediente button {
+  width: 40px;
+  height: 40px;
+  border: none;
+  background: #ff3c28;
+  color: white;
+  font-size: 25px;
+  border-radius: 50%;
+  cursor: pointer;
+  align-items: center;
+}
+
+.ingrediente button.mais {
+  background: #6fcf97;
+}
+
+.popup-buttons {
+  margin-top: 15px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.btn-voltar {
+  background: white;
+  color: black;
+  border: 2px solid black;
+  padding: 20px 40px;
+  font-size: 20px;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.btn-adicionar-popup {
+  background: #ff9800;
+  color: white;
+  padding: 20px 40px;
+  font-size: 20px;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+footer.resumo-compra {
+  position: fixed;
+  bottom: 0;
+  width: 80%;
+  margin-left: 20%;
+  border-radius: 0 16px 0 0;
+  background: rgb(255, 255, 255);
+  box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.1);
+  padding: 10px 20px;
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+}
+
+.resumo p {
+  font-size: 20px;
+  margin-bottom: 4px;
+}
+
+.resumo .total {
+  font-weight: bold;
+  font-size: 22px;
+  color: #e74c3c;
+}
+
+.acoes {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: end;
+  width: 50%;
+}
+
+.acoes button {
+  /* margin-right: 20%;
+  margin-left: 70%; */
+  border: none;
+  width: 10rem;
+  height: 50px;
+  padding: 15px 14px;
+  border-radius: 14px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn-editar {
+  background: #f0f0f0;
+  color: #333;
+}
+
+.btn-pagar {
+  background: #ff6600;
+  color: white;
+}
+
+.btn-cancelar {
+  background: #e74c3c;
+  color: white;
+}

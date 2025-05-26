@@ -28,7 +28,16 @@ public class HomeController : Controller
         return View();
     }
 
+<<<<<<< HEAD
+
+    public IActionResult Pagamentos()
+      {
+        return View();
+    }
+
     public IActionResult carregamento()
+
+
     {
         return View();
     }
@@ -53,11 +62,14 @@ public class HomeController : Controller
     }
 
     public IActionResult telaTipoPedido()
+
     {
         return View();
     }
 
 
+=======
+>>>>>>> e46a44b69153bb6a7735f37d51724ea6cd026064
     public IActionResult modalCupom()
     {
         return View();
@@ -68,8 +80,37 @@ public class HomeController : Controller
         return View();
     }
 
+    public IActionResult carregamento()
 
 
+    {
+        return View();
+    }
+
+
+    public IActionResult telaCpf()
+    {
+        return View();
+    }
+
+
+
+     public IActionResult telaNome()
+     {
+        return View();
+    }
+
+
+    public IActionResult telaItensPedidos()
+    {
+        return View();
+    }
+
+    public IActionResult telaTipoPedido()
+
+    {
+        return View();
+    }
 
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
