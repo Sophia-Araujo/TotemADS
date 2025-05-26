@@ -13,6 +13,10 @@ body {
   background: #f8f8f8;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 header {
   position: fixed;
   top: 0;
@@ -79,6 +83,10 @@ main {
   border-color: #cddc39 10px solid !important;
 }
 
+.category.active {
+  background-color: #F0F0F0;
+}
+
 .menu-section {
   scroll-margin-top: 17.5rem;
   margin-bottom: 2rem;
@@ -117,7 +125,6 @@ main {
   text-align: center;
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
   overflow-y: auto;
-  /* Adiciona scroll se necessário */
 }
 
 .card img {

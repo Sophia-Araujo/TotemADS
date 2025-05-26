@@ -9,15 +9,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cardápio</title>
     <link rel="stylesheet" href="./css/pedidos.css">
-    <style>
-        html {
-            scroll-behavior: smooth;
-        }
-
-        .category.active {
-            background-color: #f0f0f0;
-        }
-    </style>
 </head>
 
 <body>
@@ -206,140 +197,86 @@
                 </div>
             </div>
 
-            <!-- POPUP INGREDIENTES -->
-            <div id="popup" class="popup-overlay" style="display: none;">
-                <div class="popup-content">
-                    <h2>C# burguer</h2>
-                    <p class="descricao-burguer">Pão, carne, alface, tomate, bacon, cebola e maionese.</p>
+        </section>
 
-                    <div class="popup-main">
-                        <img src="/image/burguer1.png" alt="C# Burguer" class="popup-img">
+        <!-- POPUP INGREDIENTES -->
+        <div id="popup" class="popup-overlay" style="display: none;">
+            <div class="popup-content">
+                <h2>C# burguer</h2>
+                <p class="descricao-burguer">Pão, carne, alface, tomate, bacon, cebola e maionese.</p>
 
-                        <div class="ingredientes">
-                            <div class="ingrediente">
-                                <span>Pão</span>
-                                <span class="quantidade">1x</span>
-                                <button class="menos">−</button>
-                                <button class="mais">+</button>
-                            </div>
-                            <div class="ingrediente">
-                                <span>Carne</span>
-                                <span class="quantidade">1x</span>
-                                <button class="menos">−</button>
-                                <button class="mais">+</button>
-                            </div>
-                            <div class="ingrediente">
-                                <span>Alface</span>
-                                <span class="quantidade">1x</span>
-                                <button class="menos">−</button>
-                                <button class="mais">+</button>
-                            </div>
-                            <div class="ingrediente">
-                                <span>Tomate</span>
-                                <span class="quantidade">1x</span>
-                                <button class="menos">−</button>
-                                <button class="mais">+</button>
-                            </div>
-                            <div class="ingrediente">
-                                <span>Bacon</span>
-                                <span class="quantidade">1x</span>
-                                <button class="menos">−</button>
-                                <button class="mais">+</button>
-                            </div>
-                            <div class="ingrediente">
-                                <span>Cebola</span>
-                                <span class="quantidade">1x</span>
-                                <button class="menos">−</button>
-                                <button class="mais">+</button>
-                            </div>
-                            <div class="ingrediente">
-                                <span>Maionese</span>
-                                <span class="quantidade">1x</span>
-                                <button class="menos">−</button>
-                                <button class="mais">+</button>
-                            </div>
+                <div class="popup-main">
+                    <img src="/image/burguer1.png" alt="C# Burguer" class="popup-img">
+
+                    <div class="ingredientes">
+                        <div class="ingrediente">
+                            <span>Pão</span>
+                            <span class="quantidade">1x</span>
+                            <button class="menos">−</button>
+                            <button class="mais">+</button>
+                        </div>
+                        <div class="ingrediente">
+                            <span>Carne</span>
+                            <span class="quantidade">1x</span>
+                            <button class="menos">−</button>
+                            <button class="mais">+</button>
+                        </div>
+                        <div class="ingrediente">
+                            <span>Alface</span>
+                            <span class="quantidade">1x</span>
+                            <button class="menos">−</button>
+                            <button class="mais">+</button>
+                        </div>
+                        <div class="ingrediente">
+                            <span>Tomate</span>
+                            <span class="quantidade">1x</span>
+                            <button class="menos">−</button>
+                            <button class="mais">+</button>
+                        </div>
+                        <div class="ingrediente">
+                            <span>Bacon</span>
+                            <span class="quantidade">1x</span>
+                            <button class="menos">−</button>
+                            <button class="mais">+</button>
+                        </div>
+                        <div class="ingrediente">
+                            <span>Cebola</span>
+                            <span class="quantidade">1x</span>
+                            <button class="menos">−</button>
+                            <button class="mais">+</button>
+                        </div>
+                        <div class="ingrediente">
+                            <span>Maionese</span>
+                            <span class="quantidade">1x</span>
+                            <button class="menos">−</button>
+                            <button class="mais">+</button>
                         </div>
                     </div>
+                </div>
 
-                    <div class="popup-buttons">
-                        <button id="voltar" class="btn-voltar">Voltar</button>
-                        <button class="btn-adicionar-popup">Adicionar</button>
-                    </div>
+                <div class="popup-buttons">
+                    <button id="voltar" class="btn-voltar">Voltar</button>
+                    <button class="btn-adicionar-popup">Adicionar</button>
                 </div>
             </div>
+        </div>
 
-            <footer class="resumo-compra">
-                <div class="resumo">
-                    <p>Lanches 2x <span>R$: 73,80</span></p>
-                    <p>Bebidas 1x <span>R$: 10,00</span></p>
-                    <p>Sobremesas 2x <span>R$: 15,90</span></p>
-                    <p class="total">Total: <span>R$: 99,70</span></p>
-                </div>
-                <div class="acoes">
-                    <button class="btn-editar">Editar pedido</button>
-                    <button class="btn-pagar" onclick="window.location.href='/Home/telaItensPedidos'">Pagar R$:
-                        83,80</button>
-                    <button class="btn-cancelar">Cancelar</button>
-                </div>
-            </footer>
+        <footer class="resumo-compra">
+            <div class="resumo">
+                <p>Lanches 2x <span>R$: 73,80</span></p>
+                <p>Bebidas 1x <span>R$: 10,00</span></p>
+                <p>Sobremesas 2x <span>R$: 15,90</span></p>
+                <p class="total">Total: <span>R$: 99,70</span></p>
+            </div>
+            <div class="acoes">
+                <button class="btn-editar">Editar pedido</button>
+                <button class="btn-pagar" onclick="window.location.href='/Home/telaItensPedidos'">Pagar R$:
+                    83,80</button>
+                <button class="btn-cancelar">Cancelar</button>
+            </div>
+        </footer>
 
-            <script>
-                const sections = document.querySelectorAll('.menu-section');
-                const categoryLinks = document.querySelectorAll('.category');
-                const bannerImage = document.getElementById('banner-image');
-
-                const bannerImages = {
-                    lanches: '/image/banner-pag1.jpg',
-                    combos: '/image/banner-combos.jpg',
-                    sobremesas: '/image/banner-sobremesas.jpg',
-                    bebidas: '/image/banner-bebidas.jpg',
-                    extras: '/image/banner-extras.jpg',
-                    promocoes: '/image/banner-promocoes.jpg'
-                };
-
-                const scrollOffset = 150;
-                function updateBanner(category) {
-                    if (bannerImages[category]) {
-                        bannerImage.src = bannerImages[category];
-                    }
-                }
-
-                categoryLinks.forEach(link => {
-                    link.addEventListener('click', () => {
-                        const category = link.getAttribute('data-category');
-                        const section = document.getElementById(category);
-                        if (section) {
-                            section.scrollIntoView({ behavior: 'smooth' });
-                            updateBanner(category);
-                        }
-                    });
-                });
-
-                window.addEventListener('scroll', () => {
-                    let current = '';
-
-                    sections.forEach(section => {
-                        const sectionTop = section.offsetTop - scrollOffset;;
-                        const sectionHeight = section.offsetHeight;
-                        if (pageYOffset >= sectionTop - sectionHeight / 3) {
-                            current = section.getAttribute('id');
-                        }
-                    });
-
-                    categoryLinks.forEach(link => {
-                        link.classList.remove('active');
-                        if (link.getAttribute('data-category') === current) {
-                            link.classList.add('active');
-                        }
-                    });
-
-                    if (current) {
-                        updateBanner(current);
-                    }
-                });
-            </script>
-
-            <script src="/js/script.js"></script>
+        <script src="/js/script.js"></script>
 </body>
 
 </html>
