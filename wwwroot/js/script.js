@@ -50,12 +50,12 @@ const categoryLinks = document.querySelectorAll(".category");
 const bannerImage = document.getElementById("banner-image");
 
 const bannerImages = {
-  lanches: "/image/banner-pag1.jpg",
-  combos: "/image/banner-combos.jpg",
-  sobremesas: "/image/banner-sobremesas.jpg",
-  bebidas: "/image/banner-bebidas.jpg",
-  extras: "/image/banner-extras.jpg",
-  promocoes: "/image/banner-promocoes.jpg",
+  lanches: "/image/banners/lanchesBanner.png",
+  combos: "/image/banners/combisBanner.png",
+  sobremesas: "/image/banners/sobremesasBanner.png",
+  bebidas: "/image/banners/bebidasBanner.png",
+  extras: "/image/banners/extrasBanner.png",
+  promocoes: "/image/banners/promocoesBanner.png",
 };
 
 const scrollOffset = 210;
