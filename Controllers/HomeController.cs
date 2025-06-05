@@ -73,6 +73,61 @@ public class HomeController : Controller
     return View();
    }
 
+   public IActionResult pagamentosCartaoFinal()
+   {
+    return View();
+   }
+
+   public IActionResult Pix()
+    {
+        return View();
+    }
+
+    public IActionResult PixFinal()
+    {
+        return View();
+    }
+
+    public IActionResult CarteiraDigital()
+    {
+        return View();
+    }
+
+    public IActionResult CarteiraDigitalFinal()
+    {
+        return View();
+    }
+
+    public IActionResult Gpay()
+    {
+        return View();
+    }
+
+    public IActionResult GpayFinal()
+    {
+        return View();
+    }
+
+    public IActionResult ApplePay()
+    {
+        return View();
+    }
+
+    public IActionResult ApplePayFinal()
+    {
+        return View();
+    }
+
+    public IActionResult Qrcode()
+    {
+        return View();
+    }
+
+    public IActionResult QRcodeFinal()
+    {
+        return View();
+    }
+
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
     {

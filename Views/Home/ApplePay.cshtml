@@ -1,0 +1,62 @@
+@{
+    Layout = "_LayoutApplepay";
+}
+
+<header class="logo-banner">
+    <img src="/image/img-pagamento.png" alt="Banner Pagamento" class="banner">
+    <img src="/image/logo2.png" alt="Logo" class="logo-pagamento">
+    <link rel="stylesheet" href="Gpay.css">
+</header>
+
+<main>
+    <div class="pagamento-container">
+        <div class="topo">
+            <p class="preco-texto">Preço: <span class="preco">R$: 83,80</span></p>
+        </div>
+
+        <h2>Escolha a forma de pagamento:</h2>
+
+        <div class="formas">
+            <div class="forma selecionado">
+                <img src="/image/opc_applePay.png" alt="Cartão">
+                <p class="titulo-opcao">Apple Pay</p>
+            </div>
+            <div class="caixa">
+                <p class="titulo-opcao">Forma de pagamento</p>
+                <div class="botoes-pagamento">
+                    <button class="opcao-btn selecionado">Crédito</button>
+                    <button class="opcao-btn">Débito</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="usar-pontos">
+            <div class="pontos-texto">
+                <strong>Usar pontos?</strong><br />
+                Você possui 50 pontos disponíveis
+            </div>
+            <img src="/image/pontos.png" alt="Ícone de pontos" class="icone-pontos">
+        </div>
+
+        <button class="confirmar">Confirmar</button>
+    </div>
+
+   <script>
+    const usarPontos = document.querySelector('.usar-pontos');
+
+    usarPontos.addEventListener('click', () => {
+        usarPontos.classList.toggle('selecionado');
+    });
+
+    const botoesOpcao = document.querySelectorAll('.opcao-btn');
+
+    botoesOpcao.forEach(botao => {
+        botao.addEventListener('click', () => {
+            botoesOpcao.forEach(btn => btn.classList.remove('selecionado'));
+            botao.classList.add('selecionado');
+        });
+    });
+</script>
+
+
+</main>

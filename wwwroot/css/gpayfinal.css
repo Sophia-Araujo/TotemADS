@@ -1,0 +1,238 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+:root {
+    --primary-orange: #f15a24;
+    --text-dark: #333;
+    --text-medium: #555;
+    --bg-light-gray: #f8f8f8;
+    --bg-white: #fff;
+    --border-gray: #ccc;
+    --shadow: rgba(0, 0, 0, 0.1);
+    --selected-border-orange: #ff6600;
+    --gpay-green: #34A853;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+body {
+    background: var(--bg-white);
+    width: 800px; /* Fixed width */
+    height: 1280px; /* Fixed height */
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    overflow: hidden; /* CRITICAL: Prevent body scroll */
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%; /* Must fill parent height */
+    background-color: var(--bg-light-gray);
+}
+
+/* Header Section */
+.logo-banner {
+    position: relative;
+    width: 100%;
+    height: 380px; /* Consistent fixed height for the header */
+    background-color: var(--primary-orange);
+    overflow: hidden; /* Hide content if it exceeds the header boundaries */
+    border-bottom-left-radius: 40px;
+    border-bottom-right-radius: 40px;
+}
+
+.banner {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.logo-pagamento {
+    position: absolute;
+    top: 40px;
+    left: 40px;
+    width: 100px;
+    z-index: 2;
+}
+
+/* Main Content Area */
+main {
+    position: relative;
+    background: var(--bg-light-gray);
+    border-top-left-radius: 40px;
+    border-top-right-radius: 40px;
+    padding: 40px; /* Padding inside the main content area */
+    margin-top: -30px; /* Overlap effect */
+    z-index: 5;
+    /* Calculate remaining height for main to prevent scroll */
+    height: calc(100% - 380px + 30px); /* Total body height - banner height + overlap */
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Reduced gap between main sections (h2, obs, formas, produtos, total) */
+    box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.1);
+    /* REMOVED: overflow-y: auto; */ /* CRITICAL: Prevent scroll on main */
+}
+
+h2 {
+    font-size: 28px; /* Slightly reduced font size for instructions */
+    text-align: center;
+    color: var(--text-dark);
+    font-weight: 600;
+    line-height: 1.2; /* Tighter line height */
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.obs {
+    text-align: center;
+    font-size: 18px; /* Slightly reduced font size for observation */
+    color: var(--text-medium);
+    font-weight: 400;
+    margin-top: -5px; /* Tighter spacing */
+    margin-left: 0;
+}
+
+.formas {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 20px; /* Gap between the two payment method boxes */
+    width: 100%;
+    /* Add specific height if needed, or let content define it */
+}
+
+/* GPay Card (Left side) */
+.forma-gpay {
+    background: var(--bg-white);
+    border-radius: 18px;
+    padding: 20px;
+    box-shadow: 0 4px 10px var(--shadow);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 3px solid transparent;
+    transition: border-color 0.3s ease;
+    flex: 1; /* Allow it to take available width */
+    max-width: 320px; /* Max width to keep consistent card size */
+    min-height: 160px; /* Adjusted min-height to ensure consistent size */
+    padding-top: 25px; /* Adjust padding to vertically center logo and text */
+    padding-bottom: 25px;
+}
+
+.forma-gpay.selecionado {
+    border-color: var(--selected-border-orange);
+}
+
+.gpay-logo {
+    width: 140px; /* Slightly adjusted size for logo */
+    height: auto;
+    object-fit: contain;
+    margin-bottom: 5px;
+}
+
+.forma-gpay p {
+    font-size: 22px; /* Adjusted font size for "Google Pay" text */
+    font-weight: 500;
+    color: var(--text-dark);
+    text-align: center;
+}
+
+/* Status Box (Right side) */
+.caixa-status {
+    background: var(--bg-white);
+    border-radius: 18px;
+    padding: 20px;
+    box-shadow: 0 4px 10px var(--shadow);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex: 1; /* Allows it to take available width */
+    max-width: 320px; /* Max width to keep consistent card size */
+    min-height: 160px; /* Adjusted min-height to ensure consistent size */
+}
+
+.caixa-status h3 {
+    font-size: 24px; /* Adjusted font size for "Aguardando aproximação" */
+    font-weight: 600;
+    color: var(--text-dark);
+    text-align: center;
+    margin-bottom: 5px;
+}
+
+.caixa-status .status-atual {
+    font-size: 18px; /* Adjusted font size */
+    color: var(--text-medium);
+    margin-bottom: 15px;
+}
+
+.caixa-status .status-icon {
+    width: 70px; /* Adjusted size of the checkmark icon */
+    height: 70px;
+    object-fit: contain;
+}
+
+/* Products Section */
+.produtos {
+    background: var(--bg-white);
+    border-radius: 18px;
+    padding: 25px; /* Reduced padding for product list */
+    box-shadow: 0 4px 10px var(--shadow);
+    display: flex;
+    flex-direction: column;
+    gap: 8px; /* Reduced gap between product items */
+    flex-grow: 1; /* This is crucial: allows products to take remaining vertical space */
+    /* If content is too long here, it will be squished but no scroll */
+    justify-content: flex-start; /* Align content to the top within products */
+}
+
+.produtos-texto strong {
+    font-size: 22px; /* Reduced font size for "Seus Produtos" heading */
+    font-weight: 600;
+    color: var(--text-dark);
+    margin-bottom: 5px; /* Reduced spacing below heading */
+    display: block;
+}
+
+.item {
+    display: flex;
+    justify-content: space-between;
+    font-size: 20px; /* Reduced font size for product items */
+    color: var(--text-dark);
+    font-weight: 400;
+}
+
+.item .desconto {
+    color: var(--primary-orange);
+    font-weight: 600;
+}
+
+/* Total Container */
+.total-container {
+    background: var(--bg-white);
+    border-radius: 18px;
+    padding: 30px; /* Padding for the total container */
+    box-shadow: 0 4px 10px var(--shadow);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 28px; /* Slightly reduced font size for total */
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-top: 0; /* Rely on main's gap for spacing */
+    flex-shrink: 0; /* Prevent it from shrinking if products need more space */
+}
+
+.valor-total {
+    color: var(--primary-orange);
+}

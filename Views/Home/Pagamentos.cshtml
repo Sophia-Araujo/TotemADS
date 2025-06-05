@@ -76,22 +76,22 @@
 
             switch (alt) {
                 case 'Cartão':
-                    window.location.href = '/Home/PagamentosCartao';
+                    window.location.href = '/home/PagamentosCartao';
                     break;
                 case 'Pix':
-                    window.location.href = '/home/PagamentosPix';
+                    window.location.href = '/home/Pix';
                     break;
                 case 'Digital':
-                    window.location.href = '/home/PagamentosDigital';
+                    window.location.href = '/home/CarteiraDigital';
                     break;
                 case 'QR Code':
-                    window.location.href = '/home/PagamentosQRCode';
+                    window.location.href = '/home/QRCode';
                     break;
                 case 'Google Pay':
-                    window.location.href = '/home/PagamentosGoogle';
+                    window.location.href = '/home/Gpay';
                     break;
                 case 'Apple Pay':
-                    window.location.href = '/home/PagamentosApple';
+                    window.location.href = '/home/Applepay';
                     break;
                 default:
                     alert('Erro ao redirecionar. Tente novamente.');
@@ -185,6 +185,9 @@
             switch (alt) {
                 case 'Cartão':
                     window.location.href = '/home/PagamentosCartao';
+                    break;
+                case 'Cartão':
+                    window.location.href = '/home/pagamentosCartaoFinal';
                     break;
                 case 'Pix':
                     window.location.href = '/home/PagamentosPix';
