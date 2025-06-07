@@ -1,0 +1,30 @@
+@model List<SeuProjeto.Models.MenuItem>
+
+@{
+    ViewData["Title"] = "Dashboard";
+    Layout = "~/Views/Shared/_LayoutMenu.cshtml";
+}
+<div class="container-principal">
+    <div class="menu-lateral">
+        <div class="logo">
+            <img src="~/image/logo_dsburguer.png" alt="ADS Burguer System" style="max-width: 200px;" />
+        </div>
+        <ul class="menu">
+            @foreach (var item in Model)
+            {
+                <li><a href="@item.Link">@item.Nome ➜</a></li>
+            }
+        </ul>
+        <div class="usuario">
+            <div class="circulo"></div>
+            <span>Olá, Mike!</span>
+        </div>
+    </div>
+
+    <div class="conteudo">
+        <div class="aviso">
+            <h2>Atenção</h2>
+            <p>Escolha uma das<br />opções do menu lateral<br />para começarmos!</p>
+        </div>
+    </div>
+</div>
