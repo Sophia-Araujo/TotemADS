@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TotemPWA.Data;
 
@@ -10,9 +11,11 @@ using TotemPWA.Data;
 namespace TotemPWA.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250608214812_addCategoria")]
+    partial class addCategoria
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "9.0.5");
@@ -182,31 +185,6 @@ namespace TotemPWA.Migrations
                     b.HasIndex("ProdutoId");
 
                     b.ToTable("IgredienteProdutos");
-                });
-
-            modelBuilder.Entity("TotemPWA.Models.ItensCombo", b =>
-                {
-                    b.Property<int>("ItensComboId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("CupomId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("ProdutoId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("Quantidade")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("ItensComboId");
-
-                    b.HasIndex("CupomId")
-                        .IsUnique();
-
-                    b.HasIndex("ProdutoId");
-
-                    b.ToTable("ItensCombos");
                 });
 
             modelBuilder.Entity("TotemPWA.Models.ItensPedido", b =>
@@ -380,25 +358,6 @@ namespace TotemPWA.Migrations
                     b.Navigation("Produto");
                 });
 
-            modelBuilder.Entity("TotemPWA.Models.ItensCombo", b =>
-                {
-                    b.HasOne("TotemPWA.Models.Cupom", "Cupom")
-                        .WithOne("ItensCombo")
-                        .HasForeignKey("TotemPWA.Models.ItensCombo", "CupomId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("TotemPWA.Models.Produto", "Produto")
-                        .WithMany("ItensCombo")
-                        .HasForeignKey("ProdutoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Cupom");
-
-                    b.Navigation("Produto");
-                });
-
             modelBuilder.Entity("TotemPWA.Models.ItensPedido", b =>
                 {
                     b.HasOne("TotemPWA.Models.Pedido", "Pedido")
@@ -478,12 +437,6 @@ namespace TotemPWA.Migrations
                     b.Navigation("Pedidos");
                 });
 
-            modelBuilder.Entity("TotemPWA.Models.Cupom", b =>
-                {
-                    b.Navigation("ItensCombo")
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("TotemPWA.Models.Igrediente", b =>
                 {
                     b.Navigation("Adicionais");
@@ -505,8 +458,6 @@ namespace TotemPWA.Migrations
             modelBuilder.Entity("TotemPWA.Models.Produto", b =>
                 {
                     b.Navigation("IgredienteProdutos");
-
-                    b.Navigation("ItensCombo");
 
                     b.Navigation("ItensPedidos");
                 });

@@ -4,9 +4,9 @@
 <div class="fundo">
     <img src="~/image/logo-reduzido.png" alt="ADS Burguer" class="logo">
 
-    <form class="formulario-cpf" action="/Home/telaTipoPedido">
+    <form class="formulario-cpf" action="/Home/telaTipoPedido" onsubmit="return validarCPF();">
         <label for="cpf">Coloque o CPF:</label>
-        <input type="text" id="cpf" name="cpf">
+        <input type="text" id="cpf" name="cpf"  placeholder="000.000.000-00" maxlength="14">
 
         <div class="checkbox-area">
             <input type="checkbox" id="nota" name="nota">
@@ -18,3 +18,8 @@
     <div class="faixa-laranja"></div>
     <div class="faixa-verde"></div>
 </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+
+
+

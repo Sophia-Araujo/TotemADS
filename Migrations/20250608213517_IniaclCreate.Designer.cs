@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TotemPWA.Data;
 
@@ -10,9 +11,11 @@ using TotemPWA.Data;
 namespace TotemPWA.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250608213517_IniaclCreate")]
+    partial class IniaclCreate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "9.0.5");
@@ -65,26 +68,6 @@ namespace TotemPWA.Migrations
                     b.HasKey("AdministradorId");
 
                     b.ToTable("Administradores");
-                });
-
-            modelBuilder.Entity("TotemPWA.Models.Categoria", b =>
-                {
-                    b.Property<int>("CategoriaId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int?>("CategoriaPaiId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Nome")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("CategoriaId");
-
-                    b.HasIndex("CategoriaPaiId");
-
-                    b.ToTable("Categorias");
                 });
 
             modelBuilder.Entity("TotemPWA.Models.Cliente", b =>
@@ -182,31 +165,6 @@ namespace TotemPWA.Migrations
                     b.HasIndex("ProdutoId");
 
                     b.ToTable("IgredienteProdutos");
-                });
-
-            modelBuilder.Entity("TotemPWA.Models.ItensCombo", b =>
-                {
-                    b.Property<int>("ItensComboId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("CupomId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("ProdutoId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("Quantidade")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("ItensComboId");
-
-                    b.HasIndex("CupomId")
-                        .IsUnique();
-
-                    b.HasIndex("ProdutoId");
-
-                    b.ToTable("ItensCombos");
                 });
 
             modelBuilder.Entity("TotemPWA.Models.ItensPedido", b =>
@@ -317,8 +275,6 @@ namespace TotemPWA.Migrations
 
                     b.HasIndex("AdministradorId");
 
-                    b.HasIndex("CategoriaId");
-
                     b.ToTable("Produto");
                 });
 
@@ -339,15 +295,6 @@ namespace TotemPWA.Migrations
                     b.Navigation("Igrediente");
 
                     b.Navigation("ItensPedido");
-                });
-
-            modelBuilder.Entity("TotemPWA.Models.Categoria", b =>
-                {
-                    b.HasOne("TotemPWA.Models.Categoria", "CategoriaPai")
-                        .WithMany("Subcategorias")
-                        .HasForeignKey("CategoriaPaiId");
-
-                    b.Navigation("CategoriaPai");
                 });
 
             modelBuilder.Entity("TotemPWA.Models.Cupom", b =>
@@ -376,25 +323,6 @@ namespace TotemPWA.Migrations
                         .IsRequired();
 
                     b.Navigation("Igrediente");
-
-                    b.Navigation("Produto");
-                });
-
-            modelBuilder.Entity("TotemPWA.Models.ItensCombo", b =>
-                {
-                    b.HasOne("TotemPWA.Models.Cupom", "Cupom")
-                        .WithOne("ItensCombo")
-                        .HasForeignKey("TotemPWA.Models.ItensCombo", "CupomId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("TotemPWA.Models.Produto", "Produto")
-                        .WithMany("ItensCombo")
-                        .HasForeignKey("ProdutoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Cupom");
 
                     b.Navigation("Produto");
                 });
@@ -448,15 +376,7 @@ namespace TotemPWA.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("TotemPWA.Models.Categoria", "Categoria")
-                        .WithMany("Produtos")
-                        .HasForeignKey("CategoriaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("Administrador");
-
-                    b.Navigation("Categoria");
                 });
 
             modelBuilder.Entity("TotemPWA.Models.Administrador", b =>
@@ -466,22 +386,9 @@ namespace TotemPWA.Migrations
                     b.Navigation("Produto");
                 });
 
-            modelBuilder.Entity("TotemPWA.Models.Categoria", b =>
-                {
-                    b.Navigation("Produtos");
-
-                    b.Navigation("Subcategorias");
-                });
-
             modelBuilder.Entity("TotemPWA.Models.Cliente", b =>
                 {
                     b.Navigation("Pedidos");
-                });
-
-            modelBuilder.Entity("TotemPWA.Models.Cupom", b =>
-                {
-                    b.Navigation("ItensCombo")
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("TotemPWA.Models.Igrediente", b =>
@@ -505,8 +412,6 @@ namespace TotemPWA.Migrations
             modelBuilder.Entity("TotemPWA.Models.Produto", b =>
                 {
                     b.Navigation("IgredienteProdutos");
-
-                    b.Navigation("ItensCombo");
 
                     b.Navigation("ItensPedidos");
                 });
