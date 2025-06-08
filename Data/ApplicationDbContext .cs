@@ -20,8 +20,7 @@ namespace TotemPWA.Data
         public DbSet<Igrediente> Igredientes { get; set; }
         public DbSet<IgredienteProduto> IgredienteProdutos { get; set; }
         public DbSet<Produto> Produto { get; set; }
-
-
+        public DbSet<Categoria> Categorias { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -39,14 +38,9 @@ namespace TotemPWA.Data
                 .WithMany(c => c.Pedidos)
                 .HasForeignKey(p => p.ClienteId);
 
-            // Chave composta em ItensPedido
-            modelBuilder.Entity<ItensPedido>()
-                .HasKey(ip => new { ip.ItensPedidoId, ip.ProdutoId });
-
-            // Chave de itens pedido
+            // Chave simples em ItensPedido
             modelBuilder.Entity<ItensPedido>()
                 .HasKey(ip => ip.ItensPedidoId);
-
 
             // Relacionamento 1:N entre Pedido e ItensPedido
             modelBuilder.Entity<ItensPedido>()
@@ -59,13 +53,20 @@ namespace TotemPWA.Data
                 .HasOne(ip => ip.Produto)
                 .WithMany(p => p.ItensPedidos)
                 .HasForeignKey(ip => ip.ProdutoId);
-            
-            //Configuração da tabela Adicional
-             modelBuilder.Entity<Adicional>()
-        .HasOne(a => a.ItensPedido)
-        .WithMany(i => i.Adicionais)
-        .HasForeignKey(a => a.ItensPedidoId)
-        .OnDelete(DeleteBehavior.Cascade); // ou Restrict se preferir
+
+            // Configuração da tabela Adicional
+            modelBuilder.Entity<Adicional>()
+                .HasOne(a => a.ItensPedido)
+                .WithMany(i => i.Adicionais)
+                .HasForeignKey(a => a.ItensPedidoId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            //autorelacionamento de Categoria
+            modelBuilder.Entity<Categoria>()
+             .HasOne(c => c.CategoriaPai)
+             .WithMany(c => c.Subcategorias)
+             .HasForeignKey(c => c.CategoriaPaiId);
+
         }
     }
 }

@@ -7,8 +7,6 @@ namespace TotemPWA.Models
         [Key]
         public int ProdutoId { get; set; }
         [Required]
-        public int CategoriaId { get; set; }
-        [Required]
         public byte[] Imagem { get; set; }
         [Required]
         public string Descricao { get; set; }
@@ -17,7 +15,7 @@ namespace TotemPWA.Models
         [Required]
         public int IsCombo { get; set; }
 
-        
+
         //Lista de Igredientes de cada Produto
         public List<IgredienteProduto> IgredienteProdutos { get; set; }
         //
@@ -26,6 +24,12 @@ namespace TotemPWA.Models
         [Required]
         public int AdministradorId { get; set; }
         public Administrador Administrador { get; set; }
+        //
+
+        //Estrangeira de Categoria
+        [Required]
+        public Categoria Categoria { get; set; }
+        public int CategoriaId { get; set; }
         //
 
 

@@ -11,8 +11,8 @@ using TotemPWA.Data;
 namespace TotemPWA.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250608210737_IgredientesEAdicionaisEIgredientesProdutoEupdateProduto_bugfix")]
-    partial class IgredientesEAdicionaisEIgredientesProdutoEupdateProduto_bugfix
+    [Migration("20250608214812_addCategoria")]
+    partial class addCategoria
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -68,6 +68,26 @@ namespace TotemPWA.Migrations
                     b.HasKey("AdministradorId");
 
                     b.ToTable("Administradores");
+                });
+
+            modelBuilder.Entity("TotemPWA.Models.Categoria", b =>
+                {
+                    b.Property<int>("CategoriaId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("CategoriaPaiId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("CategoriaId");
+
+                    b.HasIndex("CategoriaPaiId");
+
+                    b.ToTable("Categorias");
                 });
 
             modelBuilder.Entity("TotemPWA.Models.Cliente", b =>
@@ -275,6 +295,8 @@ namespace TotemPWA.Migrations
 
                     b.HasIndex("AdministradorId");
 
+                    b.HasIndex("CategoriaId");
+
                     b.ToTable("Produto");
                 });
 
@@ -295,6 +317,15 @@ namespace TotemPWA.Migrations
                     b.Navigation("Igrediente");
 
                     b.Navigation("ItensPedido");
+                });
+
+            modelBuilder.Entity("TotemPWA.Models.Categoria", b =>
+                {
+                    b.HasOne("TotemPWA.Models.Categoria", "CategoriaPai")
+                        .WithMany("Subcategorias")
+                        .HasForeignKey("CategoriaPaiId");
+
+                    b.Navigation("CategoriaPai");
                 });
 
             modelBuilder.Entity("TotemPWA.Models.Cupom", b =>
@@ -376,7 +407,15 @@ namespace TotemPWA.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("TotemPWA.Models.Categoria", "Categoria")
+                        .WithMany("Produtos")
+                        .HasForeignKey("CategoriaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Administrador");
+
+                    b.Navigation("Categoria");
                 });
 
             modelBuilder.Entity("TotemPWA.Models.Administrador", b =>
@@ -384,6 +423,13 @@ namespace TotemPWA.Migrations
                     b.Navigation("Cupons");
 
                     b.Navigation("Produto");
+                });
+
+            modelBuilder.Entity("TotemPWA.Models.Categoria", b =>
+                {
+                    b.Navigation("Produtos");
+
+                    b.Navigation("Subcategorias");
                 });
 
             modelBuilder.Entity("TotemPWA.Models.Cliente", b =>
