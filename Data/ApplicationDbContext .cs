@@ -22,6 +22,8 @@ namespace TotemPWA.Data
         public DbSet<Produto> Produto { get; set; }
         public DbSet<Categoria> Categorias { get; set; }
 
+        public DbSet<ItensCombo> ItensCombos { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

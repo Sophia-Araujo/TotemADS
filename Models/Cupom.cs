@@ -15,8 +15,16 @@ namespace TotemPWA.Models
         [Required]
         public string ProdutoId { get; set; }
 
+        //Etrangeira de Administrador
+        [Required]
         public int AdministradorId { get; set; }
         public Administrador Administrador { get; set; }
+        //
+
+        // Coleção de ItensCombo
+        public ItensCombo ItensCombo { get; set; }
+        //
+
 
 
     }

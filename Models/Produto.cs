@@ -36,5 +36,9 @@ namespace TotemPWA.Models
         //Coleção de Itens Pedidos
         public List<ItensPedido> ItensPedidos { get; set; }
         //
+
+        //Coleção de Itens Combo
+        public List<ItensCombo> ItensCombo { get; set; }
+        //
     }
 }
