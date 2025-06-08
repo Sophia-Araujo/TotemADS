@@ -4,8 +4,9 @@ namespace TotemPWA.Models
 {
     public class ItensCombo
     {
-        [key]
+        [Key]
         public int ItensComboId { get; set; }
+
         [Required]
         public int Quantidade { get; set; }
 
