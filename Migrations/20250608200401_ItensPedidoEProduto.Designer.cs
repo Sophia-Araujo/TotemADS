@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TotemPWA.Data;
 
@@ -10,36 +11,14 @@ using TotemPWA.Data;
 namespace TotemPWA.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250608200401_ItensPedidoEProduto")]
+    partial class ItensPedidoEProduto
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "9.0.5");
-
-            modelBuilder.Entity("TotemPWA.Models.Adicional", b =>
-                {
-                    b.Property<int>("AdicionalId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("IgredienteId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("ItensPedidoId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("Quantidade")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("AdicionalId");
-
-                    b.HasIndex("IgredienteId");
-
-                    b.HasIndex("ItensPedidoId");
-
-                    b.ToTable("Adicionais");
-                });
 
             modelBuilder.Entity("TotemPWA.Models.Administrador", b =>
                 {
@@ -118,70 +97,21 @@ namespace TotemPWA.Migrations
                     b.ToTable("Cupons");
                 });
 
-            modelBuilder.Entity("TotemPWA.Models.Igrediente", b =>
-                {
-                    b.Property<int>("IgredienteId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<byte[]>("Imagem")
-                        .IsRequired()
-                        .HasColumnType("BLOB");
-
-                    b.Property<string>("Nome")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<float>("Valor")
-                        .HasColumnType("REAL");
-
-                    b.HasKey("IgredienteId");
-
-                    b.ToTable("Igredientes");
-                });
-
-            modelBuilder.Entity("TotemPWA.Models.IgredienteProduto", b =>
-                {
-                    b.Property<int>("IgredienteProdutoId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("IgredienteId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("ProdutoId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<float>("Quantidade")
-                        .HasColumnType("REAL");
-
-                    b.HasKey("IgredienteProdutoId");
-
-                    b.HasIndex("IgredienteId");
-
-                    b.HasIndex("ProdutoId");
-
-                    b.ToTable("IgredienteProdutos");
-                });
-
             modelBuilder.Entity("TotemPWA.Models.ItensPedido", b =>
                 {
-                    b.Property<int>("ItensPedidoId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
                     b.Property<int>("PedidoId")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("ProdutoId")
                         .HasColumnType("INTEGER");
 
+                    b.Property<int>("ItensPedidoId")
+                        .HasColumnType("INTEGER");
+
                     b.Property<int>("Quantidade")
                         .HasColumnType("INTEGER");
 
-                    b.HasKey("ItensPedidoId");
-
-                    b.HasIndex("PedidoId");
+                    b.HasKey("PedidoId", "ProdutoId");
 
                     b.HasIndex("ProdutoId");
 
@@ -248,9 +178,6 @@ namespace TotemPWA.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("AdministradorId")
-                        .HasColumnType("INTEGER");
-
                     b.Property<int>("CategoriaId")
                         .HasColumnType("INTEGER");
 
@@ -270,28 +197,7 @@ namespace TotemPWA.Migrations
 
                     b.HasKey("ProdutoId");
 
-                    b.HasIndex("AdministradorId");
-
-                    b.ToTable("Produto");
-                });
-
-            modelBuilder.Entity("TotemPWA.Models.Adicional", b =>
-                {
-                    b.HasOne("TotemPWA.Models.Igrediente", "Igrediente")
-                        .WithMany("Adicionais")
-                        .HasForeignKey("IgredienteId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("TotemPWA.Models.ItensPedido", "ItensPedido")
-                        .WithMany("Adicionais")
-                        .HasForeignKey("ItensPedidoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Igrediente");
-
-                    b.Navigation("ItensPedido");
+                    b.ToTable("Produtos");
                 });
 
             modelBuilder.Entity("TotemPWA.Models.Cupom", b =>
@@ -303,25 +209,6 @@ namespace TotemPWA.Migrations
                         .IsRequired();
 
                     b.Navigation("Administrador");
-                });
-
-            modelBuilder.Entity("TotemPWA.Models.IgredienteProduto", b =>
-                {
-                    b.HasOne("TotemPWA.Models.Igrediente", "Igrediente")
-                        .WithMany()
-                        .HasForeignKey("IgredienteId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("TotemPWA.Models.Produto", "Produto")
-                        .WithMany("IgredienteProdutos")
-                        .HasForeignKey("ProdutoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Igrediente");
-
-                    b.Navigation("Produto");
                 });
 
             modelBuilder.Entity("TotemPWA.Models.ItensPedido", b =>
@@ -365,37 +252,14 @@ namespace TotemPWA.Migrations
                     b.Navigation("Cliente");
                 });
 
-            modelBuilder.Entity("TotemPWA.Models.Produto", b =>
-                {
-                    b.HasOne("TotemPWA.Models.Administrador", "Administrador")
-                        .WithMany("Produto")
-                        .HasForeignKey("AdministradorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Administrador");
-                });
-
             modelBuilder.Entity("TotemPWA.Models.Administrador", b =>
                 {
                     b.Navigation("Cupons");
-
-                    b.Navigation("Produto");
                 });
 
             modelBuilder.Entity("TotemPWA.Models.Cliente", b =>
                 {
                     b.Navigation("Pedidos");
-                });
-
-            modelBuilder.Entity("TotemPWA.Models.Igrediente", b =>
-                {
-                    b.Navigation("Adicionais");
-                });
-
-            modelBuilder.Entity("TotemPWA.Models.ItensPedido", b =>
-                {
-                    b.Navigation("Adicionais");
                 });
 
             modelBuilder.Entity("TotemPWA.Models.Pedido", b =>
@@ -408,8 +272,6 @@ namespace TotemPWA.Migrations
 
             modelBuilder.Entity("TotemPWA.Models.Produto", b =>
                 {
-                    b.Navigation("IgredienteProdutos");
-
                     b.Navigation("ItensPedidos");
                 });
 #pragma warning restore 612, 618

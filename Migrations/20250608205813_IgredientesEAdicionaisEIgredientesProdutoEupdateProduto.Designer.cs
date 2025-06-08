@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TotemPWA.Data;
 
@@ -10,9 +11,11 @@ using TotemPWA.Data;
 namespace TotemPWA.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250608205813_IgredientesEAdicionaisEIgredientesProdutoEupdateProduto")]
+    partial class IgredientesEAdicionaisEIgredientesProdutoEupdateProduto
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "9.0.5");
@@ -29,6 +32,12 @@ namespace TotemPWA.Migrations
                     b.Property<int>("ItensPedidoId")
                         .HasColumnType("INTEGER");
 
+                    b.Property<int>("ItensPedidoId1")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("ItensPedidoProdutoId")
+                        .HasColumnType("INTEGER");
+
                     b.Property<int>("Quantidade")
                         .HasColumnType("INTEGER");
 
@@ -36,7 +45,7 @@ namespace TotemPWA.Migrations
 
                     b.HasIndex("IgredienteId");
 
-                    b.HasIndex("ItensPedidoId");
+                    b.HasIndex("ItensPedidoId1", "ItensPedidoProdutoId");
 
                     b.ToTable("Adicionais");
                 });
@@ -142,24 +151,21 @@ namespace TotemPWA.Migrations
 
             modelBuilder.Entity("TotemPWA.Models.IgredienteProduto", b =>
                 {
-                    b.Property<int>("IgredienteProdutoId")
-                        .ValueGeneratedOnAdd()
+                    b.Property<int>("ProdutoId")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("IgredienteId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("ProdutoId")
+                    b.Property<int>("IgredienteProdutoId")
                         .HasColumnType("INTEGER");
 
                     b.Property<float>("Quantidade")
                         .HasColumnType("REAL");
 
-                    b.HasKey("IgredienteProdutoId");
+                    b.HasKey("ProdutoId", "IgredienteId");
 
                     b.HasIndex("IgredienteId");
-
-                    b.HasIndex("ProdutoId");
 
                     b.ToTable("IgredienteProdutos");
                 });
@@ -167,19 +173,18 @@ namespace TotemPWA.Migrations
             modelBuilder.Entity("TotemPWA.Models.ItensPedido", b =>
                 {
                     b.Property<int>("ItensPedidoId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("PedidoId")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("ProdutoId")
                         .HasColumnType("INTEGER");
 
+                    b.Property<int>("PedidoId")
+                        .HasColumnType("INTEGER");
+
                     b.Property<int>("Quantidade")
                         .HasColumnType("INTEGER");
 
-                    b.HasKey("ItensPedidoId");
+                    b.HasKey("ItensPedidoId", "ProdutoId");
 
                     b.HasIndex("PedidoId");
 
@@ -285,7 +290,7 @@ namespace TotemPWA.Migrations
 
                     b.HasOne("TotemPWA.Models.ItensPedido", "ItensPedido")
                         .WithMany("Adicionais")
-                        .HasForeignKey("ItensPedidoId")
+                        .HasForeignKey("ItensPedidoId1", "ItensPedidoProdutoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
