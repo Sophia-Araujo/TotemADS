@@ -51,7 +51,7 @@ const bannerImage = document.getElementById("banner-image");
 
 const bannerImages = {
   lanches: "/image/banners/lanchesBanner.png",
-  combos: "/image/banners/combisBanner.png",
+  combos: "/image/banners/combosBanner.png",
   sobremesas: "/image/banners/sobremesasBanner.png",
   bebidas: "/image/banners/bebidasBanner.png",
   extras: "/image/banners/extrasBanner.png",

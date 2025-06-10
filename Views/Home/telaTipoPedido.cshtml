@@ -4,8 +4,8 @@
 <div class="fundo">
     <img src="@Url.Content("~/image/logos/logo-reduzido.png")" alt="ADS Burguer" class="logo">
 
-    <form class="formulario-opcoes" action="/Home/telaOpcoes">
-        <label class="titulo">Selecione uma opção:</label>
+    <form class="formulario-opcoes" action="/Home/telaOpcoes" method="get">
+    <label class="titulo">Selecione uma opção:</label>
 
         <div class="opcoes">
             <label class="opcao">
@@ -23,6 +23,7 @@
 
         <button type="submit">Confirmar</button>
     </form>
+
 
     <div class="faixa-laranja"></div>
     <div class="faixa-verde"></div>
