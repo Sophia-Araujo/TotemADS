@@ -14,12 +14,12 @@ namespace TotemPWA.Models
         public float Valor { get; set; }
 
         //lista de igradientes de produtos
-        public List<IgredienteProduto> IgredienteProdutos { get; set; }
+        public List<IgredienteProduto>? IgredienteProdutos { get; set; }
         //
 
 
         //lista de adicionais
-        public List<Adicional> Adicionais { get; set; }
+        public List<Adicional>? Adicionais { get; set; }
         //
     }
 }

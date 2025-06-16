@@ -15,10 +15,10 @@ namespace TotemPWA.Models
         [Required]
         public string CPF { get; set; }
 
-        public List<Cupom> Cupons { get; set; }
+        public List<Cupom>? Cupons { get; set; }
 
         //Coleção de Itens Pedidos
-        public List<Produto> Produto { get; set; }
+        public List<Produto>? Produto { get; set; }
         //
 
 
