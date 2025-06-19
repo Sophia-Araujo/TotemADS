@@ -8,20 +8,22 @@
     box-sizing: border-box;
     font-family: "Poppins", sans-serif;
 }
-body{
+
+body {
     overflow-y: hidden;
 }
 
 /* Estiliza o contêiner branco sobre o banner */
 main {
-    
+
     background: white;
     padding: 20px;
 }
 
 /* Cabeçalho com a imagem do banner */
 header {
-    position: relative; /* Para permitir que o conteúdo branco se sobreponha */
+    position: relative;
+    /* Para permitir que o conteúdo branco se sobreponha */
     width: 100%;
     height: auto;
 }
@@ -37,21 +39,25 @@ main {
     position: relative;
     background: rgb(255, 255, 255);
     text-align: center;
-    border-radius: 30px 30px 0 0; /* Arredonda apenas a parte superior */
+    border-radius: 0 90px 0 0;
     width: 100%;
     height: 52rem;
-    margin-top: -10%; /* Faz a sobreposição do fundo branco no banner */
+    margin-top: -12%;
     box-shadow: 0px 4px 10px rgba(100, 99, 99, 0.1);
     padding: 20px;
-    z-index: 2; /* Mantém na frente da imagem */
+    z-index: 2;
 }
-a{
+
+a {
     text-decoration: none;
 }
 
 h2 {
-    font-size:40px;
+    font-weight: bold;
+    font-size: 3.2rem;
     color: #696969;
+    text-align: left;
+    margin-left: 20px;
 }
 
 /* Grid de categorias */
@@ -59,19 +65,18 @@ h2 {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 20px;
-    justify-items: center;
-    padding: 10px;
+    padding: 15px;
 }
 
 /* Cada categoria */
 .category {
     background: #fff;
-    padding: 15px 0 15px 0;
-    border-radius: 20px;
-    text-align: center;
+    border-radius: 30px;
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.222);
+    padding: 20px 0 20px 0;
+    text-align: center;
     transition: 0.3s;
-    width: 106%;
+    width: 100%;
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -82,7 +87,7 @@ h2 {
 .category img {
     width: 50%;
     object-fit: cover;
-    margin-bottom: 5px;
+    margin-bottom: 10px;
 }
 
 .category p {
@@ -93,6 +98,4 @@ h2 {
 
 .category:hover {
     background: #ebebeb;
-  }
-
-
+}
