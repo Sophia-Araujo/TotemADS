@@ -21,7 +21,7 @@ namespace TotemPWA.Models
         public int Quantidade { get; set; }
 
         //Lista de Adicionais
-        public List<Adicional> Adicionais { get; set; }
+        public List<Adicional>? Adicionais { get; set; }
         //
         
 

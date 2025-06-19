@@ -10,6 +10,6 @@ namespace TotemPWA.Models
         public Categoria? CategoriaPai { get; set; } // Navegação para pai
         public ICollection<Categoria>? Subcategorias { get; set; } // Navegação para filhos
 
-        public List<Produto> Produtos { get; set; }
+        public List<Produto>? Produtos { get; set; }
     }
 }
