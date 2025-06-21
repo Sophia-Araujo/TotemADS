@@ -1,5 +1,5 @@
 @{
-    Layout = "_LayoutPagamentosCartao";
+    Layout = "_LayoutPix";
 }
 
 <header class="logo-banner">
@@ -13,18 +13,15 @@
             <p class="preco-texto">Preço: <span class="preco">R$: 83,80</span></p>
         </div>
 
-        <h2>Escolha a forma de pagamento:</h2>
+        <h2>Pagamento com PIX:</h2>
 
         <div class="formas">
             <div class="forma selecionado">
-                <img src="/image/opc_cartao.png" alt="Cartão">
+                <img src="/image/opc_pix.png" alt="Cartão">
+                <p class="titulo-opcao">PIX</p>
             </div>
             <div class="caixa">
-                <p class="titulo-opcao">Forma de pagamento</p>
-                <div class="botoes-pagamento">
-                    <button class="opcao-btn selecionado">Crédito</button>
-                    <button class="opcao-btn">Débito</button>
-                </div>
+                <p class="titulo-opcao">Escaneie o Qrcode na <br>próxima tela dentro da área pix do seu aplicativo do banco.</p>
             </div>
         </div>
 
@@ -36,7 +33,7 @@
             <img src="/image/pontos.png" alt="Ícone de pontos" class="icone-pontos">
         </div>
 
-        <button class="confirmar" onclick="window.location.href='/Home/pagamentosCartaoFinal'">Confirmar</button>
+        <button class="confirmar" onclick="window.location.href='/Home/PixFinal'">Confirmar</button>
     </div>
 
    <script>

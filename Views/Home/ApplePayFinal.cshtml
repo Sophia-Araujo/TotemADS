@@ -1,0 +1,46 @@
+@{
+    Layout = "_LayoutApplepayFinal";
+}
+
+ <div class="container">
+        <header class="logo-banner">
+            <img src="/image/img-pagamento.png" alt="Banner Pagamento" class="banner">
+            <img src="/image/logo2.png" alt="Logo" class="logo-pagamento">
+        </header>
+
+        <main>
+            <h2>Por favor, aproxime seu celular da maquininha de cartão para efetuar o pagamento</h2>
+            <p class="obs"> * Seu pedido aparecerá com o nome informado </p>
+
+            <div class="formas">
+                <div class="forma-gpay selecionado">
+                    <img src="/image/opc_applePay.png" alt="Apple Pay Logo" class="applepay-logo">
+                    <p>Apple Pay</p>
+                </div>
+                <div class="caixa-status">
+                    <h3>Aguardando aproximação</h3>
+                    <p class="status-atual">Status atual</p>
+                    <img src="/image/errado.png" alt="Status OK" class="status-icon">
+                </div>
+            </div>
+
+            <div class="produtos">
+                <div class="produtos-texto">
+                    <strong>Seus Produtos:</strong>
+                    <div class="item">
+                        <span>Lanches 2 x</span><span>R$: 73,80</span>
+                    </div>
+                    <div class="item">
+                        <span>Bebidas 1 x</span><span>R$: 10,00</span>
+                    </div>
+                    <div class="item">
+                        <span>Descontos:</span><span class="desconto">R$: -09,52</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="total-container">
+                <span>Total:</span><span class="valor-total">R$: 74,28</span>
+            </div>
+        </main>
+    </div>
