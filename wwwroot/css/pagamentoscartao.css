@@ -47,6 +47,7 @@ main {
     z-index: 2;
     height: calc(100vh - 23vh); /* 100% - altura do banner visível */
     overflow-y: auto;
+    box-shadow: 0px -10px 11px 4px rgba(0, 0, 0, 0.1);
 }
 
 .pagamento-container {
@@ -181,7 +182,6 @@ h2 {
     justify-content: space-between;
     align-items: center;
     background: #FFFFFF;
-    border: 2px solid #ff6600;
     padding: 1.2rem;
     border-radius: 15px;
     width: 100%;
@@ -198,9 +198,7 @@ h2 {
 }
 
 .usar-pontos.selecionado {
-    background-color: #fff2e6;
-    border-color: #ff6600;
-    box-shadow: 0 0 10px rgba(255, 102, 0, 0.3);
+    border: 3px solid #ff6600;
 }
 
 .opcao-btn {

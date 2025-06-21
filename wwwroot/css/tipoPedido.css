@@ -1,4 +1,5 @@
-body, html {
+body,
+html {
     margin: 0;
     padding: 0;
     height: 100%;
@@ -61,8 +62,8 @@ body, html {
 
 .titulo {
     font-weight: bold;
-    font-size: 2.5rem;
-    margin-bottom: 25px;
+    font-size: 3.2rem;
+    margin-bottom: 30px;
 }
 
 .opcoes {
@@ -75,8 +76,8 @@ body, html {
 
 .opcao {
     border: 2px solid #ccc;
-    border-radius: 15px;
-    padding: 20px 30px;
+    border-radius: 30px;
+    padding: 25px 40px;
     text-align: center;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -99,23 +100,23 @@ body, html {
 }
 
 /* Selecionado */
-.opcao input[type="radio"]:checked ~ img {
+.opcao input[type="radio"]:checked~img {
     filter: brightness(0) saturate(100%) invert(29%) sepia(99%) saturate(749%) hue-rotate(360deg) brightness(99%) contrast(108%);
 }
 
-.opcao input[type="radio"]:checked ~ span {
+.opcao input[type="radio"]:checked~span {
     font-weight: bold;
     color: #FF5C00;
 }
 
 /* Hover geral */
 .opcao:hover {
-    border: 3px solid #FF5C00;
+    border: 1px solid #FF5C00;
 }
 
 /* Quando estiver selecionado */
-.opcao input[type="radio"]:checked ~ span,
-.opcao input[type="radio"]:checked ~ img {
+.opcao input[type="radio"]:checked~span,
+.opcao input[type="radio"]:checked~img {
     border: none;
 }
 
@@ -123,9 +124,10 @@ body, html {
     background-color: #FF5C00;
     color: white;
     border: none;
-    padding: 15px 40px;
-    border-radius: 15px;
-    font-size: 2.5rem;
+    padding: 20px 80px;
+    border-radius: 35px;
+    margin-top: 40px;
+    font-size: 2rem;
     font-weight: bold;
     cursor: pointer;
     transition: background-color 0.3s ease;

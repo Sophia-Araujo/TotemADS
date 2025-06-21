@@ -62,8 +62,7 @@ body, html {
   .formulario-cpf {
     position: relative;
     z-index: 10;
-    margin-top: 85%;
-    margin-left: 5%;
+    margin-top: 78%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -73,26 +72,23 @@ body, html {
   
   .formulario-cpf label {
     font-weight: bold;
-    font-size: 4rem;
-    margin-bottom: 10px;
+    font-size: 3.2rem;
   }
 
   .checkbox-area label.desejo {
-    font-size: 1.5rem; /* ou 2rem, menor que o resto */
+    font-size: 1.5rem;
     margin-bottom: 1px;
   }
   
 
   .formulario-cpf input[type="text"] {
     margin-top: 50px;
-    margin-bottom: 20px;
-    width: 550px;
-    padding: 12px 18px;
-    border: 2px solid #ccc;
-    border-radius: 20px;
+    padding: 20px 15px;
+    border: 2px solid #1d1d1d;
+    border-radius: 35px;
     font-size: 2.5rem;
     outline: none;
-    margin-bottom: 15px;
+    margin-bottom: 25px;
   }
   
   .checkbox-area {
@@ -103,8 +99,8 @@ body, html {
   }
   
 .checkbox-area input[type="checkbox"] {
-  transform: scale(1.8);
-  margin-right: 10px;
+  transform: scale(2);
+  margin-right: 15px;
   accent-color: #FF5C00; /* deixa a caixinha laranja */
   cursor: pointer;
 }
@@ -113,9 +109,9 @@ body, html {
     background-color: #FF5C00;
     color: white;
     border: none;
-    padding: 15px 50px;
-    border-radius: 15px;
-    margin-top: 50px;
+    padding: 20px 80px;
+    border-radius: 35px;
+    margin-top: 40px;
     font-size: 2rem;
     font-weight: bold;
     cursor: pointer;

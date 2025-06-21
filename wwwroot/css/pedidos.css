@@ -39,6 +39,13 @@ main {
   margin-top: 34%;
 }
 
+h3 {
+  text-align: left;
+  color: #e74c3c;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
 /* Sidebar fixa */
 .sidebarlateral {
   width: 20%;
@@ -48,25 +55,20 @@ main {
   gap: 15px;
   padding: 20px;
   position: fixed;
-  height: calc(100vh - 200px);
-  /* Ajusta para ocupar toda a tela sem o header */
-  overflow-y: auto;
-  /* Adiciona scroll se necessário */
+  height: 80vh;
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
 }
 
 .category {
-  background: #f0f0f0;
+  background: #fff;
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
   border: none;
-
-  padding: 3%;
-  margin: 30% 0% -1% 0%;
   padding: 5%;
-  margin: 15% 0% 7% 0%;
+  width: 100%;
+  height: 12%;
+  margin: 30% 0% -10% 0%;
   text-align: center;
-  cursor: pointer;
-  border-radius: 15%;
+  border-radius: 25px;
   transition: 0.3s;
   display: flex;
   flex-direction: column;
@@ -84,22 +86,25 @@ main {
 }
 
 .category.active {
-  background-color: #F0F0F0;
+  background-color: #FFF;
+  border: #C4D438 3px solid;
+  box-shadow: none;
 }
 
 .menu-section {
   scroll-margin-top: 17.5rem;
   margin-bottom: 2rem;
+  margin-top: 4rem;
 }
 
 .menu-section.final {
   padding-bottom: 150px;
+  min-height: 48vh;
 }
 
 .menu-section h2 {
   font-size: 1.5rem;
   margin-bottom: -0.5rem;
-  padding-top: 2.5rem;
   padding-left: 12rem;
   color: #333;
 }
@@ -120,16 +125,38 @@ main {
 
 .card {
   background: white;
-  padding: 15px;
-  border-radius: 6%;
+  padding: 25px 20px 25px 20px;
+  border-radius: 25px;
   text-align: center;
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-  overflow-y: auto;
+  overflow-y: hidden;
+  overflow-x: hidden;
+  text-overflow: ellipsis;
+}
+
+.card p {
+  text-align: left;
+  font-weight: 800;
+  color: #5E5E5E;
+  font-size: 1.3rem;
+}
+
+.card span {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: left;
+  font-weight: 400;
+  color: #8F8F8F;
 }
 
 .card img {
   width: 70%;
   height: 40%;
+  object-fit: cover;
+  margin-top: -15px;
 }
 
 .add-to-cart {
@@ -156,7 +183,6 @@ footer {
   display: flex;
   justify-content: space-between;
   padding: 10px;
-  border-top: 2px solid #ccc;
 }
 
 .cart-button {
@@ -181,18 +207,17 @@ footer {
 .sidebar {
   margin-top: 3%;
   width: 80%;
-  height: 4%;
+  height: 6%;
   background: white;
   display: flex;
   flex-direction: row;
-  gap: 10px;
+  gap: 8px;
   margin-left: 20%;
   position: fixed;
   align-items: center;
   overflow-x: auto;
-  /* Adiciona scroll se necessário */
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-  overflow-x: scroll;
+  overflow-x: hidden;
   overflow-y: hidden;
   white-space: nowrap;
 }
@@ -211,6 +236,12 @@ footer {
 
 }
 
+.cate.active {
+  background-color: #FFF;
+  border: #C4D438 3px solid;
+  box-shadow: none;
+  border-radius: 25px;
+}
 
 .sidebar span {
   font-size: 18px;
@@ -337,10 +368,10 @@ footer.resumo-compra {
   bottom: 0;
   width: 80%;
   margin-left: 20%;
-  border-radius: 0 16px 0 0;
+  border-radius: 0 90px 0 0;
   background: rgb(255, 255, 255);
-  box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.1);
-  padding: 10px 20px;
+  box-shadow: 45px 20px 23px 25px rgba(0, 0, 0, 0.1);
+  padding: 40px 80px 30px 20px;
   display: flex;
   align-items: flex-start;
   flex-wrap: nowrap;
@@ -353,43 +384,40 @@ footer.resumo-compra {
 }
 
 .resumo .total {
-  font-weight: bold;
-  font-size: 22px;
+  font-weight: 800;
+  font-size: 2.1em;
   color: #e74c3c;
 }
 
 .acoes {
   display: flex;
-  gap: 10px;
+  gap: 15px;
   flex-wrap: wrap;
   justify-content: end;
   width: 50%;
 }
 
 .acoes button {
-  /* margin-right: 20%;
-  margin-left: 70%; */
   border: none;
-  width: 10rem;
+  width: 12rem;
   height: 50px;
-  padding: 15px 14px;
-  border-radius: 14px;
-  font-size: 15px;
-  font-weight: 600;
-  cursor: pointer;
+  padding: 12px 12px;
+  border-radius: 25px;
+  font-size: 18px;
+  font-weight: 700;
 }
 
 .btn-editar {
-  background: #f0f0f0;
-  color: #333;
+  background: #D6ED3A;
+  color: #fff;
 }
 
 .btn-pagar {
-  background: #ff6600;
-  color: white;
+  background: #FF6501;
+  color: #fff;
 }
 
 .btn-cancelar {
-  background: #e74c3c;
-  color: white;
+  background: white;
+  border: 4px solid #333;
 }
