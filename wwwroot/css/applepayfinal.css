@@ -1,0 +1,239 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+:root {
+    --primary-orange: #f15a24;
+    --text-dark: #333;
+    --text-medium: #555;
+    --bg-light-gray: #f8f8f8;
+    --bg-white: #fff;
+    --border-gray: #ccc;
+    --shadow: rgba(0, 0, 0, 0.1);
+    --selected-border-orange: #ff6600;
+    --gpay-green: #34A853;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+body {
+    background: var(--bg-white);
+    width: 800px; /* Fixed width */
+    height: 1280px; /* Fixed height */
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    overflow: hidden; /* CRITICAL: Prevent body scroll */
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%; /* Must fill parent height */
+    background-color: var(--bg-light-gray);
+}
+
+/* Header Section */
+.logo-banner {
+    position: relative;
+    width: 100%;
+    height: 380px; /* Fixed height for the header */
+    background-color: var(--primary-orange);
+    overflow: hidden; /* Hide content if it exceeds the header boundaries */
+    border-bottom-left-radius: 40px;
+    border-bottom-right-radius: 40px;
+}
+
+.banner {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.logo-pagamento {
+    position: absolute;
+    top: 40px;
+    left: 40px;
+    width: 100px;
+    z-index: 2;
+}
+
+/* Main Content Area */
+main {
+    position: relative;
+    background: var(--bg-light-gray);
+    border-top-left-radius: 40px;
+    border-top-right-radius: 40px;
+    padding: 30px; /* Slightly reduced padding for main */
+    margin-top: -30px; /* Overlap effect */
+    z-index: 5;
+    height: calc(100% - 380px + 30px); /* This calculation remains crucial */
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 12px; /* Further reduced gap between major sections */
+    box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.1);
+    overflow: hidden; /* CRITICAL: Prevent scroll on main itself */
+}
+
+h2 {
+    font-size: 26px; /* Further reduced font size for instructions */
+    text-align: center;
+    color: var(--text-dark);
+    font-weight: 600;
+    line-height: 1.2;
+    margin-top: 0;
+    margin-bottom: 0;
+    flex-shrink: 0; /* Prevent h2 from shrinking */
+}
+
+.obs {
+    text-align: center;
+    font-size: 16px; /* Further reduced font size for observation */
+    color: var(--text-medium);
+    font-weight: 400;
+    margin-top: -8px; /* Tighter spacing */
+    margin-left: 0;
+    flex-shrink: 0; /* Prevent obs from shrinking */
+}
+
+.formas {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 15px; /* Reduced gap between the two payment method boxes */
+    width: 100%;
+    flex-shrink: 0; /* Prevent this section from shrinking */
+}
+
+
+.forma-gpay {
+    background: var(--bg-white);
+    border-radius: 18px;
+    padding: 15px; 
+    box-shadow: 0 4px 10px var(--shadow);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 3px solid transparent;
+    transition: border-color 0.3s ease;
+    flex: 1;
+    max-width: 320px;
+    min-height: 150px; 
+    padding-top: 20px; 
+    padding-bottom: 20px;
+}
+
+.forma-gpay.selecionado {
+    border-color: var(--selected-border-orange);
+}
+
+.gpay-logo {
+    width: 130px; 
+    height: auto;
+    object-fit: contain;
+    margin-bottom: 5px;
+}
+
+.forma-gpay p {
+    font-size: 20px; 
+    font-weight: 500;
+    color: var(--text-dark);
+    text-align: center;
+}
+
+
+.caixa-status {
+    background: var(--bg-white);
+    border-radius: 18px;
+    padding: 15px; 
+    box-shadow: 0 4px 10px var(--shadow);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    max-width: 320px;
+    min-height: 150px; 
+}
+
+.caixa-status h3 {
+    font-size: 22px; 
+    font-weight: 600;
+    color: var(--text-dark);
+    text-align: center;
+    margin-bottom: 5px;
+}
+
+.caixa-status .status-atual {
+    font-size: 16px; 
+    color: var(--text-medium);
+    margin-bottom: 10px; 
+}
+
+.caixa-status .status-icon {
+    width: 60px; 
+    height: 60px;
+    object-fit: contain;
+}
+
+
+.produtos {
+    background: var(--bg-white);
+    border-radius: 18px;
+    padding: 20px; 
+    box-shadow: 0 4px 10px var(--shadow);
+    display: flex;
+    flex-direction: column;
+    gap: 6px; 
+    flex-grow: 1; 
+    justify-content: flex-start;
+    overflow: hidden; 
+}
+
+.produtos-texto strong {
+    font-size: 20px; 
+    font-weight: 600;
+    color: var(--text-dark);
+    margin-bottom: 5px;
+    display: block;
+}
+
+.item {
+    display: flex;
+    justify-content: space-between;
+    font-size: 18px; 
+    color: var(--text-dark);
+    font-weight: 400;
+}
+
+.item .desconto {
+    color: var(--primary-orange);
+    font-weight: 600;
+}
+
+/* Total Container */
+.total-container {
+    background: var(--bg-white);
+    border-radius: 18px;
+    padding: 25px; 
+    box-shadow: 0 4px 10px var(--shadow);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 26px; 
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-top: 0;
+    flex-shrink: 0; 
+}
+
+.valor-total {
+    color: var(--primary-orange);
+}
