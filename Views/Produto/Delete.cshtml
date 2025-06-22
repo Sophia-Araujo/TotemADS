@@ -4,54 +4,63 @@
     ViewData["Title"] = "Delete";
 }
 
-<h1>Delete</h1>
+<h1>Excluir Produto</h1>
 
-<h3>Are you sure you want to delete this?</h3>
+<h3>Tem certeza que deseja excluir este produto?</h3>
 <div>
     <h4>Produto</h4>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Imagem)
+        <dt class="col-sm-2">
+            Imagem
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Imagem)
+        <dd class="col-sm-10">
+            @if (Model.Imagem != null && Model.Imagem.Length > 0)
+            {
+                <img src="@Url.Action("ExibirImagem", new { id = Model.ProdutoId })" 
+                     alt="@Model.Descricao" 
+                     style="max-width: 200px; max-height: 200px; border: 1px solid #ddd; border-radius: 5px;" />
+            }
+            else
+            {
+                <span class="text-muted">Nenhuma imagem cadastrada</span>
+            }
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Descricao)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Descricao)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Valor)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Valor)
+        <dd class="col-sm-10">
+            R$ @Model.Valor.ToString("F2")
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.IsCombo)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IsCombo)
+        <dd class="col-sm-10">
+            @(Model.IsCombo == 1 ? "Sim" : "Não")
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Administrador)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Administrador.CPF)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Categoria)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Categoria.CategoriaId)
         </dd>
     </dl>
     
     <form asp-action="Delete">
         <input type="hidden" asp-for="ProdutoId" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Back to List</a>
+        <input type="submit" value="Confirmar Exclusão" class="btn btn-danger" />
+        <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
     </form>
 </div>

@@ -4,51 +4,60 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+<h1>Detalhes do Produto</h1>
 
 <div>
     <h4>Produto</h4>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Imagem)
+        <dt class="col-sm-2">
+            Imagem
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Imagem)
+        <dd class="col-sm-10">
+            @if (Model.Imagem != null && Model.Imagem.Length > 0)
+            {
+                <img src="@Url.Action("ExibirImagem", new { id = Model.ProdutoId })" 
+                     alt="@Model.Descricao" 
+                     style="max-width: 300px; max-height: 300px; border: 1px solid #ddd; border-radius: 5px;" />
+            }
+            else
+            {
+                <span class="text-muted">Nenhuma imagem cadastrada</span>
+            }
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Descricao)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Descricao)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Valor)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Valor)
+        <dd class="col-sm-10">
+            R$ @Model.Valor.ToString("F2")
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.IsCombo)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IsCombo)
+        <dd class="col-sm-10">
+            @(Model.IsCombo == 1 ? "Sim" : "Não")
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Administrador)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Administrador.CPF)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Categoria)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Categoria.CategoriaId)
         </dd>
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.ProdutoId">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Edit" asp-route-id="@Model?.ProdutoId" class="btn btn-warning">Editar</a>
+    <a asp-action="Index" class="btn btn-secondary">Voltar para Lista</a>
 </div>

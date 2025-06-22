@@ -6,39 +6,42 @@ namespace TotemPWA.Models
     {
         [Key]
         public int ProdutoId { get; set; }
-        [Required]
-        public byte[] Imagem { get; set; }
-        [Required]
+        
+        // Removido [Required] daqui pois será tratado no controller
+        public byte[]? Imagem { get; set; }
+        
+        [Required(ErrorMessage = "A descrição é obrigatória")]
+        [Display(Name = "Descrição")]
         public string Descricao { get; set; }
-        [Required]
+        
+        [Required(ErrorMessage = "O valor é obrigatório")]
+        [Display(Name = "Valor")]
+        [Range(0.01, double.MaxValue, ErrorMessage = "O valor deve ser maior que zero")]
         public float Valor { get; set; }
-        [Required]
+        
+        [Required(ErrorMessage = "Informe se é combo ou não")]
+        [Display(Name = "É Combo?")]
         public int IsCombo { get; set; }
 
-
-        //Lista de Igredientes de cada Produto
+        //Lista de Ingredientes de cada Produto
         public List<IgredienteProduto>? IgredienteProdutos { get; set; }
-        //
 
         //Estrangeira de Administrador
-        [Required]
+        [Required(ErrorMessage = "Selecione um administrador")]
+        [Display(Name = "Administrador")]
         public int AdministradorId { get; set; }
-        public Administrador Administrador { get; set; }
-        //
+        public Administrador? Administrador { get; set; }
 
         //Estrangeira de Categoria
-        [Required]
-        public Categoria Categoria { get; set; }
+        [Required(ErrorMessage = "Selecione uma categoria")]
+        [Display(Name = "Categoria")]
         public int CategoriaId { get; set; }
-        //
-
+        public Categoria? Categoria { get; set; }
 
         //Coleção de Itens Pedidos
         public List<ItensPedido>? ItensPedidos { get; set; }
-        //
 
         //Coleção de Itens Combo
         public List<ItensCombo>? ItensCombo { get; set; }
-        //
     }
 }

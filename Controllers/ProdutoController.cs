@@ -55,18 +55,46 @@ namespace TotemPWA.Controllers
         }
 
         // POST: Produto/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ProdutoId,Imagem,Descricao,Valor,IsCombo,AdministradorId,CategoriaId")] Produto produto)
+        public async Task<IActionResult> Create([Bind("ProdutoId,Descricao,Valor,IsCombo,AdministradorId,CategoriaId")] Produto produto, IFormFile imagemFile)
         {
+            // Remove erro de validação da Imagem se existir, pois trataremos manualmente
+            ModelState.Remove("Imagem");
+            
+            // Validação manual da imagem
+            if (imagemFile == null || imagemFile.Length == 0)
+            {
+                ModelState.AddModelError("imagemFile", "Por favor, selecione uma imagem.");
+            }
+            else
+            {
+                // Verifica se é um arquivo de imagem válido
+                var allowedTypes = new[] { "image/jpeg", "image/jpg", "image/png", "image/gif" };
+                if (!allowedTypes.Contains(imagemFile.ContentType.ToLower()))
+                {
+                    ModelState.AddModelError("imagemFile", "Por favor, selecione um arquivo de imagem válido (JPEG, PNG, GIF).");
+                }
+                else if (imagemFile.Length > 5 * 1024 * 1024) // 5MB
+                {
+                    ModelState.AddModelError("imagemFile", "A imagem deve ter no máximo 5MB.");
+                }
+            }
+
             if (ModelState.IsValid)
             {
+                // Converte o arquivo para byte array
+                using (var memoryStream = new MemoryStream())
+                {
+                    await imagemFile.CopyToAsync(memoryStream);
+                    produto.Imagem = memoryStream.ToArray();
+                }
+
                 _context.Add(produto);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            
             ViewData["AdministradorId"] = new SelectList(_context.Administradores, "AdministradorId", "CPF", produto.AdministradorId);
             ViewData["CategoriaId"] = new SelectList(_context.Categorias, "CategoriaId", "CategoriaId", produto.CategoriaId);
             return View(produto);
@@ -91,11 +119,9 @@ namespace TotemPWA.Controllers
         }
 
         // POST: Produto/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ProdutoId,Imagem,Descricao,Valor,IsCombo,AdministradorId,CategoriaId")] Produto produto)
+        public async Task<IActionResult> Edit(int id, [Bind("ProdutoId,Descricao,Valor,IsCombo,AdministradorId,CategoriaId")] Produto produto, IFormFile imagemFile)
         {
             if (id != produto.ProdutoId)
             {
@@ -106,6 +132,34 @@ namespace TotemPWA.Controllers
             {
                 try
                 {
+                    // Busca o produto existente para manter a imagem atual se não foi enviada nova
+                    var produtoExistente = await _context.Produto.AsNoTracking().FirstOrDefaultAsync(p => p.ProdutoId == id);
+                    
+                    if (imagemFile != null && imagemFile.Length > 0)
+                    {
+                        // Verifica se é um arquivo de imagem válido
+                        var allowedTypes = new[] { "image/jpeg", "image/jpg", "image/png", "image/gif" };
+                        if (!allowedTypes.Contains(imagemFile.ContentType.ToLower()))
+                        {
+                            ModelState.AddModelError("imagemFile", "Por favor, selecione um arquivo de imagem válido (JPEG, PNG, GIF).");
+                            ViewData["AdministradorId"] = new SelectList(_context.Administradores, "AdministradorId", "CPF", produto.AdministradorId);
+                            ViewData["CategoriaId"] = new SelectList(_context.Categorias, "CategoriaId", "CategoriaId", produto.CategoriaId);
+                            return View(produto);
+                        }
+
+                        // Converte o arquivo para byte array
+                        using (var memoryStream = new MemoryStream())
+                        {
+                            await imagemFile.CopyToAsync(memoryStream);
+                            produto.Imagem = memoryStream.ToArray();
+                        }
+                    }
+                    else
+                    {
+                        // Mantém a imagem existente se nenhuma nova foi enviada
+                        produto.Imagem = produtoExistente?.Imagem;
+                    }
+
                     _context.Update(produto);
                     await _context.SaveChangesAsync();
                 }
@@ -165,6 +219,17 @@ namespace TotemPWA.Controllers
         private bool ProdutoExists(int id)
         {
             return _context.Produto.Any(e => e.ProdutoId == id);
+        }
+
+        // Action para exibir imagem
+        public async Task<IActionResult> ExibirImagem(int id)
+        {
+            var produto = await _context.Produto.FindAsync(id);
+            if (produto?.Imagem != null)
+            {
+                return File(produto.Imagem, "image/jpeg");
+            }
+            return NotFound();
         }
     }
 }
