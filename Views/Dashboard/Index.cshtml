@@ -1,0 +1,33 @@
+@{
+    ViewData["Title"] = "Dashboard";
+    Layout = "~/Views/Shared/_LayoutMenu.cshtml";
+}
+
+<div class="container-principal">
+    <div class="menu-lateral">
+        <div class="logo">
+            <img src="~/image/logos/logo_dsburguer.png" alt="ADS Burguer System" style="max-width: 200px;" />
+        </div>
+
+        <ul class="menu">
+            <li><a asp-controller="Home" asp-action="Index">Tela Inicial ➜</a></li>
+            <li><a asp-controller="Produto" asp-action="Index">Produtos do Sistema ➜</a></li>
+            <li><a asp-controller="Produto" asp-action="Index">Novo Produto ➜</a></li>
+            <li><a asp-controller="Cupom" asp-action="Index">Novo Cupom ➜</a></li>
+            <li><a asp-controller="Usuario" asp-action="Index">Novo Usuário ➜</a></li>
+            <li><a asp-controller="Tabela" asp-action="Index">Nova Tabela ➜</a></li>
+        </ul>
+
+        <div class="usuario">
+            <div class="circulo"></div>
+            <span>Olá, Admin!</span>
+        </div>
+    </div>
+
+    <div class="conteudo">
+        <div class="aviso">
+            <h2>Atenção</h2>
+            <p>Escolha uma das<br />opções do menu lateral<br />para começarmos!</p>
+        </div>
+    </div>
+</div>
