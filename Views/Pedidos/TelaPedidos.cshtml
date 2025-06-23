@@ -1,0 +1,164 @@
+@using TotemPWA.ViewModels
+@model TelaPedidosViewModel
+
+@{
+    ViewData["Title"] = "Tela de Pedidos";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <!-- Sidebar com Categorias -->
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-header">
+                    <h5>Categorias</h5>
+                </div>
+                <div class="card-body">
+                    <div class="list-group">
+                        <button type="button" class="list-group-item list-group-item-action active" 
+                                onclick="mostrarTodosProdutos()">
+                            Todos os Produtos
+                        </button>
+                        @foreach (var categoria in Model.Categorias)
+                        {
+                            <button type="button" class="list-group-item list-group-item-action" 
+                                    onclick="filtrarPorCategoria(@categoria.CategoriaId, '@categoria.Nome')">
+                                @categoria.Nome
+                            </button>
+                            
+                            @if (categoria.Subcategorias != null && categoria.Subcategorias.Any())
+                            {
+                                @foreach (var subcategoria in categoria.Subcategorias)
+                                {
+                                    <button type="button" class="list-group-item list-group-item-action ml-3" 
+                                            onclick="filtrarPorCategoria(@subcategoria.CategoriaId, '@subcategoria.Nome')">
+                                        &nbsp;&nbsp;↳ @subcategoria.Nome
+                                    </button>
+                                }
+                            }
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Área dos Produtos -->
+        <div class="col-md-9">
+            <div class="card">
+                <div class="card-header">
+                    <h5 id="titulo-produtos">Todos os Produtos</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row" id="lista-produtos">
+                        @foreach (var produto in Model.Produtos)
+                        {
+                            <div class="col-md-4 mb-3 produto-item" data-categoria="@produto.CategoriaId">
+                                <div class="card h-100">
+                                    @if (produto.Imagem != null && produto.Imagem.Length > 0)
+                                    {
+                                        <img src="data:image/jpeg;base64,@Convert.ToBase64String(produto.Imagem)" class="card-img-top" alt="@produto.Descricao" style="height: 200px; object-fit: cover;">
+                                    }
+                                    else
+                                    {
+                                        <div class="card-img-top d-flex align-items-center justify-content-center" style="height: 200px; background-color: #f8f9fa;">
+                                            <span class="text-muted">Sem imagem</span>
+                                        </div>
+                                    }
+                                    <div class="card-body d-flex flex-column">
+                                        <h6 class="card-title">@produto.Descricao</h6>
+                                        @if (produto.IsCombo == 1)
+                                        {
+                                            <span class="badge badge-success mb-2">Combo</span>
+                                        }
+                                        <div class="mt-auto">
+                                            <p class="card-text">
+                                                <strong>R$ @produto.Valor.ToString("F2")</strong>
+                                            </p>
+                                            <button class="btn btn-primary btn-sm" 
+                                                    onclick="adicionarAoPedido(@produto.ProdutoId)">
+                                                Adicionar ao Pedido
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        function mostrarTodosProdutos() {
+            // Remove classe active de todos os botões
+            document.querySelectorAll('.list-group-item').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Adiciona classe active ao botão "Todos os Produtos"
+            event.target.classList.add('active');
+            
+            // Mostra todos os produtos
+            document.querySelectorAll('.produto-item').forEach(item => {
+                item.style.display = 'block';
+            });
+            
+            // Atualiza o título
+            document.getElementById('titulo-produtos').textContent = 'Todos os Produtos';
+        }
+
+        function filtrarPorCategoria(categoriaId, nomeCategoria) {
+            // Remove classe active de todos os botões
+            document.querySelectorAll('.list-group-item').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Adiciona classe active ao botão clicado
+            event.target.classList.add('active');
+            
+            // Filtra produtos por categoria
+            document.querySelectorAll('.produto-item').forEach(item => {
+                if (item.dataset.categoria == categoriaId) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+            
+            // Atualiza o título
+            document.getElementById('titulo-produtos').textContent = nomeCategoria;
+        }
+
+        function adicionarAoPedido(produtoId) {
+            // Implementar lógica para adicionar produto ao pedido
+            alert('Produto ' + produtoId + ' adicionado ao pedido!');
+            
+            // Aqui você pode fazer uma chamada AJAX para adicionar o produto ao carrinho/pedido
+            // fetch('/Pedidos/AdicionarItem', {
+            //     method: 'POST',
+            //     headers: {
+            //         'Content-Type': 'application/json',
+            //     },
+            //     body: JSON.stringify({ produtoId: produtoId, quantidade: 1 })
+            // });
+        }
+    </script>
+}
+
+<style>
+    .produto-item {
+        transition: all 0.3s ease;
+    }
+    
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    
+    .list-group-item:hover {
+        background-color: #f8f9fa;
+    }
+</style>

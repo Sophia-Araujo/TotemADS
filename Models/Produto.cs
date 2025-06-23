@@ -7,7 +7,7 @@ namespace TotemPWA.Models
         [Key]
         public int ProdutoId { get; set; }
         
-        // Removido [Required] daqui pois será tratado no controller
+       
         public byte[]? Imagem { get; set; }
         
         [Required(ErrorMessage = "A descrição é obrigatória")]
