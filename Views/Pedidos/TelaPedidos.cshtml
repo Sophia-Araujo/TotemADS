@@ -19,8 +19,15 @@
         </button>
         @foreach (var categoria in Model.Categorias)
         {
-            <button class="category" onclick="filtrarPorCategoria(@categoria.CategoriaId, '@categoria.Nome')">
-                <img src="/image/sidebar/@(categoria.Nome.ToLower()).png" alt="@categoria.Nome">
+            <button class="category" onclick="filtrarPorCategoria(@categoria.CategoriaId, '@categoria.Nome', '@(categoria.Banner != null ? Url.Action("GetCategoriaImage", "Pedidos", new { id = categoria.CategoriaId, type = "banner" }) : "/image/banners/lanchesBanner.png")')">
+                @if (categoria.Image != null && categoria.Image.Length > 0)
+                {
+                    <img src="@Url.Action("GetCategoriaImage", "Pedidos", new { id = categoria.CategoriaId, type = "image" })" alt="@categoria.Nome">
+                }
+                else
+                {
+                    <img src="/image/sidebar/@(categoria.Nome.ToLower()).png" alt="@categoria.Nome">
+                }
                 <span>@categoria.Nome</span>
             </button>
         }
@@ -34,7 +41,7 @@
             {
                 @foreach (var subcategoria in categoria.Subcategorias)
                 {
-                    <button class="cate" onclick="filtrarPorCategoria(@subcategoria.CategoriaId, '@subcategoria.Nome')">
+                    <button class="cate" onclick="filtrarPorCategoria(@subcategoria.CategoriaId, '@subcategoria.Nome', '@(subcategoria.Banner != null ? Url.Action("GetCategoriaImage", "Pedidos", new { id = subcategoria.CategoriaId, type = "banner" }) : "/image/banners/lanchesBanner.png")')">>
                         <span>@subcategoria.Nome.ToUpper()</span>
                     </button>
                 }
@@ -124,15 +131,23 @@
             event.target.classList.add('active');
             document.querySelectorAll('.produto-item').forEach(item => item.style.display = 'block');
             document.getElementById('titulo-produtos').textContent = 'Todos os Produtos';
+            
+            // Volta para o banner padrão
+            document.getElementById('banner-image').src = '/image/banners/lanchesBanner.png';
         }
 
-        function filtrarPorCategoria(categoriaId, nomeCategoria) {
+        function filtrarPorCategoria(categoriaId, nomeCategoria, bannerUrl) {
             document.querySelectorAll('.category, .cate').forEach(btn => btn.classList.remove('active'));
             event.target.classList.add('active');
             document.querySelectorAll('.produto-item').forEach(item => {
                 item.style.display = item.dataset.categoria == categoriaId ? 'block' : 'none';
             });
             document.getElementById('titulo-produtos').textContent = nomeCategoria;
+            
+            // Atualiza o banner com a imagem da categoria
+            if (bannerUrl && bannerUrl !== '') {
+                document.getElementById('banner-image').src = bannerUrl;
+            }
         }
 
         function adicionarAoPedido(produtoId) {
