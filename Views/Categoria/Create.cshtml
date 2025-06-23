@@ -10,17 +10,32 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create">
+        <form asp-action="Create" method="post" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            
             <div class="form-group">
                 <label asp-for="Nome" class="control-label"></label>
                 <input asp-for="Nome" class="form-control" />
                 <span asp-validation-for="Nome" class="text-danger"></span>
             </div>
+            
             <div class="form-group">
-                <label asp-for="CategoriaPaiId" class="control-label"></label>
-                <select asp-for="CategoriaPaiId" class ="form-control" asp-items="ViewBag.CategoriaPaiId"></select>
+                <label asp-for="CategoriaPaiId" class="control-label">Categoria Pai</label>
+                <select asp-for="CategoriaPaiId" class="form-control" asp-items="ViewBag.CategoriaPaiId"></select>
             </div>
+            
+            <div class="form-group">
+                <label for="imageFile" class="control-label">Imagem da Categoria</label>
+                <input type="file" name="imageFile" class="form-control" accept="image/*" />
+                <small class="form-text text-muted">Selecione uma imagem para a categoria (JPG, PNG, etc.)</small>
+            </div>
+            
+            <div class="form-group">
+                <label for="bannerFile" class="control-label">Banner da Categoria</label>
+                <input type="file" name="bannerFile" class="form-control" accept="image/*" />
+                <small class="form-text text-muted">Selecione um banner para a categoria (JPG, PNG, etc.)</small>
+            </div>
+            
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
@@ -34,4 +49,35 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    
+    <script>
+        // Preview das imagens selecionadas
+        document.querySelector('input[name="imageFile"]').addEventListener('change', function(e) {
+            previewImage(e.target, 'imagePreview');
+        });
+        
+        document.querySelector('input[name="bannerFile"]').addEventListener('change', function(e) {
+            previewImage(e.target, 'bannerPreview');
+        });
+        
+        function previewImage(input, previewId) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    var preview = document.getElementById(previewId);
+                    if (!preview) {
+                        preview = document.createElement('img');
+                        preview.id = previewId;
+                        preview.style.maxWidth = '200px';
+                        preview.style.maxHeight = '200px';
+                        preview.style.marginTop = '10px';
+                        preview.className = 'img-thumbnail';
+                        input.parentNode.appendChild(preview);
+                    }
+                    preview.src = e.target.result;
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    </script>
 }

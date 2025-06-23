@@ -18,12 +18,13 @@ public class HomeController : Controller
         return View();
     }
 
-    public IActionResult telaPedidos()
+
+    public IActionResult telaOpcoes()
     {
         return View();
     }
 
-    public IActionResult telaOpcoes()
+    public IActionResult telaEscolha()
     {
         return View();
     }

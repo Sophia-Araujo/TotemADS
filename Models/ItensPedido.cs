@@ -9,6 +9,7 @@ namespace TotemPWA.Models
 
         //Navegação de Pedido
         public Pedido Pedido { get; set; }
+        [Required]
         public int PedidoId { get; set; }
         //
 

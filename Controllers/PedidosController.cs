@@ -60,6 +60,31 @@ namespace TotemPWA.Controllers
             }
         }
 
+        // Método para servir imagens das categorias
+        [HttpGet("GetCategoriaImage/{id}/{type}")]
+        public async Task<IActionResult> GetCategoriaImage(int id, string type = "image")
+        {
+            try
+            {
+                var categoria = await _context.Categorias.FindAsync(id);
+                if (categoria == null) return NotFound();
+
+                byte[]? imageData = type.ToLower() == "banner" ? categoria.Banner : categoria.Image;
+                
+                if (imageData == null || imageData.Length == 0)
+                    return NotFound();
+
+                // Detecta o tipo de imagem baseado no header do arquivo
+                string contentType = DetectImageContentType(imageData);
+                
+                return File(imageData, contentType);
+            }
+            catch (Exception)
+            {
+                return NotFound();
+            }
+        }
+
         // API endpoint para buscar produtos por categoria (AJAX)
         [HttpGet("GetProdutosPorCategoria")]
         public async Task<JsonResult> GetProdutosPorCategoria(int categoriaId)
@@ -119,6 +144,22 @@ namespace TotemPWA.Controllers
             {
                 return Json(new { erro = "Erro ao buscar produto" });
             }
+        }
+
+        // Método auxiliar para detectar o tipo de conteúdo da imagem
+        private string DetectImageContentType(byte[] imageData)
+        {
+            if (imageData.Length < 4) return "image/jpeg";
+
+            // Verifica assinatura do arquivo
+            if (imageData[0] == 0xFF && imageData[1] == 0xD8) return "image/jpeg";
+            if (imageData[0] == 0x89 && imageData[1] == 0x50 && imageData[2] == 0x4E && imageData[3] == 0x47) return "image/png";
+            if (imageData[0] == 0x47 && imageData[1] == 0x49 && imageData[2] == 0x46) return "image/gif";
+            if (imageData[0] == 0x42 && imageData[1] == 0x4D) return "image/bmp";
+            if (imageData[0] == 0x52 && imageData[1] == 0x49 && imageData[2] == 0x46 && imageData[3] == 0x46) return "image/webp";
+
+            // Default para JPEG
+            return "image/jpeg";
         }
     }
 }
