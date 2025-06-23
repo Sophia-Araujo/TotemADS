@@ -15,7 +15,7 @@ namespace TotemPWA.Migrations
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder.HasAnnotation("ProductVersion", "9.0.5");
+            modelBuilder.HasAnnotation("ProductVersion", "9.0.6");
 
             modelBuilder.Entity("TotemPWA.Models.Adicional", b =>
                 {
@@ -59,8 +59,9 @@ namespace TotemPWA.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("Senha")
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("Senha")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
 
                     b.HasKey("AdministradorId");
 
@@ -73,8 +74,14 @@ namespace TotemPWA.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<byte[]>("Banner")
+                        .HasColumnType("BLOB");
+
                     b.Property<int?>("CategoriaPaiId")
                         .HasColumnType("INTEGER");
+
+                    b.Property<byte[]>("Image")
+                        .HasColumnType("BLOB");
 
                     b.Property<string>("Nome")
                         .IsRequired()
@@ -101,7 +108,7 @@ namespace TotemPWA.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("Pontos")
+                    b.Property<int?>("Pontos")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("ClienteId");
@@ -277,7 +284,7 @@ namespace TotemPWA.Migrations
                     b.Property<int>("PagamentoId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<float>("Valor")
+                    b.Property<float?>("Valor")
                         .HasColumnType("REAL");
 
                     b.HasKey("PedidoId");
