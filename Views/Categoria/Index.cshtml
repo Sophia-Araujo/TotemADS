@@ -18,6 +18,12 @@
             <th>
                 @Html.DisplayNameFor(model => model.CategoriaPai)
             </th>
+            <th>
+                Imagem
+            </th>
+            <th>
+                Banner
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -28,7 +34,29 @@
                 @Html.DisplayFor(modelItem => item.Nome)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.CategoriaPai.CategoriaId)
+                @Html.DisplayFor(modelItem => item.CategoriaPai.Nome)
+            </td>
+            <td>
+                @if (item.Image != null && item.Image.Length > 0)
+                {
+                    <img src="@Url.Action("GetImage", new { id = item.CategoriaId, type = "image" })" 
+                         alt="Imagem da categoria" class="img-thumbnail" style="width: 50px; height: 50px; object-fit: cover;" />
+                }
+                else
+                {
+                    <span class="text-muted">Sem imagem</span>
+                }
+            </td>
+            <td>
+                @if (item.Banner != null && item.Banner.Length > 0)
+                {
+                    <img src="@Url.Action("GetImage", new { id = item.CategoriaId, type = "banner" })" 
+                         alt="Banner da categoria" class="img-thumbnail" style="width: 50px; height: 50px; object-fit: cover;" />
+                }
+                else
+                {
+                    <span class="text-muted">Sem banner</span>
+                }
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.CategoriaId">Edit</a> |

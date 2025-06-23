@@ -8,7 +8,6 @@ using Microsoft.EntityFrameworkCore;
 using TotemPWA.Data;
 using TotemPWA.Models;
 
-
 namespace TotemPWA.Controllers
 {
     public class CategoriaController : Controller
@@ -40,20 +39,33 @@ namespace TotemPWA.Controllers
             return View(categoria);
         }
 
-        // ✅ GET: Categoria/Create
+        // GET: Categoria/Create
         public IActionResult Create()
         {
             ViewData["CategoriaPaiId"] = GetCategoriaPaiSelectList();
             return View();
         }
 
-        // ✅ POST: Categoria/Create
+        // POST: Categoria/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("CategoriaId,Nome,CategoriaPaiId")] Categoria categoria)
+        public async Task<IActionResult> Create([Bind("CategoriaId,Nome,CategoriaPaiId")] Categoria categoria, 
+                                               IFormFile? imageFile, IFormFile? bannerFile)
         {
             if (ModelState.IsValid)
             {
+                // Processar imagem principal
+                if (imageFile != null && imageFile.Length > 0)
+                {
+                    categoria.Image = await ConvertToByteArray(imageFile);
+                }
+
+                // Processar banner
+                if (bannerFile != null && bannerFile.Length > 0)
+                {
+                    categoria.Banner = await ConvertToByteArray(bannerFile);
+                }
+
                 _context.Add(categoria);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -63,7 +75,7 @@ namespace TotemPWA.Controllers
             return View(categoria);
         }
 
-        // ✅ GET: Categoria/Edit/5
+        // GET: Categoria/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null) return NotFound();
@@ -75,10 +87,11 @@ namespace TotemPWA.Controllers
             return View(categoria);
         }
 
-        // ✅ POST: Categoria/Edit/5
+        // POST: Categoria/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("CategoriaId,Nome,CategoriaPaiId")] Categoria categoria)
+        public async Task<IActionResult> Edit(int id, [Bind("CategoriaId,Nome,CategoriaPaiId")] Categoria categoria,
+                                             IFormFile? imageFile, IFormFile? bannerFile)
         {
             if (id != categoria.CategoriaId) return NotFound();
 
@@ -86,6 +99,29 @@ namespace TotemPWA.Controllers
             {
                 try
                 {
+                    // Buscar a categoria existente para preservar imagens se não foram alteradas
+                    var categoriaExistente = await _context.Categorias.AsNoTracking()
+                        .FirstOrDefaultAsync(c => c.CategoriaId == id);
+
+                    if (categoriaExistente != null)
+                    {
+                        // Preservar imagem existente se nova não foi enviada
+                        categoria.Image = categoriaExistente.Image;
+                        categoria.Banner = categoriaExistente.Banner;
+                    }
+
+                    // Processar nova imagem se foi enviada
+                    if (imageFile != null && imageFile.Length > 0)
+                    {
+                        categoria.Image = await ConvertToByteArray(imageFile);
+                    }
+
+                    // Processar novo banner se foi enviado
+                    if (bannerFile != null && bannerFile.Length > 0)
+                    {
+                        categoria.Banner = await ConvertToByteArray(bannerFile);
+                    }
+
                     _context.Update(categoria);
                     await _context.SaveChangesAsync();
                 }
@@ -129,12 +165,26 @@ namespace TotemPWA.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        // Método para exibir imagem
+        public async Task<IActionResult> GetImage(int id, string type = "image")
+        {
+            var categoria = await _context.Categorias.FindAsync(id);
+            if (categoria == null) return NotFound();
+
+            byte[]? imageData = type.ToLower() == "banner" ? categoria.Banner : categoria.Image;
+            
+            if (imageData == null || imageData.Length == 0)
+                return NotFound();
+
+            return File(imageData, "image/jpeg"); // ou detectar o tipo automaticamente
+        }
+
         private bool CategoriaExists(int id)
         {
             return _context.Categorias.Any(e => e.CategoriaId == id);
         }
 
-        // ✅ Método auxiliar para montar a SelectList com "vazio"
+        // Método auxiliar para montar a SelectList
         private List<SelectListItem> GetCategoriaPaiSelectList(int? selectedId = null)
         {
             var categorias = _context.Categorias
@@ -154,6 +204,14 @@ namespace TotemPWA.Controllers
             }));
 
             return lista;
+        }
+
+        // Método auxiliar para converter IFormFile em byte array
+        private async Task<byte[]> ConvertToByteArray(IFormFile file)
+        {
+            using var memoryStream = new MemoryStream();
+            await file.CopyToAsync(memoryStream);
+            return memoryStream.ToArray();
         }
     }
 }
