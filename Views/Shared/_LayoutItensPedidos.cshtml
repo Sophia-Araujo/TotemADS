@@ -1,15 +1,25 @@
 <!DOCTYPE html>
-
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
-    <meta charset="utf-8" />
-    <title>@ViewBag.Title - ADS Burguer</title>
-    <link rel="shortcut icon" type="imagex/png" href="~/image/logo-reduzido-icon.png" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="~/css/itensPedidos.css" />
-    @RenderSection("Scripts", required: false)
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="shortcut icon" type="imagex/png" href="~/image/logo-reduzido-icon.png">
+    <title>@ViewBag.Title</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tilt+Warp&display=swap" rel="stylesheet">
+    
+    <!-- CSS existente da página -->
+    <link href="~/css/itenspedidos.css" rel="stylesheet">
+    
+    <!-- CSS do modal de cupom -->
+    <link href="~/css/cupom.css" rel="stylesheet">
 </head>
 <body>
     @RenderBody()
+    
+    <!-- Scripts existentes -->
+    <script src="~/js/cupom.js" asp-append-version="true"></script>
+    
+    <!-- Renderizar scripts adicionais das views -->
+    @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
