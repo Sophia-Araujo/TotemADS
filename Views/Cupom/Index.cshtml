@@ -1,59 +1,75 @@
 ﻿@model IEnumerable<TotemPWA.Models.Cupom>
 
 @{
-    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_LayoutCrudCupom.cshtml";
+    ViewData["Title"] = "Cupons";
 }
 
-<h1>Index</h1>
+<div class="content-area">
+    <div class="cupons-section">
+        <div class="section-header">
+            <div class="header-content">
+                <h1>Cupons</h1>
+                <p class="section-subtitle">Gerencie todos os cupons de desconto</p>
+            </div>
+            <div class="header-actions">
+                <a asp-action="Create" class="btn btn-primary">
+                    <i class="icon-plus"></i>
+                    Novo Cupom
+                </a>
+            </div>
+        </div>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Codigo)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Desconto)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Validade)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ProdutoId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Administrador)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Codigo)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Desconto)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Validade)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProdutoId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Administrador.CPF)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.CupomId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.CupomId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.CupomId">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+        @if (Model != null && Model.Any())
+        {
+            <div class="cupons-grid">
+                @foreach (var item in Model)
+                {
+                    <div class="cupom-card">
+                        <div class="cupom-header">
+                            <div class="cupom-codigo">@item.Codigo</div>
+                            <div class="cupom-desconto">@item.Desconto%</div>
+                        </div>
+                        
+                        <div class="cupom-body">
+                            <div class="cupom-info">
+                                <div class="info-item">
+                                    <span class="label">Validade:</span>
+                                    <span class="value">@item.Validade.ToString("dd/MM/yyyy")</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="label">Produto ID:</span>
+                                    <span class="value">@item.ProdutoId</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="label">Criado por:</span>
+                                    <span class="value">@(item.Administrador?.CPF ?? "N/A")</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="cupom-actions">
+                            <a asp-action="Edit" asp-route-id="@item.CupomId" class="btn-action btn-edit" title="Editar">
+                                <i class="icon-edit"></i>
+                            </a>
+                            <a asp-action="Details" asp-route-id="@item.CupomId" class="btn-action btn-view" title="Detalhes">
+                                <i class="icon-eye"></i>
+                            </a>
+                            <a asp-action="Delete" asp-route-id="@item.CupomId" class="btn-action btn-delete" title="Excluir">
+                                <i class="icon-trash"></i>
+                            </a>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+        else
+        {
+            <div class="empty-state">
+                <h3>Nenhum cupom encontrado</h3>
+                <p>Adicione cupons de descontos</p>
+                <a asp-action="Create" class="btn btn-primary">Criar Primeiro Cupom</a>
+            </div>
+        }
+    </div>
+</div>
