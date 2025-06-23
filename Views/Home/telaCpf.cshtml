@@ -4,10 +4,10 @@
 <div class="fundo">
     <img src="~/image/logos/logo-reduzido.png" alt="ADS Burguer" class="logo">
 
-    <form class="formulario-cpf" action="/Home/telaTipoPedido" onsubmit="return validarCPF();">
+    <form class="formulario-cpf" id="formCpf">
         <label for="cpf">Coloque o CPF:</label>
-        <input type="text" id="cpf" name="cpf"  placeholder="000.000.000-00" maxlength="14">
-
+        <input type="text" id="cpf" name="cpf" placeholder="000.000.000-00" maxlength="14">
+        
         <div class="checkbox-area">
             <input type="checkbox" id="nota" name="nota">
             <label class="desejo" for="nota">Deseja colocar CPF na nota?</label>
@@ -15,11 +15,16 @@
         <button type="submit">Confirmar</button>
     </form>
 
+    <!-- Aqui aparecerão as mensagens -->
+    <div id="mensagem" class="mensagem-validacao"></div>
+
     <div class="faixa-laranja"></div>
     <div class="faixa-verde"></div>
 </div>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="~/lib/jquery/dist/jquery.min.js"></script>
 
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
 
-
+<!-- Script da validação -->
+<script src="~/js/cpf-validador.js"></script>

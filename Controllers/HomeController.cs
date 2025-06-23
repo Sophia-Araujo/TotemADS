@@ -24,6 +24,11 @@ public class HomeController : Controller
         return View();
     }
 
+    public IActionResult telaEscolha()
+    {
+        return View();
+    }
+
     public IActionResult carregamento()
     {
         return View();

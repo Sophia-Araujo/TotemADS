@@ -4,7 +4,7 @@
 <div class="fundo">
     <img src="@Url.Content("~/image/logos/logo-reduzido.png")" alt="ADS Burguer" class="logo">
 
-    <form class="formulario-opcoes" action="/Home/telaOpcoes" method="get">
+    <form class="formulario-opcoes" action="/Home/telaOpcoes" method="get" id="formTipoPedido">
     <label class="titulo">Selecione uma opção:</label>
 
         <div class="opcoes">
@@ -24,7 +24,44 @@
         <button type="submit">Confirmar</button>
     </form>
 
+    <div id="mensagem" class="mensagem-validacao"></div>
 
     <div class="faixa-laranja"></div>
     <div class="faixa-verde"></div>
 </div>
+
+<script>
+document.getElementById('formTipoPedido').addEventListener('submit', function(e) {
+    // Verifica se algum radio button está selecionado
+    const tipoPedidoSelecionado = document.querySelector('input[name="tipoPedido"]:checked');
+    const mensagemDiv = document.getElementById('mensagem');
+    
+    if (!tipoPedidoSelecionado) {
+        // Previne o envio do formulário
+        e.preventDefault();
+        
+        // Exibe mensagem de erro
+        mensagemDiv.textContent = 'Por favor, selecione uma opção antes de continuar.';
+        mensagemDiv.style.display = 'block';
+        
+        // Remove a mensagem após 3 segundos
+        setTimeout(function() {
+            mensagemDiv.style.display = 'none';
+        }, 3000);
+        
+        return false;
+    } else {
+        // Remove a mensagem de erro se existir
+        mensagemDiv.style.display = 'none';
+        return true;
+    }
+});
+
+// Remove a mensagem de erro quando uma opção é selecionada
+document.querySelectorAll('input[name="tipoPedido"]').forEach(function(radio) {
+    radio.addEventListener('change', function() {
+        const mensagemDiv = document.getElementById('mensagem');
+        mensagemDiv.style.display = 'none';
+    });
+});
+</script>

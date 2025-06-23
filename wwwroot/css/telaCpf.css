@@ -1,3 +1,56 @@
+/* Estilos para as mensagens de validação - Centralizadas e seguindo o padrão */
+.mensagem-validacao {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1001;
+    padding: 25px 40px;
+    border-radius: 35px;
+    font-weight: bold;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+    font-size: 2rem;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s ease;
+    min-width: 400px;
+    max-width: 600px;
+    backdrop-filter: blur(10px);
+    cursor: default; /* Impede que o cursor mude ao passar sobre a mensagem */
+}
+
+/* Overlay sutil atrás da mensagem */
+.mensagem-validacao::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.1);
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.mensagem-validacao:not([style*="display: none"])::before {
+    opacity: 1;
+}
+
+.mensagem-validacao.erro {
+    background: rgba(255, 255, 255, 0.95);
+    color: #FF5C00;
+    border: 3px solid #FF5C00;
+}
+
+.mensagem-validacao.ok {
+    background: rgba(255, 255, 255, 0.95);
+    color: #BCD84F;
+    border: 3px solid #BCD84F;
+}
+
+/* Seu CSS original mantido intacto */
 body, html {
     margin: 0;
     padding: 0;
@@ -6,16 +59,16 @@ body, html {
     font-family: 'Poppins', sans-serif;
     background: white;
     overflow: hidden;
-  }
-  
-  .fundo {
+}
+
+.fundo {
     position: absolute;
     width: 100%;
     height: 100vh;
-  }
-  
-  /* Faixa Laranja fina no topo */
-  .faixa-laranja {
+}
+
+/* Faixa Laranja fina no topo */
+.faixa-laranja {
     position: absolute;
     top: 0;
     left: 0;
@@ -23,10 +76,10 @@ body, html {
     width: 100%;
     background-color: #FF5C00;
     z-index: 1;
-  }
-  
-  /* Faixa verde com corte inclinado */
-  .faixa-verde {
+}
+
+/* Faixa verde com corte inclinado */
+.faixa-verde {
     position: absolute;
     top: 15px; /* abaixo da faixa laranja */
     left: 0;
@@ -35,20 +88,20 @@ body, html {
     background-color: #BCD84F;
     z-index: 0;
     clip-path: polygon(0 0, 100% 0, 100% 40%, 60% 85%, 0 90%);
-  }
-  
-  /* Logo centralizada dentro da faixa verde */
-  .logo {
+}
+
+/* Logo centralizada dentro da faixa verde */
+.logo {
     position: absolute;
     top: 20%;
     left: 50%;
     transform: translate(-50%, -50%);
     width: 200px;
     z-index: 5;
-  }
-  
-  /* Mensagem (caso queira exibir) */
-  .mensagem {
+}
+
+/* Mensagem (caso queira exibir) */
+.mensagem {
     text-align: center;
     color: #FF5C00;
     font-weight: bold;
@@ -56,10 +109,10 @@ body, html {
     margin-top: 280px;
     z-index: 10;
     position: relative;
-  }
-  
-  /* Formulário CPF */
-  .formulario-cpf {
+}
+
+/* Formulário CPF */
+.formulario-cpf {
     position: relative;
     z-index: 10;
     margin-top: 78%;
@@ -68,20 +121,19 @@ body, html {
     align-items: center;
     font-family: 'Poppins', sans-serif;
     color: #676767;
-  }
-  
-  .formulario-cpf label {
+}
+
+.formulario-cpf label {
     font-weight: bold;
     font-size: 3.2rem;
-  }
+}
 
-  .checkbox-area label.desejo {
+.checkbox-area label.desejo {
     font-size: 1.5rem;
     margin-bottom: 1px;
-  }
-  
+}
 
-  .formulario-cpf input[type="text"] {
+.formulario-cpf input[type="text"] {
     margin-top: 50px;
     padding: 20px 15px;
     border: 2px solid #1d1d1d;
@@ -89,23 +141,23 @@ body, html {
     font-size: 2.5rem;
     outline: none;
     margin-bottom: 25px;
-  }
-  
-  .checkbox-area {
+}
+
+.checkbox-area {
     display: flex;
     align-items: center;
     margin-bottom: 20px;
     font-size: 2.7rem;
-  }
-  
-.checkbox-area input[type="checkbox"] {
-  transform: scale(2);
-  margin-right: 15px;
-  accent-color: #FF5C00; /* deixa a caixinha laranja */
-  cursor: pointer;
 }
-  
-  .formulario-cpf button {
+
+.checkbox-area input[type="checkbox"] {
+    transform: scale(2);
+    margin-right: 15px;
+    accent-color: #FF5C00; /* deixa a caixinha laranja */
+    cursor: pointer;
+}
+
+.formulario-cpf button {
     background-color: #FF5C00;
     color: white;
     border: none;
@@ -116,9 +168,8 @@ body, html {
     font-weight: bold;
     cursor: pointer;
     transition: background-color 0.3s ease;
-  }
-  
-  .formulario-cpf button:hover {
+}
+
+.formulario-cpf button:hover {
     background-color: #e24e00;
-  }
-  
+}
