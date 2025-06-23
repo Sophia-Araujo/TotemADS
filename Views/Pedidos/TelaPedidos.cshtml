@@ -3,162 +3,140 @@
 
 @{
     ViewData["Title"] = "Tela de Pedidos";
+    Layout = "_LayoutPedidos";
 }
 
-<div class="container-fluid">
-    <div class="row">
-        <!-- Sidebar com Categorias -->
-        <div class="col-md-3">
-            <div class="card">
-                <div class="card-header">
-                    <h5>Categorias</h5>
-                </div>
-                <div class="card-body">
-                    <div class="list-group">
-                        <button type="button" class="list-group-item list-group-item-action active" 
-                                onclick="mostrarTodosProdutos()">
-                            Todos os Produtos
-                        </button>
-                        @foreach (var categoria in Model.Categorias)
+<header>
+    <img src="/image/banners/lanchesBanner.png" id="banner-image" alt="Banner de Hambúrguer">
+</header>
+
+<main>
+    <!-- SIDEBAR LATERAL COM CATEGORIAS PRINCIPAIS -->
+    <aside class="sidebarlateral">
+        <button class="category active" onclick="mostrarTodosProdutos()">
+            <img src="/image/sidebar/todos.png" alt="Todos">
+            <span>Todos</span>
+        </button>
+        @foreach (var categoria in Model.Categorias)
+        {
+            <button class="category" onclick="filtrarPorCategoria(@categoria.CategoriaId, '@categoria.Nome')">
+                <img src="/image/sidebar/@(categoria.Nome.ToLower()).png" alt="@categoria.Nome">
+                <span>@categoria.Nome</span>
+            </button>
+        }
+    </aside>
+
+    <!-- SIDEBAR DE SUBCATEGORIAS/FILTROS -->
+    <aside class="sidebar">
+        @foreach (var categoria in Model.Categorias)
+        {
+            @if (categoria.Subcategorias != null && categoria.Subcategorias.Any())
+            {
+                @foreach (var subcategoria in categoria.Subcategorias)
+                {
+                    <button class="cate" onclick="filtrarPorCategoria(@subcategoria.CategoriaId, '@subcategoria.Nome')">
+                        <span>@subcategoria.Nome.ToUpper()</span>
+                    </button>
+                }
+            }
+        }
+    </aside>
+
+    <!-- PRODUTOS -->
+    <section class="content">
+        <div class="menu-section" id="produtos-section">
+            <h2 id="titulo-produtos">Todos os Produtos</h2>
+            <div class="menu">
+                @foreach (var produto in Model.Produtos)
+                {
+                    <div class="card produto-item" data-categoria="@produto.CategoriaId">
+                        @if (produto.Imagem != null && produto.Imagem.Length > 0)
                         {
-                            <button type="button" class="list-group-item list-group-item-action" 
-                                    onclick="filtrarPorCategoria(@categoria.CategoriaId, '@categoria.Nome')">
-                                @categoria.Nome
-                            </button>
-                            
-                            @if (categoria.Subcategorias != null && categoria.Subcategorias.Any())
-                            {
-                                @foreach (var subcategoria in categoria.Subcategorias)
-                                {
-                                    <button type="button" class="list-group-item list-group-item-action ml-3" 
-                                            onclick="filtrarPorCategoria(@subcategoria.CategoriaId, '@subcategoria.Nome')">
-                                        &nbsp;&nbsp;↳ @subcategoria.Nome
-                                    </button>
-                                }
-                            }
+                            <img src="data:image/jpeg;base64,@Convert.ToBase64String(produto.Imagem)"
+                                 alt="@produto.Descricao" class="produto-img" />
                         }
+                        else
+                        {
+                            <img src="/image/produtos/default.png"
+                                 alt="@produto.Descricao" class="produto-img" />
+                        }
+
+                        <h3>@produto.Descricao</h3>
+                        <p>R$ @produto.Valor.ToString("F2")</p>
+                        <span class="produto-descricao">Pão brioche, queijo cheddar cremoso...</span>
+
+                        <button class="add-to-cart" onclick="adicionarAoPedido(@produto.ProdutoId)">Adicionar</button>
                     </div>
-                </div>
+                }
             </div>
         </div>
+    </section>
 
-        <!-- Área dos Produtos -->
-        <div class="col-md-9">
-            <div class="card">
-                <div class="card-header">
-                    <h5 id="titulo-produtos">Todos os Produtos</h5>
+    <!-- POPUP INGREDIENTES -->
+    <div id="popup" class="popup-overlay" style="display: none;">
+        <div class="popup-content">
+            <h2>C# burguer</h2>
+            <p class="descricao-burguer">Pão, carne, alface, tomate, bacon, cebola e maionese.</p>
+
+            <div class="popup-main">
+                <img src="/image/produtos/lanches/404 Not Found Burger.png" alt="C# Burguer" class="popup-img" />
+
+                <div class="ingredientes">
+                    @foreach (var ingrediente in new[] { "Pão", "Carne", "Alface", "Tomate", "Bacon", "Cebola", "Maionese" })
+                    {
+                        <div class="ingrediente">
+                            <span>@ingrediente</span>
+                            <span class="quantidade">1x</span>
+                            <button class="menos">−</button>
+                            <button class="mais">+</button>
+                        </div>
+                    }
                 </div>
-                <div class="card-body">
-                    <div class="row" id="lista-produtos">
-                        @foreach (var produto in Model.Produtos)
-                        {
-                            <div class="col-md-4 mb-3 produto-item" data-categoria="@produto.CategoriaId">
-                                <div class="card h-100">
-                                    @if (produto.Imagem != null && produto.Imagem.Length > 0)
-                                    {
-                                        <img src="data:image/jpeg;base64,@Convert.ToBase64String(produto.Imagem)" class="card-img-top" alt="@produto.Descricao" style="height: 200px; object-fit: cover;">
-                                    }
-                                    else
-                                    {
-                                        <div class="card-img-top d-flex align-items-center justify-content-center" style="height: 200px; background-color: #f8f9fa;">
-                                            <span class="text-muted">Sem imagem</span>
-                                        </div>
-                                    }
-                                    <div class="card-body d-flex flex-column">
-                                        <h6 class="card-title">@produto.Descricao</h6>
-                                        @if (produto.IsCombo == 1)
-                                        {
-                                            <span class="badge badge-success mb-2">Combo</span>
-                                        }
-                                        <div class="mt-auto">
-                                            <p class="card-text">
-                                                <strong>R$ @produto.Valor.ToString("F2")</strong>
-                                            </p>
-                                            <button class="btn btn-primary btn-sm" 
-                                                    onclick="adicionarAoPedido(@produto.ProdutoId)">
-                                                Adicionar ao Pedido
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        }
-                    </div>
-                </div>
+            </div>
+
+            <div class="popup-buttons">
+                <button id="voltar" class="btn-voltar">Voltar</button>
+                <button class="btn-adicionar-popup">Adicionar</button>
             </div>
         </div>
     </div>
-</div>
+
+    <!-- FOOTER -->
+    <footer class="resumo-compra">
+        <div class="resumo">
+            <p>Lanches 2x <span>R$: 73,80</span></p>
+            <p>Bebidas 1x <span>R$: 10,00</span></p>
+            <p>Sobremesas 2x <span>R$: 15,90</span></p>
+            <p class="total">Total: <span>R$: 99,70</span></p>
+        </div>
+        <div class="acoes">
+            <button class="btn-editar">Editar pedido</button>
+            <button class="btn-pagar" onclick="window.location.href='/Home/telaItensPedidos'">Pagar R$: 83,80</button>
+            <button class="btn-cancelar">Cancelar</button>
+        </div>
+    </footer>
+</main>
 
 @section Scripts {
     <script>
         function mostrarTodosProdutos() {
-            // Remove classe active de todos os botões
-            document.querySelectorAll('.list-group-item').forEach(btn => {
-                btn.classList.remove('active');
-            });
-            
-            // Adiciona classe active ao botão "Todos os Produtos"
+            document.querySelectorAll('.category, .cate').forEach(btn => btn.classList.remove('active'));
             event.target.classList.add('active');
-            
-            // Mostra todos os produtos
-            document.querySelectorAll('.produto-item').forEach(item => {
-                item.style.display = 'block';
-            });
-            
-            // Atualiza o título
+            document.querySelectorAll('.produto-item').forEach(item => item.style.display = 'block');
             document.getElementById('titulo-produtos').textContent = 'Todos os Produtos';
         }
 
         function filtrarPorCategoria(categoriaId, nomeCategoria) {
-            // Remove classe active de todos os botões
-            document.querySelectorAll('.list-group-item').forEach(btn => {
-                btn.classList.remove('active');
-            });
-            
-            // Adiciona classe active ao botão clicado
+            document.querySelectorAll('.category, .cate').forEach(btn => btn.classList.remove('active'));
             event.target.classList.add('active');
-            
-            // Filtra produtos por categoria
             document.querySelectorAll('.produto-item').forEach(item => {
-                if (item.dataset.categoria == categoriaId) {
-                    item.style.display = 'block';
-                } else {
-                    item.style.display = 'none';
-                }
+                item.style.display = item.dataset.categoria == categoriaId ? 'block' : 'none';
             });
-            
-            // Atualiza o título
             document.getElementById('titulo-produtos').textContent = nomeCategoria;
         }
 
         function adicionarAoPedido(produtoId) {
-            // Implementar lógica para adicionar produto ao pedido
             alert('Produto ' + produtoId + ' adicionado ao pedido!');
-            
-            // Aqui você pode fazer uma chamada AJAX para adicionar o produto ao carrinho/pedido
-            // fetch('/Pedidos/AdicionarItem', {
-            //     method: 'POST',
-            //     headers: {
-            //         'Content-Type': 'application/json',
-            //     },
-            //     body: JSON.stringify({ produtoId: produtoId, quantidade: 1 })
-            // });
         }
     </script>
 }
-
-<style>
-    .produto-item {
-        transition: all 0.3s ease;
-    }
-    
-    .card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    }
-    
-    .list-group-item:hover {
-        background-color: #f8f9fa;
-    }
-</style>
