@@ -1,6 +1,8 @@
 body {
     margin: 0;
     font-family: 'Poppins', sans-serif;
+    height: 100vh;
+    overflow: hidden;
 }
 
 .container-principal {
@@ -8,6 +10,7 @@ body {
     height: 100vh;
 }
 
+/* Sidebar fixa */
 .menu-lateral {
     width: 250px;
     background: linear-gradient(to bottom, #f5b759, #f28200);
@@ -17,16 +20,22 @@ body {
 
     display: flex;
     flex-direction: column;
-    justify-content: space-between; /* separa o topo e o final */
+    justify-content: space-between;
     height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
 }
 
+/* Logo */
 .logo {
     font-size: 18px;
     margin-bottom: 30px;
     line-height: 1.2;
+    text-align: center;
 }
 
+/* Menu */
 .menu {
     list-style: none;
     padding: 0;
@@ -70,21 +79,24 @@ body {
     border-radius: 50%;
 }
 
-/* Conteúdo principal */
+/* Conteúdo do lado direito */
 .conteudo {
+    margin-left: 250px; /* distância da sidebar */
+    padding: 40px;
     flex-grow: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     background: white;
+    height: 100vh;
+    overflow-y: auto;
 }
 
+/* Mensagem inicial ou conteúdo genérico */
 .aviso {
     border: 2px solid black;
     border-radius: 10px;
     padding: 30px;
     text-align: center;
     max-width: 300px;
+    margin: 0 auto;
 }
 
 .aviso h2 {

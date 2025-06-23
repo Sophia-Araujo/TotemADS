@@ -1,66 +1,75 @@
 ﻿@model TotemPWA.Models.Produto
 
 @{
-    ViewData["Title"] = "Delete";
+    ViewData["Title"] = "Excluir Produto";
+    Layout = "~/Views/Shared/_LayoutMenu.cshtml";
 }
 
-<h1>Excluir Produto</h1>
+<div class="content-area">
+    <div class="produtos-section">
+        <div class="section-header">
+            <div class="header-content">
+                <h1>Excluir Produto</h1>
+                <p class="section-subtitle">Tem certeza que deseja excluir este produto?</p>
+            </div>
+        </div>
 
-<h3>Tem certeza que deseja excluir este produto?</h3>
-<div>
-    <h4>Produto</h4>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            Imagem
-        </dt>
-        <dd class="col-sm-10">
-            @if (Model.Imagem != null && Model.Imagem.Length > 0)
-            {
-                <img src="@Url.Action("ExibirImagem", new { id = Model.ProdutoId })" 
-                     alt="@Model.Descricao" 
-                     style="max-width: 200px; max-height: 200px; border: 1px solid #ddd; border-radius: 5px;" />
-            }
-            else
-            {
-                <span class="text-muted">Nenhuma imagem cadastrada</span>
-            }
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Descricao)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Descricao)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Valor)
-        </dt>
-        <dd class="col-sm-10">
-            R$ @Model.Valor.ToString("F2")
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.IsCombo)
-        </dt>
-        <dd class="col-sm-10">
-            @(Model.IsCombo == 1 ? "Sim" : "Não")
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Administrador)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Administrador.CPF)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Categoria)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Categoria.CategoriaId)
-        </dd>
-    </dl>
-    
-    <form asp-action="Delete">
-        <input type="hidden" asp-for="ProdutoId" />
-        <input type="submit" value="Confirmar Exclusão" class="btn btn-danger" />
-        <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
-    </form>
+        <div class="form-container">
+            <form asp-action="Delete" method="post">
+                <input type="hidden" asp-for="ProdutoId" />
+                
+                <div class="form-group">
+                    <label>Imagem do Produto</label>
+                    @if (Model.Imagem != null && Model.Imagem.Length > 0)
+                    {
+                        <img src="@Url.Action("ExibirImagem", new { id = Model.ProdutoId })" 
+                             alt="@Model.Descricao" 
+                             id="imagePreview"
+                             style="max-width: 200px; max-height: 200px; border: 1px solid #ddd; border-radius: 5px;" />
+                    }
+                    else
+                    {
+                        <p class="form-text text-muted">Nenhuma imagem cadastrada</p>
+                    }
+                </div>
+
+                <div class="form-group">
+                    <label>Descrição</label>
+                    <p class="form-text">@Model.Descricao</p>
+                </div>
+
+                <div class="form-group">
+                    <label>Valor</label>
+                    <p class="form-text">R$ @Model.Valor.ToString("F2")</p>
+                </div>
+
+                <div class="form-group">
+                    <label>É Combo?</label>
+                    <p class="form-text">@(Model.IsCombo == 1 ? "Sim" : "Não")</p>
+                </div>
+
+                <div class="form-group">
+                    <label>Administrador</label>
+                    <p class="form-text">@Model.Administrador?.CPF</p>
+                </div>
+
+                <div class="form-group">
+                    <label>Categoria</label>
+                    <p class="form-text">@Model.Categoria?.CategoriaId</p>
+                </div>
+
+                <div class="form-group text-center">
+                    <input type="submit" value="Confirmar Exclusão" class="btn btn-danger" />
+                </div>
+            </form>
+
+            <div class="text-center mt-3">
+                <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+            </div>
+        </div>
+    </div>
 </div>
+
+@section Scripts {
+    <link rel="stylesheet" href="~/css/deleteproduto.css" />
+}
