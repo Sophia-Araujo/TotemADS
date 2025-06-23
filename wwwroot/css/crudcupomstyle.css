@@ -1,0 +1,265 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+.content-area {
+    padding: 20px 40px;
+    background-color: #f8f9fa;
+    min-height: 100vh;
+}
+
+.cupons-section {
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    padding: 30px;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid #f0f0f0;
+}
+
+.header-content h1 {
+    color: #333333;
+    font-size: 32px;
+    font-weight: 700;
+    margin: 0 0 5px 0;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.section-subtitle {
+    color: #666666;
+    font-size: 16px;
+    margin: 0;
+}
+
+.btn {
+    padding: 12px 24px;
+    border-radius: 25px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: none;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #FF8C42, #FF6B1A);
+    color: white;
+    box-shadow: 0 4px 15px rgba(255, 140, 66, 0.3);
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, #FF6B1A, #E55A15);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 140, 66, 0.4);
+    color: white;
+    text-decoration: none;
+}
+
+/* Grid de cupons */
+.cupons-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 20px;
+}
+
+.cupom-card {
+    background: #ffffff;
+    border: 2px solid #FF8C42;
+    border-radius: 15px;
+    padding: 20px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.cupom-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(255, 140, 66, 0.2);
+    border-color: #FF6B1A;
+}
+
+.cupom-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.cupom-codigo {
+    background: linear-gradient(135deg, #FF8C42, #FF6B1A);
+    color: white;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 1px;
+}
+
+.cupom-desconto {
+    font-size: 24px;
+    font-weight: 900;
+    color: #FF6B1A;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.cupom-body {
+    margin-bottom: 20px;
+}
+
+.info-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    padding: 5px 0;
+}
+
+.info-item .label {
+    color: #666666;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.info-item .value {
+    color: #333333;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.cupom-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    border-top: 1px solid #f0f0f0;
+    padding-top: 15px;
+}
+
+.btn-action {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.btn-edit {
+    background-color: #28a745;
+    color: white;
+}
+
+.btn-edit:hover {
+    background-color: #218838;
+    transform: scale(1.1);
+    color: white;
+}
+
+.btn-view {
+    background-color: #17a2b8;
+    color: white;
+}
+
+.btn-view:hover {
+    background-color: #138496;
+    transform: scale(1.1);
+    color: white;
+}
+
+.btn-delete {
+    background-color: #dc3545;
+    color: white;
+}
+
+.btn-delete:hover {
+    background-color: #c82333;
+    transform: scale(1.1);
+    color: white;
+}
+
+/* Estado vazio */
+.empty-state {
+    text-align: center;
+    padding: 80px 20px;
+    color: #666666;
+}
+
+.empty-icon {
+    font-size: 64px;
+    margin-bottom: 20px;
+}
+
+.empty-state h3 {
+    font-size: 24px;
+    color: #333333;
+    margin-bottom: 10px;
+}
+
+.empty-state p {
+    font-size: 16px;
+    margin-bottom: 30px;
+}
+
+/* Ícones simples (substitua por font-awesome se disponível) */
+.icon-plus::before { content: "+"; }
+.icon-edit::before { content: "✏️"; }
+.icon-eye::before { content: "👁️"; }
+.icon-trash::before { content: "🗑️"; }
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .content-area {
+        padding: 15px 20px;
+    }
+    
+    .section-header {
+        flex-direction: column;
+        gap: 15px;
+        align-items: stretch;
+    }
+    
+    .cupons-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .header-content h1 {
+        font-size: 24px;
+    }
+}
+
+@media (max-width: 480px) {
+    .cupom-card {
+        padding: 15px;
+    }
+    
+    .cupom-header {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+    }
+    
+    .cupom-actions {
+        flex-wrap: wrap;
+    }
+}

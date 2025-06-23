@@ -169,7 +169,7 @@ h2 {
 }
 
 .opcao-btn.selecionado {
-    border-color: #ff6600;
+    border: 4px solid #ff6600;
     background-color: #FFFFFF;
 }
 
@@ -198,7 +198,7 @@ h2 {
 }
 
 .usar-pontos.selecionado {
-    border: 3px solid #ff6600;
+    border: 4px solid #ff6600;
 }
 
 .opcao-btn {

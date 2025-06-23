@@ -304,7 +304,6 @@ namespace TotemPWA.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<byte[]>("Imagem")
-                        .IsRequired()
                         .HasColumnType("BLOB");
 
                     b.Property<int>("IsCombo")
@@ -364,7 +363,7 @@ namespace TotemPWA.Migrations
             modelBuilder.Entity("TotemPWA.Models.IgredienteProduto", b =>
                 {
                     b.HasOne("TotemPWA.Models.Igrediente", "Igrediente")
-                        .WithMany()
+                        .WithMany("IgredienteProdutos")
                         .HasForeignKey("IgredienteId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -487,6 +486,8 @@ namespace TotemPWA.Migrations
             modelBuilder.Entity("TotemPWA.Models.Igrediente", b =>
                 {
                     b.Navigation("Adicionais");
+
+                    b.Navigation("IgredienteProdutos");
                 });
 
             modelBuilder.Entity("TotemPWA.Models.ItensPedido", b =>

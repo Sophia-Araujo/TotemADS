@@ -1,0 +1,125 @@
+﻿@model TotemPWA.Models.Produto
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Editar Produto</h1>
+
+<h4>Produto</h4>
+<hr />
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="Edit" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="ProdutoId" />
+            
+            <div class="form-group">
+                <label class="control-label">Imagem Atual</label>
+                @if (Model.Imagem != null && Model.Imagem.Length > 0)
+                {
+                    <div>
+                        <img src="@Url.Action("ExibirImagem", new { id = Model.ProdutoId })" 
+                             alt="Imagem atual" 
+                             style="max-width: 200px; max-height: 200px; border: 1px solid #ddd; border-radius: 5px;" />
+                    </div>
+                }
+                else
+                {
+                    <p class="text-muted">Nenhuma imagem cadastrada</p>
+                }
+            </div>
+            
+            <div class="form-group">
+                <label for="imagemFile" class="control-label">Nova Imagem (opcional)</label>
+                <input type="file" name="imagemFile" id="imagemFile" class="form-control" accept="image/*" />
+                <small class="form-text text-muted">Deixe em branco para manter a imagem atual</small>
+            </div>
+            
+            <div class="form-group">
+                <label asp-for="Descricao" class="control-label"></label>
+                <input asp-for="Descricao" class="form-control" />
+                <span asp-validation-for="Descricao" class="text-danger"></span>
+            </div>
+            
+            <div class="form-group">
+                <label asp-for="Valor" class="control-label"></label>
+                <input asp-for="Valor" class="form-control" type="number" step="0.01" min="0" />
+                <span asp-validation-for="Valor" class="text-danger"></span>
+            </div>
+            
+            <div class="form-group">
+                <label asp-for="IsCombo" class="control-label">É Combo?</label>
+                <select asp-for="IsCombo" class="form-control">
+                    <option value="0">Não</option>
+                    <option value="1">Sim</option>
+                </select>
+                <span asp-validation-for="IsCombo" class="text-danger"></span>
+            </div>
+            
+            <div class="form-group">
+                <label asp-for="AdministradorId" class="control-label">Administrador</label>
+                <select asp-for="AdministradorId" class="form-control" asp-items="ViewBag.AdministradorId"></select>
+                <span asp-validation-for="AdministradorId" class="text-danger"></span>
+            </div>
+            
+            <div class="form-group">
+                <label asp-for="CategoriaId" class="control-label">Categoria</label>
+                <select asp-for="CategoriaId" class="form-control" asp-items="ViewBag.CategoriaId"></select>
+                <span asp-validation-for="CategoriaId" class="text-danger"></span>
+            </div>
+            
+            <div class="form-group">
+                <input type="submit" value="Salvar Alterações" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Voltar para Lista</a> |
+    <a asp-action="Details" asp-route-id="@Model.ProdutoId">Ver Detalhes</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    
+    <script>
+        // Preview da nova imagem selecionada
+        document.getElementById('imagemFile').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    // Remove preview anterior se existir
+                    const existingPreview = document.getElementById('imagePreview');
+                    if (existingPreview) {
+                        existingPreview.remove();
+                    }
+                    
+                    // Cria novo preview
+                    const img = document.createElement('img');
+                    img.id = 'imagePreview';
+                    img.src = e.target.result;
+                    img.style.maxWidth = '200px';
+                    img.style.maxHeight = '200px';
+                    img.style.marginTop = '10px';
+                    img.style.border = '1px solid #ddd';
+                    img.style.borderRadius = '5px';
+                    
+                    const label = document.createElement('small');
+                    label.textContent = 'Nova imagem:';
+                    label.style.display = 'block';
+                    label.style.marginTop = '10px';
+                    label.style.fontWeight = 'bold';
+                    
+                    // Adiciona o preview após o input
+                    const container = document.getElementById('imagemFile').parentNode;
+                    container.appendChild(label);
+                    container.appendChild(img);
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+    </script>
+}
