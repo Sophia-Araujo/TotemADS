@@ -1,5 +1,4 @@
-body,
-html {
+body, html {
     margin: 0;
     padding: 0;
     height: 100%;
@@ -135,4 +134,28 @@ html {
 
 .formulario-opcoes button:hover {
     background-color: #e24e00;
+}
+
+/* Estilos para mensagem de validação */
+.mensagem-validacao {
+    display: none;
+    background-color: #ff4444;
+    color: white;
+    padding: 15px 30px;
+    border-radius: 25px;
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-left: 50px;
+    margin-right: 50px;
+    margin-top: 1px;
+    text-align: center;
+    animation: shake 0.5s ease-in-out;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Animação de "shake" para chamar atenção */
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
 }
