@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using TotemPWA.Data;
 using TotemPWA.Models;
-using Microsoft.AspNetCore.Mvc.Rendering;
+
 
 namespace TotemPWA.Controllers
 {
