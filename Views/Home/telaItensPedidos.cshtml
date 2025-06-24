@@ -4,13 +4,9 @@
 }
 
 <!-- Botão de cupom -->
-
-<button id="btnCupom" class="btn-cupom" onclick="window.location.href='/Home/modalCupom'">
-
+<button id="btnCupom" class="btn-cupom">
     <span>🧾</span> Tem um cupom
 </button>
-
-<!-- Título -->
 <div class="titulo">
     <h1>Lanches</h1>
 </div>
@@ -18,7 +14,7 @@
 <!-- Lista de lanches -->
 <div class="VisualizaItensPedidos">
     <div class="card-pedido">
-        <div class="card-conteudo"> <!-- Esse é o novo wrapper que alinha lado a lado -->
+        <div class="card-conteudo">
             <div class="info-lanche">
                 <img src="~/image/produtos/lanches/404 Not Found Burger.png" alt="Java Bife" />
                 <h2 class="nomePedido">Java Bife</h2>
@@ -43,7 +39,7 @@
 
 <div class="VisualizaItensPedidos">
     <div class="card-pedido">
-        <div class="card-conteudo"> <!-- Esse é o novo wrapper que alinha lado a lado -->
+        <div class="card-conteudo">
             <div class="info-lanche">
                 <img src="~/image/produtos/lanches/404 Not Found Burger.png" alt="Java Bife" />
                 <h2 class="nomePedido">Java Bife</h2>
@@ -68,7 +64,7 @@
 
 <div class="VisualizaItensPedidos">
     <div class="card-pedido">
-        <div class="card-conteudo"> <!-- Esse é o novo wrapper que alinha lado a lado -->
+        <div class="card-conteudo">
             <div class="info-lanche">
                 <img src="/image/produtos/lanches/404 Not Found Burger.png" alt="Burger 404">
                 <h2 class="nomePedido">Java Bife</h2>
@@ -109,7 +105,29 @@
     </div>
 
     <div class="acoes">
-        <button class="botao-cancelar">Cancelar</button>
+        <button class="botao-cancelar" onclick="window.location.href='/Pedidos/TelaPedidos'">Cancelar</button>
         <button class="botao-pagar" onclick="window.location.href='/Home/Pagamentos'">Pagar R$: 83,80</button>
     </div>
 </div>
+
+<!-- Modal de Cupom -->
+<div id="modalOverlay" class="modal-overlay">
+    <div class="popup">
+        <button class="close-btn" id="closeModal">X</button>
+        <h2>DIGITE SEU CUPOM</h2>
+        <input type="text" id="input" readonly />
+        <small>*sujeito a invalidez ou expiração</small>
+        <button class="confirmar">Confirmar</button>
+        <div class="keyboard-container">
+            <div class="keyboard-row" id="row1"></div>
+            <div class="keyboard-row" id="row2"></div>
+            <div class="keyboard-row middle-offset" id="row3"></div>
+            <div class="keyboard-row" id="row4"></div>
+            <div class="keyboard-row" id="row5"></div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/cupom.js" asp-append-version="true"></script>
+}

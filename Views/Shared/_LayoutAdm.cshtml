@@ -1,14 +1,31 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <link rel="shortcut icon" type="imagex/png" href="~/image/logo-reduzido-icon.png">
-
-    <title>Carregando</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="~/css/loginadm.css">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - TotemPWA</title>
+    <link rel="stylesheet" href="~/css/site.css" />
 </head>
 <body>
-    @RenderBody()
+    <header>
+        <nav class="navbar">
+            <div class="container">
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <div class="user-info">
+                        <span>Bem-vindo, @User.Identity.Name!</span>
+                        <a asp-controller="Administrador" asp-action="Logout" class="btn-logout">Sair</a>
+                    </div>
+                }
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        @RenderBody()
+    </main>
+
+    <script src="~/js/site.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

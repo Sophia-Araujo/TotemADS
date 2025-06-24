@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<TotemPWA.Models.Cupom>
 
 @{
-    Layout = "~/Views/Shared/_LayoutCrudCupom.cshtml";
+    Layout = "~/Views/Shared/_LayoutMenu.cshtml";
     ViewData["Title"] = "Cupons";
 }
 
@@ -73,3 +73,7 @@
         }
     </div>
 </div>
+
+@section Scripts {
+    <link rel="stylesheet" href="~/css/crudcupom.css" />
+}

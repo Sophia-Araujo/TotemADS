@@ -1,74 +1,81 @@
 ﻿@model IEnumerable<TotemPWA.Models.Produto>
 
 @{
-    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_LayoutMenu.cshtml";
+    ViewData["Title"] = "Produtos";
 }
 
-<h1>Lista de Produtos</h1>
-
-<p>
-    <a asp-action="Create" class="btn btn-primary">Criar Novo Produto</a>
-</p>
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th>
-                Imagem
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Descricao)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Valor)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IsCombo)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Administrador)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Categoria)
-            </th>
-            <th>Ações</th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @if (item.Imagem != null && item.Imagem.Length > 0)
-                {
-                    <img src="@Url.Action("ExibirImagem", new { id = item.ProdutoId })" 
-                         alt="@item.Descricao" 
-                         style="width: 50px; height: 50px; object-fit: cover; border-radius: 5px;" />
-                }
-                else
-                {
-                    <span class="text-muted">Sem imagem</span>
-                }
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Descricao)
-            </td>
-            <td>
-                R$ @item.Valor.ToString("F2")
-            </td>
-            <td>
-                @(item.IsCombo == 1 ? "Sim" : "Não")
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Administrador.CPF)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Categoria.CategoriaId)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.ProdutoId" class="btn btn-sm btn-warning">Editar</a>
-                <a asp-action="Details" asp-route-id="@item.ProdutoId" class="btn btn-sm btn-info">Detalhes</a>
-                <a asp-action="Delete" asp-route-id="@item.ProdutoId" class="btn btn-sm btn-danger">Excluir</a>
-            </td>
-        </tr>
+@section Styles {
+    <link rel="stylesheet" href="~/css/crudproduto.css" />
 }
-    </tbody>
-</table>
+
+<div class="content-area">
+    <div class="produtos-section">
+        <div class="section-header">
+            <div class="header-content">
+                <h1>Produtos</h1>
+                <p class="section-subtitle">Gerencie todos os produtos cadastrados</p>
+            </div>
+            <div class="header-actions">
+                <a asp-action="Create" class="btn btn-primary">
+                    <i class="icon-plus"></i>
+                    Novo Produto
+                </a>
+            </div>
+        </div>
+
+        @if (Model != null && Model.Any())
+        {
+            <div class="produtos-grid">
+                @foreach (var item in Model)
+                {
+                    <div class="produto-card">
+                        <img src="@Url.Action("ExibirImagem", new { id = item.ProdutoId })" 
+                             alt="@item.Descricao" 
+                             class="produto-imagem" />
+
+                        <div class="produto-header">
+                            <div class="produto-nome">@item.Descricao</div>
+                            <div class="produto-preco">R$ @item.Valor.ToString("F2")</div>
+                        </div>
+
+                        <div class="produto-info">
+                            <div class="info-item">
+                                <span class="label">Combo:</span>
+                                <span class="value">@(item.IsCombo == 1 ? "Sim" : "Não")</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="label">Categoria ID:</span>
+                                <span class="value">@item.Categoria?.CategoriaId</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="label">Criado por:</span>
+                                <span class="value">@item.Administrador?.CPF</span>
+                            </div>
+                        </div>
+
+                        <div class="produto-actions">
+                            <a asp-action="Edit" asp-route-id="@item.ProdutoId" class="btn-action btn-edit" title="Editar">
+                                <i class="icon-edit"></i>
+                            </a>
+                            <a asp-action="Details" asp-route-id="@item.ProdutoId" class="btn-action btn-view" title="Detalhes">
+                                <i class="icon-eye"></i>
+                            </a>
+                            <a asp-action="Delete" asp-route-id="@item.ProdutoId" class="btn-action btn-delete" title="Excluir">
+                                <i class="icon-trash"></i>
+                            </a>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+        else
+        {
+            <div class="empty-state">
+                <h3>Nenhum produto encontrado</h3>
+                <p>Adicione produtos ao sistema</p>
+                <a asp-action="Create" class="btn btn-primary">Criar Primeiro Produto</a>
+            </div>
+        }
+    </div>
+</div>

@@ -1,61 +1,145 @@
-
+// Funcionalidade do Modal
+document.addEventListener('DOMContentLoaded', function() {
+    const btnCupom = document.getElementById('btnCupom');
+    const modalOverlay = document.getElementById('modalOverlay');
+    const closeModal = document.getElementById('closeModal');
     const input = document.getElementById('input');
-    const row1 = document.getElementById('row1');
-    const row2 = document.getElementById('row2');
-    const row3 = document.getElementById('row3');
-    const row4 = document.getElementById('row4');
-    const row5 = document.getElementById('row5');
 
-    const keysRow1 = ['1','2','3','4','5','6','7','8','9','0'];
-    const keysRow2 = ['Q','W','E','R','T','Y','U','I','O','P'];
-    const keysRow3 = ['A','S','D','F','G','H','J','K','L'];
-    const keysRow4 = ['Z','X','C','V','B','N','M'];
+    // Abrir modal
+    btnCupom.addEventListener('click', function() {
+        modalOverlay.classList.add('active');
+        document.body.style.overflow = 'hidden'; // Previne scroll do body
+        createKeyboard(); // Inicializa o teclado
+    });
 
-    let isUpper = true;
+    // Fechar modal
+    closeModal.addEventListener('click', function() {
+        modalOverlay.classList.remove('active');
+        document.body.style.overflow = 'auto'; // Restaura scroll do body
+        input.value = ''; // Limpa o input
+        isShiftActive = false; // Reset shift
+    });
 
-    function createKey(char) {
-      const key = document.createElement('button');
-      key.classList.add('key');
-      key.textContent = isUpper ? char.toUpperCase() : char.toLowerCase();
-      key.onclick = () => input.value += key.textContent;
-      return key;
+    // Fechar modal clicando no overlay
+    modalOverlay.addEventListener('click', function(e) {
+        if (e.target === modalOverlay) {
+            modalOverlay.classList.remove('active');
+            document.body.style.overflow = 'auto';
+            input.value = '';
+            isShiftActive = false;
+        }
+    });
+
+    // Teclado Virtual - Layout das teclas
+    const keyboardLayouts = {
+        normal: [
+            ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'],
+            ['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P'],
+            ['A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L'],
+            ['Z', 'X', 'C', 'V', 'B', 'N', 'M', '⌫'],
+            ['ESPAÇO']
+        ]
+    };
+
+    let isShiftActive = false;
+
+    function createKeyboard() {
+        const rows = [
+            document.getElementById('row1'),
+            document.getElementById('row2'),
+            document.getElementById('row3'),
+            document.getElementById('row4'),
+            document.getElementById('row5')
+        ];
+
+        const layout = isShiftActive ? keyboardLayouts.shift : keyboardLayouts.normal;
+
+        rows.forEach((row, rowIndex) => {
+            row.innerHTML = '';
+            layout[rowIndex].forEach(key => {
+                const button = document.createElement('button');
+                button.textContent = key;
+                button.className = 'key';
+
+                if (key === 'SHIFT') {
+                    button.className += ' shift';
+                    if (isShiftActive) button.className += ' active';
+                } else if (key === '⌫') {
+                    button.className += ' delete';
+                } else if (key === 'ESPAÇO') {
+                    button.className += ' space';
+                    button.textContent = 'ESPAÇO';
+                }
+
+                button.addEventListener('click', () => handleKeyPress(key));
+                row.appendChild(button);
+            });
+        });
     }
 
-    function renderKeyboard() {
-      row1.innerHTML = '';
-      row2.innerHTML = '';
-      row3.innerHTML = '';
-      row4.innerHTML = '';
+    function handleKeyPress(key) {
+        const currentValue = input.value;
 
-      keysRow1.forEach(char => row1.appendChild(createKey(char)));
-      keysRow2.forEach(char => row2.appendChild(createKey(char)));
-      keysRow3.forEach(char => row3.appendChild(createKey(char)));
-
-      const shiftKey = document.createElement('button');
-      shiftKey.classList.add('key', 'shift');
-      if (isUpper) shiftKey.classList.add('active');
-      shiftKey.innerHTML = '⇧';
-      shiftKey.onclick = () => {
-        isUpper = !isUpper;
-        renderKeyboard();
-      };
-
-      const deleteKey = document.createElement('button');
-      deleteKey.classList.add('key', 'delete');
-      deleteKey.innerHTML = '⌫';
-      deleteKey.onclick = () => input.value = input.value.slice(0, -1);
-
-      row4.appendChild(shiftKey);
-      keysRow4.forEach(char => row4.appendChild(createKey(char)));
-      row4.appendChild(deleteKey);
-
-      const space = document.createElement('button');
-      space.classList.add('key', 'space');
-      space.textContent = 'espaço';
-      space.onclick = () => input.value += ' ';
-
-      row5.innerHTML = '';
-      row5.appendChild(space);
+        if (key === 'SHIFT') {
+            isShiftActive = !isShiftActive;
+            createKeyboard();
+        } else if (key === '⌫') {
+            input.value = currentValue.slice(0, -1);
+        } else if (key === 'ESPAÇO') {
+            input.value = currentValue + ' ';
+        } else {
+            input.value = currentValue + key;
+            if (isShiftActive && key !== 'SHIFT') {
+                isShiftActive = false;
+                createKeyboard();
+            }
+        }
     }
 
-    renderKeyboard();
+    // Funcionalidade do botão Confirmar
+    document.querySelector('.confirmar').addEventListener('click', function() {
+        const cupomValue = input.value.trim();
+        if (cupomValue) {
+            // Aqui você pode fazer uma requisição AJAX para validar o cupom
+            // Por enquanto, apenas mostra um alerta
+            alert(`Cupom "${cupomValue}" aplicado!`);
+            modalOverlay.classList.remove('active');
+            document.body.style.overflow = 'auto';
+            input.value = '';
+            isShiftActive = false;
+            
+            // Aqui você pode atualizar os valores do pedido se o cupom for válido
+            // aplicarCupom(cupomValue);
+        } else {
+            alert('Por favor, digite um cupom válido.');
+        }
+    });
+
+    // Função para aplicar o cupom (opcional - para integração futura)
+    function aplicarCupom(cupom) {
+        // Aqui você faria uma requisição para seu backend
+        // fetch('/Home/AplicarCupom', {
+        //     method: 'POST',
+        //     headers: {
+        //         'Content-Type': 'application/json',
+        //     },
+        //     body: JSON.stringify({ cupom: cupom })
+        // })
+        // .then(response => response.json())
+        // .then(data => {
+        //     if (data.sucesso) {
+        //         // Atualizar os valores na tela
+        //         atualizarValoresPedido(data.novoTotal, data.desconto);
+        //     } else {
+        //         alert('Cupom inválido ou expirado.');
+        //     }
+        // });
+    }
+
+    // Função para atualizar os valores do pedido (opcional)
+    function atualizarValoresPedido(novoTotal, desconto) {
+        // Atualizar os elementos da página com os novos valores
+        // document.querySelector('.total span:last-child').textContent = `R$: ${novoTotal.toFixed(2)}`;
+        // Se houver desconto, adicionar uma linha mostrando o desconto
+    }
+});

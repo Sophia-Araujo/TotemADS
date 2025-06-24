@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using TotemPWA.Data;
 using TotemPWA.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace TotemPWA.Controllers
 {
+    [Authorize]
     public class CupomController : Controller
     {
         private readonly ApplicationDbContext _context;
