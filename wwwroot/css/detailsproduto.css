@@ -1,0 +1,147 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+.content-area {
+    padding: 20px 40px;
+    background-color: #f8f9fa;
+    min-height: 100vh;
+}
+
+.produtos-section {
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    padding: 30px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.section-header {
+    margin-bottom: 30px;
+    border-bottom: 2px solid #f0f0f0;
+    padding-bottom: 20px;
+}
+
+.section-header h1 {
+    color: #333333;
+    font-size: 32px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 5px;
+}
+
+.section-subtitle {
+    color: #666666;
+    font-size: 16px;
+    margin: 0;
+}
+
+.details-container {
+    width: 100%;
+}
+
+/* Estilo para a lista de detalhes */
+.details-container dl.row {
+    margin-top: 0;
+}
+
+.details-container dt.col-sm-3 {
+    font-weight: 600;
+    color: #333;
+    padding-bottom: 6px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.details-container dd.col-sm-9 {
+    padding-bottom: 12px;
+    border-bottom: 1px solid #f0f0f0;
+    color: #555;
+    margin-left: 0; /* remove indent padrão do dd */
+}
+
+/* Imagem de preview do produto */
+#imagePreview {
+    max-width: 300px;
+    max-height: 300px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    display: block;
+    margin-bottom: 20px;
+}
+
+/* Botões no rodapé */
+.btn-group.text-center {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.btn {
+    padding: 12px 24px;
+    border-radius: 25px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.btn-warning {
+    background: linear-gradient(135deg, #FFBA42, #FF9F1A);
+    color: white;
+    box-shadow: 0 4px 15px rgba(255, 186, 66, 0.3);
+}
+
+
+.btn-secondary {
+    background-color: #6c757d;
+    color: white;
+    padding: 12px 24px;
+    border-radius: 25px;
+    font-size: 15px;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-block;
+    transition: 0.3s ease;
+}
+
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .content-area {
+        padding: 20px;
+    }
+
+    .produtos-section {
+        padding: 20px;
+    }
+
+    .section-header h1 {
+        font-size: 24px;
+    }
+
+    .details-container dt.col-sm-3,
+    .details-container dd.col-sm-9 {
+        display: block;
+        width: 100%;
+        margin-left: 0;
+        border: none;
+        padding-bottom: 10px;
+    }
+
+    .btn-group.text-center {
+        flex-direction: column;
+        gap: 10px;
+    }
+}

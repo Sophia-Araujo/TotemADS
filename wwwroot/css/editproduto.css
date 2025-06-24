@@ -1,0 +1,239 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+.content-area {
+    padding: 20px 40px;
+    background-color: #f8f9fa;
+    min-height: 100vh;
+}
+
+.produtos-section {
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    padding: 30px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.section-header {
+    margin-bottom: 30px;
+    border-bottom: 2px solid #f0f0f0;
+    padding-bottom: 20px;
+}
+
+.section-header h1 {
+    color: #333333;
+    font-size: 32px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 5px;
+}
+
+.section-subtitle {
+    color: #666666;
+    font-size: 16px;
+    margin: 0;
+}
+
+.form-container {
+    width: 100%;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    font-weight: 600;
+    color: #333333;
+    margin-bottom: 5px;
+    display: block;
+}
+
+.form-control {
+    width: 100%;
+    padding: 10px 14px;
+    font-size: 14px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    transition: border-color 0.3s ease;
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: #FF8C42;
+    box-shadow: 0 0 0 2px rgba(255, 140, 66, 0.2);
+}
+
+.form-text {
+    font-size: 12px;
+    color: #888888;
+    margin-top: 4px;
+    display: block;
+}
+
+.text-danger {
+    font-size: 13px;
+    color: #dc3545;
+    margin-top: 4px;
+    display: block;
+}
+
+.btn {
+    padding: 12px 24px;
+    border-radius: 25px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #FF8C42, #FF6B1A);
+    color: white;
+    box-shadow: 0 4px 15px rgba(255, 140, 66, 0.3);
+}
+
+
+.btn-secondary {
+    background-color: #6c757d;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 25px;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-block;
+    transition: 0.3s ease;
+}
+
+
+#imagePreview {
+    margin-top: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    max-width: 200px;
+    max-height: 200px;
+    display: block;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.mt-3 {
+    margin-top: 1rem;
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+    .content-area {
+        padding: 20px;
+    }
+
+    .produtos-section {
+        padding: 20px;
+    }
+
+    .section-header h1 {
+        font-size: 24px;
+    }
+}
+
+/* Estilo das caixas de input, select e file */
+.form-control {
+    width: 100%;
+    padding: 12px 16px;
+    font-size: 14px;
+    border-radius: 10px;
+    border: 1.5px solid #ccc;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    background-color: #fefefe;
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: #FF8C42;
+    box-shadow: 0 0 0 3px rgba(255, 140, 66, 0.2);
+}
+
+/* Estilo do campo de upload de imagem */
+input[type="file"].form-control {
+    padding: 10px;
+    background-color: #f9f9f9;
+    border-style: dashed;
+    border-color: #FF8C42;
+    color: #333;
+}
+
+/* Ajuste para selects */
+select.form-control {
+    appearance: none;
+    background-image: url("data:image/svg+xml;utf8,<svg fill='gray' height='16' viewBox='0 0 24 24' width='16' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 16px;
+}
+
+/* Labels */
+.form-group label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 600;
+    font-size: 14px;
+    color: #444;
+}
+
+/* Mensagem de ajuda */
+.form-text {
+    font-size: 12px;
+    color: #888;
+    margin-top: 4px;
+}
+
+/* Feedback de erro */
+.text-danger {
+    font-size: 13px;
+    margin-top: 4px;
+    color: #dc3545;
+}
+
+/* Imagem de preview */
+#imagePreview {
+    margin-top: 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    max-width: 100%;
+    max-height: 200px;
+    display: block;
+}
+
+/* Estiliza o botão de upload */
+input[type="file"]::file-selector-button {
+    padding: 10px 20px;
+    background: linear-gradient(135deg, #FF8C42, #FF6B1A);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+input[type="file"]::file-selector-button:hover {
+    background: linear-gradient(135deg, #FF6B1A, #E55A15);
+    transform: scale(1.05);
+}
