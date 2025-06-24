@@ -7,13 +7,15 @@ namespace TotemPWA.Models
         [Key]
         public int CupomId { get; set; }
         [Required]
-        public int Codigo { get; set; }
+        public String Codigo { get; set; }
         [Required]
         public float Desconto { get; set; }
         [Required]
         public DateTime Validade { get; set; }
+        
         [Required]
-        public string ProdutoId { get; set; }
+        public int ProdutoId { get; set; }
+        public Produto Produto { get; set; }
 
         //Etrangeira de Administrador
         [Required]

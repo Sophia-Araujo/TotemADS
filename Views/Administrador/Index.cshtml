@@ -6,6 +6,13 @@
 
 <h1>Index</h1>
 
+@if (User.Identity.IsAuthenticated)
+{
+    <a asp-controller="Administrador" asp-action="Logout" class="btn btn-logout">
+        Sair
+    </a>
+}
+
 <p>
     <a asp-action="Create">Create New</a>
 </p>

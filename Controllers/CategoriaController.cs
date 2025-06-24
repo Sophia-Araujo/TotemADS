@@ -7,9 +7,12 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using TotemPWA.Data;
 using TotemPWA.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace TotemPWA.Controllers
 {
+
+    [Authorize]
     public class CategoriaController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -49,7 +52,7 @@ namespace TotemPWA.Controllers
         // POST: Categoria/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("CategoriaId,Nome,CategoriaPaiId")] Categoria categoria, 
+        public async Task<IActionResult> Create([Bind("CategoriaId,Nome,CategoriaPaiId")] Categoria categoria,
                                                IFormFile? imageFile, IFormFile? bannerFile)
         {
             if (ModelState.IsValid)
@@ -172,7 +175,7 @@ namespace TotemPWA.Controllers
             if (categoria == null) return NotFound();
 
             byte[]? imageData = type.ToLower() == "banner" ? categoria.Banner : categoria.Image;
-            
+
             if (imageData == null || imageData.Length == 0)
                 return NotFound();
 
