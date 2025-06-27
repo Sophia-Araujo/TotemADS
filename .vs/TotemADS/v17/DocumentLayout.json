@@ -1,88 +1,12 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "C:\\Users\\elron\\Desktop\\TotemADS\\",
-  "Documents": [
-    {
-      "AbsoluteMoniker": "D:0:0:{AFDA75ED-8AA7-74ED-18D9-3F3E9D7DC413}|TotemPWA.csproj|c:\\users\\elron\\desktop\\totemads\\controllers\\produtocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{AFDA75ED-8AA7-74ED-18D9-3F3E9D7DC413}|TotemPWA.csproj|solutionrelative:controllers\\produtocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{AFDA75ED-8AA7-74ED-18D9-3F3E9D7DC413}|TotemPWA.csproj|c:\\users\\elron\\desktop\\totemads\\controllers\\categoriacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{AFDA75ED-8AA7-74ED-18D9-3F3E9D7DC413}|TotemPWA.csproj|solutionrelative:controllers\\categoriacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{AFDA75ED-8AA7-74ED-18D9-3F3E9D7DC413}|TotemPWA.csproj|c:\\users\\elron\\desktop\\totemads\\models\\produto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{AFDA75ED-8AA7-74ED-18D9-3F3E9D7DC413}|TotemPWA.csproj|solutionrelative:models\\produto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{AFDA75ED-8AA7-74ED-18D9-3F3E9D7DC413}|TotemPWA.csproj|c:\\users\\elron\\desktop\\totemads\\totempwa.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
-      "RelativeMoniker": "D:0:0:{AFDA75ED-8AA7-74ED-18D9-3F3E9D7DC413}|TotemPWA.csproj|solutionrelative:totempwa.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
-    }
-  ],
+  "Documents": [],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
       "VerticalTabListWidth": 256,
-      "DocumentGroups": [
-        {
-          "DockedWidth": 200,
-          "SelectedChildIndex": 0,
-          "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "ProdutoController.cs",
-              "DocumentMoniker": "C:\\Users\\elron\\Desktop\\TotemADS\\Controllers\\ProdutoController.cs",
-              "RelativeDocumentMoniker": "Controllers\\ProdutoController.cs",
-              "ToolTip": "C:\\Users\\elron\\Desktop\\TotemADS\\Controllers\\ProdutoController.cs",
-              "RelativeToolTip": "Controllers\\ProdutoController.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-22T20:33:54.245Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Produto.cs",
-              "DocumentMoniker": "C:\\Users\\elron\\Desktop\\TotemADS\\Models\\Produto.cs",
-              "RelativeDocumentMoniker": "Models\\Produto.cs",
-              "ToolTip": "C:\\Users\\elron\\Desktop\\TotemADS\\Models\\Produto.cs",
-              "RelativeToolTip": "Models\\Produto.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAASAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-22T20:20:06.926Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "CategoriaController.cs",
-              "DocumentMoniker": "C:\\Users\\elron\\Desktop\\TotemADS\\Controllers\\CategoriaController.cs",
-              "RelativeDocumentMoniker": "Controllers\\CategoriaController.cs",
-              "ToolTip": "C:\\Users\\elron\\Desktop\\TotemADS\\Controllers\\CategoriaController.cs",
-              "RelativeToolTip": "Controllers\\CategoriaController.cs",
-              "ViewState": "AQIAAAYAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-22T20:02:44.555Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "TotemPWA",
-              "DocumentMoniker": "C:\\Users\\elron\\Desktop\\TotemADS\\TotemPWA.csproj",
-              "RelativeDocumentMoniker": "TotemPWA.csproj",
-              "ToolTip": "C:\\Users\\elron\\Desktop\\TotemADS\\TotemPWA.csproj",
-              "RelativeToolTip": "TotemPWA.csproj",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-06-22T19:57:16.871Z",
-              "EditorCaption": ""
-            }
-          ]
-        }
-      ]
+      "DocumentGroups": []
     }
   ]
 }
