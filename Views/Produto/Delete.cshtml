@@ -23,7 +23,7 @@
                     @if (Model.Imagem != null && Model.Imagem.Length > 0)
                     {
                         <img src="@Url.Action("ExibirImagem", new { id = Model.ProdutoId })" 
-                             alt="@Model.Descricao" 
+                             alt="@Model.Nome" 
                              id="imagePreview"
                              style="max-width: 200px; max-height: 200px; border: 1px solid #ddd; border-radius: 5px;" />
                     }
@@ -31,6 +31,11 @@
                     {
                         <p class="form-text text-muted">Nenhuma imagem cadastrada</p>
                     }
+                </div>
+
+                <div class="form-group">
+                    <label>Nome</label>
+                    <p class="form-text">@Model.Nome</p>
                 </div>
 
                 <div class="form-group">

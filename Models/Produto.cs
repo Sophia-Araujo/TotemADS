@@ -9,9 +9,11 @@ namespace TotemPWA.Models
         
        
         public byte[]? Imagem { get; set; }
-
+        [Required]
+        public string Nome { get; set; }
         [Required(ErrorMessage = "A descrição é obrigatória")]
         [Display(Name = "Descrição")]
+        
         
         public string Descricao { get; set; }
         

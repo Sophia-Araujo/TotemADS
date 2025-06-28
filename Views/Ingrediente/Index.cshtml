@@ -1,0 +1,54 @@
+﻿@model IEnumerable<TotemPWA.Models.Igrediente>
+
+@{
+    ViewData["Title"] = "Ingredientes";
+}
+
+<h1>Ingredientes</h1>
+
+@if (ViewBag.Error != null)
+{
+    <div class="alert alert-danger">
+        <strong>Erro:</strong> @ViewBag.Error
+    </div>
+}
+
+<p>
+    <a asp-action="Create">Criar Novo</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Nome</th>
+            <th>Valor</th>
+            <th>Imagem</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.Nome)</td>
+                <td>@Html.DisplayFor(modelItem => item.Valor)</td>
+                <td>
+                    @if (item.Imagem != null)
+                    {
+                        <img src="@Url.Action("GetImagem", "Ingrediente", new { id = item.IgredienteId })" 
+                             style="width: 50px; height: 50px; object-fit: cover;" />
+                    }
+                    else
+                    {
+                        <span>Sem imagem</span>
+                    }
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.IgredienteId">Editar</a> |
+                    <a asp-action="Details" asp-route-id="@item.IgredienteId">Detalhes</a> |
+                    <a asp-action="Delete" asp-route-id="@item.IgredienteId">Excluir</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

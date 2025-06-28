@@ -15,53 +15,96 @@
         </div>
 
         <div class="form-container">
-            <form asp-action="Create" enctype="multipart/form-data">
+            <form method="post" asp-action="Create" enctype="multipart/form-data">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
+                <!-- Campo Nome -->
                 <div class="form-group">
-                    <label for="imagemFile">Imagem do Produto</label>
-                    <input type="file" name="imagemFile" id="imagemFile" class="form-control" accept="image/*" />
-                    <span asp-validation-for="Imagem" class="text-danger"></span>
-                    <small class="form-text">Selecione uma imagem (JPEG, PNG, GIF)</small>
+                    <label for="Nome">Nome do Produto *</label>
+                    <input type="text" 
+                           id="Nome" 
+                           name="Nome" 
+                           class="form-control" 
+                           value="@Model?.Nome" 
+                           required />
+                    <span asp-validation-for="Nome" class="text-danger"></span>
                 </div>
 
+                <!-- Campo Descrição -->
                 <div class="form-group">
-                    <label asp-for="Descricao"></label>
-                    <input asp-for="Descricao" class="form-control" />
+                    <label for="Descricao">Descrição *</label>
+                    <textarea id="Descricao" 
+                              name="Descricao" 
+                              class="form-control" 
+                              rows="3" 
+                              required>@Model?.Descricao</textarea>
                     <span asp-validation-for="Descricao" class="text-danger"></span>
                 </div>
 
+                <!-- Campo Imagem -->
                 <div class="form-group">
-                    <label asp-for="Valor"></label>
-                    <input asp-for="Valor" class="form-control" type="number" step="0.01" min="0" />
+                    <label for="imagemFile">Imagem do Produto (Opcional)</label>
+                    <input type="file" 
+                           name="imagemFile" 
+                           id="imagemFile" 
+                           class="form-control" 
+                           accept="image/*" />
+                    <span asp-validation-for="Imagem" class="text-danger"></span>
+                    <small class="form-text">Selecione uma imagem (JPEG, PNG, GIF) - Campo opcional</small>
+                </div>
+
+                <!-- Campo Valor -->
+                <div class="form-group">
+                    <label for="Valor">Valor (R$) *</label>
+                    <input type="number" 
+                           id="Valor" 
+                           name="Valor" 
+                           class="form-control" 
+                           step="0.01" 
+                           min="0.01" 
+                           value="@Model?.Valor" 
+                           required />
                     <span asp-validation-for="Valor" class="text-danger"></span>
                 </div>
 
+                <!-- Campo É Combo CORRIGIDO -->
                 <div class="form-group">
-                    <label asp-for="IsCombo">É Combo?</label>
-                    <select asp-for="IsCombo" class="form-control">
+                    <label for="IsCombo">É Combo? *</label>
+                    <select id="IsCombo" name="IsCombo" class="form-control" required>
+
                         <option value="0">Não</option>
                         <option value="1">Sim</option>
                     </select>
                     <span asp-validation-for="IsCombo" class="text-danger"></span>
                 </div>
 
+                <!-- Campo Administrador -->
                 <div class="form-group">
-                    <label asp-for="AdministradorId">Administrador</label>
-                    <select asp-for="AdministradorId" class="form-control" asp-items="ViewBag.AdministradorId">
+                    <label for="AdministradorId">Administrador *</label>
+                    <select id="AdministradorId" 
+                            name="AdministradorId" 
+                            class="form-control" 
+                            asp-items="ViewBag.AdministradorId" 
+                            required>
                         <option value="">Selecione um administrador</option>
                     </select>
                     <span asp-validation-for="AdministradorId" class="text-danger"></span>
                 </div>
 
+                <!-- Campo Categoria -->
                 <div class="form-group">
-                    <label asp-for="CategoriaId">Categoria</label>
-                    <select asp-for="CategoriaId" class="form-control" asp-items="ViewBag.CategoriaId">
+                    <label for="CategoriaId">Categoria *</label>
+                    <select id="CategoriaId" 
+                            name="CategoriaId" 
+                            class="form-control" 
+                            asp-items="ViewBag.CategoriaId" 
+                            required>
                         <option value="">Selecione uma categoria</option>
                     </select>
                     <span asp-validation-for="CategoriaId" class="text-danger"></span>
                 </div>
 
+                <!-- Botão Submit -->
                 <div class="form-group text-center">
                     <input type="submit" value="Criar Produto" class="btn btn-primary" />
                 </div>
@@ -78,15 +121,19 @@
     @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
 
     <script>
+        // Preview da imagem
         document.getElementById('imagemFile').addEventListener('change', function (e) {
             const file = e.target.files[0];
             if (file) {
                 const reader = new FileReader();
                 reader.onload = function (e) {
+                    // Remove preview anterior se existir
                     const existingPreview = document.getElementById('imagePreview');
                     if (existingPreview) {
                         existingPreview.remove();
                     }
+                    
+                    // Cria novo preview
                     const img = document.createElement('img');
                     img.id = 'imagePreview';
                     img.src = e.target.result;
@@ -95,9 +142,29 @@
                     img.style.marginTop = '10px';
                     img.style.border = '1px solid #ddd';
                     img.style.borderRadius = '5px';
+                    img.style.display = 'block';
+                    
+                    // Adiciona depois do input file
                     document.getElementById('imagemFile').parentNode.appendChild(img);
                 };
                 reader.readAsDataURL(file);
+            }
+        });
+
+        // Validação customizada do IsCombo
+        document.querySelector('form').addEventListener('submit', function(e) {
+            const isComboSelect = document.getElementById('IsCombo');
+            if (isComboSelect.value === '') {
+                e.preventDefault();
+                alert('Por favor, selecione se o produto é combo ou não.');
+                isComboSelect.focus();
+                return false;
+            }
+            
+            console.log('=== DADOS DO FORMULÁRIO ===');
+            const formData = new FormData(this);
+            for (let [key, value] of formData.entries()) {
+                console.log(key + ':', value);
             }
         });
     </script>

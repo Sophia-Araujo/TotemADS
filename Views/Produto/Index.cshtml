@@ -31,15 +31,19 @@
                 {
                     <div class="produto-card">
                         <img src="@Url.Action("ExibirImagem", new { id = item.ProdutoId })" 
-                             alt="@item.Descricao" 
+                             alt="@item.Nome" 
                              class="produto-imagem" />
 
                         <div class="produto-header">
-                            <div class="produto-nome">@item.Descricao</div>
+                            <div class="produto-nome">@item.Nome</div>
                             <div class="produto-preco">R$ @item.Valor.ToString("F2")</div>
                         </div>
 
                         <div class="produto-info">
+                            <div class="info-item">
+                                <span class="label">Descrição:</span>
+                                <span class="value">@(item.Descricao?.Length > 50 ? item.Descricao.Substring(0, 50) + "..." : item.Descricao)</span>
+                            </div>
                             <div class="info-item">
                                 <span class="label">Combo:</span>
                                 <span class="value">@(item.IsCombo == 1 ? "Sim" : "Não")</span>

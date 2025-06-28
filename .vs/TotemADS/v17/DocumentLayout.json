@@ -1,12 +1,54 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "C:\\Users\\elron\\Desktop\\TotemADS\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{AFDA75ED-8AA7-74ED-18D9-3F3E9D7DC413}|TotemPWA.csproj|c:\\users\\elron\\desktop\\totemads\\controllers\\igredientecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AFDA75ED-8AA7-74ED-18D9-3F3E9D7DC413}|TotemPWA.csproj|solutionrelative:controllers\\igredientecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AFDA75ED-8AA7-74ED-18D9-3F3E9D7DC413}|TotemPWA.csproj|c:\\users\\elron\\desktop\\totemads\\controllers\\igredienteprodutocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AFDA75ED-8AA7-74ED-18D9-3F3E9D7DC413}|TotemPWA.csproj|solutionrelative:controllers\\igredienteprodutocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
       "VerticalTabListWidth": 256,
-      "DocumentGroups": []
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "IgredienteProdutoController.cs",
+              "DocumentMoniker": "C:\\Users\\elron\\Desktop\\TotemADS\\Controllers\\IgredienteProdutoController.cs",
+              "RelativeDocumentMoniker": "Controllers\\IgredienteProdutoController.cs",
+              "ToolTip": "C:\\Users\\elron\\Desktop\\TotemADS\\Controllers\\IgredienteProdutoController.cs",
+              "RelativeToolTip": "Controllers\\IgredienteProdutoController.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAB0AAAA5AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-28T01:53:32.634Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "IgredienteController.cs",
+              "DocumentMoniker": "C:\\Users\\elron\\Desktop\\TotemADS\\Controllers\\IgredienteController.cs",
+              "RelativeDocumentMoniker": "Controllers\\IgredienteController.cs",
+              "ToolTip": "C:\\Users\\elron\\Desktop\\TotemADS\\Controllers\\IgredienteController.cs",
+              "RelativeToolTip": "Controllers\\IgredienteController.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-27T17:41:43.863Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
     }
   ]
 }

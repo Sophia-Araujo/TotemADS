@@ -318,6 +318,10 @@ namespace TotemPWA.Migrations
                     b.Property<int>("IsCombo")
                         .HasColumnType("INTEGER");
 
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
                     b.Property<float>("Valor")
                         .HasColumnType("REAL");
 

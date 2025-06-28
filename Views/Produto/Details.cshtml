@@ -21,7 +21,7 @@
                     @if (Model.Imagem != null && Model.Imagem.Length > 0)
                     {
                         <img src="@Url.Action("ExibirImagem", new { id = Model.ProdutoId })" 
-                             alt="@Model.Descricao" 
+                             alt="@Model.Nome" 
                              id="imagePreview"
                              />
                     }
@@ -30,6 +30,9 @@
                         <span class="text-muted">Nenhuma imagem cadastrada</span>
                     }
                 </dd>
+
+                <dt class="col-sm-3">@Html.DisplayNameFor(model => model.Nome)</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.Nome)</dd>
 
                 <dt class="col-sm-3">@Html.DisplayNameFor(model => model.Descricao)</dt>
                 <dd class="col-sm-9">@Html.DisplayFor(model => model.Descricao)</dd>

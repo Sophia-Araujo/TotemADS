@@ -1,0 +1,64 @@
+﻿@model TotemPWA.Models.Igrediente
+
+@{
+    ViewData["Title"] = "Criar Ingrediente";
+}
+
+<h1>Criar Ingrediente</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-8">
+        <form asp-action="Create" method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            
+            <div class="form-group">
+                <label asp-for="Nome">Nome do Produto</label>
+                <input asp-for="Nome" class="form-control" />
+                <span asp-validation-for="Nome" class="text-danger"></span>
+            </div>
+            
+            <div class="form-group mb-3">
+                <label asp-for="Valor" class="control-label"></label>
+                <input asp-for="Valor" class="form-control" type="number" step="0.01" min="0" />
+                <span asp-validation-for="Valor" class="text-danger"></span>
+            </div>
+            
+            <div class="form-group mb-3">
+                <label for="imagemFile" class="control-label">Imagem</label>
+                <input type="file" id="imagemFile" name="imagemFile" class="form-control" accept="image/*" required />
+                <span asp-validation-for="Imagem" class="text-danger"></span>
+                <div class="form-text">Selecione uma imagem (.jpg, .jpeg, .png, .gif)</div>
+            </div>
+
+            <!-- Preview da imagem -->
+            <div class="form-group mb-3">
+                <img id="imagePreview" src="#" alt="Preview da imagem" style="max-width: 300px; max-height: 200px; display: none;" class="img-thumbnail" />
+            </div>
+            
+            <div class="form-group">
+                <input type="submit" value="Criar" class="btn btn-primary" />
+                <a asp-action="Index" class="btn btn-secondary">Voltar para Lista</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    
+    <script>
+        document.getElementById('imagemFile').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const preview = document.getElementById('imagePreview');
+                    preview.src = e.target.result;
+                    preview.style.display = 'block';
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+    </script>
+}

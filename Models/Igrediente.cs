@@ -9,7 +9,7 @@ namespace TotemPWA.Models
         [Required]
         public string Nome { get; set; }
         [Required]
-        public byte[] Imagem { get; set; }
+        public byte[]? Imagem { get; set; }
         [Required]
         public float Valor { get; set; }
 
