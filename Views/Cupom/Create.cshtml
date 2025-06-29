@@ -1,52 +1,68 @@
 ﻿@model TotemPWA.Models.Cupom
 
 @{
-    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_LayoutMenu.cshtml";
+    ViewData["Title"] = "Criar Cupom";
 }
 
-<h1>Create</h1>
+<div class="content-area">
+    <div class="form-container">
+        <div class="page-header">
+            <h1>Criar Cupom</h1>
+            <h4>Adicionar novo cupom de desconto</h4>
+        </div>
 
-<h4>Cupom</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Codigo" class="control-label"></label>
-                <input asp-for="Codigo" class="form-control" />
-                <span asp-validation-for="Codigo" class="text-danger"></span>
+        <div class="row">
+            <div class="col-md-8 col-lg-6">
+                <form asp-action="Create">
+                    <div asp-validation-summary="ModelOnly" class="validation-summary-errors"></div>
+                    
+                    <div class="form-group">
+                        <label asp-for="Codigo" class="control-label">Código do Cupom</label>
+                        <input asp-for="Codigo" class="form-control" placeholder="Ex: DESCONTO20" />
+                        <span asp-validation-for="Codigo" class="text-danger"></span>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label asp-for="Desconto" class="control-label">Desconto (%)</label>
+                        <input asp-for="Desconto" class="form-control" type="number" min="0" max="100" placeholder="Ex: 15" />
+                        <span asp-validation-for="Desconto" class="text-danger"></span>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label asp-for="Validade" class="control-label">Data de Validade</label>
+                        <input asp-for="Validade" class="form-control" type="date" />
+                        <span asp-validation-for="Validade" class="text-danger"></span>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label asp-for="ProdutoId" class="control-label">ID do Produto</label>
+                        <input asp-for="ProdutoId" class="form-control" type="number" placeholder="ID do produto aplicável" />
+                        <span asp-validation-for="ProdutoId" class="text-danger"></span>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label asp-for="AdministradorId" class="control-label">Administrador</label>
+                        <select asp-for="AdministradorId" class="form-control" asp-items="ViewBag.AdministradorId">
+                            <option value="">Selecione um administrador</option>
+                        </select>
+                        <span asp-validation-for="AdministradorId" class="text-danger"></span>
+                    </div>
+                    
+                    <div class="form-group">
+                        <input type="submit" value="Criar Cupom" class="btn btn-primary" />
+                    </div>
+                </form>
             </div>
-            <div class="form-group">
-                <label asp-for="Desconto" class="control-label"></label>
-                <input asp-for="Desconto" class="form-control" />
-                <span asp-validation-for="Desconto" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Validade" class="control-label"></label>
-                <input asp-for="Validade" class="form-control" />
-                <span asp-validation-for="Validade" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ProdutoId" class="control-label"></label>
-                <input asp-for="ProdutoId" class="form-control" />
-                <span asp-validation-for="ProdutoId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="AdministradorId" class="control-label"></label>
-                <select asp-for="AdministradorId" class ="form-control" asp-items="ViewBag.AdministradorId"></select>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+        </div>
+
+        <div class="nav-links">
+            <a asp-action="Index">← Voltar para Lista</a>
+        </div>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <link rel="stylesheet" href="~/css/crudcupom.css" />
 }

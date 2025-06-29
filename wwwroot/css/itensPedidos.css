@@ -121,7 +121,7 @@ body {
     top: 77%;
     left: 0;
     right: 0;
-    z-index: 9999;
+    z-index: 30;
     max-width: 100%;
     box-sizing: border-box;
 }
