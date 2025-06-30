@@ -68,71 +68,91 @@
                                  alt="@produto.Descricao" class="produto-img" />
                         }
 
-                        <h3>@produto.Descricao</h3>
+                        <h3>@produto.Nome</h3>
                         <p>R$ @produto.Valor.ToString("F2")</p>
-                        <span class="produto-descricao">Pão brioche, queijo cheddar cremoso...</span>
+                        <span class="produto-descricao">@produto.Descricao</span>
 
-                        <button class="add-to-cart" onclick="adicionarAoPedido(@produto.ProdutoId)">Adicionar</button>
+                        <button class="add-to-cart" onclick="abrirModalPersonalizacao(@produto.ProdutoId, '@produto.Nome', '@produto.Descricao', @produto.Valor, '@(produto.Imagem != null ? Convert.ToBase64String(produto.Imagem) : "")')">Adicionar</button>
                     </div>
                 }
             </div>
         </div>
     </section>
 
-    <!-- POPUP INGREDIENTES -->
-    <div id="popup" class="popup-overlay" style="display: none;">
+    <!-- MODAL DE PERSONALIZAÇÃO -->
+    <div id="modal-personalizacao" class="popup-overlay" style="display: none;">
         <div class="popup-content">
-            <h2>C# burguer</h2>
-            <p class="descricao-burguer">Pão, carne, alface, tomate, bacon, cebola e maionese.</p>
+            <h2 id="modal-produto-nome">Produto</h2>
+            <p class="descricao-burguer" id="modal-produto-descricao">Descrição do produto</p>
 
             <div class="popup-main">
-                <img src="/image/produtos/lanches/404 Not Found Burger.png" alt="C# Burguer" class="popup-img" />
+                <img id="modal-produto-imagem" src="/image/produtos/default.png" alt="Produto" class="popup-img" />
 
                 <div class="ingredientes">
-                    @foreach (var ingrediente in new[] { "Pão", "Carne", "Alface", "Tomate", "Bacon", "Cebola", "Maionese" })
-                    {
-                        <div class="ingrediente">
-                            <span>@ingrediente</span>
-                            <span class="quantidade">1x</span>
-                            <button class="menos">−</button>
-                            <button class="mais">+</button>
-                        </div>
-                    }
+                    <div class="ingrediente">
+                        <span>Personalização básica</span>
+                        <span class="quantidade">1x</span>
+                        <button class="menos" onclick="ajustarQuantidade(-1)">−</button>
+                        <button class="mais" onclick="ajustarQuantidade(1)">+</button>
+                    </div>
+                    <div class="ingrediente">
+                        <span>Extra molho</span>
+                        <span class="quantidade">0x</span>
+                        <button class="menos" onclick="ajustarIngrediente(this, -1)">−</button>
+                        <button class="mais" onclick="ajustarIngrediente(this, 1)">+</button>
+                    </div>
+                    <div class="ingrediente">
+                        <span>Bacon extra</span>
+                        <span class="quantidade">0x</span>
+                        <button class="menos" onclick="ajustarIngrediente(this, -1)">−</button>
+                        <button class="mais" onclick="ajustarIngrediente(this, 1)">+</button>
+                    </div>
                 </div>
             </div>
 
             <div class="popup-buttons">
-                <button id="voltar" class="btn-voltar">Voltar</button>
-                <button class="btn-adicionar-popup">Adicionar</button>
+                <button id="btn-voltar-modal" class="btn-voltar" onclick="fecharModalPersonalizacao()">Voltar</button>
+                <button id="btn-adicionar-carrinho" class="btn-adicionar-popup" onclick="adicionarAoCarrinho()">
+                    Adicionar - R$ <span id="preco-modal">0,00</span>
+                </button>
             </div>
         </div>
     </div>
 
     <!-- FOOTER -->
     <footer class="resumo-compra">
-        <div class="resumo">
-            <p>Lanches 2x <span>R$: 73,80</span></p>
-            <p>Bebidas 1x <span>R$: 10,00</span></p>
-            <p>Sobremesas 2x <span>R$: 15,90</span></p>
-            <p class="total">Total: <span>R$: 99,70</span></p>
+        <div class="resumo" id="resumo-carrinho">
+            <p id="resumo-vazio" style="display: block;">Carrinho vazio</p>
         </div>
         <div class="acoes">
-            <button class="btn-editar">Editar pedido</button>
-            <button class="btn-pagar" onclick="window.location.href='/Home/telaItensPedidos'">Pagar R$: 83,80</button>
-            <button class="btn-cancelar">Cancelar</button>
+            <button class="btn-editar" onclick="editarPedido()" id="btn-editar" style="display: none;">Editar pedido</button>
+            <button class="btn-pagar" onclick="finalizarPedido()" id="btn-pagar" style="display: none;">
+                Pagar R$ <span id="total-pagar">0,00</span>
+            </button>
+            <button class="btn-cancelar" onclick="cancelarPedido()" id="btn-cancelar" style="display: none;">Cancelar</button>
         </div>
     </footer>
 </main>
 
 @section Scripts {
     <script>
+        // Variáveis globais do carrinho
+        let carrinho = [];
+        let produtoSelecionado = null;
+        let quantidadeProduto = 1;
+
+        // Inicializar carrinho ao carregar a página
+        document.addEventListener('DOMContentLoaded', function() {
+            carregarCarrinho();
+            atualizarResumoCarrinho();
+        });
+
+        // Funções de navegação e filtragem
         function mostrarTodosProdutos() {
             document.querySelectorAll('.category, .cate').forEach(btn => btn.classList.remove('active'));
             event.target.classList.add('active');
             document.querySelectorAll('.produto-item').forEach(item => item.style.display = 'block');
             document.getElementById('titulo-produtos').textContent = 'Todos os Produtos';
-            
-            // Volta para o banner padrão
             document.getElementById('banner-image').src = '/image/banners/lanchesBanner.png';
         }
 
@@ -144,14 +164,282 @@
             });
             document.getElementById('titulo-produtos').textContent = nomeCategoria;
             
-            // Atualiza o banner com a imagem da categoria
             if (bannerUrl && bannerUrl !== '') {
                 document.getElementById('banner-image').src = bannerUrl;
             }
         }
 
-        function adicionarAoPedido(produtoId) {
-            alert('Produto ' + produtoId + ' adicionado ao pedido!');
+        // Funções do modal de personalização
+        function abrirModalPersonalizacao(produtoId, nome, descricao, valor, imagem) {
+            produtoSelecionado = {
+                id: produtoId,
+                nome: nome,
+                descricao: descricao,
+                valor: valor,
+                imagem: imagem
+            };
+            
+            quantidadeProduto = 1;
+            
+            document.getElementById('modal-produto-nome').textContent = nome;
+            document.getElementById('modal-produto-descricao').textContent = descricao;
+            document.getElementById('preco-modal').textContent = valor.toFixed(2).replace('.', ',');
+            
+            if (imagem && imagem !== '') {
+                document.getElementById('modal-produto-imagem').src = 'data:image/jpeg;base64,' + imagem;
+            } else {
+                document.getElementById('modal-produto-imagem').src = '/image/produtos/default.png';
+            }
+            
+            // Reset quantidade no modal
+            const quantidadeSpan = document.querySelector('.ingrediente .quantidade');
+            quantidadeSpan.textContent = '1x';
+            
+            // Reset ingredientes extras
+            const ingredientesExtras = document.querySelectorAll('.ingrediente:not(:first-child) .quantidade');
+            ingredientesExtras.forEach(span => span.textContent = '0x');
+            
+            document.getElementById('modal-personalizacao').style.display = 'flex';
         }
+
+        function fecharModalPersonalizacao() {
+            document.getElementById('modal-personalizacao').style.display = 'none';
+            produtoSelecionado = null;
+            quantidadeProduto = 1;
+        }
+
+        function ajustarQuantidade(delta) {
+            quantidadeProduto = Math.max(1, quantidadeProduto + delta);
+            document.querySelector('.ingrediente .quantidade').textContent = quantidadeProduto + 'x';
+            
+            const precoTotal = (produtoSelecionado.valor * quantidadeProduto);
+            document.getElementById('preco-modal').textContent = precoTotal.toFixed(2).replace('.', ',');
+        }
+
+        function ajustarIngrediente(button, delta) {
+            const quantidadeSpan = button.parentElement.querySelector('.quantidade');
+            let quantidade = parseInt(quantidadeSpan.textContent.replace('x', ''));
+            quantidade = Math.max(0, quantidade + delta);
+            quantidadeSpan.textContent = quantidade + 'x';
+        }
+
+        // Funções do carrinho
+        function adicionarAoCarrinho() {
+            if (!produtoSelecionado) return;
+            
+            const itemCarrinho = {
+                id: produtoSelecionado.id,
+                nome: produtoSelecionado.nome,
+                descricao: produtoSelecionado.descricao,
+                valor: produtoSelecionado.valor,
+                quantidade: quantidadeProduto,
+                imagem: produtoSelecionado.imagem,
+                personalizacoes: obterPersonalizacoes()
+            };
+            
+            // Verificar se já existe no carrinho
+            const itemExistente = carrinho.find(item => 
+                item.id === itemCarrinho.id && 
+                JSON.stringify(item.personalizacoes) === JSON.stringify(itemCarrinho.personalizacoes)
+            );
+            
+            if (itemExistente) {
+                itemExistente.quantidade += itemCarrinho.quantidade;
+            } else {
+                carrinho.push(itemCarrinho);
+            }
+            
+            salvarCarrinho();
+            atualizarResumoCarrinho();
+            fecharModalPersonalizacao();
+            
+            // Feedback visual
+            mostrarNotificacao('Produto adicionado ao carrinho!');
+        }
+
+        function obterPersonalizacoes() {
+            const personalizacoes = [];
+            const ingredientes = document.querySelectorAll('.ingrediente:not(:first-child)');
+            
+            ingredientes.forEach(ingrediente => {
+                const nome = ingrediente.querySelector('span').textContent;
+                const quantidade = parseInt(ingrediente.querySelector('.quantidade').textContent.replace('x', ''));
+                if (quantidade > 0) {
+                    personalizacoes.push({ nome, quantidade });
+                }
+            });
+            
+            return personalizacoes;
+        }
+
+        function removerDoCarrinho(index) {
+            carrinho.splice(index, 1);
+            salvarCarrinho();
+            atualizarResumoCarrinho();
+        }
+
+        function atualizarQuantidadeCarrinho(index, novaQuantidade) {
+            if (novaQuantidade <= 0) {
+                removerDoCarrinho(index);
+            } else {
+                carrinho[index].quantidade = novaQuantidade;
+                salvarCarrinho();
+                atualizarResumoCarrinho();
+            }
+        }
+
+        function atualizarResumoCarrinho() {
+            const resumoDiv = document.getElementById('resumo-carrinho');
+            const resumoVazio = document.getElementById('resumo-vazio');
+            const btnEditar = document.getElementById('btn-editar');
+            const btnPagar = document.getElementById('btn-pagar');
+            const btnCancelar = document.getElementById('btn-cancelar');
+            const totalPagar = document.getElementById('total-pagar');
+            
+            if (carrinho.length === 0) {
+                resumoVazio.style.display = 'block';
+                btnEditar.style.display = 'none';
+                btnPagar.style.display = 'none';
+                btnCancelar.style.display = 'none';
+                
+                // Remover itens existentes
+                const itensExistentes = resumoDiv.querySelectorAll('p:not(#resumo-vazio):not(.total)');
+                itensExistentes.forEach(item => item.remove());
+                
+                // Manter linha do total com R$ 0,00
+                let totalExistente = resumoDiv.querySelector('.total');
+                if (!totalExistente) {
+                    const pTotal = document.createElement('p');
+                    pTotal.className = 'total';
+                    pTotal.innerHTML = `Total: <span>R$ 0,00</span>`;
+                    resumoDiv.appendChild(pTotal);
+                } else {
+                    totalExistente.innerHTML = `Total: <span>R$ 0,00</span>`;
+                }
+                
+                // Atualizar botão pagar
+                totalPagar.textContent = '0,00';
+                
+                return;
+            }
+            
+            resumoVazio.style.display = 'none';
+            btnEditar.style.display = 'inline-block';
+            btnPagar.style.display = 'inline-block';
+            btnCancelar.style.display = 'inline-block';
+            
+            // Limpar resumo existente (exceto o total)
+            const itensExistentes = resumoDiv.querySelectorAll('p:not(#resumo-vazio):not(.total)');
+            itensExistentes.forEach(item => item.remove());
+            
+            // Agrupar por categoria (simplificado)
+            const categorias = {};
+            let total = 0;
+            
+            carrinho.forEach(item => {
+                const categoria = 'Produtos'; // Simplificado, você pode mapear por categoria real
+                if (!categorias[categoria]) {
+                    categorias[categoria] = { quantidade: 0, valor: 0 };
+                }
+                categorias[categoria].quantidade += item.quantidade;
+                categorias[categoria].valor += item.valor * item.quantidade;
+                total += item.valor * item.quantidade;
+            });
+            
+            // Adicionar linhas do resumo
+            Object.keys(categorias).forEach(categoria => {
+                const cat = categorias[categoria];
+                const p = document.createElement('p');
+                p.innerHTML = `${categoria} ${cat.quantidade}x <span>R$ ${cat.valor.toFixed(2).replace('.', ',')}</span>`;
+                resumoDiv.appendChild(p);
+            });
+            
+            // Atualizar ou criar linha do total
+            let totalExistente = resumoDiv.querySelector('.total');
+            if (!totalExistente) {
+                const pTotal = document.createElement('p');
+                pTotal.className = 'total';
+                pTotal.innerHTML = `Total: <span>R$ ${total.toFixed(2).replace('.', ',')}</span>`;
+                resumoDiv.appendChild(pTotal);
+            } else {
+                totalExistente.innerHTML = `Total: <span>R$ ${total.toFixed(2).replace('.', ',')}</span>`;
+            }
+            
+            // Atualizar botão pagar
+            totalPagar.textContent = total.toFixed(2).replace('.', ',');
+        }
+
+        // Funções de persistência
+        function salvarCarrinho() {
+            localStorage.setItem('carrinho-totem', JSON.stringify(carrinho));
+        }
+
+        function carregarCarrinho() {
+            const carrinhoSalvo = localStorage.getItem('carrinho-totem');
+            if (carrinhoSalvo) {
+                carrinho = JSON.parse(carrinhoSalvo);
+            }
+        }
+
+        // Funções dos botões do footer
+        function editarPedido() {
+            // Implementar modal de edição ou redirecionar para tela de edição
+            alert('Função de editar pedido - implementar conforme necessário');
+        }
+
+        function finalizarPedido() {
+            if (carrinho.length === 0) {
+                alert('Carrinho vazio!');
+                return;
+            }
+            
+            // Salvar dados do pedido e redirecionar
+            localStorage.setItem('pedido-finalizar', JSON.stringify(carrinho));
+            window.location.href = '/Home/telaItensPedidos';
+        }
+
+        function cancelarPedido() {
+            if (confirm('Tem certeza que deseja cancelar o pedido?')) {
+                carrinho = [];
+                salvarCarrinho();
+                atualizarResumoCarrinho();
+            }
+        }
+
+        // Função para mostrar notificações
+        function mostrarNotificacao(mensagem) {
+            const notificacao = document.createElement('div');
+            notificacao.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: #4CAF50;
+                color: white;
+                padding: 15px 20px;
+                border-radius: 5px;
+                z-index: 9999;
+                box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+                animation: slideIn 0.3s ease-out;
+            `;
+            notificacao.textContent = mensagem;
+            
+            document.body.appendChild(notificacao);
+            
+            setTimeout(() => {
+                notificacao.style.animation = 'slideOut 0.3s ease-in';
+                setTimeout(() => {
+                    if (notificacao.parentNode) {
+                        notificacao.parentNode.removeChild(notificacao);
+                    }
+                }, 300);
+            }, 3000);
+        }
+
+        // Fechar modal ao clicar fora
+        document.getElementById('modal-personalizacao').addEventListener('click', function(e) {
+            if (e.target === this) {
+                fecharModalPersonalizacao();
+            }
+        });
     </script>
 }

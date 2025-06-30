@@ -11,102 +11,32 @@
     <h1>Lanches</h1>
 </div>
 
-<!-- Lista de lanches -->
-<div class="VisualizaItensPedidos">
-    <div class="card-pedido">
-        <div class="card-conteudo">
-            <div class="info-lanche">
-                <img src="~/image/produtos/lanches/404 Not Found Burger.png" alt="Java Bife" />
-                <h2 class="nomePedido">Java Bife</h2>
-                <h3 class="precoPedido">R$: 34,90</h3>
-                <p class="descricaoPedido">Pão, carne, alface, tomate, bacon, cebola e maionese.</p>
-            </div>
-
-            <div class="ingredientesPedido">
-                <ul class="ingredientesPedidoLista">
-                    <li>Pão <span>1x</span></li>
-                    <li>Carne <span>1x</span></li>
-                    <li>Alface <span>1x</span></li>
-                    <li>Tomate <span>1x</span></li>
-                    <li>Bacon <span>1x</span></li>
-                    <li>Cebola <span>1x</span></li>
-                    <li>Maionese <span>1x</span></li>
-                </ul>
-            </div>
-        </div>
+<!-- Lista de lanches dinâmica -->
+<div id="lista-itens-pedido">
+    <!-- Os itens serão carregados dinamicamente aqui -->
+    <div class="loading" id="loading-itens" style="text-align: center; padding: 20px;">
+        <p>Carregando itens do pedido...</p>
     </div>
-</div>
-
-<div class="VisualizaItensPedidos">
-    <div class="card-pedido">
-        <div class="card-conteudo">
-            <div class="info-lanche">
-                <img src="~/image/produtos/lanches/404 Not Found Burger.png" alt="Java Bife" />
-                <h2 class="nomePedido">Java Bife</h2>
-                <h3 class="precoPedido">R$: 34,90</h3>
-                <p class="descricaoPedido">Pão, carne, alface, tomate, bacon, cebola e maionese.</p>
-            </div>
-
-            <div class="ingredientesPedido">
-                <ul class="ingredientesPedidoLista">
-                    <li>Pão <span>1x</span></li>
-                    <li>Carne <span>1x</span></li>
-                    <li>Alface <span>1x</span></li>
-                    <li>Tomate <span>1x</span></li>
-                    <li>Bacon <span>1x</span></li>
-                    <li>Cebola <span>1x</span></li>
-                    <li>Maionese <span>1x</span></li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="VisualizaItensPedidos">
-    <div class="card-pedido">
-        <div class="card-conteudo">
-            <div class="info-lanche">
-                <img src="/image/produtos/lanches/404 Not Found Burger.png" alt="Burger 404">
-                <h2 class="nomePedido">Java Bife</h2>
-                <h3 class="precoPedido">R$: 34,90</h3>
-                <p class="descricaoPedido">Pão, carne, alface, tomate, bacon, cebola e maionese.</p>
-            </div>
-
-            <div class="ingredientesPedido">
-                <ul class="ingredientesPedidoLista">
-                    <li>Pão <span>1x</span></li>
-                    <li>Carne <span>1x</span></li>
-                    <li>Alface <span>1x</span></li>
-                    <li>Tomate <span>1x</span></li>
-                    <li>Bacon <span>1x</span></li>
-                    <li>Cebola <span>1x</span></li>
-                    <li>Maionese <span>1x</span></li>
-                </ul>
-            </div>
-        </div>
+    
+    <div class="empty-cart" id="carrinho-vazio" style="display: none; text-align: center; padding: 40px;">
+        <p>Nenhum item no carrinho</p>
+        <button onclick="window.location.href='/Pedidos/TelaPedidos'" class="btn-voltar-pedidos">
+            Voltar aos Pedidos
+        </button>
     </div>
 </div>
 
 <!-- Resumo dos pedidos -->
-<div class="resumo">
-    <div class="total-lista">
-        <div class="total-item">
-            <span>Lanches 2 x</span>
-            <span>R$: 73,80</span>
-        </div>
-        <div class="total-item">
-            <span>Bebidas 1 x</span>
-            <span>R$: 10,00</span>
-        </div>
-        <div class="total-item total">
-            <span>Total:</span>
-            <span>R$: 83,80</span>
-        </div>
+<div class="resumo" id="resumo-pedido">
+    <div class="total-lista" id="total-lista">
+        <!-- Será preenchido dinamicamente -->
     </div>
 
     <div class="acoes">
-        <button class="botao-cancelar" onclick="window.location.href='/Pedidos/TelaPedidos'">Cancelar</button>
-        <button class="botao-pagar" onclick="window.location.href='/Home/Pagamentos'">Pagar R$: 83,80</button>
+        <button class="botao-cancelar" onclick="cancelarPedido()">Cancelar</button>
+        <button class="botao-pagar" id="btn-finalizar-pedido" onclick="finalizarPedido()">
+            Pagar R$: <span id="valor-total">0,00</span>
+        </button>
     </div>
 </div>
 
@@ -130,4 +60,357 @@
 
 @section Scripts {
     <script src="~/js/cupom.js" asp-append-version="true"></script>
+    <script>
+        let carrinhoPedido = [];
+        let totalPedido = 0;
+        let cupomAplicado = null;
+
+        // Carregar itens do pedido ao inicializar a página
+        document.addEventListener('DOMContentLoaded', function() {
+            carregarItensPedido();
+        });
+
+        function carregarItensPedido() {
+            const pedidoSalvo = localStorage.getItem('pedido-finalizar');
+            const loadingElement = document.getElementById('loading-itens');
+            const carrinhoVazioElement = document.getElementById('carrinho-vazio');
+            const listaItensElement = document.getElementById('lista-itens-pedido');
+            
+            if (!pedidoSalvo) {
+                loadingElement.style.display = 'none';
+                carrinhoVazioElement.style.display = 'block';
+                return;
+            }
+
+            try {
+                carrinhoPedido = JSON.parse(pedidoSalvo);
+                
+                if (carrinhoPedido.length === 0) {
+                    loadingElement.style.display = 'none';
+                    carrinhoVazioElement.style.display = 'block';
+                    return;
+                }
+
+                // Remover loading
+                loadingElement.style.display = 'none';
+                
+                // Renderizar itens
+                renderizarItensPedido();
+                calcularResumo();
+                
+            } catch (error) {
+                console.error('Erro ao carregar pedido:', error);
+                loadingElement.style.display = 'none';
+                carrinhoVazioElement.style.display = 'block';
+            }
+        }
+
+        function renderizarItensPedido() {
+            const listaItensElement = document.getElementById('lista-itens-pedido');
+            
+            // Limpar conteúdo existente
+            listaItensElement.innerHTML = '';
+
+            carrinhoPedido.forEach((item, index) => {
+                const itemElement = criarElementoItem(item, index);
+                listaItensElement.appendChild(itemElement);
+            });
+        }
+
+        function criarElementoItem(item, index) {
+            const divContainer = document.createElement('div');
+            divContainer.className = 'VisualizaItensPedidos';
+            
+            // Preparar lista de ingredientes/personalizações
+            let ingredientesHtml = '';
+            
+            // Adicionar ingredientes básicos (simulado)
+            const ingredientesBasicos = ['Pão', 'Carne', 'Alface', 'Tomate'];
+            ingredientesBasicos.forEach(ingrediente => {
+                ingredientesHtml += `<li>${ingrediente} <span>1x</span></li>`;
+            });
+            
+            // Adicionar personalizações
+            if (item.personalizacoes && item.personalizacoes.length > 0) {
+                item.personalizacoes.forEach(personalizacao => {
+                    ingredientesHtml += `<li>${personalizacao.nome} <span>${personalizacao.quantidade}x</span></li>`;
+                });
+            }
+
+            // Preparar imagem
+            const imagemSrc = item.imagem && item.imagem !== '' 
+                ? `data:image/jpeg;base64,${item.imagem}`
+                : '/image/produtos/default.png';
+
+            divContainer.innerHTML = `
+                <div class="card-pedido">
+                    <div class="card-conteudo">
+                        <div class="info-lanche">
+                            <img src="${imagemSrc}" alt="${item.nome}" />
+                            <h2 class="nomePedido">${item.nome}</h2>
+                            <h3 class="precoPedido">R$: ${(item.valor * item.quantidade).toFixed(2).replace('.', ',')}</h3>
+                            <p class="descricaoPedido">${item.descricao}</p>
+                            <div class="quantidade-item">
+                                <span>Quantidade: ${item.quantidade}x</span>
+                                <button class="btn-remover-item" onclick="removerItem(${index})" title="Remover item">
+                                    ×
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="ingredientesPedido">
+                            <ul class="ingredientesPedidoLista">
+                                ${ingredientesHtml}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            return divContainer;
+        }
+
+        function calcularResumo() {
+            const totalListaElement = document.getElementById('total-lista');
+            const valorTotalElement = document.getElementById('valor-total');
+            
+            // Agrupar por categoria
+            const categorias = {};
+            totalPedido = 0;
+
+            carrinhoPedido.forEach(item => {
+                const categoria = 'Lanches'; // Você pode mapear categorias reais aqui
+                if (!categorias[categoria]) {
+                    categorias[categoria] = { quantidade: 0, valor: 0 };
+                }
+                categorias[categoria].quantidade += item.quantidade;
+                categorias[categoria].valor += item.valor * item.quantidade;
+                totalPedido += item.valor * item.quantidade;
+            });
+
+            // Limpar resumo
+            totalListaElement.innerHTML = '';
+
+            // Adicionar linhas de categoria
+            Object.keys(categorias).forEach(categoria => {
+                const cat = categorias[categoria];
+                const divItem = document.createElement('div');
+                divItem.className = 'total-item';
+                divItem.innerHTML = `
+                    <span>${categoria} ${cat.quantidade}x</span>
+                    <span>R$: ${cat.valor.toFixed(2).replace('.', ',')}</span>
+                `;
+                totalListaElement.appendChild(divItem);
+            });
+
+            // Aplicar cupom se houver
+            let valorFinal = totalPedido;
+            if (cupomAplicado) {
+                const desconto = totalPedido * (cupomAplicado.desconto / 100);
+                valorFinal = totalPedido - desconto;
+                
+                const divDesconto = document.createElement('div');
+                divDesconto.className = 'total-item desconto';
+                divDesconto.innerHTML = `
+                    <span>Desconto (${cupomAplicado.codigo})</span>
+                    <span>-R$: ${desconto.toFixed(2).replace('.', ',')}</span>
+                `;
+                totalListaElement.appendChild(divDesconto);
+            }
+
+            // Adicionar total
+            const divTotal = document.createElement('div');
+            divTotal.className = 'total-item total';
+            divTotal.innerHTML = `
+                <span>Total:</span>
+                <span>R$: ${valorFinal.toFixed(2).replace('.', ',')}</span>
+            `;
+            totalListaElement.appendChild(divTotal);
+
+            // Atualizar botão
+            valorTotalElement.textContent = valorFinal.toFixed(2).replace('.', ',');
+        }
+
+        function removerItem(index) {
+            if (confirm('Deseja remover este item do pedido?')) {
+                carrinhoPedido.splice(index, 1);
+                
+                // Atualizar localStorage
+                localStorage.setItem('pedido-finalizar', JSON.stringify(carrinhoPedido));
+                
+                if (carrinhoPedido.length === 0) {
+                    document.getElementById('carrinho-vazio').style.display = 'block';
+                    document.getElementById('resumo-pedido').style.display = 'none';
+                } else {
+                    renderizarItensPedido();
+                    calcularResumo();
+                }
+            }
+        }
+
+        function cancelarPedido() {
+            if (confirm('Tem certeza que deseja cancelar o pedido? Todos os itens serão removidos.')) {
+                localStorage.removeItem('pedido-finalizar');
+                window.location.href = '/Pedidos/TelaPedidos';
+            }
+        }
+
+        async function finalizarPedido() {
+            if (carrinhoPedido.length === 0) {
+                alert('Carrinho vazio!');
+                return;
+            }
+
+            try {
+                // Mostrar loading
+                const btnFinalizar = document.getElementById('btn-finalizar-pedido');
+                const textoOriginal = btnFinalizar.innerHTML;
+                btnFinalizar.innerHTML = 'Processando...';
+                btnFinalizar.disabled = true;
+
+                // Preparar dados do pedido para envio
+                const dadosPedido = {
+                    itens: carrinhoPedido.map(item => ({
+                        produtoId: item.id,
+                        nome: item.nome,
+                        quantidade: item.quantidade,
+                        valor: item.valor,
+                        personalizacoes: item.personalizacoes || []
+                    })),
+                    total: cupomAplicado ? totalPedido * (1 - cupomAplicado.desconto / 100) : totalPedido,
+                    cupom: cupomAplicado?.codigo || null,
+                    dataHora: new Date().toISOString()
+                };
+
+                // Fazer chamada AJAX para salvar no SQLite
+                const response = await fetch('/Pedidos/FinalizarPedido', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(dadosPedido)
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    // Limpar localStorage
+                    localStorage.removeItem('pedido-finalizar');
+                    localStorage.removeItem('carrinho-totem');
+                    
+                    // Salvar ID do pedido para referência
+                    localStorage.setItem('ultimo-pedido-id', result.pedidoId);
+                    
+                    // Redirecionar para pagamento
+                    window.location.href = '/Home/Pagamentos';
+                } else {
+                    throw new Error(result.message || 'Erro desconhecido');
+                }
+                
+            } catch (error) {
+                console.error('Erro ao finalizar pedido:', error);
+                alert('Erro ao processar pedido: ' + error.message);
+                
+                // Restaurar botão
+                const btnFinalizar = document.getElementById('btn-finalizar-pedido');
+                btnFinalizar.innerHTML = textoOriginal;
+                btnFinalizar.disabled = false;
+            }
+        }
+
+        // Função para aplicar cupom (integração com o sistema de cupom existente)
+        async function aplicarCupom(codigoCupom) {
+            try {
+                const response = await fetch('/Pedidos/ValidarCupom', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ codigo: codigoCupom })
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    cupomAplicado = { 
+                        codigo: result.codigo, 
+                        desconto: result.desconto 
+                    };
+                    calcularResumo();
+                    alert(`Cupom ${result.codigo} aplicado com sucesso! Desconto de ${result.desconto}%`);
+                    return true;
+                } else {
+                    alert(result.message || 'Cupom inválido ou expirado.');
+                    return false;
+                }
+            } catch (error) {
+                console.error('Erro ao validar cupom:', error);
+                alert('Erro ao validar cupom. Tente novamente.');
+                return false;
+            }
+        }
+
+        // Integração com o sistema de cupom existente
+        if (typeof window.aplicarCupomCallback === 'undefined') {
+            window.aplicarCupomCallback = aplicarCupom;
+        }
+    </script>
+
+    <style>
+        .quantidade-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px solid #eee;
+        }
+
+        .btn-remover-item {
+            background: #ff4444;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 25px;
+            height: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            line-height: 1;
+        }
+
+        .btn-remover-item:hover {
+            background: #cc0000;
+        }
+
+        .btn-voltar-pedidos {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .btn-voltar-pedidos:hover {
+            background: #0056b3;
+        }
+
+        .loading {
+            color: #666;
+        }
+
+        .empty-cart {
+            color: #999;
+        }
+
+        .total-item.desconto {
+            color: #28a745;
+            font-weight: bold;
+        }
+
+        .total-item.desconto span:last-child {
+            color: #28a745;
+        }
+    </style>
 }

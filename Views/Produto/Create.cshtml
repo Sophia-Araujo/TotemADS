@@ -20,24 +20,15 @@
 
                 <!-- Campo Nome -->
                 <div class="form-group">
-                    <label for="Nome">Nome do Produto *</label>
-                    <input type="text" 
-                           id="Nome" 
-                           name="Nome" 
-                           class="form-control" 
-                           value="@Model?.Nome" 
-                           required />
+                    <label asp-for="Nome">Nome do Produto *</label>
+                    <input asp-for="Nome" class="form-control" required />
                     <span asp-validation-for="Nome" class="text-danger"></span>
                 </div>
 
                 <!-- Campo Descrição -->
                 <div class="form-group">
-                    <label for="Descricao">Descrição *</label>
-                    <textarea id="Descricao" 
-                              name="Descricao" 
-                              class="form-control" 
-                              rows="3" 
-                              required>@Model?.Descricao</textarea>
+                    <label asp-for="Descricao">Descrição *</label>
+                    <textarea asp-for="Descricao" class="form-control" rows="3" required></textarea>
                     <span asp-validation-for="Descricao" class="text-danger"></span>
                 </div>
 
@@ -48,30 +39,30 @@
                            name="imagemFile" 
                            id="imagemFile" 
                            class="form-control" 
-                           accept="image/*" />
-                    <span asp-validation-for="Imagem" class="text-danger"></span>
-                    <small class="form-text">Selecione uma imagem (JPEG, PNG, GIF) - Campo opcional</small>
+                           accept="image/jpeg,image/jpg,image/png,image/gif" />
+                    <small class="form-text text-muted">
+                        Formatos aceitos: JPEG, PNG, GIF. Tamanho máximo: 5MB. Campo opcional.
+                    </small>
+                    <div id="imagePreviewContainer" style="margin-top: 10px;"></div>
                 </div>
 
                 <!-- Campo Valor -->
                 <div class="form-group">
-                    <label for="Valor">Valor (R$) *</label>
-                    <input type="number" 
-                           id="Valor" 
-                           name="Valor" 
+                    <label asp-for="Valor">Valor (R$) *</label>
+                    <input asp-for="Valor" 
                            class="form-control" 
+                           type="number" 
                            step="0.01" 
                            min="0.01" 
-                           value="@Model?.Valor" 
                            required />
                     <span asp-validation-for="Valor" class="text-danger"></span>
                 </div>
 
-                <!-- Campo É Combo CORRIGIDO -->
+                <!-- Campo É Combo -->
                 <div class="form-group">
-                    <label for="IsCombo">É Combo? *</label>
-                    <select id="IsCombo" name="IsCombo" class="form-control" required>
-
+                    <label asp-for="IsCombo">É Combo? *</label>
+                    <select asp-for="IsCombo" class="form-control" required>
+                        <option value="">Selecione uma opção</option>
                         <option value="0">Não</option>
                         <option value="1">Sim</option>
                     </select>
@@ -80,9 +71,8 @@
 
                 <!-- Campo Administrador -->
                 <div class="form-group">
-                    <label for="AdministradorId">Administrador *</label>
-                    <select id="AdministradorId" 
-                            name="AdministradorId" 
+                    <label asp-for="AdministradorId">Administrador *</label>
+                    <select asp-for="AdministradorId" 
                             class="form-control" 
                             asp-items="ViewBag.AdministradorId" 
                             required>
@@ -93,9 +83,8 @@
 
                 <!-- Campo Categoria -->
                 <div class="form-group">
-                    <label for="CategoriaId">Categoria *</label>
-                    <select id="CategoriaId" 
-                            name="CategoriaId" 
+                    <label asp-for="CategoriaId">Categoria *</label>
+                    <select asp-for="CategoriaId" 
                             class="form-control" 
                             asp-items="ViewBag.CategoriaId" 
                             required>
@@ -124,43 +113,54 @@
         // Preview da imagem
         document.getElementById('imagemFile').addEventListener('change', function (e) {
             const file = e.target.files[0];
+            const container = document.getElementById('imagePreviewContainer');
+            
+            // Limpa preview anterior
+            container.innerHTML = '';
+            
             if (file) {
+                // Validação de tipo no frontend
+                const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif'];
+                if (!allowedTypes.includes(file.type.toLowerCase())) {
+                    container.innerHTML = '<div class="alert alert-danger">Formato inválido. Use JPEG, PNG ou GIF.</div>';
+                    this.value = '';
+                    return;
+                }
+                
+                // Validação de tamanho no frontend (5MB)
+                if (file.size > 5 * 1024 * 1024) {
+                    container.innerHTML = '<div class="alert alert-danger">Arquivo muito grande. Máximo: 5MB.</div>';
+                    this.value = '';
+                    return;
+                }
+                
                 const reader = new FileReader();
                 reader.onload = function (e) {
-                    // Remove preview anterior se existir
-                    const existingPreview = document.getElementById('imagePreview');
-                    if (existingPreview) {
-                        existingPreview.remove();
-                    }
-                    
-                    // Cria novo preview
-                    const img = document.createElement('img');
-                    img.id = 'imagePreview';
-                    img.src = e.target.result;
-                    img.style.maxWidth = '200px';
-                    img.style.maxHeight = '200px';
-                    img.style.marginTop = '10px';
-                    img.style.border = '1px solid #ddd';
-                    img.style.borderRadius = '5px';
-                    img.style.display = 'block';
-                    
-                    // Adiciona depois do input file
-                    document.getElementById('imagemFile').parentNode.appendChild(img);
+                    const preview = document.createElement('div');
+                    preview.innerHTML = `
+                        <small class="text-muted">Preview da imagem:</small>
+                        <img src="${e.target.result}" 
+                             style="max-width: 200px; max-height: 200px; border: 1px solid #ddd; border-radius: 5px; display: block; margin-top: 5px;" 
+                             alt="Preview" />
+                    `;
+                    container.appendChild(preview);
                 };
                 reader.readAsDataURL(file);
             }
         });
 
-        // Validação customizada do IsCombo
+        // Validação do formulário
         document.querySelector('form').addEventListener('submit', function(e) {
+            // Validação específica do IsCombo
             const isComboSelect = document.getElementById('IsCombo');
-            if (isComboSelect.value === '') {
+            if (!isComboSelect.value) {
                 e.preventDefault();
                 alert('Por favor, selecione se o produto é combo ou não.');
                 isComboSelect.focus();
                 return false;
             }
             
+            // Log dos dados do formulário para debug
             console.log('=== DADOS DO FORMULÁRIO ===');
             const formData = new FormData(this);
             for (let [key, value] of formData.entries()) {
