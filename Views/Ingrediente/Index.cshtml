@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<TotemPWA.Models.Igrediente>
 
 @{
-    ViewData["Title"] = "Ingredientes";
+    Layout = "_LayoutCrudIngredientes";
 }
 
 <h1>Ingredientes</h1>
@@ -45,7 +45,6 @@
                 </td>
                 <td>
                     <a asp-action="Edit" asp-route-id="@item.IgredienteId">Editar</a> |
-                    <a asp-action="Details" asp-route-id="@item.IgredienteId">Detalhes</a> |
                     <a asp-action="Delete" asp-route-id="@item.IgredienteId">Excluir</a>
                 </td>
             </tr>
