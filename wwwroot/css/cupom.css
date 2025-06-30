@@ -39,13 +39,11 @@
 
 .popup input {
     width: 70%;
-    padding: 15px;
+    padding: 30px;
     border-radius: 15px;
     font-size: 20px;
-    border:1px solid black;
-    box-shadow: 0 6px 10px rgba(0,0,0,0.1);
+    border:3px solid black;
     margin-bottom: 10px;
-    z-index: 30;
 }
 
 .popup small {
@@ -58,7 +56,7 @@
 .popup button.confirmar {
     background: #d5f721;
     color: white;
-    font-weight: bold;
+    font-weight: 700;
     border: none;
     border-radius: 15px;
     padding: 12px 30px;
@@ -84,8 +82,8 @@
 }
 
 .keyboard-container {
-    background: #ddd;
-    padding: 15px 10px;
+    background: #F4F4F4;
+    padding: 20px 0px;
     margin-top: 10px;
     font-family: 'Arial', sans-serif;
     width: 100%;
@@ -134,8 +132,9 @@
 
 .key.space {
     width: 94%;
-    max-width: 100% !important;
+    max-width: 90% !important;
     padding: 12px;
+    margin-left: 12px;
     font-size: 16px;
 }
 
