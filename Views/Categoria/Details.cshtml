@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "Details";
+    Layout = "_LayoutMenu";
 }
 
 <h1>Details</h1>
@@ -28,3 +29,7 @@
     <a asp-action="Edit" asp-route-id="@Model?.CategoriaId">Edit</a> |
     <a asp-action="Index">Back to List</a>
 </div>
+
+@section Styles{
+    <link rel="stylesheet" href="~/css/css-categoria.css"/>
+}

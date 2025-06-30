@@ -2,11 +2,13 @@
 
 @{
     ViewData["Title"] = "Criar Ingrediente";
+    Layout = "_LayoutMenu";  
 }
 
 <h1>Criar Ingrediente</h1>
 
 <hr />
+    
 <div class="row">
     <div class="col-md-8">
         <form asp-action="Create" method="post" enctype="multipart/form-data">
@@ -45,8 +47,9 @@
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-    
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    <link rel="stylesheet" href="~/css/crud-ingredientes.css" />}
+
     <script>
         document.getElementById('imagemFile').addEventListener('change', function(e) {
             const file = e.target.files[0];
@@ -61,4 +64,8 @@
             }
         });
     </script>
+}
+
+@section Styles{
+    <link rel="stylesheet" href="~/css/crud-ingredientes.css"/>
 }

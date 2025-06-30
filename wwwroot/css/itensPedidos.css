@@ -49,6 +49,7 @@ body {
     color: #2F2F2F;
 }
 
+
 /* Título */
 .titulo h1 {
     font-size: 2.5rem;
@@ -194,6 +195,7 @@ body {
     font-weight: bold;
     cursor: pointer;
     font-size: 2rem;
+    text-decoration: none;
 
 }
 
