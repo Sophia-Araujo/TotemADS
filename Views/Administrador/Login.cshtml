@@ -4,49 +4,52 @@
 }
 
 <body>
-    <div class="left">
-        <div class="logo">
-            <img src="~/image/logo_dsburguer.png" alt="ADS Burguer System" style="max-width: 450px;" />
+    <div class="login-container">
+
+        <div class="left">
+            <div class="logo">
+                <img src="~/image/logos/logo_adsburguer.png" alt="ADS Burguer System" style="max-width: 450px;" />
+            </div>
         </div>
-    </div>
-    <div class="right">
-        <div class="login-box">
-            <h2>Faça login:</h2>
 
-            @if (!ViewData.ModelState.IsValid)
-            {
-                <div class="alert alert-danger">
-                    <div asp-validation-summary="All"></div>
-                </div>
-            }
+        <div class="right">
+            <div class="login-box">
+                <h2>Faça login:</h2>
 
-            <form asp-action="Login" method="post">
-                <div class="form-group">
-                    <input asp-for="Username" class="form-control" placeholder="Email" />
-                    <span asp-validation-for="Username" class="validation-message"></span>
-                </div>
+                @if (!ViewData.ModelState.IsValid)
+                {
+                    <div class="alert alert-danger">
+                        <div asp-validation-summary="All"></div>
+                    </div>
+                }
 
-                <div class="form-group">
-                    <input asp-for="Password" type="password" class="form-control" placeholder="Senha" id="senha" />
-                    <span asp-validation-for="Password" class="validation-message"></span>
-                </div>
+                <form asp-action="Login" method="post">
+                    <div class="form-group">
+                        <input asp-for="Username" class="form-control" placeholder="Email" />
+                        <span asp-validation-for="Username" class="validation-message"></span>
+                    </div>
 
-                <div class="form-check">
-                    <input type="checkbox" id="mostrarSenha" onclick="mostrarOcultarSenha()" />
-                    <label for="mostrarSenha">Mostrar senha</label>
-                </div>
+                    <div class="form-group">
+                        <input asp-for="Password" type="password" class="form-control" placeholder="Senha" id="senha" />
+                        <span asp-validation-for="Password" class="validation-message"></span>
+                    </div>
 
-                <div class="form-check">
-                    <input asp-for="RememberMe" type="checkbox" id="rememberMe" />
-                    <label for="rememberMe">Manter conectado</label>
-                </div>
+                    <div class="form-check">
+                        <input type="checkbox" id="mostrarSenha" onclick="mostrarOcultarSenha()" />
+                        <label for="mostrarSenha">Mostrar senha</label>
+                    </div>
 
-                <button type="submit" class="btn-login">Entrar</button>
-            </form>
+                    <div class="form-check">
+                        <input asp-for="RememberMe" type="checkbox" id="rememberMe" />
+                        <label for="rememberMe">Manter conectado</label>
+                    </div>
+
+                    <button type="submit" class="btn-login">Entrar</button>
+                </form>
+            </div>
         </div>
-    </div>
 
-    <script>
+    </div> <script>
         function mostrarOcultarSenha() {
             var input = document.getElementById("senha");
             input.type = input.type === "password" ? "text" : "password";

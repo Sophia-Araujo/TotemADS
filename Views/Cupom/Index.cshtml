@@ -6,69 +6,62 @@
 }
 
 <div class="content-area">
-    <div class="cupons-section">
+    <div class="admin-section">
         <div class="section-header">
-            <div class="header-content">
-                <h1>Cupons</h1>
-                <p class="section-subtitle">Gerencie todos os cupons de desconto</p>
-            </div>
-            <div class="header-actions">
-                <a asp-action="Create" class="btn btn-primary">
-                    <i class="icon-plus"></i>
-                    Novo Cupom
-                </a>
-            </div>
+            <h1>Cupons</h1>
+            <span class="section-subtitle">Gerencie todos os cupons de desconto</span>
+            <a asp-action="Create" class="btn-create">+ Novo Cupom</a>
         </div>
 
         @if (Model != null && Model.Any())
         {
-            <div class="cupons-grid">
-                @foreach (var item in Model)
-                {
-                    <div class="cupom-card">
-                        <div class="cupom-header">
-                            <div class="cupom-codigo">@item.Codigo</div>
-                            <div class="cupom-desconto">@item.Desconto%</div>
-                        </div>
-                        
-                        <div class="cupom-body">
-                            <div class="cupom-info">
-                                <div class="info-item">
-                                    <span class="label">Validade:</span>
-                                    <span class="value">@item.Validade.ToString("dd/MM/yyyy")</span>
-                                </div>
-                                <div class="info-item">
-                                    <span class="label">Produto ID:</span>
-                                    <span class="value">@item.ProdutoId</span>
-                                </div>
-                                <div class="info-item">
-                                    <span class="label">Criado por:</span>
-                                    <span class="value">@(item.Administrador?.CPF ?? "N/A")</span>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="cupom-actions">
-                            <a asp-action="Edit" asp-route-id="@item.CupomId" class="btn-action btn-edit" title="Editar">
-                                <i class="icon-edit"></i>
-                            </a>
-                            <a asp-action="Details" asp-route-id="@item.CupomId" class="btn-action btn-view" title="Detalhes">
-                                <i class="icon-eye"></i>
-                            </a>
-                            <a asp-action="Delete" asp-route-id="@item.CupomId" class="btn-action btn-delete" title="Excluir">
-                                <i class="icon-trash"></i>
-                            </a>
-                        </div>
-                    </div>
-                }
+            <div class="table-responsive">
+                <table class="table-custom">
+                    <thead>
+                        <tr>
+                            <th>Código</th>
+                            <th>Desconto</th>
+                            <th>Validade</th>
+                            <th>Produto ID</th>
+                            <th>Administrador</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td><strong>@item.Codigo</strong></td>
+                                <td><span style="color: #FF6B1A; font-weight: 700;">@item.Desconto%</span></td>
+                                <td>@item.Validade.ToString("dd/MM/yyyy")</td>
+                                <td>@item.ProdutoId</td>
+                                <td>@(item.Administrador?.CPF ?? "N/A")</td>
+                                <td>
+                                    <div class="actions-cell">
+                                        <a asp-action="Edit" asp-route-id="@item.CupomId" class="btn btn-warning btn-sm" title="Editar">
+                                            ✏️ Editar
+                                        </a>
+                                        <a asp-action="Details" asp-route-id="@item.CupomId" class="btn btn-info btn-sm" title="Detalhes">
+                                            👁️ Ver
+                                        </a>
+                                        <a asp-action="Delete" asp-route-id="@item.CupomId" class="btn btn-danger btn-sm" title="Excluir">
+                                            🗑️ Excluir
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
             </div>
         }
         else
         {
-            <div class="empty-state">
-                <h3>Nenhum cupom encontrado</h3>
-                <p>Adicione cupons de descontos</p>
-                <a asp-action="Create" class="btn btn-primary">Criar Primeiro Cupom</a>
+            <div style="text-align: center; padding: 80px 20px; color: #666;">
+                <div style="font-size: 64px; margin-bottom: 20px;">📋</div>
+                <h3 style="color: #333; margin-bottom: 10px;">Nenhum cupom encontrado</h3>
+                <p style="margin-bottom: 30px;">Adicione cupons de descontos</p>
+                <a asp-action="Create" class="btn-create">Criar Primeiro Cupom</a>
             </div>
         }
     </div>
