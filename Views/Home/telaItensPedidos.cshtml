@@ -36,8 +36,7 @@
 
     <div class="acoes">
         <button class="botao-cancelar" onclick="cancelarPedido()">Cancelar</button>
-        <button class="botao-pagar" id="btn-finalizar-pedido" onclick="finalizarPedido()">
-            Pagar R$: <span id="valor-total">0,00</span>
+       <a class="botao-pagar" id="btn-finalizar-pedido" asp-controller="Home" asp-action="Pagamentos">Finalizar Pedido</a>
         </button>
     </div>
 </div>

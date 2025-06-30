@@ -1,0 +1,169 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background-color: #f8f9fa;
+    padding: 30px;
+}
+
+/* Estilo geral do container */
+.crud-section {
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    padding: 30px;
+    max-width: 800px;
+    margin: 0 auto 40px;
+}
+
+/* Títulos */
+.crud-section h1 {
+    font-size: 28px;
+    font-weight: 700;
+    color: #333;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+
+.crud-section h4 {
+    font-size: 20px;
+    font-weight: 600;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+/* Inputs e labels */
+.form-group label {
+    font-weight: 600;
+    margin-bottom: 5px;
+    display: block;
+    color: #333;
+}
+
+.form-control {
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    font-size: 15px;
+    margin-bottom: 10px;
+    background-color: #fff;
+}
+
+.form-text {
+    font-size: 13px;
+    color: #888;
+    margin-bottom: 10px;
+}
+
+/* Mensagens de erro */
+.text-danger {
+    font-size: 13px;
+    color: #dc3545;
+}
+
+/* Botões */
+.btn {
+    padding: 10px 24px;
+    border-radius: 25px;
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-block;
+    text-align: center;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #FF8C42, #FF6B1A);
+    color: white;
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, #FF6B1A, #E55A15);
+}
+
+.btn-danger {
+    background-color: #dc3545;
+    color: white;
+}
+
+.btn-danger:hover {
+    background-color: #c82333;
+}
+
+/* Links simples */
+a {
+    color: #FF6B1A;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Estilo para pré-visualização de imagens */
+.img-thumbnail {
+    border-radius: 8px;
+    margin-top: 10px;
+    max-width: 200px;
+    max-height: 200px;
+}
+
+/* Tabela */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    font-size: 15px;
+}
+
+.table th, .table td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: left;
+}
+
+.table thead {
+    background-color: #FF8C42;
+    color: white;
+    text-transform: uppercase;
+}
+
+.table img {
+    border-radius: 6px;
+    object-fit: cover;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    body {
+        padding: 15px;
+    }
+
+    .crud-section {
+        padding: 20px;
+    }
+
+    .crud-section h1 {
+        font-size: 22px;
+    }
+
+    .form-control {
+        font-size: 14px;
+    }
+
+    .table {
+        font-size: 14px;
+    }
+}
