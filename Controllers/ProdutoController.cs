@@ -56,67 +56,77 @@ namespace TotemPWA.Controllers
             return View();
         }
 
-        // POST: Produto/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Produto produto, IFormFile? imagemFile)
+       // Substitua o método Create (POST) no ProdutoController.cs pela versão abaixo:
+
+// POST: Produto/Create
+[HttpPost]
+[ValidateAntiForgeryToken]
+public async Task<IActionResult> Create(Produto produto, IFormFile? imagemFile)
+{
+    Console.WriteLine("=== INÍCIO DO CREATE ===");
+    Console.WriteLine($"Nome: {produto.Nome}");
+    Console.WriteLine($"Descricao: {produto.Descricao}");
+    Console.WriteLine($"Valor: {produto.Valor}");
+    Console.WriteLine($"IsCombo: {produto.IsCombo}");
+    Console.WriteLine($"AdministradorId: {produto.AdministradorId}");
+    Console.WriteLine($"CategoriaId: {produto.CategoriaId}");
+    Console.WriteLine($"Imagem File: {(imagemFile != null ? imagemFile.FileName : "null")}");
+
+    // Remove validações das propriedades de navegação
+    RemoveNavigationPropertiesValidation();
+
+    // Processa a imagem se fornecida
+    var imagemProcessada = await ProcessarImagem(imagemFile);
+    if (imagemProcessada.HasError)
+    {
+        ModelState.AddModelError("imagemFile", imagemProcessada.ErrorMessage!);
+    }
+    else
+    {
+        produto.Imagem = imagemProcessada.ImagemBytes;
+    }
+
+    Console.WriteLine($"ModelState.IsValid: {ModelState.IsValid}");
+
+    if (ModelState.IsValid)
+    {
+        try
         {
-            Console.WriteLine("=== INÍCIO DO CREATE ===");
-            Console.WriteLine($"Nome: {produto.Nome}");
-            Console.WriteLine($"Descricao: {produto.Descricao}");
-            Console.WriteLine($"Valor: {produto.Valor}");
-            Console.WriteLine($"IsCombo: {produto.IsCombo}");
-            Console.WriteLine($"AdministradorId: {produto.AdministradorId}");
-            Console.WriteLine($"CategoriaId: {produto.CategoriaId}");
-            Console.WriteLine($"Imagem File: {(imagemFile != null ? imagemFile.FileName : "null")}");
-
-            // Remove validações das propriedades de navegação
-            RemoveNavigationPropertiesValidation();
-
-            // Processa a imagem se fornecida
-            var imagemProcessada = await ProcessarImagem(imagemFile);
-            if (imagemProcessada.HasError)
+            Console.WriteLine("ModelState válido - tentando salvar...");
+            
+            _context.Add(produto);
+            await _context.SaveChangesAsync();
+            
+            Console.WriteLine("Produto salvo com sucesso!");
+            TempData["SuccessMessage"] = "Produto criado com sucesso!";
+            
+            // Redireciona para ingredientes se NÃO for combo
+            if (produto.IsCombo == 0)
             {
-                ModelState.AddModelError("imagemFile", imagemProcessada.ErrorMessage!);
-            }
-            else
-            {
-                produto.Imagem = imagemProcessada.ImagemBytes;
-            }
-
-            Console.WriteLine($"ModelState.IsValid: {ModelState.IsValid}");
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    Console.WriteLine("ModelState válido - tentando salvar...");
-                    
-                    _context.Add(produto);
-                    await _context.SaveChangesAsync();
-                    
-                    Console.WriteLine("Produto salvo com sucesso!");
-                    TempData["SuccessMessage"] = "Produto criado com sucesso!";
-                    return RedirectToAction(nameof(Index));
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine($"ERRO AO SALVAR: {ex.Message}");
-                    if (ex.InnerException != null)
-                        Console.WriteLine($"INNER EXCEPTION: {ex.InnerException.Message}");
-                    
-                    ModelState.AddModelError("", $"Erro ao salvar: {ex.Message}");
-                }
+                TempData["InfoMessage"] = "Agora você pode configurar os ingredientes do produto.";
+                return RedirectToAction("Index", "IgredienteProduto", new { produtoId = produto.ProdutoId });
             }
             
-            // Recarrega dropdowns
-            ViewData["AdministradorId"] = new SelectList(_context.Administradores, "AdministradorId", "CPF", produto.AdministradorId);
-            ViewData["CategoriaId"] = new SelectList(_context.Categorias, "CategoriaId", "Nome", produto.CategoriaId);
-            
-            Console.WriteLine("=== FIM DO CREATE ===");
-            return View(produto);
+            // Se for combo, vai direto para a lista de produtos
+            return RedirectToAction(nameof(Index));
         }
-
+        catch (Exception ex)
+        {
+            Console.WriteLine($"ERRO AO SALVAR: {ex.Message}");
+            if (ex.InnerException != null)
+                Console.WriteLine($"INNER EXCEPTION: {ex.InnerException.Message}");
+            
+            ModelState.AddModelError("", $"Erro ao salvar: {ex.Message}");
+        }
+    }
+    
+    // Recarrega dropdowns
+    ViewData["AdministradorId"] = new SelectList(_context.Administradores, "AdministradorId", "CPF", produto.AdministradorId);
+    ViewData["CategoriaId"] = new SelectList(_context.Categorias, "CategoriaId", "Nome", produto.CategoriaId);
+    
+    Console.WriteLine("=== FIM DO CREATE ===");
+    return View(produto);
+}
         // GET: Produto/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {

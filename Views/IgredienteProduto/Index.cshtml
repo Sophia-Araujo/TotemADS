@@ -1,1 +1,187 @@
-﻿
+﻿@model TotemPWA.Controllers.IgredienteProdutoViewModel
+
+@{
+    ViewData["Title"] = "Gerenciar Ingredientes";
+    Layout = "~/Views/Shared/_LayoutMenu.cshtml";
+}
+
+<div class="content-area">
+    <div class="ingredientes-section">
+        <div class="section-header">
+            <div class="header-content">
+                <h1>🍊 Gerenciar Ingredientes</h1>
+                <p class="section-subtitle">
+                    Produto: <strong>@Model.Produto.Nome</strong> | 
+                    Valor: <strong>R$ @Model.Produto.Valor.ToString("F2")</strong>
+                </p>
+            </div>
+        </div>
+
+        <div class="ingredientes-container">
+            <form id="ingredientesForm" method="post">
+                @Html.AntiForgeryToken()
+                <input type="hidden" name="produtoId" value="@Model.Produto.ProdutoId" />
+                
+                <div class="ingredientes-grid">
+                    @foreach (var ingrediente in Model.TodosIngredientes)
+                    {
+                        var quantidade = Model.GetQuantidadeIngrediente(ingrediente.IgredienteId);
+                        <div class="ingrediente-card @(quantidade > 0 ? "selecionado" : "")" data-ingrediente-id="@ingrediente.IgredienteId">
+                            <div class="ingrediente-image">
+                                @if (ingrediente.Imagem != null && ingrediente.Imagem.Length > 0)
+                                {
+                                    <img src="@Url.Action("ExibirImagemIngrediente", "IgredienteProduto", new { id = ingrediente.IgredienteId })" alt="@ingrediente.Nome" />
+                                }
+                                else
+                                {
+                                    <div class="no-image">
+                                        <i class="fas fa-leaf"></i>
+                                    </div>
+                                }
+                            </div>
+                            <div class="ingrediente-info">
+                                <h3 class="ingrediente-nome">@ingrediente.Nome</h3>
+                                <p class="ingrediente-valor">R$ @ingrediente.Valor.ToString("F2")</p>
+                            </div>
+                            <div class="quantidade-section">
+                                <div class="quantidade-display" data-quantidade="@quantidade.ToString("F2")">
+                                    @quantidade.ToString("F2")
+                                </div>
+                                <div class="quantidade-controls">
+                                    <button type="button" class="btn-quantidade btn-menos" data-action="diminuir">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                    <input type="hidden" 
+                                           class="quantidade-input" 
+                                           name="ingredientes[@ingrediente.IgredienteId]" 
+                                           value="@quantidade.ToString("F2", System.Globalization.CultureInfo.InvariantCulture)" />
+                                    <button type="button" class="btn-quantidade btn-mais" data-action="aumentar">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+
+                <div class="actions-container">
+                    <button type="button" id="salvarIngredientes" class="btn btn-primary">
+                        <i class="fas fa-save"></i> Salvar Ingredientes
+                    </button>
+                    <button type="button" id="limparTodos" class="btn btn-warning">
+                        <i class="fas fa-eraser"></i> Limpar Todos
+                    </button>
+                    <a asp-controller="Produto" asp-action="Index" class="btn btn-secondary">
+                        <i class="fas fa-arrow-left"></i> Voltar aos Produtos
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Modal de Loading -->
+<div class="modal fade" id="loadingModal" tabindex="-1" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-sm modal-dialog-centered">
+        <div class="modal-content" style="border: none; border-radius: 15px; overflow: hidden;">
+            <div class="modal-body text-center" style="background: linear-gradient(135deg, #ff6b35 0%, #ff8f65 100%); color: white; padding: 30px;">
+                <div class="spinner-border" style="color: white; width: 3rem; height: 3rem;" role="status">
+                    <span class="sr-only">Salvando...</span>
+                </div>
+                <p class="mt-3 mb-0" style="font-weight: 600; font-size: 1.1rem;">Salvando ingredientes...</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $('.btn-quantidade').on('click', function () {
+                const card = $(this).closest('.ingrediente-card');
+                const input = card.find('.quantidade-input');
+                const display = card.find('.quantidade-display');
+                const action = $(this).data('action');
+                let valor = parseFloat(input.val()) || 0;
+
+                if (action === 'aumentar') {
+                    valor += 0.25;
+                } else if (action === 'diminuir') {
+                    valor = Math.max(0, valor - 0.25);
+                }
+
+                input.val(valor.toFixed(2));
+                display.text(valor.toFixed(2));
+                display.attr('data-quantidade', valor.toFixed(2));
+                atualizarVisualCard(card, valor);
+            });
+
+            function atualizarVisualCard(card, quantidade) {
+                if (quantidade > 0) {
+                    card.addClass('selecionado');
+                } else {
+                    card.removeClass('selecionado');
+                }
+            }
+
+            $('#salvarIngredientes').on('click', function () {
+                const form = $('#ingredientesForm')[0];
+                const formData = new FormData(form);
+
+                $('#loadingModal').modal('show');
+
+                $.ajax({
+                    url: '@Url.Action("SalvarIngredientes", "IgredienteProduto")',
+                    type: 'POST',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function (response) {
+                        $('#loadingModal').modal('hide');
+                        if (response.success) {
+                            showToast('success', response.message);
+                        } else {
+                            showToast('error', response.message);
+                        }
+                    },
+                    error: function () {
+                        $('#loadingModal').modal('hide');
+                        showToast('error', 'Erro de comunicação com o servidor.');
+                    }
+                });
+            });
+
+            $('#limparTodos').on('click', function () {
+                if (confirm('🗑️ Tem certeza que deseja remover todos os ingredientes deste produto?')) {
+                    $('.quantidade-input').val('0.00');
+                    $('.quantidade-display').text('0.00').attr('data-quantidade', '0.00');
+                    $('.ingrediente-card').removeClass('selecionado');
+                }
+            });
+
+            function showToast(type, message) {
+                const bgColor = type === 'success'
+                    ? 'linear-gradient(135deg, #28a745 0%, #20c997 100%)'
+                    : 'linear-gradient(135deg, #dc3545 0%, #fd7e14 100%)';
+
+                const icon = type === 'success'
+                    ? '<i class="fas fa-check-circle"></i>'
+                    : '<i class="fas fa-exclamation-triangle"></i>';
+
+                const toast = `
+                    <div class="toast text-white" role="alert" style="position: fixed; top: 20px; right: 20px; z-index: 9999; background: ${bgColor}; border: none; min-width: 350px;">
+                        <div class="toast-body d-flex align-items-center" style="padding: 20px;">
+                            <div style="font-size: 1.5rem; margin-right: 15px;">${icon}</div>
+                            <div style="font-weight: 600;">${message}</div>
+                        </div>
+                    </div>`;
+
+                $('body').append(toast);
+                $('.toast').last().toast({ delay: 4000 }).toast('show');
+                $('.toast').last().on('hidden.bs.toast', function () {
+                    $(this).remove();
+                });
+            }
+        });
+    </script>
+}
