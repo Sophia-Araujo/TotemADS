@@ -175,3 +175,97 @@ html {
     opacity: 0;
     transition: opacity 0.3s ease;
 }
+
+
+/* CSS para o Botão Voltar */
+.back-button-container {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 1050;
+}
+
+.btn-back {
+    background: rgba(255, 255, 255, 0.95);
+    border: 2px solid #dee2e6;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    color: #333;
+    backdrop-filter: blur(10px);
+}
+
+.btn-back:hover {
+    background: rgba(255, 255, 255, 1);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+    transform: translateY(-2px) scale(1.05);
+    color: #007bff;
+    border-color: #007bff;
+}
+
+.btn-back:active {
+    transform: translateY(0) scale(0.95);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.btn-back i {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+/* Responsivo para mobile */
+@media (max-width: 768px) {
+    .back-button-container {
+        top: 15px;
+        left: 15px;
+    }
+    
+    .btn-back {
+        width: 45px;
+        height: 45px;
+    }
+    
+    .btn-back i {
+        font-size: 16px;
+    }
+}
+
+/* Para tablets */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .back-button-container {
+        top: 25px;
+        left: 25px;
+    }
+    
+    .btn-back {
+        width: 55px;
+        height: 55px;
+    }
+    
+    .btn-back i {
+        font-size: 20px;
+    }
+}
+
+/* Animação de entrada */
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: scale(0.5);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.back-button-container {
+    animation: fadeInScale 0.4s ease-out;
+}
+

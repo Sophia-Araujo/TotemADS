@@ -2,55 +2,61 @@
     Layout = "_OpcoesLayout";
 }
 
-    <!-- Cabeçalho com imagem -->
-    <header>
-        <img src="/image/banner-pag2.jpg" alt="Hambúrguer e batatas fritas">
-    </header>
+<div class="back-button-container">
+    <button type="button" class="btn-back" onclick="history.back()" title="Voltar">
+        <i class="fas fa-arrow-left"></i>
+    </button>
+</div>
 
-    <!-- Menu principal -->
-    <main>
-        <h2>Escolha uma das opções:</h2>
+<header>
+    <img src="/image/banner-pag2.jpg" alt="Hambúrguer e batatas fritas">
+</header>
+
+<main>
+    <h2>Escolha uma das opções:</h2>
+
+    <div class="categories">
+
         <a asp-controller="Pedidos" asp-action="TelaPedidos">
-        <div class="categories">
             <div class="category">
                 <img src="/image/produtos_opc/404 Not Found Burger.png" alt="Lanches">
                 <p>Lanches</p>
             </div>
-         </a>
+        </a>
 
-            <a asp-controller="Pedidos" asp-action="TelaPedidos">
+        <a asp-controller="Pedidos" asp-action="TelaPedidos">
             <div class="category">
                 <img src="/image/produtos_opc/copo de dell valle de laranja.png" alt="Bebidas">
                 <p>Bebidas</p>
             </div>
-            </a>
+        </a>
 
-            <a asp-controller="Pedidos" asp-action="TelaPedidos">
+        <a asp-controller="Pedidos" asp-action="TelaPedidos">
             <div class="category">
                 <img src="/image/produtos_opc/Combo.png" alt="Combos">
                 <p>Combos</p>
             </div>
-            </a>
+        </a>
 
-            <a asp-controller="Pedidos" asp-action="TelaPedidos">
+        <a asp-controller="Pedidos" asp-action="TelaPedidos">
             <div class="category">
                 <img src="/image/produtos_opc/Lambda Shake.png" alt="Sobremesas">
                 <p>Sobremesas</p>
             </div>
-            </a>
+        </a>
 
-            <a asp-controller="Pedidos" asp-action="TelaPedidos">
+        <a asp-controller="Pedidos" asp-action="TelaPedidos">
             <div class="category">
                 <img src="/image/produtos_opc/Array Verde.png" alt="Extras">
                 <p>Extras</p>
             </div>
-            </a>
-
-            <a asp-controller="Pedidos" asp-action="TelaPedidos">
+        </a>
+        
+        <a asp-controller="Pedidos" asp-action="TelaPedidos">
             <div class="category">
-               <img src="/image/produtos_opc/promocao.png" alt="Promoções">
+                <img src="/image/produtos_opc/promocao.png" alt="Promoções">
                 <p>Promoções</p>
             </div>
-            </a>
-        </div>
-    </main>
+        </a>
+
+    </div> </main>

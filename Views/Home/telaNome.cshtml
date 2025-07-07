@@ -1,6 +1,11 @@
 @{
     Layout = "_NomeLayout";
 }
+<div class="back-button-container">
+    <button type="button" class="btn-back" onclick="history.back()" title="Voltar">
+        <i class="fas fa-arrow-left"></i>
+    </button>
+</div>
 <div class="fundo">
     <img src="~/image/logos/logo-reduzido.png" alt="ADS Burguer" class="logo">
     <form class="formulario-cpf" action="/Home/telaCpf">
