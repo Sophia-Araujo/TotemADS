@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Pagamento PIX - Finalizar Pedido</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+       html, body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: #ffffff; /* ou outra cor de fundo fora da área visível */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    width: 100vw;
+    height: 100vh;
+    aspect-ratio: 10 / 16;
+    max-height: 100vh;
+    max-width: 100vw;
+    background: white;
+    display: flex;
+    flex-direction: column;
+    padding-left: 0px;
+    padding-right: 0px;
+
+}
+
+
+        .back-button-container {
+            position: fixed;
+            top: 30px;
+            left: 30px;
+            z-index: 1000;
+        }
+
+        .btn-back {
+            background: rgba(255, 255, 255, 0.95);
+            border: none;
+            border-radius: 50%;
+            width: 55px;
+            height: 55px;
+            font-size: 20px;
+            color: #333;
+            cursor: pointer;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-back:hover {
+            background: white;
+            transform: scale(1.05);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.2);
+        }
+
+
+        .header-section {
+            background: linear-gradient(135deg, #ff7b54 0%, #ff6b35 100%);
+            color: white;
+            padding: 80px 40px 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+
+        .header-section h1 {
+            font-size: 2.5em;
+            font-weight: 700;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .header-section p {
+            font-size: 1.1em;
+            opacity: 0.9;
+            position: relative;
+            z-index: 2;
+        }
+
+       @@keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 60px 40px;
+            max-width: 800px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .payment-method {
+            background: linear-gradient(135deg, #ff7b54 0%, #ff6b35 100%);
+            color: white;
+            padding: 25px 50px;
+            border-radius: 25px;
+            margin-bottom: 50px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 1.5em;
+            font-weight: 600;
+            box-shadow: 0 15px 40px rgba(255, 107, 53, 0.3);
+        }
+
+        .payment-method img {
+            width: 40px;
+            height: 40px;
+        }
+
+        .status-indicator {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            color: #ff7b54;
+            font-size: 1.3em;
+            font-weight: 600;
+            margin-bottom: 50px;
+        }
+
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+
+        @@keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.6; }
+            100% { opacity: 1; }
+        }
+
+        .order-summary {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 40px;
+            border-radius: 20px;
+            margin-bottom: 40px;
+            border-left: 5px solid #ff7b54;
+            width: 100%;
+            max-width: 600px;
+        }
+
+        .order-summary h3 {
+            color: #333;
+            font-size: 1.4em;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .order-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        .order-item:last-child {
+            border-bottom: none;
+        }
+
+        .order-item span:first-child {
+            color: #495057;
+            font-weight: 500;
+        }
+
+        .order-item span:last-child {
+            font-weight: 700;
+            color: #28a745;
+        }
+
+        .discount {
+            color: #dc3545 !important;
+        }
+
+        .total-container {
+            background: linear-gradient(135deg, #ff7b54 0%, #ff6b35 100%);
+            padding: 35px;
+            border-radius: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+            font-size: 1.5em;
+            font-weight: 700;
+            margin-bottom: 40px;
+            box-shadow: 0 15px 40px rgba(255, 107, 53, 0.3);
+            width: 100%;
+            max-width: 600px;
+        }
+
+        .total-value {
+            font-size: 1.8em;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 25px;
+            width: 100%;
+            max-width: 600px;
+        }
+
+        .btn {
+            padding: 18px 35px;
+            border: none;
+            border-radius: 15px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex: 1;
+            justify-content: center;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+            color: white;
+            box-shadow: 0 8px 25px rgba(0, 123, 255, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(0, 123, 255, 0.4);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, #6c757d 0%, #495057 100%);
+            color: white;
+            box-shadow: 0 8px 25px rgba(108, 117, 125, 0.3);
+        }
+
+        .btn-secondary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(108, 117, 125, 0.4);
+        }
+
+        .alert {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 25px 40px;
+            border-radius: 15px;
+            font-size: 1.1em;
+            font-weight: 600;
+            z-index: 1001;
+            min-width: 300px;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .alert-success {
+            background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+            color: #155724;
+            border: 2px solid #28a745;
+        }
+
+        .alert-error {
+            background: linear-gradient(135deg, #f8d7da 0%, #f5c6cb 100%);
+            color: #721c24;
+            border: 2px solid #dc3545;
+        }
+
+        @@media (max-width: 1024px) {
+            .main-content {
+                padding: 40px 20px;
+            }
+
+            .header-section {
+                padding: 100px 20px 30px;
+            }
+
+            .header-section h1 {
+                font-size: 2em;
+            }
+        }
+
+        @@media (max-width: 768px) {
+            .back-button-container {
+                top: 20px;
+                left: 20px;
+            }
+
+            .btn-back {
+                width: 45px;
+                height: 45px;
+                font-size: 18px;
+            }
+
+            .header-section {
+                padding: 80px 15px 25px;
+            }
+
+            .header-section h1 {
+                font-size: 1.8em;
+            }
+
+            .main-content {
+                padding: 30px 15px;
+            }
+
+            .order-summary {
+                padding: 25px;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .payment-method {
+                padding: 20px 35px;
+                font-size: 1.3em;
+            }
+
+            .payment-method img {
+                width: 35px;
+                height: 35px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="back-button-container">
+        <button type="button" class="btn-back" onclick="history.back()" title="Voltar">
+            <i class="fas fa-arrow-left"></i>
+        </button>
+    </div>
+
+    <div class="container">
+        <header class="header-section">
+            <h1>Pagamento via PIX</h1>
+            <p>Escaneie o QR Code ou copie o código PIX para finalizar seu pedido</p>
+        </header>
+
+        <main class="main-content">
+            <div class="payment-method">
+                <img src="/image/pagamento/opc_pix.png" alt="Ícone PIX">
+                <span>PIX</span>
+            </div>
+
+            <div class="status-indicator pulse">
+                <i class="fas fa-clock"></i>
+                <span>Aguardando pagamento...</span>
+            </div>
+
+            <div class="order-summary">
+                <h3>
+                    <i class="fas fa-shopping-cart"></i>
+                    Resumo do Pedido
+                </h3>
+                <div class="order-item">
+                    <span>Lanches 2x</span>
+                    <span>R$ 73,80</span>
+                </div>
+                <div class="order-item">
+                    <span>Bebidas 1x</span>
+                    <span>R$ 10,00</span>
+                </div>
+                <div class="order-item">
+                    <span>Desconto aplicado</span>
+                    <span class="discount">-R$ 9,52</span>
+                </div>
+            </div>
+
+            <div class="total-container">
+                <span><i class="fas fa-receipt"></i> Total a Pagar:</span>
+                <span class="total-value">R$ 74,28</span>
+            </div>
+
+            <div class="action-buttons">
+                <button class="btn btn-secondary" onclick="voltarPagamento()">
+                    <i class="fas fa-arrow-left"></i> Voltar
+                </button>
+                <button class="btn btn-primary" onclick="confirmarPagamento()">
+                    <i class="fas fa-check-circle"></i> Confirmar Pagamento
+                </button>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        function mostrarAlerta(mensagem, tipo = 'success') {
+            const alertasExistentes = document.querySelectorAll('.alert');
+            alertasExistentes.forEach(alerta => alerta.remove());
+
+            const alerta = document.createElement('div');
+            alerta.className = `alert alert-${tipo}`;
+            alerta.innerHTML = `
+                <i class="fas fa-${tipo === 'success' ? 'check-circle' : 'exclamation-triangle'}"></i>
+                ${mensagem}
+            `;
+
+            document.body.appendChild(alerta);
+
+            setTimeout(() => {
+                alerta.remove();
+            }, 4000);
+        }
+
+        function voltarPagamento() {
+            mostrarAlerta('Voltando para seleção de pagamento...', 'success');
+            setTimeout(() => {
+                history.back();
+            }, 1000);
+        }
+
+        function confirmarPagamento() {
+            mostrarAlerta('Verificando pagamento...', 'success');
+            setTimeout(() => {
+                const pagamentoConfirmado = Math.random() > 0.3;
+
+                if (pagamentoConfirmado) {
+                    mostrarAlerta('Pagamento confirmado com sucesso!', 'success');
+                    document.querySelector('.status-indicator').innerHTML = `
+                        <i class="fas fa-check-circle" style="color: #28a745;"></i>
+                        <span style="color: #28a745;">Pagamento confirmado!</span>
+                    `;
+                    setTimeout(() => {
+                        mostrarAlerta('Redirecionando para confirmação do pedido...', 'success');
+                    }, 2000);
+                } else {
+                    mostrarAlerta('Pagamento não detectado. Tente novamente.', 'error');
+                }
+            }, 2000);
+        }
+
+        function verificarPagamentoAutomatico() {
+            const intervalo = setInterval(() => {
+                const pagamentoDetectado = Math.random() > 0.98;
+
+                if (pagamentoDetectado) {
+                    clearInterval(intervalo);
+                    mostrarAlerta('Pagamento detectado automaticamente!', 'success');
+                    document.querySelector('.status-indicator').innerHTML = `
+                        <i class="fas fa-check-circle" style="color: #28a745;"></i>
+                        <span style="color: #28a745;">Pagamento detectado!</span>
+                    `;
+                    setTimeout(() => {
+                        mostrarAlerta('Processando pedido...', 'success');
+                    }, 1500);
+                }
+            }, 5000);
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            mostrarAlerta('Página carregada. Aguardando confirmação do pagamento.', 'success');
+            verificarPagamentoAutomatico();
+        });
+    </script>
+</body>
+</html>

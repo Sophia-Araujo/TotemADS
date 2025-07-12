@@ -270,4 +270,119 @@ h2 {
 }
 
 /* Se você não tiver o Font Awesome instalado, adicione esta linha no <head> do seu layout */
-/* <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"> */          
+/* <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"> */   
+
+
+
+
+/* Adições porcas do Ronaldo */
+ .resumo-pedido {
+            margin-top: 15px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            border: 1px solid #dee2e6;
+        }
+
+        .btn-mostrar-detalhes {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-mostrar-detalhes:hover {
+            background: #0056b3;
+        }
+
+        .detalhes-pedido {
+            margin-top: 15px;
+            padding: 15px;
+            background: white;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+
+        .detalhes-pedido h3 {
+            margin-top: 0;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .item-pedido-resumo {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .item-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .item-nome {
+            font-weight: bold;
+            color: #333;
+        }
+
+        .item-quantidade {
+            font-size: 12px;
+            color: #666;
+        }
+
+        .item-valor {
+            font-weight: bold;
+            color: #007bff;
+        }
+
+        .item-personalizacao {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 4px 0 4px 20px;
+            font-size: 12px;
+            color: #666;
+        }
+
+        .totais-pedido {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 2px solid #ddd;
+        }
+
+        .total-linha {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 5px 0;
+        }
+
+        .total-linha.desconto {
+            color: #28a745;
+        }
+
+        .total-linha.total-final {
+            font-weight: bold;
+            font-size: 16px;
+            color: #333;
+            border-top: 1px solid #ddd;
+            padding-top: 10px;
+            margin-top: 10px;
+        }
+
+        .preco-texto {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .preco {
+            color: #007bff;
+        }

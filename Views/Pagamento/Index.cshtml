@@ -1,0 +1,223 @@
+@{
+    Layout = "_LayoutPagamentos";
+}
+
+<!-- BOTÃO VOLTAR -->
+<div class="back-button-container">
+    <button type="button" class="btn-back" onclick="history.back()" title="Voltar">
+        <i class="fas fa-arrow-left"></i>
+    </button>
+</div>
+
+<header class="logo-banner">
+    <img src="https://localhost:52507/image/banners/img-pagamento.png" alt="Banner Pagamento" class="banner">
+    <img src="https://localhost:52507/image/logos/logo2.png" alt="Logo" class="logo-pagamento">
+</header>
+
+<main>
+    <div class="pagamento-container">
+        <div class="topo">
+            <p class="preco-texto">Preço: <span class="preco" id="preco-total">R$: 0,00</span></p>
+            <div class="resumo-pedido" id="resumo-pedido-pagamento" style="display: none;">
+                <button class="btn-mostrar-detalhes" onclick="toggleDetalhes()">
+                    <i class="fas fa-receipt"></i> Ver detalhes do pedido
+                </button>
+                <div class="detalhes-pedido" id="detalhes-pedido" style="display: none;">
+                    <h3>Resumo do Pedido</h3>
+                    <div class="itens-pedido" id="itens-pedido-lista">
+                        <!-- Itens serão inseridos aqui -->
+                    </div>
+                    <div class="totais-pedido" id="totais-pedido">
+                        <!-- Totais serão inseridos aqui -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h2>Escolha a forma de pagamento:</h2>
+
+        <div class="formas">
+            <div class="forma" data-tipo="cartao">
+                <img src="https://localhost:52507/image/pagamento/opc_cartao.png" alt="Cartão">
+                <span>Cartão</span>
+            </div>
+            <div class="forma" data-tipo="pix">
+                <img src="https://localhost:52507/image/pagamento/opc_pix.png" alt="Pix">
+                <span>PIX</span>
+            </div>
+            <div class="forma" data-tipo="carteira-digital">
+                <img src="https://localhost:52507/image/pagamento/opc_carteiradigital.png" alt="Digital">
+                <span>Carteira Digital</span>
+            </div>
+            <div class="forma" data-tipo="qr-code">
+                <img src="https://localhost:52507/image/pagamento/opc_Qrcode.png" alt="QR Code">
+                <span>QR Code</span>
+            </div>
+            <div class="forma" data-tipo="google-pay">
+                <img src="https://localhost:52507/image/pagamento/opc_googlePay.png" alt="Google Pay">
+                <span>Google Pay</span>
+            </div>
+            <div class="forma" data-tipo="apple-pay">
+                <img src="https://localhost:52507/image/pagamento/opc_applePay.png" alt="Apple Pay">
+                <span>Apple Pay</span>
+            </div>
+        </div>
+
+        <button class="confirmar">Confirmar</button>
+    </div>
+
+    <div id="popup-alerta" class="popup">
+        <div class="popup-conteudo">
+            <p>Por favor, selecione uma forma de pagamento.</p>
+            <button id="fechar-popup">Fechar</button>
+        </div>
+    </div>
+
+    <script>
+        let dadosPedido = null;
+
+        // Carregar dados do pedido ao inicializar a página
+        document.addEventListener('DOMContentLoaded', function() {
+            carregarDadosPedido();
+        });
+
+        function carregarDadosPedido() {
+            const dadosSalvos = localStorage.getItem('dados-pedido-pagamento');
+            
+            if (dadosSalvos) {
+                try {
+                    dadosPedido = JSON.parse(dadosSalvos);
+                    
+                    // Atualizar preço na tela
+                    document.getElementById('preco-total').textContent = `R$: ${dadosPedido.total.toFixed(2).replace('.', ',')}`;
+                    
+                    // Mostrar resumo do pedido
+                    document.getElementById('resumo-pedido-pagamento').style.display = 'block';
+                    
+                    // Preencher detalhes do pedido
+                    preencherDetalhesPedido();
+                    
+                } catch (error) {
+                    console.error('Erro ao carregar dados do pedido:', error);
+                    alert('Erro ao carregar dados do pedido. Redirecionando...');
+                    window.location.href = 'https://localhost:52507/Pedidos/TelaPedidos';
+                }
+            } else {
+                // Sem dados do pedido, redirecionar
+                alert('Nenhum pedido encontrado. Redirecionando...');
+                window.location.href = 'https://localhost:52507/Pedidos/TelaPedidos';
+            }
+        }
+
+        function preencherDetalhesPedido() {
+            const itensLista = document.getElementById('itens-pedido-lista');
+            const totaisPedido = document.getElementById('totais-pedido');
+
+            // Limpar conteúdo existente
+            itensLista.innerHTML = '';
+            totaisPedido.innerHTML = '';
+
+            // Adicionar itens
+            dadosPedido.itens.forEach(item => {
+                const itemDiv = document.createElement('div');
+                itemDiv.className = 'item-pedido-resumo';
+                itemDiv.innerHTML = `
+                    <div class="item-info">
+                        <span class="item-nome">${item.nome}</span>
+                        <span class="item-quantidade">${item.quantidade}x</span>
+                    </div>
+                    <span class="item-valor">R$: ${item.valorTotal.toFixed(2).replace('.', ',')}</span>
+                `;
+                itensLista.appendChild(itemDiv);
+
+                // Adicionar personalizações se houver
+                if (item.personalizacoes && item.personalizacoes.length > 0) {
+                    item.personalizacoes.forEach(personalizacao => {
+                        const personalizacaoDiv = document.createElement('div');
+                        personalizacaoDiv.className = 'item-personalizacao';
+                        personalizacaoDiv.innerHTML = `
+                            <span class="personalizacao-nome">+ ${personalizacao.nome}</span>
+                            <span class="personalizacao-quantidade">${personalizacao.quantidade}x</span>
+                        `;
+                        itensLista.appendChild(personalizacaoDiv);
+                    });
+                }
+            });
+
+            // Adicionar totais
+            const subtotalDiv = document.createElement('div');
+            subtotalDiv.className = 'total-linha';
+            subtotalDiv.innerHTML = `
+                <span>Subtotal:</span>
+                <span>R$: ${dadosPedido.subtotal.toFixed(2).replace('.', ',')}</span>
+            `;
+            totaisPedido.appendChild(subtotalDiv);
+
+            // Adicionar desconto se houver
+            if (dadosPedido.cupom) {
+                const descontoDiv = document.createElement('div');
+                descontoDiv.className = 'total-linha desconto';
+                descontoDiv.innerHTML = `
+                    <span>Desconto (${dadosPedido.cupom.codigo}):</span>
+                    <span>-R$: ${dadosPedido.cupom.valorDesconto.toFixed(2).replace('.', ',')}</span>
+                `;
+                totaisPedido.appendChild(descontoDiv);
+            }
+
+            // Adicionar total final
+            const totalDiv = document.createElement('div');
+            totalDiv.className = 'total-linha total-final';
+            totalDiv.innerHTML = `
+                <span>Total:</span>
+                <span>R$: ${dadosPedido.total.toFixed(2).replace('.', ',')}</span>
+            `;
+            totaisPedido.appendChild(totalDiv);
+        }
+
+        function toggleDetalhes() {
+            const detalhes = document.getElementById('detalhes-pedido');
+            if (detalhes.style.display === 'none') {
+                detalhes.style.display = 'block';
+            } else {
+                detalhes.style.display = 'none';
+            }
+        }
+
+        // Lógica de seleção de forma de pagamento
+        const formas = document.querySelectorAll('.forma');
+        const confirmarBtn = document.querySelector('.confirmar');
+
+        formas.forEach(item => {
+            item.addEventListener('click', () => {
+                formas.forEach(f => f.classList.remove('selecionado'));
+                item.classList.add('selecionado');
+            });
+        });
+
+        confirmarBtn.addEventListener('click', () => {
+            const selecionado = document.querySelector('.forma.selecionado');
+
+            if (!selecionado) {
+                document.getElementById('popup-alerta').style.display = 'flex';
+                return;
+            }
+
+            // Obter o tipo de pagamento selecionado
+            const tipoPagamento = selecionado.getAttribute('data-tipo');
+            
+            // Salvar método de pagamento selecionado
+            if (dadosPedido) {
+                dadosPedido.metodoPagamento = tipoPagamento;
+                localStorage.setItem('dados-pedido-pagamento', JSON.stringify(dadosPedido));
+            }
+
+            // Redirecionar para a tela final com o tipo de pagamento na URL
+            window.location.href = `https://localhost:52507/Pagamento/PagamentoFinal?tipo=${tipoPagamento}`;
+        });
+
+        document.getElementById('fechar-popup').addEventListener('click', () => {
+            document.getElementById('popup-alerta').style.display = 'none';
+        });
+    </script>
+
+</main>

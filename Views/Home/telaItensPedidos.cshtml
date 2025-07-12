@@ -36,8 +36,7 @@
 
     <div class="acoes">
         <button class="botao-cancelar" onclick="cancelarPedido()">Cancelar</button>
-       <a class="botao-pagar" id="btn-finalizar-pedido" asp-controller="Home" asp-action="Pagamentos">Finalizar Pedido</a>
-        </button>
+        <button class="botao-pagar" id="btn-finalizar-pedido" onclick="finalizarPedido()">Finalizar Pedido</button>
     </div>
 </div>
 
@@ -173,7 +172,6 @@
 
         function calcularResumo() {
             const totalListaElement = document.getElementById('total-lista');
-            const valorTotalElement = document.getElementById('valor-total');
             
             // Agrupar por categoria
             const categorias = {};
@@ -227,9 +225,6 @@
                 <span>R$: ${valorFinal.toFixed(2).replace('.', ',')}</span>
             `;
             totalListaElement.appendChild(divTotal);
-
-            // Atualizar botão
-            valorTotalElement.textContent = valorFinal.toFixed(2).replace('.', ',');
         }
 
         function removerItem(index) {
@@ -256,18 +251,19 @@
             }
         }
 
-        async function finalizarPedido() {
+        function finalizarPedido() {
             if (carrinhoPedido.length === 0) {
                 alert('Carrinho vazio!');
                 return;
             }
 
             try {
-                // Mostrar loading
-                const btnFinalizar = document.getElementById('btn-finalizar-pedido');
-                const textoOriginal = btnFinalizar.innerHTML;
-                btnFinalizar.innerHTML = 'Processando...';
-                btnFinalizar.disabled = true;
+                // Calcular valor final com cupom
+                let valorFinal = totalPedido;
+                if (cupomAplicado) {
+                    const desconto = totalPedido * (cupomAplicado.desconto / 100);
+                    valorFinal = totalPedido - desconto;
+                }
 
                 // Preparar dados do pedido para envio
                 const dadosPedido = {
@@ -276,46 +272,31 @@
                         nome: item.nome,
                         quantidade: item.quantidade,
                         valor: item.valor,
-                        personalizacoes: item.personalizacoes || []
+                        valorTotal: item.valor * item.quantidade,
+                        personalizacoes: item.personalizacoes || [],
+                        imagem: item.imagem || null,
+                        descricao: item.descricao || ''
                     })),
-                    total: cupomAplicado ? totalPedido * (1 - cupomAplicado.desconto / 100) : totalPedido,
-                    cupom: cupomAplicado?.codigo || null,
-                    dataHora: new Date().toISOString()
+                    subtotal: totalPedido,
+                    total: valorFinal,
+                    cupom: cupomAplicado ? {
+                        codigo: cupomAplicado.codigo,
+                        desconto: cupomAplicado.desconto,
+                        valorDesconto: totalPedido * (cupomAplicado.desconto / 100)
+                    } : null,
+                    dataHora: new Date().toISOString(),
+                    quantidadeItens: carrinhoPedido.reduce((total, item) => total + item.quantidade, 0)
                 };
 
-                // Fazer chamada AJAX para salvar no SQLite
-                const response = await fetch('/Pedidos/FinalizarPedido', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(dadosPedido)
-                });
-
-                const result = await response.json();
-
-                if (result.success) {
-                    // Limpar localStorage
-                    localStorage.removeItem('pedido-finalizar');
-                    localStorage.removeItem('carrinho-totem');
-                    
-                    // Salvar ID do pedido para referência
-                    localStorage.setItem('ultimo-pedido-id', result.pedidoId);
-                    
-                    // Redirecionar para pagamento
-                    window.location.href = '/Home/Pagamentos';
-                } else {
-                    throw new Error(result.message || 'Erro desconhecido');
-                }
+                // Salvar dados do pedido no localStorage para a tela de pagamento
+                localStorage.setItem('dados-pedido-pagamento', JSON.stringify(dadosPedido));
+                
+                // Redirecionar para a tela de pagamentos
+                window.location.href = '/Pagamento/Index';
                 
             } catch (error) {
                 console.error('Erro ao finalizar pedido:', error);
                 alert('Erro ao processar pedido: ' + error.message);
-                
-                // Restaurar botão
-                const btnFinalizar = document.getElementById('btn-finalizar-pedido');
-                btnFinalizar.innerHTML = textoOriginal;
-                btnFinalizar.disabled = false;
             }
         }
 
