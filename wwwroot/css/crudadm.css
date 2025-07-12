@@ -16,9 +16,9 @@
 .admin-section {
     background-color: #ffffff;
     border-radius: 12px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
     padding: 30px;
-    max-width: 1000px;
+    max-width: 1200px;
     margin: 0 auto;
 }
 
@@ -27,47 +27,59 @@
     flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 25px;
+    margin-bottom: 30px;
     border-bottom: 2px solid #f0f0f0;
-    padding-bottom: 15px;
+    padding-bottom: 20px;
 }
 
-.section-header h1 {
-    color: #333;
-    font-size: 32px;
-    font-weight: 700;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-}
-
-.section-subtitle {
-    color: #666;
-    font-size: 16px;
-    margin-left: 10px;
+.header-content {
+    display: flex;
+    align-items: center;
     flex-grow: 1;
 }
 
+.section-header h1 {
+    color: #333333;
+    font-size: 32px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 0;
+}
+
+.section-subtitle {
+    color: #666666;
+    font-size: 16px;
+    margin-left: 15px;
+    margin-bottom: 0;
+}
+
 .btn-create {
-    padding: 10px 25px;
-    font-weight: 600;
+    padding: 12px 24px;
     border-radius: 25px;
-    background: linear-gradient(135deg, #FF8C42, #FF6B1A);
-    color: #fff;
-    border: none;
+    font-size: 15px;
+    font-weight: 600;
     cursor: pointer;
-    transition: background 0.3s ease;
+    border: none;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.3s ease;
     text-transform: uppercase;
     letter-spacing: 0.5px;
+    background: linear-gradient(135deg, #FF8C42, #FF6B1A);
+    color: white;
+    box-shadow: 0 4px 15px rgba(255, 140, 66, 0.3);
 }
 
 .btn-create:hover {
-    background: linear-gradient(135deg, #FF6B1A, #E55A15);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 140, 66, 0.4);
 }
 
 /* Tabela customizada */
-
 .table-responsive {
     overflow-x: auto;
+    margin-top: 20px;
 }
 
 .table-custom {
@@ -75,18 +87,31 @@
     border-collapse: collapse;
     font-size: 15px;
     min-width: 700px;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .table-custom thead {
-    background-color: #FF8C42;
+    background: linear-gradient(135deg, #FF8C42, #FF6B1A);
     color: white;
     text-transform: uppercase;
 }
 
-.table-custom th, .table-custom td {
-    padding: 12px 15px;
-    border: 1px solid #ddd;
+.table-custom th {
+    padding: 15px;
+    font-weight: 600;
     text-align: left;
+    border: none;
+    font-size: 14px;
+    letter-spacing: 0.5px;
+}
+
+.table-custom td {
+    padding: 12px 15px;
+    border-bottom: 1px solid #eee;
+    text-align: left;
+    vertical-align: middle;
 }
 
 .table-custom tbody tr:nth-child(even) {
@@ -96,14 +121,15 @@
 .actions-cell {
     display: flex;
     gap: 8px;
+    flex-wrap: wrap;
+    align-items: center;
 }
 
 /* Botões dentro da tabela */
-
 .btn {
-    padding: 6px 14px;
+    padding: 8px 16px;
     border-radius: 20px;
-    font-size: 14px;
+    font-size: 12px;
     font-weight: 600;
     cursor: pointer;
     text-decoration: none;
@@ -111,61 +137,174 @@
     border: none;
     text-align: center;
     transition: all 0.3s ease;
+    display: inline-block;
+    min-width: 70px;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 .btn-sm {
     padding: 6px 12px;
-    font-size: 13px;
+    font-size: 11px;
+    min-width: 60px;
 }
 
 .btn-warning {
-    background-color: #f0ad4e;
+    background: linear-gradient(135deg, #FF8C42, #FF6B1A);
 }
 
 .btn-warning:hover {
-    background-color: #ec971f;
+    background: linear-gradient(135deg, #FF6B1A, #E55A15);
 }
 
 .btn-info {
-    background-color: #5bc0de;
+    background: linear-gradient(135deg, #6c757d, #495057);
 }
 
 .btn-info:hover {
-    background-color: #31b0d5;
+    background: linear-gradient(135deg, #495057, #343a40);
 }
 
 .btn-danger {
-    background-color: #d9534f;
+    background: linear-gradient(135deg, #dc3545, #c82333);
 }
 
 .btn-danger:hover {
-    background-color: #c9302c;
+    background: linear-gradient(135deg, #c82333, #bd2130);
+}
+
+/* Estilo para dados da tabela */
+.table-custom td {
+    font-weight: 400;
+    color: #555;
+}
+
+.table-custom td:first-child {
+    font-weight: 600;
+    color: #333;
 }
 
 /* Responsividade */
-
-@media (max-width: 768px) {
+@media (max-width: 1280px) {
     .content-area {
-        padding: 20px 20px;
+        padding: 20px;
+    }
+
+    .admin-section {
+        padding: 25px;
+        max-width: 100%;
+    }
+
+    .table-custom {
+        min-width: 600px;
+    }
+}
+
+@media (max-width: 800px) {
+    .content-area {
+        padding: 15px;
+    }
+
+    .admin-section {
+        padding: 20px;
     }
 
     .section-header {
         flex-direction: column;
         align-items: flex-start;
-        gap: 10px;
+        gap: 15px;
+    }
+
+    .header-content {
+        flex-direction: column;
+        align-items: flex-start;
     }
 
     .section-header h1 {
         font-size: 24px;
     }
 
+    .section-subtitle {
+        margin-left: 0;
+        margin-top: 5px;
+    }
+
     .table-custom {
         min-width: 0;
-        font-size: 14px;
+        font-size: 13px;
+    }
+
+    .table-custom th,
+    .table-custom td {
+        padding: 8px 6px;
     }
 
     .actions-cell {
         flex-direction: column;
-        gap: 6px;
+        gap: 4px;
+        min-width: 80px;
     }
+
+    .btn {
+        width: 100%;
+        min-width: auto;
+        font-size: 11px;
+        padding: 6px 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .content-area {
+        padding: 10px;
+    }
+
+    .admin-section {
+        padding: 15px;
+    }
+
+    .section-header h1 {
+        font-size: 20px;
+    }
+
+    .table-custom {
+        font-size: 12px;
+    }
+
+    .table-custom th,
+    .table-custom td {
+        padding: 6px 4px;
+    }
+
+    .btn {
+        font-size: 10px;
+        padding: 5px 8px;
+    }
+}
+
+/* Animações */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.admin-section {
+    animation: fadeInUp 0.6s ease-out;
+}
+
+.table-custom tbody tr {
+    animation: fadeInUp 0.4s ease-out;
+}
+
+/* Estados especiais */
+.table-custom tbody tr:last-child td {
+    border-bottom: none;
 }

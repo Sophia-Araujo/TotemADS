@@ -160,57 +160,59 @@
 /* Ações do card */
 .produto-actions {
     display: flex;
-    gap: 10px;
+    gap: 8px;
     justify-content: center;
     border-top: 1px solid #f0f0f0;
     padding-top: 15px;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
 }
 
 .btn-action {
-    padding: 8px 16px;
+    padding: 8px 12px;
     border-radius: 8px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     transition: all 0.3s ease;
     text-decoration: none;
-    font-size: 14px;
+    font-size: 11px;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.5px;
     white-space: nowrap;
+    flex: 1;
+    min-width: 0;
 }
 
 .btn-edit {
-    background-color: #28a745;
+    background-color: #FF8C42;
     color: white;
 }
 
 .btn-edit:hover {
-    background-color: #218838;
+    background-color: #FF6B1A;
     transform: translateY(-2px);
     color: white;
 }
 
 .btn-view {
-    background-color: #17a2b8;
+    background-color: #FF8C42;
     color: white;
 }
 
 .btn-view:hover {
-    background-color: #138496;
+    background-color: #FF6B1A;
     transform: translateY(-2px);
     color: white;
 }
 
 .btn-delete {
-    background-color: #dc3545;
+    background-color: #FF8C42;
     color: white;
 }
 
 .btn-delete:hover {
-    background-color: #c82333;
+    background-color: #FF6B1A;
     transform: translateY(-2px);
     color: white;
 }
@@ -278,5 +280,11 @@
 
     .produto-actions {
         flex-wrap: wrap;
+        gap: 5px;
+    }
+
+    .btn-action {
+        font-size: 10px;
+        padding: 6px 8px;
     }
 }

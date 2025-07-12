@@ -4,53 +4,78 @@
     Layout = "_LayoutMenu";
 }
 
-<h1>Ingredientes</h1>
+<div class="content-area">
+    <div class="ingredientes-section">
+        <div class="section-header">
+            <div class="header-content">
+                <h1>Ingredientes</h1>
+                <p class="section-subtitle">Gerencie os ingredientes do seu cardápio</p>
+            </div>
+            <a asp-action="Create" class="btn btn-primary">
+                <span class="icon-plus"></span>
+                + Adicionar Ingrediente
+            </a>
+        </div>
 
-@if (ViewBag.Error != null)
-{
-    <div class="alert alert-danger">
-        <strong>Erro:</strong> @ViewBag.Error
-    </div>
-}
-
-<p>
-    <a asp-action="Create">Criar Novo</a>
-</p>
-
-<table class="table">
-    <thead>
-        <tr>
-            <th>Nome</th>
-            <th>Valor</th>
-            <th>Imagem</th>
-            <th>Ações</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
+        @if (ViewBag.Error != null)
         {
-            <tr>
-                <td>@Html.DisplayFor(modelItem => item.Nome)</td>
-                <td>@Html.DisplayFor(modelItem => item.Valor)</td>
-                <td>
-                    @if (item.Imagem != null)
-                    {
-                        <img src="@Url.Action("GetImagem", "Ingrediente", new { id = item.IgredienteId })" 
-                             style="width: 50px; height: 50px; object-fit: cover;" />
-                    }
-                    else
-                    {
-                        <span>Sem imagem</span>
-                    }
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.IgredienteId">Editar</a> |
-                    <a asp-action="Delete" asp-route-id="@item.IgredienteId">Excluir</a>
-                </td>
-            </tr>
+            <div class="alert alert-danger">
+                <strong>Erro:</strong> @ViewBag.Error
+            </div>
         }
-    </tbody>
-</table>
+
+        @if (Model != null && Model.Any())
+        {
+            <div class="ingredientes-grid">
+                @foreach (var item in Model)
+                {
+                    <div class="ingrediente-card">
+                        <div class="ingrediente-header">
+                            <h3 class="ingrediente-nome">@Html.DisplayFor(modelItem => item.Nome)</h3>
+                            <span class="ingrediente-valor">R$ @Html.DisplayFor(modelItem => item.Valor)</span>
+                        </div>
+
+                        <div class="ingrediente-body">
+                            @if (item.Imagem != null)
+                            {
+                                <img src="@Url.Action("GetImagem", "Ingrediente", new { id = item.IgredienteId })" 
+                                     alt="@item.Nome" 
+                                     class="ingrediente-imagem" />
+                            }
+                            else
+                            {
+                                <div class="sem-imagem">
+                                    Sem imagem
+                                </div>
+                            }
+                        </div>
+
+                        <div class="ingrediente-actions">
+                            <a asp-action="Edit" asp-route-id="@item.IgredienteId" class="btn-action btn-edit">
+                                Editar
+                            </a>
+                            <a asp-action="Delete" asp-route-id="@item.IgredienteId" class="btn-action btn-delete">
+                                Excluir
+                            </a>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+        else
+        {
+            <div class="empty-state">
+                <div class="empty-icon">🥕</div>
+                <h3>Nenhum ingrediente cadastrado</h3>
+                <p>Comece adicionando seu primeiro ingrediente ao sistema</p>
+                <a asp-action="Create" class="btn btn-primary">
+                    <span class="icon-plus"></span>
+                    Adicionar Primeiro Ingrediente
+                </a>
+            </div>
+        }
+    </div>
+</div>
 
 @section Styles{
     <link rel="stylesheet" href="~/css/crud-ingredientes.css"/>

@@ -2,70 +2,80 @@
 
 @{
     ViewData["Title"] = "Criar Ingrediente";
-    Layout = "_LayoutMenu";  
+    Layout = "~/Views/Shared/_LayoutMenu.cshtml";
 }
 
-<h1>Criar Ingrediente</h1>
+<div class="content-area">
+    <div class="ingredientes-section">
+        <div class="section-header">
+            <div class="header-content">
+                <h1>Criar Ingrediente</h1>
+                <p class="section-subtitle">Cadastre um novo ingrediente para o sistema</p>
+            </div>
+        </div>
 
-<hr />
-    
-<div class="row">
-    <div class="col-md-8">
-        <form asp-action="Create" method="post" enctype="multipart/form-data">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            
-            <div class="form-group">
-                <label asp-for="Nome">Nome do Produto</label>
-                <input asp-for="Nome" class="form-control" />
-                <span asp-validation-for="Nome" class="text-danger"></span>
-            </div>
-            
-            <div class="form-group mb-3">
-                <label asp-for="Valor" class="control-label"></label>
-                <input asp-for="Valor" class="form-control" type="number" step="0.01" min="0" />
-                <span asp-validation-for="Valor" class="text-danger"></span>
-            </div>
-            
-            <div class="form-group mb-3">
-                <label for="imagemFile" class="control-label">Imagem</label>
-                <input type="file" id="imagemFile" name="imagemFile" class="form-control" accept="image/*" required />
-                <span asp-validation-for="Imagem" class="text-danger"></span>
-                <div class="form-text">Selecione uma imagem (.jpg, .jpeg, .png, .gif)</div>
-            </div>
+        <div class="form-container">
+            <form asp-action="Create" enctype="multipart/form-data">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-            <!-- Preview da imagem -->
-            <div class="form-group mb-3">
-                <img id="imagePreview" src="#" alt="Preview da imagem" style="max-width: 300px; max-height: 200px; display: none;" class="img-thumbnail" />
-            </div>
-            
-            <div class="form-group">
-                <input type="submit" value="Criar" class="btn btn-primary" />
+                <div class="form-group">
+                    <label for="imagemFile">Imagem do Ingrediente</label>
+                    <input type="file" name="imagemFile" id="imagemFile" class="form-control" accept="image/*" />
+                    <span asp-validation-for="Imagem" class="text-danger"></span>
+                    <small class="form-text">Selecione uma imagem (JPEG, PNG, GIF)</small>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Nome">Nome do Ingrediente</label>
+                    <input asp-for="Nome" class="form-control" placeholder="Digite o nome do ingrediente" />
+                    <span asp-validation-for="Nome" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Valor">Valor</label>
+                    <input asp-for="Valor" class="form-control" type="number" step="0.01" min="0" placeholder="0,00" />
+                    <span asp-validation-for="Valor" class="text-danger"></span>
+                </div>
+
+                <div class="form-group text-center">
+                    <input type="submit" value="Criar Ingrediente" class="btn btn-primary" />
+                </div>
+            </form>
+
+            <div class="text-center mt-3">
                 <a asp-action="Index" class="btn btn-secondary">Voltar para Lista</a>
             </div>
-        </form>
+        </div>
     </div>
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    <link rel="stylesheet" href="~/css/crud-ingredientes.css" />}
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
 
     <script>
-        document.getElementById('imagemFile').addEventListener('change', function(e) {
+        document.getElementById('imagemFile').addEventListener('change', function (e) {
             const file = e.target.files[0];
             if (file) {
                 const reader = new FileReader();
-                reader.onload = function(e) {
-                    const preview = document.getElementById('imagePreview');
-                    preview.src = e.target.result;
-                    preview.style.display = 'block';
+                reader.onload = function (e) {
+                    const existingPreview = document.getElementById('imagePreview');
+                    if (existingPreview) {
+                        existingPreview.remove();
+                    }
+                    const img = document.createElement('img');
+                    img.id = 'imagePreview';
+                    img.src = e.target.result;
+                    img.style.maxWidth = '200px';
+                    img.style.maxHeight = '200px';
+                    img.style.marginTop = '10px';
+                    img.style.border = '1px solid #ddd';
+                    img.style.borderRadius = '5px';
+                    document.getElementById('imagemFile').parentNode.appendChild(img);
                 };
                 reader.readAsDataURL(file);
             }
         });
     </script>
-}
 
-@section Styles{
-    <link rel="stylesheet" href="~/css/crud-ingredientes.css"/>
+    <link rel="stylesheet" href="~/css/createIngrediente.css" />
 }
