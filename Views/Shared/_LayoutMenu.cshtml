@@ -21,15 +21,19 @@
                 <li><a asp-controller="Produto" asp-action="Index">Produtos ➜</a></li>
                 <li><a asp-controller="Cupom" asp-action="Index">Cupons ➜</a></li>
                 <li><a asp-controller="Administrador" asp-action="Index">Administrador ➜</a></li>
-                <li><a asp-controller="Ingrediente" asp-action="Index">Ingrediente ➜</a></li>
-                <li><a asp-controller="Categoria" asp-action="Index">Categoria ➜</a></li>
-
             </ul>
 
-            <div class="usuario">
+           <div class="usuario" style="color: white;">
                 <div class="circulo"></div>
                 <span>Olá, Admin!</span>
+                <a asp-controller="Administrador"
+                asp-action= "Logout" class="btn-btn-logout" style="color:white; text-decoration:none;">
+                      Sair
+                </a>
             </div>
+            
+                
+            
         </div>
 
         <div class="conteudo">

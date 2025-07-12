@@ -1,0 +1,72 @@
+﻿@model IEnumerable<TotemPWA.Models.Cupom>
+
+@{
+    Layout = "~/Views/Shared/_LayoutMenu.cshtml";
+    ViewData["Title"] = "Cupons";
+}
+
+<div class="content-area">
+    <div class="admin-section">
+        <div class="section-header">
+            <h1>Cupons</h1>
+            <span class="section-subtitle">Gerencie todos os cupons de desconto</span>
+            <a asp-action="Create" class="btn-create">+ Novo Cupom</a>
+        </div>
+
+        @if (Model != null && Model.Any())
+        {
+            <div class="table-responsive">
+                <table class="table-custom">
+                    <thead>
+                        <tr>
+                            <th>Código</th>
+                            <th>Desconto</th>
+                            <th>Validade</th>
+                            <th>Produto ID</th>
+                            <th>Administrador</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td><strong>@item.Codigo</strong></td>
+                                <td><span style="color: #FF6B1A; font-weight: 700;">@item.Desconto%</span></td>
+                                <td>@item.Validade.ToString("dd/MM/yyyy")</td>
+                                <td>@item.ProdutoId</td>
+                                <td>@(item.Administrador?.CPF ?? "N/A")</td>
+                                <td>
+                                    <div class="actions-cell">
+                                        <a asp-action="Edit" asp-route-id="@item.CupomId" class="btn btn-warning btn-sm" title="Editar">
+                                            ✏️ Editar
+                                        </a>
+                                        <a asp-action="Details" asp-route-id="@item.CupomId" class="btn btn-info btn-sm" title="Detalhes">
+                                            👁️ Ver
+                                        </a>
+                                        <a asp-action="Delete" asp-route-id="@item.CupomId" class="btn btn-danger btn-sm" title="Excluir">
+                                            🗑️ Excluir
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+        else
+        {
+            <div style="text-align: center; padding: 80px 20px; color: #666;">
+                <div style="font-size: 64px; margin-bottom: 20px;">📋</div>
+                <h3 style="color: #333; margin-bottom: 10px;">Nenhum cupom encontrado</h3>
+                <p style="margin-bottom: 30px;">Adicione cupons de descontos</p>
+                <a asp-action="Create" class="btn-create">Criar Primeiro Cupom</a>
+            </div>
+        }
+    </div>
+</div>
+
+@section Scripts {
+    <link rel="stylesheet" href="~/css/crudcupom.css" />
+}

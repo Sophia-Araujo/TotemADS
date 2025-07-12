@@ -1,0 +1,65 @@
+﻿@model TotemPWA.Models.Cupom
+
+@{
+    Layout = "~/Views/Shared/_LayoutMenu.cshtml";
+    ViewData["Title"] = "Detalhes do Cupom";
+}
+
+<div class="content-area">
+    <div class="details-container">
+        <div class="page-header">
+            <h1>Detalhes do Cupom</h1>
+            <h4>Informações completas do cupom @Model.Codigo</h4>
+        </div>
+
+        <div class="row">
+            <div class="col-md-8">
+                <dl class="details-list">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Codigo)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Codigo)
+                    </dd>
+                    
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Desconto)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Desconto)%
+                    </dd>
+                    
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Validade)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Validade)
+                    </dd>
+                    
+                    <dt>
+                        @Html.DisplayNameFor(model => model.ProdutoId)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.ProdutoId)
+                    </dd>
+                    
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Administrador)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Administrador.CPF)
+                    </dd>
+                </dl>
+            </div>
+        </div>
+
+        <div class="nav-links">
+            <a asp-action="Edit" asp-route-id="@Model?.CupomId">✏️ Editar</a>
+            <a asp-action="Index">← Voltar para Lista</a>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <link rel="stylesheet" href="~/css/crudcupom.css" />
+}

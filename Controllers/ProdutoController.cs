@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using TotemPWA.Data;
 using TotemPWA.Models;
 using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
 
 namespace TotemPWA.Controllers
 {
@@ -49,84 +50,124 @@ namespace TotemPWA.Controllers
         }
 
         // GET: Produto/Create
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
-            ViewData["AdministradorId"] = new SelectList(_context.Administradores, "AdministradorId", "CPF");
             ViewData["CategoriaId"] = new SelectList(_context.Categorias, "CategoriaId", "Nome");
-            return View();
+            
+            // Obter dados do administrador logado através das Claims
+            var adminIdClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var cpfClaim = User.FindFirst("CPF")?.Value;
+
+            ViewBag.AdministradorId = int.TryParse(adminIdClaim, out var adminId) ? adminId : 0;
+            ViewBag.AdministradorCPF = cpfClaim;
+
+            return View(new Produto
+            {
+                AdministradorId = ViewBag.AdministradorId
+            });
         }
 
-       // Substitua o método Create (POST) no ProdutoController.cs pela versão abaixo:
-
-// POST: Produto/Create
-[HttpPost]
-[ValidateAntiForgeryToken]
-public async Task<IActionResult> Create(Produto produto, IFormFile? imagemFile)
-{
-    Console.WriteLine("=== INÍCIO DO CREATE ===");
-    Console.WriteLine($"Nome: {produto.Nome}");
-    Console.WriteLine($"Descricao: {produto.Descricao}");
-    Console.WriteLine($"Valor: {produto.Valor}");
-    Console.WriteLine($"IsCombo: {produto.IsCombo}");
-    Console.WriteLine($"AdministradorId: {produto.AdministradorId}");
-    Console.WriteLine($"CategoriaId: {produto.CategoriaId}");
-    Console.WriteLine($"Imagem File: {(imagemFile != null ? imagemFile.FileName : "null")}");
-
-    // Remove validações das propriedades de navegação
-    RemoveNavigationPropertiesValidation();
-
-    // Processa a imagem se fornecida
-    var imagemProcessada = await ProcessarImagem(imagemFile);
-    if (imagemProcessada.HasError)
-    {
-        ModelState.AddModelError("imagemFile", imagemProcessada.ErrorMessage!);
-    }
-    else
-    {
-        produto.Imagem = imagemProcessada.ImagemBytes;
-    }
-
-    Console.WriteLine($"ModelState.IsValid: {ModelState.IsValid}");
-
-    if (ModelState.IsValid)
-    {
-        try
+        // POST: Produto/Create
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create(Produto produto, IFormFile? imagemFile)
         {
-            Console.WriteLine("ModelState válido - tentando salvar...");
-            
-            _context.Add(produto);
-            await _context.SaveChangesAsync();
-            
-            Console.WriteLine("Produto salvo com sucesso!");
-            TempData["SuccessMessage"] = "Produto criado com sucesso!";
-            
-            // Redireciona para ingredientes se NÃO for combo
-            if (produto.IsCombo == 0)
+            Console.WriteLine("=== INÍCIO DO CREATE ===");
+            Console.WriteLine($"Nome: {produto.Nome}");
+            Console.WriteLine($"Descricao: {produto.Descricao}");
+            Console.WriteLine($"Valor: {produto.Valor}");
+            Console.WriteLine($"IsCombo: {produto.IsCombo}");
+            Console.WriteLine($"AdministradorId: {produto.AdministradorId}");
+            Console.WriteLine($"CategoriaId: {produto.CategoriaId}");
+            Console.WriteLine($"Imagem File: {(imagemFile != null ? imagemFile.FileName : "null")}");
+
+            // Se o AdministradorId não foi preenchido, obter das Claims
+            if (produto.AdministradorId == 0)
             {
-                TempData["InfoMessage"] = "Agora você pode configurar os ingredientes do produto.";
-                return RedirectToAction("Index", "IgredienteProduto", new { produtoId = produto.ProdutoId });
+                var adminIdClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+                if (int.TryParse(adminIdClaim, out var adminId))
+                {
+                    produto.AdministradorId = adminId;
+                }
+            }
+
+            // Remove validações das propriedades de navegação
+            RemoveNavigationPropertiesValidation();
+
+            // Validação manual da imagem (usando lógica do segundo controller que funciona)
+            if (imagemFile == null || imagemFile.Length == 0)
+            {
+                ModelState.AddModelError("imagemFile", "Por favor, selecione uma imagem.");
+            }
+            else
+            {
+                // Verifica se é um arquivo de imagem válido
+                var allowedTypes = new[] { "image/jpeg", "image/jpg", "image/png", "image/gif" };
+                if (!allowedTypes.Contains(imagemFile.ContentType.ToLower()))
+                {
+                    ModelState.AddModelError("imagemFile", "Por favor, selecione um arquivo de imagem válido (JPEG, PNG, GIF).");
+                }
+                else if (imagemFile.Length > 5 * 1024 * 1024) // 5MB
+                {
+                    ModelState.AddModelError("imagemFile", "A imagem deve ter no máximo 5MB.");
+                }
+            }
+
+            Console.WriteLine($"ModelState.IsValid: {ModelState.IsValid}");
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    Console.WriteLine("ModelState válido - processando imagem...");
+                    
+                    // Converte o arquivo para byte array (usando método do segundo controller)
+                    using (var memoryStream = new MemoryStream())
+                    {
+                        await imagemFile.CopyToAsync(memoryStream);
+                        produto.Imagem = memoryStream.ToArray();
+                    }
+                    
+                    Console.WriteLine("Imagem processada - tentando salvar...");
+                    
+                    _context.Add(produto);
+                    await _context.SaveChangesAsync();
+                    
+                    Console.WriteLine("Produto salvo com sucesso!");
+                    TempData["SuccessMessage"] = "Produto criado com sucesso!";
+                    
+                    // Redireciona para ingredientes se NÃO for combo
+                    if (produto.IsCombo == 0)
+                    {
+                        TempData["InfoMessage"] = "Agora você pode configurar os ingredientes do produto.";
+                        return RedirectToAction("Index", "IgredienteProduto", new { produtoId = produto.ProdutoId });
+                    }
+                    
+                    // Se for combo, vai direto para a lista de produtos
+                    return RedirectToAction(nameof(Index));
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"ERRO AO SALVAR: {ex.Message}");
+                    if (ex.InnerException != null)
+                        Console.WriteLine($"INNER EXCEPTION: {ex.InnerException.Message}");
+                    
+                    ModelState.AddModelError("", $"Erro ao salvar: {ex.Message}");
+                }
             }
             
-            // Se for combo, vai direto para a lista de produtos
-            return RedirectToAction(nameof(Index));
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine($"ERRO AO SALVAR: {ex.Message}");
-            if (ex.InnerException != null)
-                Console.WriteLine($"INNER EXCEPTION: {ex.InnerException.Message}");
+            // Recarrega dados para a view
+            ViewData["CategoriaId"] = new SelectList(_context.Categorias, "CategoriaId", "Nome", produto.CategoriaId);
             
-            ModelState.AddModelError("", $"Erro ao salvar: {ex.Message}");
+            var adminIdClaimReload = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var cpfClaim = User.FindFirst("CPF")?.Value;
+            ViewBag.AdministradorId = int.TryParse(adminIdClaimReload, out var adminIdReload) ? adminIdReload : 0;
+            ViewBag.AdministradorCPF = cpfClaim;
+            
+            Console.WriteLine("=== FIM DO CREATE ===");
+            return View(produto);
         }
-    }
-    
-    // Recarrega dropdowns
-    ViewData["AdministradorId"] = new SelectList(_context.Administradores, "AdministradorId", "CPF", produto.AdministradorId);
-    ViewData["CategoriaId"] = new SelectList(_context.Categorias, "CategoriaId", "Nome", produto.CategoriaId);
-    
-    Console.WriteLine("=== FIM DO CREATE ===");
-    return View(produto);
-}
+
         // GET: Produto/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -141,7 +182,13 @@ public async Task<IActionResult> Create(Produto produto, IFormFile? imagemFile)
                 return NotFound();
             }
             
-            ViewData["AdministradorId"] = new SelectList(_context.Administradores, "AdministradorId", "CPF", produto.AdministradorId);
+            // Obter dados do administrador logado através das Claims
+            var adminIdClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var cpfClaim = User.FindFirst("CPF")?.Value;
+
+            ViewBag.AdministradorId = int.TryParse(adminIdClaim, out var adminId) ? adminId : 0;
+            ViewBag.AdministradorCPF = cpfClaim;
+            
             ViewData["CategoriaId"] = new SelectList(_context.Categorias, "CategoriaId", "Nome", produto.CategoriaId);
             return View(produto);
         }
@@ -163,6 +210,16 @@ public async Task<IActionResult> Create(Produto produto, IFormFile? imagemFile)
                 return NotFound();
             }
 
+            // Se o AdministradorId não foi preenchido, obter das Claims
+            if (produto.AdministradorId == 0)
+            {
+                var adminIdClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+                if (int.TryParse(adminIdClaim, out var adminId))
+                {
+                    produto.AdministradorId = adminId;
+                }
+            }
+
             // Remove validações das propriedades de navegação
             RemoveNavigationPropertiesValidation();
 
@@ -172,35 +229,45 @@ public async Task<IActionResult> Create(Produto produto, IFormFile? imagemFile)
                 {
                     Console.WriteLine("ModelState válido - buscando produto original...");
                     
-                    // Busca o produto original para preservar a imagem se necessário
-                    var produtoOriginal = await _context.Produto
-                        .AsNoTracking()
-                        .FirstOrDefaultAsync(p => p.ProdutoId == id);
+                    // Busca o produto existente para manter a imagem atual se não foi enviada nova
+                    var produtoExistente = await _context.Produto.AsNoTracking().FirstOrDefaultAsync(p => p.ProdutoId == id);
                     
-                    if (produtoOriginal == null)
+                    if (produtoExistente == null)
                     {
                         Console.WriteLine("Produto original não encontrado!");
                         return NotFound();
                     }
 
-                    // Processa a nova imagem ou mantém a original
+                    // Processa a nova imagem ou mantém a original (usando lógica do segundo controller)
                     if (imagemFile != null && imagemFile.Length > 0)
                     {
-                        var imagemProcessada = await ProcessarImagem(imagemFile);
-                        if (imagemProcessada.HasError)
+                        // Verifica se é um arquivo de imagem válido
+                        var allowedTypes = new[] { "image/jpeg", "image/jpg", "image/png", "image/gif" };
+                        if (!allowedTypes.Contains(imagemFile.ContentType.ToLower()))
                         {
-                            ModelState.AddModelError("imagemFile", imagemProcessada.ErrorMessage!);
-                            ViewData["AdministradorId"] = new SelectList(_context.Administradores, "AdministradorId", "CPF", produto.AdministradorId);
+                            ModelState.AddModelError("imagemFile", "Por favor, selecione um arquivo de imagem válido (JPEG, PNG, GIF).");
                             ViewData["CategoriaId"] = new SelectList(_context.Categorias, "CategoriaId", "Nome", produto.CategoriaId);
+                            
+                            var adminIdClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+                            var cpfClaim = User.FindFirst("CPF")?.Value;
+                            ViewBag.AdministradorId = int.TryParse(adminIdClaim, out var adminIdReload) ? adminIdReload : 0;
+                            ViewBag.AdministradorCPF = cpfClaim;
+                            
                             return View(produto);
                         }
-                        produto.Imagem = imagemProcessada.ImagemBytes;
+
+                        // Converte o arquivo para byte array
+                        using (var memoryStream = new MemoryStream())
+                        {
+                            await imagemFile.CopyToAsync(memoryStream);
+                            produto.Imagem = memoryStream.ToArray();
+                        }
                         Console.WriteLine($"Nova imagem processada: {produto.Imagem?.Length ?? 0} bytes");
                     }
                     else
                     {
-                        // Mantém a imagem original se nenhuma nova imagem foi fornecida
-                        produto.Imagem = produtoOriginal.Imagem;
+                        // Mantém a imagem existente se nenhuma nova foi enviada
+                        produto.Imagem = produtoExistente.Imagem;
                         Console.WriteLine("Mantendo imagem original");
                     }
 
@@ -234,8 +301,13 @@ public async Task<IActionResult> Create(Produto produto, IFormFile? imagemFile)
                 }
             }
             
-            ViewData["AdministradorId"] = new SelectList(_context.Administradores, "AdministradorId", "CPF", produto.AdministradorId);
+            // Recarrega dados para a view
             ViewData["CategoriaId"] = new SelectList(_context.Categorias, "CategoriaId", "Nome", produto.CategoriaId);
+            
+            var adminIdClaimFinal = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var cpfClaimFinal = User.FindFirst("CPF")?.Value;
+            ViewBag.AdministradorId = int.TryParse(adminIdClaimFinal, out var adminIdFinal) ? adminIdFinal : 0;
+            ViewBag.AdministradorCPF = cpfClaimFinal;
             
             Console.WriteLine("=== FIM DO EDIT ===");
             return View(produto);
@@ -273,6 +345,7 @@ public async Task<IActionResult> Create(Produto produto, IFormFile? imagemFile)
             }
 
             await _context.SaveChangesAsync();
+            TempData["SuccessMessage"] = "Produto excluído com sucesso!";
             return RedirectToAction(nameof(Index));
         }
 
@@ -315,74 +388,6 @@ public async Task<IActionResult> Create(Produto produto, IFormFile? imagemFile)
             }
         }
 
-        /// <summary>
-        /// Processa o arquivo de imagem carregado
-        /// </summary>
-        /// <param name="imagemFile">Arquivo de imagem</param>
-        /// <returns>Resultado do processamento da imagem</returns>
-        private async Task<ImagemProcessadaResult> ProcessarImagem(IFormFile? imagemFile)
-        {
-            if (imagemFile == null || imagemFile.Length == 0)
-            {
-                return new ImagemProcessadaResult { ImagemBytes = null };
-            }
-
-            Console.WriteLine($"Processando imagem: {imagemFile.FileName}, Tamanho: {imagemFile.Length}");
-            
-            var allowedTypes = new[] { "image/jpeg", "image/jpg", "image/png", "image/gif" };
-            
-            if (!allowedTypes.Contains(imagemFile.ContentType.ToLower()))
-            {
-                Console.WriteLine($"Tipo de arquivo inválido: {imagemFile.ContentType}");
-                return new ImagemProcessadaResult 
-                { 
-                    HasError = true, 
-                    ErrorMessage = "Formato de imagem inválido. Use JPEG, PNG ou GIF." 
-                };
-            }
-            
-            if (imagemFile.Length > 5 * 1024 * 1024) // 5MB
-            {
-                Console.WriteLine("Imagem muito grande");
-                return new ImagemProcessadaResult 
-                { 
-                    HasError = true, 
-                    ErrorMessage = "Imagem muito grande. Máximo permitido: 5MB." 
-                };
-            }
-
-            try
-            {
-                using (var memoryStream = new MemoryStream())
-                {
-                    await imagemFile.CopyToAsync(memoryStream);
-                    var imagemBytes = memoryStream.ToArray();
-                    Console.WriteLine($"Imagem processada com sucesso: {imagemBytes.Length} bytes");
-                    
-                    return new ImagemProcessadaResult { ImagemBytes = imagemBytes };
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Erro ao processar imagem: {ex.Message}");
-                return new ImagemProcessadaResult 
-                { 
-                    HasError = true, 
-                    ErrorMessage = "Erro ao processar a imagem." 
-                };
-            }
-        }
-
         #endregion
-    }
-
-    /// <summary>
-    /// Classe para retornar o resultado do processamento de imagem
-    /// </summary>
-    public class ImagemProcessadaResult
-    {
-        public byte[]? ImagemBytes { get; set; }
-        public bool HasError { get; set; } = false;
-        public string? ErrorMessage { get; set; }
     }
 }
