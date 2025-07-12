@@ -91,6 +91,7 @@
             <div class="text-center mt-3">
                 <a asp-action="Index" class="btn btn-secondary">Voltar para Lista</a>
                 <a asp-action="Details" asp-route-id="@Model.ProdutoId" class="btn btn-secondary">Ver Detalhes</a>
+                <a href="@Url.Action("Index", "IgredienteProduto", new { produtoId = Model.ProdutoId })" class="btn btn-primary">Editar Ingredientes</a>
             </div>
         </div>
     </div>

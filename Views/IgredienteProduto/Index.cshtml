@@ -9,7 +9,7 @@
     <div class="ingredientes-section">
         <div class="section-header">
             <div class="header-content">
-                <h1>🍊 Gerenciar Ingredientes</h1>
+                <h1> Gerenciar Ingredientes</h1>
                 <p class="section-subtitle">
                     Produto: <strong>@Model.Produto.Nome</strong> | 
                     Valor: <strong>R$ @Model.Produto.Valor.ToString("F2")</strong>
@@ -25,7 +25,7 @@
                 <div class="ingredientes-grid">
                     @foreach (var ingrediente in Model.TodosIngredientes)
                     {
-                        var quantidade = Model.GetQuantidadeIngrediente(ingrediente.IgredienteId);
+                        var quantidade = (int)Model.GetQuantidadeIngrediente(ingrediente.IgredienteId);
                         <div class="ingrediente-card @(quantidade > 0 ? "selecionado" : "")" data-ingrediente-id="@ingrediente.IgredienteId">
                             <div class="ingrediente-image">
                                 @if (ingrediente.Imagem != null && ingrediente.Imagem.Length > 0)
@@ -44,19 +44,17 @@
                                 <p class="ingrediente-valor">R$ @ingrediente.Valor.ToString("F2")</p>
                             </div>
                             <div class="quantidade-section">
-                                <div class="quantidade-display" data-quantidade="@quantidade.ToString("F2")">
-                                    @quantidade.ToString("F2")
+                                <div class="quantidade-display" data-quantidade="@quantidade">
+                                    @quantidade
                                 </div>
                                 <div class="quantidade-controls">
                                     <button type="button" class="btn-quantidade btn-menos" data-action="diminuir">
-                                        <i class="fas fa-minus"></i>
                                     </button>
                                     <input type="hidden" 
                                            class="quantidade-input" 
                                            name="ingredientes[@ingrediente.IgredienteId]" 
-                                           value="@quantidade.ToString("F2", System.Globalization.CultureInfo.InvariantCulture)" />
+                                           value="@quantidade" />
                                     <button type="button" class="btn-quantidade btn-mais" data-action="aumentar">
-                                        <i class="fas fa-plus"></i>
                                     </button>
                                 </div>
                             </div>
@@ -80,40 +78,41 @@
     </div>
 </div>
 
-<!-- Modal de Loading -->
-<div class="modal fade" id="loadingModal" tabindex="-1" data-backdrop="static" data-keyboard="false">
-    <div class="modal-dialog modal-sm modal-dialog-centered">
-        <div class="modal-content" style="border: none; border-radius: 15px; overflow: hidden;">
-            <div class="modal-body text-center" style="background: linear-gradient(135deg, #ff6b35 0%, #ff8f65 100%); color: white; padding: 30px;">
-                <div class="spinner-border" style="color: white; width: 3rem; height: 3rem;" role="status">
-                    <span class="sr-only">Salvando...</span>
-                </div>
-                <p class="mt-3 mb-0" style="font-weight: 600; font-size: 1.1rem;">Salvando ingredientes...</p>
-            </div>
-        </div>
-    </div>
-</div>
 
 @section Scripts {
+    <!-- Adicionando jQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+    
     <script>
         $(document).ready(function () {
-            $('.btn-quantidade').on('click', function () {
+            // Gerenciar cliques nos botões + e -
+            $('.btn-quantidade').on('click', function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+                
                 const card = $(this).closest('.ingrediente-card');
                 const input = card.find('.quantidade-input');
                 const display = card.find('.quantidade-display');
                 const action = $(this).data('action');
-                let valor = parseFloat(input.val()) || 0;
+                let valor = parseInt(input.val()) || 0;
 
                 if (action === 'aumentar') {
-                    valor += 0.25;
+                    valor += 1;
                 } else if (action === 'diminuir') {
-                    valor = Math.max(0, valor - 0.25);
+                    valor = Math.max(0, valor - 1);
                 }
 
-                input.val(valor.toFixed(2));
-                display.text(valor.toFixed(2));
-                display.attr('data-quantidade', valor.toFixed(2));
+                input.val(valor);
+                display.text(valor);
+                display.attr('data-quantidade', valor);
                 atualizarVisualCard(card, valor);
+                
+                // Salvar automaticamente após 1 segundo de inatividade
+                clearTimeout(window.autoSaveTimer);
+                window.autoSaveTimer = setTimeout(function() {
+                    salvarIngredientes();
+                }, 1000);
             });
 
             function atualizarVisualCard(card, quantidade) {
@@ -128,7 +127,11 @@
                 const form = $('#ingredientesForm')[0];
                 const formData = new FormData(form);
 
-                $('#loadingModal').modal('show');
+                // Verificar se existe modal de loading
+                const loadingModal = $('#loadingModal');
+                if (loadingModal.length > 0) {
+                    loadingModal.modal('show');
+                }
 
                 $.ajax({
                     url: '@Url.Action("SalvarIngredientes", "IgredienteProduto")',
@@ -137,7 +140,9 @@
                     processData: false,
                     contentType: false,
                     success: function (response) {
-                        $('#loadingModal').modal('hide');
+                        if (loadingModal.length > 0) {
+                            loadingModal.modal('hide');
+                        }
                         if (response.success) {
                             showToast('success', response.message);
                         } else {
@@ -145,16 +150,18 @@
                         }
                     },
                     error: function () {
-                        $('#loadingModal').modal('hide');
+                        if (loadingModal.length > 0) {
+                            loadingModal.modal('hide');
+                        }
                         showToast('error', 'Erro de comunicação com o servidor.');
                     }
                 });
             });
 
             $('#limparTodos').on('click', function () {
-                if (confirm('🗑️ Tem certeza que deseja remover todos os ingredientes deste produto?')) {
-                    $('.quantidade-input').val('0.00');
-                    $('.quantidade-display').text('0.00').attr('data-quantidade', '0.00');
+                if (confirm('Tem certeza que deseja remover todos os ingredientes deste produto?')) {
+                    $('.quantidade-input').val('0');
+                    $('.quantidade-display').text('0').attr('data-quantidade', '0');
                     $('.ingrediente-card').removeClass('selecionado');
                 }
             });
@@ -168,20 +175,30 @@
                     ? '<i class="fas fa-check-circle"></i>'
                     : '<i class="fas fa-exclamation-triangle"></i>';
 
-                const toast = `
-                    <div class="toast text-white" role="alert" style="position: fixed; top: 20px; right: 20px; z-index: 9999; background: ${bgColor}; border: none; min-width: 350px;">
+                const toast = $(`
+                    <div class="toast text-white" role="alert" style="position: fixed; top: 20px; right: 20px; z-index: 9999; background: ${bgColor}; border: none; min-width: 350px; border-radius: 15px;">
                         <div class="toast-body d-flex align-items-center" style="padding: 20px;">
                             <div style="font-size: 1.5rem; margin-right: 15px;">${icon}</div>
                             <div style="font-weight: 600;">${message}</div>
                         </div>
-                    </div>`;
+                    </div>`);
 
                 $('body').append(toast);
-                $('.toast').last().toast({ delay: 4000 }).toast('show');
-                $('.toast').last().on('hidden.bs.toast', function () {
-                    $(this).remove();
-                });
+                
+                // Mostrar toast
+                toast.show();
+                
+                // Remover após 4 segundos
+                setTimeout(() => {
+                    toast.fadeOut(500, function() {
+                        $(this).remove();
+                    });
+                }, 4000);
             }
         });
     </script>
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/crudIgredProduto.css" />
 }
