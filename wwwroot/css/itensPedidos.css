@@ -235,3 +235,233 @@ body {
     }
 }
 */
+
+.quantidade-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 2px solid #f0f0f0;
+            gap: 15px;
+        }
+
+        .quantidade-texto {
+            font-weight: 600;
+            color: #2c3e50;
+            font-size: 16px;
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            padding: 8px 16px;
+            border-radius: 8px;
+            border: 1px solid #dee2e6;
+        }
+
+        .btn-remover-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: linear-gradient(135deg, #ff4757, #ff3742);
+            color: white;
+            border: none;
+            padding: 14px 24px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: 600;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 12px rgba(255, 71, 87, 0.25);
+            position: relative;
+            overflow: hidden;
+            min-width: 160px;
+            justify-content: center;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-icon-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 24px;
+            height: 24px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .btn-remover-item:hover .btn-icon-container {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.1);
+        }
+
+        .btn-ripple {
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transition: left 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .btn-remover-item:hover .btn-ripple {
+            left: 100%;
+        }
+
+        .btn-remover-item:hover {
+            background: linear-gradient(135deg, #ff3742, #ff2731);
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 8px 20px rgba(255, 71, 87, 0.4);
+        }
+
+        .btn-remover-item:active {
+            transform: translateY(-1px) scale(0.98);
+            box-shadow: 0 4px 12px rgba(255, 71, 87, 0.3);
+        }
+
+        .btn-remover-item i {
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-remover-item:hover i {
+            transform: scale(1.1);
+        }
+
+        .btn-text {
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-remover-item:hover .btn-text {
+            transform: translateX(2px);
+        }
+
+        .btn-voltar-pedidos {
+            background: linear-gradient(135deg, #007bff, #0056b3);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0, 123, 255, 0.2);
+        }
+
+        .btn-voltar-pedidos:hover {
+            background: linear-gradient(135deg, #0056b3, #004085);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 123, 255, 0.3);
+        }
+
+        .loading {
+            color: #666;
+            font-size: 16px;
+        }
+
+        .empty-cart {
+            color: #999;
+            font-size: 16px;
+        }
+
+        .empty-cart p {
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+
+        .total-item.desconto {
+            color: #28a745;
+            font-weight: bold;
+        }
+
+        .total-item.desconto span:last-child {
+            color: #28a745;
+        }
+
+        /* Notificações */
+        .notificacao {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 12px 20px;
+            border-radius: 8px;
+            color: white;
+            font-weight: 500;
+            z-index: 1000;
+            animation: slideIn 0.3s ease;
+        }
+
+        .notificacao.success {
+            background: linear-gradient(135deg, #28a745, #20c997);
+            box-shadow: 0 4px 8px rgba(40, 167, 69, 0.3);
+        }
+
+        .notificacao.error {
+            background: linear-gradient(135deg, #dc3545, #c82333);
+            box-shadow: 0 4px 8px rgba(220, 53, 69, 0.3);
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        /* Melhorias responsivas */
+        @media (max-width: 768px) {
+            .quantidade-item {
+                flex-direction: column;
+                gap: 15px;
+                align-items: stretch;
+            }
+
+            .btn-remover-item {
+                width: 100%;
+                padding: 16px 24px;
+                font-size: 16px;
+                min-width: auto;
+            }
+
+            .quantidade-texto {
+                text-align: center;
+                font-size: 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .btn-remover-item {
+                padding: 18px 24px;
+                font-size: 17px;
+            }
+            
+            .btn-icon-container {
+                width: 28px;
+                height: 28px;
+            }
+            
+            .btn-remover-item i {
+                font-size: 18px;
+            }
+        }
+
+        /* Animações de transição */
+        .VisualizaItensPedidos {
+            transition: all 0.3s ease;
+        }
+
+        .card-pedido {
+            transition: all 0.3s ease;
+        }
+
+        .card-pedido:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
