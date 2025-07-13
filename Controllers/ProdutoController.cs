@@ -137,14 +137,17 @@ namespace TotemPWA.Controllers
                     TempData["SuccessMessage"] = "Produto criado com sucesso!";
                     
                     // Redireciona para ingredientes se NÃO for combo
-                    if (produto.IsCombo == 0)
-                    {
+                    if (produto.IsCombo == 0){
                         TempData["InfoMessage"] = "Agora você pode configurar os ingredientes do produto.";
                         return RedirectToAction("Index", "IgredienteProduto", new { produtoId = produto.ProdutoId });
                     }
                     
-                    // Se for combo, vai direto para a lista de produtos
-                    return RedirectToAction(nameof(Index));
+                    else
+                    {
+                        // Se for combo, redireciona para a tela de configuração do combo
+                        TempData["InfoMessage"] = "Agora você pode configurar os itens do combo.";
+                        return RedirectToAction("Index", "ItensCombo", new { produtoId = produto.ProdutoId });
+                    }
                 }
                 catch (Exception ex)
                 {

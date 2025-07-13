@@ -61,7 +61,7 @@
 
                 <div class="form-group">
                     <label asp-for="IsCombo">É Combo?</label>
-                    <select asp-for="IsCombo" class="form-control">
+                    <select asp-for="IsCombo" class="form-control" id="isComboSelect">
                         <option value="0">Não</option>
                         <option value="1">Sim</option>
                     </select>
@@ -91,7 +91,18 @@
             <div class="text-center mt-3">
                 <a asp-action="Index" class="btn btn-secondary">Voltar para Lista</a>
                 <a asp-action="Details" asp-route-id="@Model.ProdutoId" class="btn btn-secondary">Ver Detalhes</a>
-                <a href="@Url.Action("Index", "IgredienteProduto", new { produtoId = Model.ProdutoId })" class="btn btn-primary">Editar Ingredientes</a>
+                
+                @* Botão dinâmico baseado no tipo do produto *@
+                <span id="actionButtons">
+                    @if (Model.IsCombo == 1)
+                    {
+                        <a href="~/ItensCombo?produtoId=@Model.ProdutoId" class="btn btn-primary">Editar Itens do Combo</a>
+                    }
+                    else
+                    {
+                        <a href="@Url.Action("Index", "IgredienteProduto", new { produtoId = Model.ProdutoId })" class="btn btn-primary">Editar Ingredientes</a>
+                    }
+                </span>
             </div>
         </div>
     </div>
@@ -101,6 +112,7 @@
     @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
 
     <script>
+        // Preview da imagem
         document.getElementById('imagemFile').addEventListener('change', function (e) {
             const file = e.target.files[0];
             if (file) {
@@ -132,6 +144,28 @@
                 reader.readAsDataURL(file);
             }
         });
+
+        // Função para atualizar o botão dinamicamente quando o tipo do produto mudar
+        function updateActionButton() {
+            const isCombo = document.getElementById('isComboSelect').value;
+            const actionButtons = document.getElementById('actionButtons');
+            const produtoId = @Model.ProdutoId;
+            
+            if (isCombo === '1') {
+                // É combo - mostrar botão para editar itens do combo
+                actionButtons.innerHTML = `
+                    <a href="~/ItensCombo?produtoId=${produtoId}" class="btn btn-primary">Editar Itens do Combo</a>
+                `;
+            } else {
+                // Não é combo - mostrar botão para editar ingredientes
+                actionButtons.innerHTML = `
+                    <a href="@Url.Action("Index", "IgredienteProduto")?produtoId=${produtoId}" class="btn btn-primary">Editar Ingredientes</a>
+                `;
+            }
+        }
+
+        // Adicionar evento para atualizar o botão quando o select mudar
+        document.getElementById('isComboSelect').addEventListener('change', updateActionButton);
     </script>
 
     <link rel="stylesheet" href="~/css/editproduto.css" />

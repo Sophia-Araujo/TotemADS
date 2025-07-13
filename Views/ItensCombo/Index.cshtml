@@ -1,0 +1,213 @@
+@{
+    ViewData["Title"] = "Gerenciar Itens do Combo";
+    Layout = "~/Views/Shared/_LayoutMenu.cshtml";
+}
+
+<div class="content-area">
+    <div class="ingredientes-section">
+        <div class="section-header">
+            <div class="header-content">
+                <h1>Gerenciar Itens do Combo</h1>
+                <p class="section-subtitle">
+                    Produto Combo: <strong>@ViewBag.ProdutoCombo.Nome</strong> | 
+                    Valor: <strong>R$ @ViewBag.ProdutoCombo.Valor.ToString("F2")</strong> |
+                    Categoria: <strong>@ViewBag.ProdutoCombo.Categoria?.Nome</strong>
+                </p>
+            </div>
+        </div>
+
+        <div class="ingredientes-container">
+            <form id="itensComboForm" method="post">
+                @Html.AntiForgeryToken()
+                <input type="hidden" name="produtoId" value="@ViewBag.ProdutoCombo.ProdutoId" />
+                
+                <div class="ingredientes-grid">
+                    @foreach (var produto in ViewBag.TodosProdutos)
+                    {
+                        var quantidade = 0;
+                        var itemAssociado = ((List<TotemPWA.Models.ItensCombo>)ViewBag.ItensAssociados).FirstOrDefault(x => x.ProdutoId == produto.ProdutoId);
+                        if (itemAssociado != null)
+                        {
+                            quantidade = itemAssociado.Quantidade;
+                        }
+                        
+                        <div class="ingrediente-card @(quantidade > 0 ? "selecionado" : "")" data-produto-id="@produto.ProdutoId">
+                            <div class="ingrediente-image">
+                                @if (produto.Imagem != null && produto.Imagem.Length > 0)
+                                {
+                                    <img src="@Url.Action("ExibirImagemProduto", "ItensCombo", new { id = produto.ProdutoId })" alt="@produto.Nome" />
+                                }
+                                else
+                                {
+                                    <div class="no-image">
+                                        <i class="fas fa-box"></i>
+                                    </div>
+                                }
+                            </div>
+                            <div class="ingrediente-info">
+                                <h3 class="ingrediente-nome">@produto.Nome</h3>
+                                <p class="ingrediente-descricao">@produto.Descricao</p>
+                                <p class="ingrediente-valor">R$ @produto.Valor.ToString("F2")</p>
+                            </div>
+                            <div class="quantidade-section">
+                                <div class="quantidade-display" data-quantidade="@quantidade">
+                                    @quantidade
+                                </div>
+                                <div class="quantidade-controls">
+                                    <button type="button" class="btn-quantidade btn-menos" data-action="diminuir">
+                                    </button>
+                                    <input type="hidden" 
+                                           class="quantidade-input" 
+                                           name="produtos[@produto.ProdutoId]" 
+                                           value="@quantidade" />
+                                    <button type="button" class="btn-quantidade btn-mais" data-action="aumentar">
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+
+                <div class="actions-container">
+                    <button type="button" id="salvarItens" class="btn btn-primary">
+                        <i class="fas fa-save"></i> Salvar Itens do Combo
+                    </button>
+                    <button type="button" id="limparTodos" class="btn btn-warning">
+                        <i class="fas fa-eraser"></i> Limpar Todos
+                    </button>
+                    <a asp-controller="Produto" asp-action="Index" class="btn btn-secondary">
+                        <i class="fas fa-arrow-left"></i> Voltar aos Produtos
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <!-- Adicionando jQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        $(document).ready(function () {
+            // Gerenciar cliques nos botões + e -
+            $('.btn-quantidade').on('click', function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                const card = $(this).closest('.ingrediente-card');
+                const input = card.find('.quantidade-input');
+                const display = card.find('.quantidade-display');
+                const action = $(this).data('action');
+                let valor = parseInt(input.val()) || 0;
+
+                if (action === 'aumentar') {
+                    valor += 1;
+                } else if (action === 'diminuir') {
+                    valor = Math.max(0, valor - 1);
+                }
+
+                input.val(valor);
+                display.text(valor);
+                display.attr('data-quantidade', valor);
+                atualizarVisualCard(card, valor);
+                
+                // Salvar automaticamente após 1 segundo de inatividade
+                clearTimeout(window.autoSaveTimer);
+                window.autoSaveTimer = setTimeout(function() {
+                    salvarItens();
+                }, 1000);
+            });
+
+            function atualizarVisualCard(card, quantidade) {
+                if (quantidade > 0) {
+                    card.addClass('selecionado');
+                } else {
+                    card.removeClass('selecionado');
+                }
+            }
+
+            function salvarItens() {
+                const form = $('#itensComboForm')[0];
+                const formData = new FormData(form);
+
+                // Verificar se existe modal de loading
+                const loadingModal = $('#loadingModal');
+                if (loadingModal.length > 0) {
+                    loadingModal.modal('show');
+                }
+
+                $.ajax({
+                    url: '@Url.Action("SalvarItens", "ItensCombo")',
+                    type: 'POST',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function (response) {
+                        if (loadingModal.length > 0) {
+                            loadingModal.modal('hide');
+                        }
+                        if (response.success) {
+                            showToast('success', response.message);
+                        } else {
+                            showToast('error', response.message);
+                        }
+                    },
+                    error: function () {
+                        if (loadingModal.length > 0) {
+                            loadingModal.modal('hide');
+                        }
+                        showToast('error', 'Erro de comunicação com o servidor.');
+                    }
+                });
+            }
+
+            $('#salvarItens').on('click', function () {
+                salvarItens();
+            });
+
+            $('#limparTodos').on('click', function () {
+                if (confirm('Tem certeza que deseja remover todos os itens deste combo?')) {
+                    $('.quantidade-input').val('0');
+                    $('.quantidade-display').text('0').attr('data-quantidade', '0');
+                    $('.ingrediente-card').removeClass('selecionado');
+                }
+            });
+
+            function showToast(type, message) {
+                const bgColor = type === 'success'
+                    ? 'linear-gradient(135deg, #28a745 0%, #20c997 100%)'
+                    : 'linear-gradient(135deg, #dc3545 0%, #fd7e14 100%)';
+
+                const icon = type === 'success'
+                    ? '<i class="fas fa-check-circle"></i>'
+                    : '<i class="fas fa-exclamation-triangle"></i>';
+
+                const toast = $(`
+                    <div class="toast text-white" role="alert" style="position: fixed; top: 20px; right: 20px; z-index: 9999; background: ${bgColor}; border: none; min-width: 350px; border-radius: 15px;">
+                        <div class="toast-body d-flex align-items-center" style="padding: 20px;">
+                            <div style="font-size: 1.5rem; margin-right: 15px;">${icon}</div>
+                            <div style="font-weight: 600;">${message}</div>
+                        </div>
+                    </div>`);
+
+                $('body').append(toast);
+                
+                // Mostrar toast
+                toast.show();
+                
+                // Remover após 4 segundos
+                setTimeout(() => {
+                    toast.fadeOut(500, function() {
+                        $(this).remove();
+                    });
+                }, 4000);
+            }
+        });
+    </script>
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/crudIgredProduto.css" />
+}

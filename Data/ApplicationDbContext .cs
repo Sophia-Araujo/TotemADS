@@ -21,7 +21,6 @@ namespace TotemPWA.Data
         public DbSet<IgredienteProduto> IgredienteProdutos { get; set; }
         public DbSet<Produto> Produto { get; set; }
         public DbSet<Categoria> Categorias { get; set; }
-
         public DbSet<ItensCombo> ItensCombos { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -63,12 +62,26 @@ namespace TotemPWA.Data
                 .HasForeignKey(a => a.ItensPedidoId)
                 .OnDelete(DeleteBehavior.Cascade);
 
-            //autorelacionamento de Categoria
+            // Autorelacionamento de Categoria
             modelBuilder.Entity<Categoria>()
-             .HasOne(c => c.CategoriaPai)
-             .WithMany(c => c.Subcategorias)
-             .HasForeignKey(c => c.CategoriaPaiId);
+                .HasOne(c => c.CategoriaPai)
+                .WithMany(c => c.Subcategorias)
+                .HasForeignKey(c => c.CategoriaPaiId);
 
+            // Configuração para ItensCombo - ATUALIZADA
+            modelBuilder.Entity<ItensCombo>()
+                .HasOne(ic => ic.Produto)
+                .WithMany()
+                .HasForeignKey(ic => ic.ProdutoId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            // CupomId agora é nullable e não obrigatório
+            modelBuilder.Entity<ItensCombo>()
+                .HasOne(ic => ic.Cupom)
+                .WithMany()
+                .HasForeignKey(ic => ic.CupomId)
+                .OnDelete(DeleteBehavior.SetNull)
+                .IsRequired(false); // Permite null
         }
     }
 }

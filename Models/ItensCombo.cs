@@ -9,6 +9,8 @@ namespace TotemPWA.Models
 
         [Required]
         public int Quantidade { get; set; }
+        [Required]
+        public int ComboId { get; set; }
 
         //Estrangeira de Produto
         [Required]
@@ -18,7 +20,6 @@ namespace TotemPWA.Models
 
         //Estrangeira de Cupom
         public Cupom Cupom { get; set; }
-        [Required]
         public int? CupomId { get; set; }
         //
     }

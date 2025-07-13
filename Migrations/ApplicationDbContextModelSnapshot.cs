@@ -199,10 +199,19 @@ namespace TotemPWA.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("CupomId")
+                    b.Property<int>("ComboId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("CupomId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("CupomId1")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("ProdutoId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("ProdutoId1")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("Quantidade")
@@ -210,10 +219,14 @@ namespace TotemPWA.Migrations
 
                     b.HasKey("ItensComboId");
 
-                    b.HasIndex("CupomId")
+                    b.HasIndex("CupomId");
+
+                    b.HasIndex("CupomId1")
                         .IsUnique();
 
                     b.HasIndex("ProdutoId");
+
+                    b.HasIndex("ProdutoId1");
 
                     b.ToTable("ItensCombos");
                 });
@@ -403,16 +416,23 @@ namespace TotemPWA.Migrations
             modelBuilder.Entity("TotemPWA.Models.ItensCombo", b =>
                 {
                     b.HasOne("TotemPWA.Models.Cupom", "Cupom")
+                        .WithMany()
+                        .HasForeignKey("CupomId")
+                        .OnDelete(DeleteBehavior.SetNull);
+
+                    b.HasOne("TotemPWA.Models.Cupom", null)
                         .WithOne("ItensCombo")
-                        .HasForeignKey("TotemPWA.Models.ItensCombo", "CupomId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("TotemPWA.Models.ItensCombo", "CupomId1");
 
                     b.HasOne("TotemPWA.Models.Produto", "Produto")
-                        .WithMany("ItensCombo")
+                        .WithMany()
                         .HasForeignKey("ProdutoId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.HasOne("TotemPWA.Models.Produto", null)
+                        .WithMany("ItensCombo")
+                        .HasForeignKey("ProdutoId1");
 
                     b.Navigation("Cupom");
 
