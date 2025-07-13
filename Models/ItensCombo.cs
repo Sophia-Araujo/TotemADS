@@ -19,7 +19,7 @@ namespace TotemPWA.Models
         //Estrangeira de Cupom
         public Cupom Cupom { get; set; }
         [Required]
-        public int CupomId { get; set; }
+        public int? CupomId { get; set; }
         //
     }
 }
