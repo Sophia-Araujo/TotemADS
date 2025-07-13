@@ -151,9 +151,13 @@
                             <h3 class="precoPedido">R$: ${(item.valor * item.quantidade).toFixed(2).replace('.', ',')}</h3>
                             <p class="descricaoPedido">${item.descricao}</p>
                             <div class="quantidade-item">
-                                <span>Quantidade: ${item.quantidade}x</span>
-                                <button class="btn-remover-item" onclick="removerItem(${index})" title="Remover item">
-                                    ×
+                                <span class="quantidade-texto">Quantidade: ${item.quantidade}</span>
+                                <button class="btn-remover-item" onclick="removerItem(${index})" title="Remover item do pedido">
+                                    <div class="btn-icon-container">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </div>
+                                    <span class="btn-text">Remover Item</span>
+                                    <div class="btn-ripple"></div>
                                 </button>
                             </div>
                         </div>
@@ -228,20 +232,53 @@
         }
 
         function removerItem(index) {
-            if (confirm('Deseja remover este item do pedido?')) {
-                carrinhoPedido.splice(index, 1);
-                
-                // Atualizar localStorage
-                localStorage.setItem('pedido-finalizar', JSON.stringify(carrinhoPedido));
-                
-                if (carrinhoPedido.length === 0) {
-                    document.getElementById('carrinho-vazio').style.display = 'block';
-                    document.getElementById('resumo-pedido').style.display = 'none';
-                } else {
-                    renderizarItensPedido();
-                    calcularResumo();
+            const item = carrinhoPedido[index];
+            
+            // Modal de confirmação personalizado
+            const confirmar = confirm(`Deseja remover "${item.nome}" do pedido?\n\nQuantidade: ${item.quantidade}x\nValor: R$ ${(item.valor * item.quantidade).toFixed(2).replace('.', ',')}`);
+            
+            if (confirmar) {
+                // Animação de remoção
+                const itemElement = document.querySelectorAll('.VisualizaItensPedidos')[index];
+                if (itemElement) {
+                    itemElement.style.transition = 'all 0.3s ease';
+                    itemElement.style.transform = 'translateX(-100%)';
+                    itemElement.style.opacity = '0';
+                    
+                    setTimeout(() => {
+                        carrinhoPedido.splice(index, 1);
+                        
+                        // Atualizar localStorage
+                        localStorage.setItem('pedido-finalizar', JSON.stringify(carrinhoPedido));
+                        
+                        if (carrinhoPedido.length === 0) {
+                            document.getElementById('carrinho-vazio').style.display = 'block';
+                            document.getElementById('resumo-pedido').style.display = 'none';
+                        } else {
+                            renderizarItensPedido();
+                            calcularResumo();
+                        }
+                        
+                        // Feedback visual
+                        mostrarNotificacao('Item removido com sucesso!', 'success');
+                    }, 300);
                 }
             }
+        }
+
+        function mostrarNotificacao(mensagem, tipo = 'info') {
+            // Criar notificação
+            const notificacao = document.createElement('div');
+            notificacao.className = `notificacao ${tipo}`;
+            notificacao.textContent = mensagem;
+            
+            // Adicionar ao body
+            document.body.appendChild(notificacao);
+            
+            // Remover após 3 segundos
+            setTimeout(() => {
+                notificacao.remove();
+            }, 3000);
         }
 
         function cancelarPedido() {
@@ -338,61 +375,5 @@
         }
     </script>
 
-    <style>
-        .quantidade-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 10px;
-            padding-top: 10px;
-            border-top: 1px solid #eee;
-        }
-
-        .btn-remover-item {
-            background: #ff4444;
-            color: white;
-            border: none;
-            border-radius: 50%;
-            width: 25px;
-            height: 25px;
-            cursor: pointer;
-            font-size: 16px;
-            line-height: 1;
-        }
-
-        .btn-remover-item:hover {
-            background: #cc0000;
-        }
-
-        .btn-voltar-pedidos {
-            background: #007bff;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-        }
-
-        .btn-voltar-pedidos:hover {
-            background: #0056b3;
-        }
-
-        .loading {
-            color: #666;
-        }
-
-        .empty-cart {
-            color: #999;
-        }
-
-        .total-item.desconto {
-            color: #28a745;
-            font-weight: bold;
-        }
-
-        .total-item.desconto span:last-child {
-            color: #28a745;
-        }
-    </style>
+  
 }
