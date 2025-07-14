@@ -11,7 +11,7 @@
 .content-area {
     padding: 20px 40px;
     background-color: #f8f9fa;
-    max-height: 100vh;
+    min-height: 100vh;
 }
 
 .admin-section {
@@ -45,7 +45,8 @@
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 1px;
-    margin-bottom: 5px; /* Espaçamento entre título e subtítulo */
+    margin-bottom: 5px;
+    /* Espaçamento entre título e subtítulo */
 }
 
 .section-subtitle {
@@ -87,7 +88,8 @@
 
 /* Container responsivo para a tabela */
 .table-responsive {
-    overflow-x: auto; /* Permite scroll horizontal em telas pequenas */
+    overflow-x: auto;
+    /* Permite scroll horizontal em telas pequenas */
     margin-top: 20px;
 }
 
@@ -96,9 +98,11 @@
     width: 100%;
     border-collapse: collapse;
     font-size: 15px;
-    min-width: 800px; /* Largura mínima para a tabela, garantindo que colunas não fiquem muito apertadas */
+    min-width: 800px;
+    /* Largura mínima para a tabela, garantindo que colunas não fiquem muito apertadas */
     border-radius: 8px;
-    overflow: hidden; /* Garante que o border-radius seja aplicado */
+    overflow: hidden;
+    /* Garante que o border-radius seja aplicado */
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
@@ -122,7 +126,8 @@
     border-bottom: 1px solid #eee;
     text-align: left;
     vertical-align: middle;
-    color: #555; /* Cor padrão para o texto das células */
+    color: #555;
+    /* Cor padrão para o texto das células */
 }
 
 .table-custom tbody tr:nth-child(even) {
@@ -131,22 +136,19 @@
 
 /* Estilo para a imagem na tabela */
 .product-table-image {
-    width: 60px; /* Tamanho fixo para a imagem na tabela */
+    width: 60px;
     height: 60px;
-    object-fit: cover; /* Garante que a imagem preencha o espaço sem distorcer */
+    object-fit: cover;
     border-radius: 8px;
     border: 1px solid #ddd;
-    display: block; /* Remove espaço extra abaixo da imagem */
-    margin: 0 auto; /* Centraliza a imagem na célula */
+    display: block;
 }
 
-/* Célula de ações */
 .actions-cell {
-    display: flex;
     gap: 8px;
-    flex-wrap: wrap; /* Permite quebrar linha em telas menores */
+    flex-wrap: wrap;
     align-items: center;
-    justify-content: center; /* Centraliza os botões */
+    justify-content: center;
 }
 
 /* Botões dentro da tabela (tamanho pequeno) */
@@ -225,7 +227,10 @@
 }
 
 /* Ícones simples com texto (para o botão "Novo Produto") */
-.icon-plus::before { content: "+"; margin-right: 5px; } 
+.icon-plus::before {
+    content: "+";
+    margin-right: 5px;
+}
 
 /* Responsividade */
 @media (max-width: 1280px) {
@@ -239,7 +244,8 @@
     }
 
     .table-custom {
-        min-width: 700px; /* Ajustado para telas um pouco menores */
+        min-width: 700px;
+        /* Ajustado para telas um pouco menores */
     }
 }
 
@@ -271,7 +277,8 @@
     }
 
     .table-custom {
-        min-width: 0; /* Permite que a tabela seja menor que o conteúdo em telas muito pequenas */
+        min-width: 0;
+        /* Permite que a tabela seja menor que o conteúdo em telas muito pequenas */
         font-size: 13px;
     }
 
@@ -328,6 +335,7 @@
         opacity: 0;
         transform: translateY(20px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);

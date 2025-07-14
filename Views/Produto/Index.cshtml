@@ -11,62 +11,66 @@
 
 <div class="content-area">
     <div class="produtos-section">
-        <div class="section-header">
-            <div class="header-content">
-                <h1>Produtos</h1>
-                <p class="section-subtitle">Gerencie todos os produtos cadastrados</p>
+        <div class="admin-section">
+            <div class="section-header">
+                <div class="header-content">
+                    <h1>Produtos</h1>
+                    <p class="section-subtitle">Gerencie todos os produtos cadastrados</p>
+                </div>
+                <div class="header-actions">
+                    <a asp-action="Create" class="btn btn-primary">
+                        <i class="icon-plus"></i>
+                        Novo Produto
+                    </a>
+                </div>
             </div>
-            <div class="header-actions">
-                <a asp-action="Create" class="btn btn-primary">
-                    <i class="icon-plus"></i>
-                    Novo Produto
-                </a>
-            </div>
-        </div>
 
-        @if (Model != null && Model.Any())
-        {
-            <div class="table-responsive">
-                <table class="table-custom">
-                    <thead>
-                        <tr>
-                            <th>Imagem</th>
-                            <th>Nome</th>
-                            <th>Preço</th>
-                            <th>Combo</th>
-                            <th>Criado por</th>
-                            <th>Ações</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var item in Model)
-                        {
+            @if (Model != null && Model.Any())
+            {
+                <div class="table-responsive">
+                    <table class="table-custom">
+                        <thead>
                             <tr>
-                                <td>
-                                    <img src="@Url.Action("ExibirImagem", new { id = item.ProdutoId })" 
-                                         alt="@item.Nome" 
-                                         class="product-table-image" />
-                                </td>
-                                <td>@item.Nome</td>
-                                <td>R$ @item.Valor.ToString("F2")</td>
-                                <td>@(item.IsCombo == 1 ? "Sim" : "Não")</td>
-                                <td>@item.Administrador?.CPF</td>
-                                <td class="actions-cell">
-                                    <a asp-action="Edit" asp-route-id="@item.ProdutoId" class="btn btn-warning btn-sm" title="Editar">
-                                        Editar
-                                    </a>
-                                    <a asp-action="Details" asp-route-id="@item.ProdutoId" class="btn btn-info btn-sm" title="Detalhes">
-                                        Detalhes
-                                    </a>
-                                    <a asp-action="Delete" asp-route-id="@item.ProdutoId" class="btn btn-danger btn-sm" title="Excluir">
-                                        Excluir
-                                    </a>
-                                </td>
+                                <th>Imagem</th>
+                                <th>Nome</th>
+                                <th>Preço</th>
+                                <th>Combo</th>
+                                <th>Criado por</th>
+                                <th>Ações</th>
                             </tr>
-                        }
-                    </tbody>
-                </table>
-            </div>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        <img src="@Url.Action("ExibirImagem", new { id = item.ProdutoId })" alt="@item.Nome"
+                                            class="product-table-image" />
+                                    </td>
+                                    <td>@item.Nome</td>
+                                    <td>R$ @item.Valor.ToString("F2")</td>
+                                    <td>@(item.IsCombo == 1 ? "Sim" : "Não")</td>
+                                    <td>@item.Administrador?.CPF</td>
+                                    <td class="actions-cell">
+                                        <a asp-action="Edit" asp-route-id="@item.ProdutoId" class="btn btn-warning btn-sm"
+                                            title="Editar">
+                                            Editar
+                                        </a>
+                                        <a asp-action="Details" asp-route-id="@item.ProdutoId" class="btn btn-info btn-sm"
+                                            title="Detalhes">
+                                            Detalhes
+                                        </a>
+                                        <a asp-action="Delete" asp-route-id="@item.ProdutoId" class="btn btn-danger btn-sm"
+                                            title="Excluir">
+                                            Excluir
+                                        </a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+          
         }
         else
         {
@@ -76,5 +80,6 @@
                 <a asp-action="Create" class="btn btn-primary">Criar Primeiro Produto</a>
             </div>
         }
+          </div>
     </div>
 </div>
