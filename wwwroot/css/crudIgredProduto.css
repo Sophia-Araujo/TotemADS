@@ -13,25 +13,6 @@
     max-height: 100vh;
 }
 
-.admin-section {
-    background-color: #ffffff;
-    border-radius: 12px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-    padding: 30px;
-    max-width: 1000px;
-    margin: 0 auto;
-}
-
-.section-header {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 25px;
-    border-bottom: 2px solid #f0f0f0;
-    padding-bottom: 15px;
-}
-
 .header-content h1 {
     color: #333333;
     font-size: 32px;
