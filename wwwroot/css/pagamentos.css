@@ -276,113 +276,182 @@ h2 {
 
 
 /* Adições porcas do Ronaldo */
- .resumo-pedido {
-            margin-top: 15px;
-            padding: 15px;
-            background-color: #f8f9fa;
-            border-radius: 8px;
-            border: 1px solid #dee2e6;
-        }
+ /* Substituindo as "Adições porcas do Ronaldo"  */
 
-        .btn-mostrar-detalhes {
-            background: #007bff;
-            color: white;
-            border: none;
-            padding: 8px 15px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 14px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
+.topo {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 2vh;
+}
 
-        .btn-mostrar-detalhes:hover {
-            background: #0056b3;
-        }
+.preco-texto {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #5E5E5E;
+}
 
-        .detalhes-pedido {
-            margin-top: 15px;
-            padding: 15px;
-            background: white;
-            border-radius: 5px;
-            border: 1px solid #ddd;
-        }
+.preco {
+    color: #ff6600;
+}
 
-        .detalhes-pedido h3 {
-            margin-top: 0;
-            margin-bottom: 15px;
-            color: #333;
-        }
+.resumo-pedido {
+    background: #FFFFFF;
+    border-radius: 20px;
+    padding: 2vh;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    border: 2px solid #dee2e6;
+    max-width: 350px;
+    transition: all 0.3s ease;
+}
 
-        .item-pedido-resumo {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 8px 0;
-            border-bottom: 1px solid #eee;
-        }
+.resumo-pedido:hover {
+    border-color: #ff6600;
+    box-shadow: 0 6px 20px rgba(255, 102, 0, 0.15);
+}
 
-        .item-info {
-            display: flex;
-            flex-direction: column;
-        }
+.btn-mostrar-detalhes {
+    background: #ff6600;
+    color: white;
+    border: none;
+    padding: 1vh 2vh;
+    border-radius: 15px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(255, 102, 0, 0.3);
+}
 
-        .item-nome {
-            font-weight: bold;
-            color: #333;
-        }
+.btn-mostrar-detalhes:hover {
+    background: #e55b00;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(255, 102, 0, 0.4);
+}
 
-        .item-quantidade {
-            font-size: 12px;
-            color: #666;
-        }
+.btn-mostrar-detalhes i {
+    font-size: 1rem;
+}
 
-        .item-valor {
-            font-weight: bold;
-            color: #007bff;
-        }
+.detalhes-pedido {
+    margin-top: 2vh;
+    padding: 2vh;
+    background: #f8f9fa;
+    border-radius: 15px;
+    border: 1px solid #dee2e6;
+    animation: fadeIn 0.3s ease;
+}
 
-        .item-personalizacao {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 4px 0 4px 20px;
-            font-size: 12px;
-            color: #666;
-        }
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-5px); }
+    to { opacity: 1; transform: translateY(0); }
+}
 
-        .totais-pedido {
-            margin-top: 15px;
-            padding-top: 15px;
-            border-top: 2px solid #ddd;
-        }
+.detalhes-pedido h3 {
+    margin-top: 0;
+    margin-bottom: 1.5vh;
+    color: #5E5E5E;
+    font-size: 1.2rem;
+    font-weight: 600;
+    text-align: center;
+    border-bottom: 2px solid #ff6600;
+    padding-bottom: 1vh;
+}
 
-        .total-linha {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 5px 0;
-        }
+.item-pedido-resumo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1vh 0;
+    border-bottom: 1px solid #dee2e6;
+}
 
-        .total-linha.desconto {
-            color: #28a745;
-        }
+.item-pedido-resumo:last-child {
+    border-bottom: none;
+}
 
-        .total-linha.total-final {
-            font-weight: bold;
-            font-size: 16px;
-            color: #333;
-            border-top: 1px solid #ddd;
-            padding-top: 10px;
-            margin-top: 10px;
-        }
+.item-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3vh;
+}
 
-        .preco-texto {
-            font-size: 18px;
-            font-weight: bold;
-        }
+.item-nome {
+    font-weight: 600;
+    color: #333;
+    font-size: 0.95rem;
+}
 
-        .preco {
-            color: #007bff;
-        }
+.item-quantidade {
+    font-size: 0.8rem;
+    color: #666;
+    font-weight: 500;
+}
+
+.item-valor {
+    font-weight: 700;
+    color: #ff6600;
+    font-size: 1rem;
+}
+
+.item-personalizacao {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5vh 0 0.5vh 2vh;
+    font-size: 0.85rem;
+    color: #666;
+    background: rgba(255, 102, 0, 0.05);
+    border-radius: 8px;
+    margin: 0.5vh 0;
+}
+
+.personalizacao-nome {
+    font-style: italic;
+}
+
+.personalizacao-quantidade {
+    font-weight: 500;
+}
+
+.totais-pedido {
+    margin-top: 2vh;
+    padding-top: 2vh;
+    border-top: 2px solid #ff6600;
+    background: #FFFFFF;
+    border-radius: 10px;
+    padding: 1.5vh;
+}
+
+.total-linha {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5vh 0;
+    font-size: 0.95rem;
+    color: #333;
+}
+
+.total-linha.desconto {
+    color: #28a745;
+    font-weight: 600;
+}
+
+.total-linha.total-final {
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: #333;
+    border-top: 2px solid #ff6600;
+    padding-top: 1vh;
+    margin-top: 1vh;
+}
+
+.total-linha.total-final span:last-child {
+    color: #ff6600;
+}
