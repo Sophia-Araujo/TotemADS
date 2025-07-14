@@ -1,0 +1,80 @@
+/* CSS para telaItensPedidos extraído do arquivo original, adicione aqui estilos específicos se necessário. */
+/* Exemplo de estilos para notificação, cards, botões, etc. */
+.notificacao {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: #4CAF50;
+    color: white;
+    padding: 15px 20px;
+    border-radius: 5px;
+    z-index: 9999;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    font-size: 16px;
+    animation: fadeIn 0.3s;
+}
+.notificacao.success {
+    background: #4CAF50;
+}
+.notificacao.info {
+    background: #2196F3;
+}
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+.VisualizaItensPedidos {
+    margin-bottom: 20px;
+    transition: all 0.3s;
+}
+.card-pedido {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background: #f9f9f9;
+    padding: 15px;
+}
+.card-conteudo {
+    display: flex;
+    flex-direction: column;
+}
+.info-lanche img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-right: 15px;
+}
+.nomePedido {
+    font-size: 20px;
+    margin: 0 0 5px 0;
+}
+.preco-detalhado {
+    font-size: 15px;
+    margin-bottom: 5px;
+}
+.precoIndividual, .precoAdicionais, .precoPedido {
+    margin-right: 10px;
+}
+.btn-remover-item {
+    background: #e74c3c;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-left: 10px;
+    display: flex;
+    align-items: center;
+}
+.btn-remover-item:hover {
+    background: #c0392b;
+}
+.ingredientesPedidoLista {
+    margin: 0;
+    padding-left: 20px;
+}
+.ingredientesPedidoLista li {
+    color: #555;
+    font-size: 14px;
+    margin: 2px 0;
+}

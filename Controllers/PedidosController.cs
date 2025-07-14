@@ -48,7 +48,7 @@ namespace TotemPWA.Controllers
             {
                 // Log do erro (você pode usar ILogger aqui)
                 // _logger.LogError(ex, "Erro ao carregar dados da tela de pedidos");
-                
+
                 // Retorna view com dados vazios em caso de erro
                 var viewModelVazio = new TelaPedidosViewModel
                 {
@@ -70,13 +70,13 @@ namespace TotemPWA.Controllers
                 if (categoria == null) return NotFound();
 
                 byte[]? imageData = type.ToLower() == "banner" ? categoria.Banner : categoria.Image;
-                
+
                 if (imageData == null || imageData.Length == 0)
                     return NotFound();
 
                 // Detecta o tipo de imagem baseado no header do arquivo
                 string contentType = DetectImageContentType(imageData);
-                
+
                 return File(imageData, contentType);
             }
             catch (Exception)
@@ -161,5 +161,42 @@ namespace TotemPWA.Controllers
             // Default para JPEG
             return "image/jpeg";
         }
+       [HttpGet("GetIngredientesProduto")]
+public async Task<JsonResult> GetIngredientesProduto(int produtoId)
+{
+    try
+    {
+        // Primeiro verificar se o produto existe e não é combo
+        var produto = await _context.Produto.FindAsync(produtoId);
+        if (produto == null || produto.IsCombo == 1)
+        {
+            return Json(new List<object>());
+        }
+
+        var ingredientes = await _context.IgredienteProdutos
+            .Where(ip => ip.ProdutoId == produtoId)
+            .Include(ip => ip.Igrediente)
+            .Select(ip => new
+            {
+                IgredienteId = ip.IgredienteId,
+                Nome = ip.Igrediente.Nome,
+                QuantidadeBase = ip.Quantidade,
+                ValorExtra = ip.Igrediente.Valor, // Valor para ingredientes extras
+                Imagem = ip.Igrediente.Imagem != null ? Convert.ToBase64String(ip.Igrediente.Imagem) : null
+            })
+            .ToListAsync();
+
+        return Json(ingredientes);
     }
+    catch (Exception)
+    {
+        return Json(new List<object>());
+    }
+}
+
+
+
+    }
+    
+    
 }
