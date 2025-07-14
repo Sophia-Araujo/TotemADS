@@ -50,7 +50,7 @@ body {
     text-decoration: none;
     color: white;
     font-weight: 500;
-    font-size: 14px;
+    font-size: 16px;
     display: block;
     transition: background 0.2s;
 }
@@ -58,7 +58,7 @@ body {
 .menu a:hover {
     background: rgba(255, 255, 255, 0.2);
     padding-left: 5px;
-    border-radius: 4px;
+    border-radius: 15px;
 }
 
 /* Rodapé do menu */
@@ -72,6 +72,25 @@ body {
     font-weight: bold;
 }
 
+/* Botão de sair */
+a.btn-btn-logout {
+    background-color: #ff6600;
+    border-radius: 16px;
+    text-decoration: none;
+    color: white;
+    padding: 4px 12px;
+    margin-left: 10px;
+    font-weight: 700;
+    font-size: 16px;
+    display: block;
+    transition: background 0.2s;
+}
+
+a.btn-btn-logout:hover {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 15px;
+}
+
 .circulo {
     width: 25px;
     height: 25px;
@@ -81,7 +100,8 @@ body {
 
 /* Conteúdo do lado direito */
 .conteudo {
-    margin-left: 250px; /* distância da sidebar */
+    margin-left: 250px;
+    /* distância da sidebar */
     padding: 40px;
     flex-grow: 1;
     background: white;

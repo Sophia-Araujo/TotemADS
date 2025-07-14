@@ -10,23 +10,7 @@
 .content-area {
     padding: 20px 40px;
     background-color: #f8f9fa;
-    min-height: 100vh;
-}
-
-.ingredientes-section {
-    background-color: #ffffff;
-    border-radius: 12px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-    padding: 30px;
-}
-
-.section-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 30px;
-    padding-bottom: 20px;
-    border-bottom: 2px solid #f0f0f0;
+    max-height: 100vh;
 }
 
 .header-content h1 {
