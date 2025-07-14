@@ -24,7 +24,6 @@ html, body {
     align-items: center;
     justify-content: center;
     border-top-right-radius: 100px;
-    border-bottom-right-radius: 100px;
 }
 
 .logo {
@@ -44,7 +43,7 @@ html, body {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 2rem;
+    padding: 10rem;
 }
 
 .login-box {

@@ -10,7 +10,7 @@
 .content-area {
     padding: 20px 40px;
     background-color: #f8f9fa;
-    min-height: 100vh;
+    max-height: 100vh;
 }
 
 .admin-section {
@@ -148,7 +148,7 @@
 
 .btn-sm {
     padding: 6px 12px;
-    font-size: 11px;
+    font-size: 12px;
     min-width: 60px;
 }
 

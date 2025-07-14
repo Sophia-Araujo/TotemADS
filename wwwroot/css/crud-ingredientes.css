@@ -7,13 +7,90 @@
     font-family: 'Poppins', sans-serif;
 }
 
+body {
+    background-color: #f8f9fa; /* Adicionado para o fundo geral */
+}
+
+/* Sidebar (Menu lateral esquerdo, se aplicável, não no CSS fornecido, mas inferido da imagem) */
+.sidebar {
+    width: 250px;
+    background-color: #FF8C42; /* Cor da sidebar da imagem */
+    padding: 20px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    height: 100%;
+    color: white;
+}
+
+.sidebar .logo {
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+.sidebar .logo img {
+    max-width: 150px;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    margin-bottom: 15px;
+}
+
+.sidebar ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: 500;
+    padding: 10px 0;
+    display: block;
+    transition: background-color 0.3s ease;
+}
+
+.sidebar ul li a:hover,
+.sidebar ul li a.active {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+    padding-left: 10px; /* Pequeno ajuste para destacar */
+}
+
+.sidebar .admin-info {
+    position: absolute;
+    bottom: 20px;
+    left: 0;
+    right: 0;
+    padding: 0 20px;
+    text-align: center;
+}
+
+.sidebar .admin-info button {
+    background-color: #FF6B1A;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+}
+
+.sidebar .admin-info button:hover {
+    background-color: #E55A15;
+}
+
+
 .content-area {
-    padding: 20px 40px;
+    margin-left: 250px; /* Ajusta para a sidebar */
+    padding: 30px 40px; /* Ajustado para mais espaçamento lateral e superior */
     background-color: #f8f9fa;
     min-height: 100vh;
 }
 
-.ingredientes-section {
+.ingredientes-section { /* Renomeado para .administradores-section ou pode manter ingredientes-section */
     background-color: #ffffff;
     border-radius: 12px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
@@ -23,32 +100,38 @@
 .section-header {
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;
+    align-items: center; /* Alinha o botão "Criar Novo" com o título */
     margin-bottom: 30px;
-    padding-bottom: 20px;
-    border-bottom: 2px solid #f0f0f0;
+    padding-bottom: 0; /* Remove o padding-bottom e border-bottom */
+    border-bottom: none; /* Remove a borda inferior */
+}
+
+.header-content {
+    display: flex;
+    flex-direction: column; /* Para empilhar título e subtítulo */
+    align-items: flex-start; /* Alinhar à esquerda */
 }
 
 .header-content h1 {
     color: #333333;
-    font-size: 32px;
+    font-size: 28px; /* Ajustado para se assemelhar à imagem */
     font-weight: 700;
-    margin: 0 0 5px 0;
+    margin: 0;
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 0; /* Remove letter-spacing extra */
 }
 
 .section-subtitle {
     color: #666666;
-    font-size: 16px;
-    margin: 0;
+    font-size: 15px; /* Ajustado para se assemelhar à imagem */
+    margin: 5px 0 0 0; /* Adiciona um pouco de margem superior */
 }
 
 /* Botões */
 .btn {
-    padding: 12px 24px;
+    padding: 10px 20px; /* Ajustado o padding */
     border-radius: 25px;
-    font-size: 16px;
+    font-size: 14px; /* Ajustado o tamanho da fonte */
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -56,7 +139,7 @@
     text-decoration: none;
     display: inline-flex;
     align-items: center;
-    gap: 8px;
+    gap: 5px; /* Ajustado o gap */
     text-transform: uppercase;
     letter-spacing: 0.5px;
 }
@@ -64,18 +147,18 @@
 .btn-primary {
     background: linear-gradient(135deg, #FF8C42, #FF6B1A);
     color: white;
-    box-shadow: 0 4px 15px rgba(255, 140, 66, 0.3);
+    box-shadow: 0 4px 10px rgba(255, 140, 66, 0.2); /* Ajustado a sombra */
 }
 
 .btn-primary:hover {
     background: linear-gradient(135deg, #FF6B1A, #E55A15);
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(255, 140, 66, 0.4);
+    box-shadow: 0 6px 15px rgba(255, 140, 66, 0.3);
     color: white;
     text-decoration: none;
 }
 
-/* Alert de erro */
+/* Alert de erro - Manter como está */
 .alert {
     padding: 15px;
     margin-bottom: 20px;
@@ -93,239 +176,222 @@
     font-weight: 600;
 }
 
-/* Grid de ingredientes */
-.ingredientes-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 20px;
+/* Remover estilos de grid de ingredientes, cards, etc. */
+.ingredientes-grid,
+.ingrediente-card,
+.ingrediente-header,
+.ingrediente-nome,
+.ingrediente-valor,
+.ingrediente-imagem,
+.sem-imagem,
+.ingrediente-actions {
+    display: none; /* Esconde todos os elementos relacionados ao layout de grid/card */
 }
 
-/* Card do ingrediente */
-.ingrediente-card {
-    background: #ffffff;
-    border: 2px solid #FF8C42;
-    border-radius: 15px;
-    padding: 20px;
-    transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
+/* Tabela de ingredientes (adaptado da tabela de administradores) */
+.table {
+    width: 100%;
+    border-collapse: separate; /* Muda para separate para permitir border-spacing */
+    border-spacing: 0 10px; /* Adiciona espaçamento entre as linhas */
+    margin-top: 20px;
+    background-color: transparent; /* Fundo transparente para a tabela, o fundo é do .ingredientes-section */
+    border-radius: 8px; /* Mantém o border-radius no wrapper se necessário */
+    overflow: hidden; /* Garante que o border-radius funcione */
+    box-shadow: none; /* Remove a sombra da tabela, a sombra é do .ingredientes-section */
 }
 
-.ingrediente-card:hover {
-    box-shadow: 0 8px 25px rgba(255, 140, 66, 0.2);
-    border-color: #FF6B1A;
+.table thead {
+    background-color: #FF8C42; /* Cor de fundo do cabeçalho */
+    border-radius: 8px 8px 0 0; /* Arredonda os cantos superiores */
+}
+
+.table th {
+    padding: 12px 15px;
+    text-align: left;
+    color: white;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: none; /* Remove a borda inferior dos th */
+}
+
+.table tbody tr {
+    background-color: #ffffff; /* Fundo branco para as linhas do corpo */
+    border-radius: 8px; /* Arredonda as linhas */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); /* Sombra para as linhas */
+    transition: all 0.2s ease;
+}
+
+.table tbody tr:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra maior no hover */
     transform: translateY(-2px);
 }
 
-/* Cabeçalho do card */
-.ingrediente-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 15px;
+
+.table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: none; /* Remove a borda inferior das td */
+    color: #333333; /* Cor do texto das células */
+    font-size: 15px;
 }
 
-/* Nome do ingrediente */
-.ingrediente-nome {
-    font-size: 18px;
-    font-weight: 700;
-    color: #333333;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    word-break: break-word;
+/* Estilo para a última célula de cada linha (Ações) */
+.table td:last-child {
+    white-space: nowrap; /* Impede que os botões quebrem a linha */
 }
 
-/* Valor do ingrediente */
-.ingrediente-valor {
-    font-size: 20px;
-    font-weight: 900;
-    color: #FF6B1A;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
-}
-
-/* Imagem do ingrediente */
-.ingrediente-imagem {
-    width: 100%;
-    max-height: 150px;
-    object-fit: cover;
-    border-radius: 8px;
-    margin-bottom: 15px;
-    border: 2px solid #f0f0f0;
-}
-
-.sem-imagem {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 150px;
-    background-color: #f8f9fa;
-    border: 2px dashed #ddd;
-    border-radius: 8px;
-    color: #666666;
-    font-size: 16px;
-    font-weight: 500;
-    margin-bottom: 15px;
-}
-
-.sem-imagem::before {
-    content: "📷";
-    font-size: 24px;
-    margin-right: 10px;
-}
-
-/* Ações do card */
-.ingrediente-actions {
-    display: flex;
-    gap: 10px;
-    justify-content: center;
-    border-top: 1px solid #f0f0f0;
-    padding-top: 15px;
-}
-
-.btn-action {
-    padding: 8px 16px;
-    border-radius: 8px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.3s ease;
-    text-decoration: none;
+.table .btn-action {
+    padding: 6px 12px; /* Ajusta o padding para os botões de ação na tabela */
+    border-radius: 5px; /* Deixa os botões com bordas mais quadradas */
     font-size: 12px;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    white-space: nowrap;
-    flex: 1;
-    min-width: 0;
+    margin-right: 8px; /* Espaço entre os botões */
+    text-decoration: none;
+    display: inline-flex; /* Para que o ícone e texto fiquem juntos se houver */
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
-.btn-edit {
-    background-color: #FF8C42;
+.table .btn-action:last-child {
+    margin-right: 0; /* Remove margem do último botão */
+}
+
+.table .btn-edit {
+    background-color: #FF8C42; /* Cor do botão Editar */
     color: white;
 }
 
-.btn-edit:hover {
+.table .btn-edit:hover {
     background-color: #FF6B1A;
-    transform: translateY(-2px);
-    color: white;
-    text-decoration: none;
+    transform: translateY(-1px);
 }
 
-.btn-delete {
-    background-color: #FF8C42;
+.table .btn-details {
+    background-color: #6c757d; /* Cor do botão Detalhes (cinza) */
     color: white;
 }
 
-.btn-delete:hover {
-    background-color: #FF6B1A;
-    transform: translateY(-2px);
+.table .btn-details:hover {
+    background-color: #5a6268;
+    transform: translateY(-1px);
+}
+
+.table .btn-delete {
+    background-color: #dc3545; /* Cor do botão Excluir (vermelho) */
     color: white;
-    text-decoration: none;
 }
 
-/* Estado vazio */
-.empty-state {
-    text-align: center;
-    padding: 80px 20px;
-    color: #666666;
+.table .btn-delete:hover {
+    background-color: #c82333;
+    transform: translateY(-1px);
 }
 
-.empty-icon {
-    font-size: 64px;
-    margin-bottom: 20px;
-}
-
-.empty-state h3 {
-    font-size: 24px;
-    color: #333333;
-    margin-bottom: 10px;
-}
-
-.empty-state p {
-    font-size: 16px;
-    margin-bottom: 30px;
-}
-
-/* Fallback para tabela (caso necessário) */
-.table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-    background-color: #ffffff;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.table th,
-.table td {
-    padding: 12px 15px;
-    text-align: left;
-    border-bottom: 1px solid #f0f0f0;
-}
-
-.table th {
-    background-color: #FF8C42;
-    color: white;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
-
-.table tr:hover {
-    background-color: #f8f9fa;
-}
-
-.table img {
-    border-radius: 4px;
-    border: 1px solid #ddd;
-}
-
-.table a {
-    color: #FF6B1A;
-    text-decoration: none;
-    font-weight: 500;
-}
-
-.table a:hover {
-    color: #E55A15;
-    text-decoration: underline;
-}
-
-/* Responsividade */
-@media (max-width: 768px) {
+/* Responsividade - Adaptação para a tabela */
+@media (max-width: 992px) { /* Ajuste para tablets */
     .content-area {
-        padding: 15px 20px;
+        margin-left: 0; /* Remove a margem da sidebar em telas menores */
+        padding: 20px;
+    }
+
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative; /* Sidebar se torna parte do fluxo do documento */
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        display: none; /* Ou você pode criar um menu hamburguer para ela */
     }
 
     .section-header {
         flex-direction: column;
+        align-items: flex-start;
         gap: 15px;
-        align-items: stretch;
-    }
-
-    .ingredientes-grid {
-        grid-template-columns: 1fr;
     }
 
     .header-content h1 {
         font-size: 24px;
     }
 
-    .ingrediente-header {
-        flex-direction: column;
-        gap: 10px;
+    .btn-primary {
+        width: 100%;
         text-align: center;
+        justify-content: center;
     }
 
-    .ingrediente-actions {
-        flex-wrap: wrap;
-        gap: 8px;
+    .table thead {
+        display: none; /* Esconde o cabeçalho da tabela em telas muito pequenas */
     }
 
-    .btn-action {
-        font-size: 11px;
-        padding: 6px 12px;
+    .table, .table tbody, .table tr, .table td {
+        display: block; /* Faz com que as células se comportem como blocos */
+        width: 100%;
+    }
+
+    .table tr {
+        margin-bottom: 15px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    }
+
+    .table td {
+        text-align: right;
+        padding-left: 50%;
+        position: relative;
+        border-bottom: 1px dashed #eee;
+    }
+
+    .table td:before {
+        content: attr(data-label); /* Usa o atributo data-label para mostrar o cabeçalho */
+        position: absolute;
+        left: 0;
+        width: 45%;
+        padding-left: 15px;
+        font-weight: 600;
+        text-align: left;
+        color: #666;
+    }
+
+    .table td:last-child {
+        border-bottom: none;
+        text-align: center;
+        padding-left: 15px; /* Ajusta o padding para os botões */
+    }
+}
+
+@media (max-width: 480px) {
+    .content-area {
+        padding: 15px;
+    }
+
+    .ingredientes-section {
+        padding: 20px;
+    }
+
+    .header-content h1 {
+        font-size: 20px;
+    }
+
+    .section-subtitle {
+        font-size: 14px;
+    }
+
+    .btn-primary {
+        font-size: 12px;
+        padding: 8px 15px;
+    }
+
+    .table td {
+        font-size: 14px;
+    }
+
+    .table .btn-action {
+        font-size: 10px;
+        padding: 5px 10px;
+        margin-right: 5px;
     }
 }
 
