@@ -313,7 +313,7 @@ function atualizarModalCarrinho() {
                 <button class="btn-menos" onclick="atualizarQuantidadeCarrinho(${index}, ${item.quantidade - 1})">−</button>
                 <span class="item-quantidade">${item.quantidade}x</span>
                 <button class="btn-mais" onclick="atualizarQuantidadeCarrinho(${index}, ${item.quantidade + 1})">+</button>
-                <button class="btn-remover" onclick="removerDoCarrinho(${index})">🗑️</button>
+                <button class="btn-remover" onclick="removerDoCarrinho(${index})">Excluir</button>
             </div>
         `;
         container.appendChild(itemDiv);
