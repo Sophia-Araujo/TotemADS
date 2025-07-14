@@ -3,7 +3,6 @@
     ViewBag.Title = "Itens do Pedido";
 }
 
-<!-- Botão de cupom -->
 <button id="btnCupom" class="btn-cupom">
     <span>
         <i class="fas fa-ticket"></i> Tem um cupom
@@ -13,9 +12,7 @@
     <h1>Lanches</h1>
 </div>
 
-<!-- Lista de lanches dinâmica -->
 <div id="lista-itens-pedido">
-    <!-- Os itens serão carregados dinamicamente aqui -->
     <div class="loading" id="loading-itens" style="text-align: center; padding: 20px;">
         <p>Carregando itens do pedido...</p>
     </div>
@@ -28,11 +25,9 @@
     </div>
 </div>
 
-<!-- Resumo dos pedidos -->
 <div class="resumo" id="resumo-pedido">
     <div class="total-lista" id="total-lista">
-        <!-- Será preenchido dinamicamente -->
-    </div>
+        </div>
 
     <div class="acoes">
         <button class="botao-cancelar" onclick="cancelarPedido()">Voltar</button>
@@ -40,7 +35,6 @@
     </div>
 </div>
 
-<!-- Modal de Cupom -->
 <div id="modalOverlay" class="modal-overlay">
     <div class="popup">
         <button class="close-btn" id="closeModal">X</button>

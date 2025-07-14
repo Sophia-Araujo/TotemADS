@@ -1,5 +1,4 @@
-/* CSS para telaItensPedidos extraído do arquivo original, adicione aqui estilos específicos se necessário. */
-/* Exemplo de estilos para notificação, cards, botões, etc. */
+/* Notificação */
 .notificacao {
     position: fixed;
     top: 20px;
@@ -9,72 +8,216 @@
     padding: 15px 20px;
     border-radius: 5px;
     z-index: 9999;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
     font-size: 16px;
     animation: fadeIn 0.3s;
 }
+
 .notificacao.success {
     background: #4CAF50;
 }
+
 .notificacao.info {
     background: #2196F3;
 }
+
 @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
 }
+
+/* Container do Item de Pedido */
 .VisualizaItensPedidos {
     margin-bottom: 20px;
     transition: all 0.3s;
 }
+
+/* Card Individual do Pedido */
 .card-pedido {
     border: 1px solid #ddd;
-    border-radius: 8px;
+    border-radius: 30px;
     background: #f9f9f9;
     padding: 15px;
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    flex-wrap: wrap;
+    width: 100%;
+    box-sizing: border-box;
 }
-.card-conteudo {
+
+/* Coluna Esquerda: Imagem, Nome e Descrição */
+.info-produto-esquerda {
     display: flex;
     flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+    flex: 1;
+    min-width: 180px;
+    max-width: 40%;
 }
-.info-lanche img {
-    width: 80px;
-    height: 80px;
+
+.info-produto-esquerda img {
+    width: 200px;
+    height: 200px;
     object-fit: cover;
     border-radius: 8px;
-    margin-right: 15px;
-}
-.nomePedido {
-    font-size: 20px;
-    margin: 0 0 5px 0;
-}
-.preco-detalhado {
-    font-size: 15px;
-    margin-bottom: 5px;
-}
-.precoIndividual, .precoAdicionais, .precoPedido {
+    margin-bottom: 10px;
     margin-right: 10px;
 }
-.btn-remover-item {
-    background: #e74c3c;
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    border-radius: 4px;
-    cursor: pointer;
-    margin-left: 10px;
+
+.info-produto-esquerda .nomePedido {
+    font-size: 25px;
+    margin: 0 0 10px 10px;
+    font-weight: 700;
+}
+
+.info-produto-esquerda .descricaoPedido {
+    color: #444;
+    max-width: 16rem;;
+    margin: 0 0 10px 10px;
+    font-size: 20px;
+    margin-bottom: 10px;
+    line-height: 1.4;
+}
+
+/* Lista de ingredientes/personalizações */
+.ingredientesPedidoLista {
+    margin: 10px 0 0 0;
+    padding-left: 20px;
+    list-style-type: disc;
+    color: #555;
+}
+
+.ingredientesPedidoLista li {
+    font-size: 13px;
+    margin: 2px 0;
+}
+
+/* Coluna Direita: Preços, Quantidade e Botão de Excluir */
+.info-preco-direita {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    text-align: right;
+    flex: 1;
+    min-width: 220px;
+}
+
+.precos-principais {
+    flex-direction: column;
+    margin-bottom: 200px;
+    margin-right: 30px;
+}
+
+.preco-unitario {
+    font-size: 16px;
+    color: #777;
+    margin-bottom: 5px;
+}
+
+.preco-total-item {
+    font-size: 25px;
+    font-weight: 700;
+    color: #2c3e50;
+}
+
+.precoAdicionais {
+    font-size: 13px;
+    color: #888;
+    margin-bottom: 15px;
+}
+
+/* Quantidade e Botão de Remover na mesma linha, alinhados à direita */
+.quantidade-e-remover {
     display: flex;
     align-items: center;
+    justify-content: flex-end;
+    width: 100%;
+    margin-top: auto;
 }
+
+.quantidade-item-carrinho {
+    font-size: 20px;
+    font-weight: 700;
+    margin-right: 25px;
+    background: linear-gradient(to right, #ece9e6, #dedcdc, #ece9e6);
+    color: #333;
+    border: 4px solid #b0b0b0;
+    border-radius: 35px;
+    padding: 10px 15px;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    text-decoration: none;
+}
+
+.btn-remover-item {
+    font-size: 20px;
+    font-weight: 700;
+    margin-right: 25px;
+    background: #e74c3c;
+    color: #fff;
+    border: 4px solid #e74c3c;
+    border-radius: 35px;
+    padding: 10px 15px;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    text-decoration: none;
+    transition: background 0.3s ease;
+}
+
+.btn-remover-item:hover {
+    background: #c0392b;
+    color: #fff;
+}
+
+.btn-remover-item i {
+    margin-right: 5px;
+}
+
 .btn-remover-item:hover {
     background: #c0392b;
 }
-.ingredientesPedidoLista {
-    margin: 0;
-    padding-left: 20px;
-}
-.ingredientesPedidoLista li {
-    color: #555;
-    font-size: 14px;
-    margin: 2px 0;
+
+/* Adaptações para telas menores */
+@media (max-width: 768px) {
+    .card-pedido {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .info-produto-esquerda,
+    .info-preco-direita {
+        max-width: 100%;
+        min-width: unset;
+        width: 100%;
+        text-align: center;
+        align-items: center;
+    }
+
+    .info-produto-esquerda img {
+        margin-bottom: 15px;
+    }
+
+    .info-produto-esquerda .nomePedido,
+    .info-produto-esquerda .descricaoPedido,
+    .ingredientesPedidoLista {
+        text-align: center;
+        width: 100%;
+        padding-left: 0;
+    }
+
+    .ingredientesPedidoLista li {
+        text-align: center;
+        list-style-position: inside;
+    }
+
+    .quantidade-e-remover {
+        justify-content: center;
+    }
 }
