@@ -27,6 +27,47 @@ namespace TotemPWA.Data
         {
             base.OnModelCreating(modelBuilder);
 
+            // Configuração da tabela Cupom
+            modelBuilder.Entity<Cupom>(entity =>
+            {
+                entity.HasKey(e => e.CupomId);
+                
+                entity.Property(e => e.Codigo)
+                    .IsRequired()
+                    .HasMaxLength(50);
+                
+                entity.Property(e => e.Desconto)
+                    .HasColumnType("decimal(5,2)")
+                    .IsRequired();
+                
+                entity.Property(e => e.Validade)
+                    .IsRequired();
+                
+                entity.Property(e => e.ProdutoId)
+                    .IsRequired(false);
+                
+                entity.Property(e => e.AdministradorId)
+                    .IsRequired();
+
+                // Índice único para código do cupom
+                entity.HasIndex(e => e.Codigo).IsUnique();
+            });
+
+            // Relacionamento Cupom -> Administrador
+            modelBuilder.Entity<Cupom>()
+                .HasOne(c => c.Administrador)
+                .WithMany()
+                .HasForeignKey(c => c.AdministradorId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            // Relacionamento Cupom -> Produto (opcional)
+            modelBuilder.Entity<Cupom>()
+                .HasOne(c => c.Produto)
+                .WithMany()
+                .HasForeignKey(c => c.ProdutoId)
+                .OnDelete(DeleteBehavior.SetNull)
+                .IsRequired(false);
+
             // Relacionamento 1:1 entre Pedido e Pagamento
             modelBuilder.Entity<Pedido>()
                 .HasOne(p => p.Pagamento)
@@ -68,20 +109,51 @@ namespace TotemPWA.Data
                 .WithMany(c => c.Subcategorias)
                 .HasForeignKey(c => c.CategoriaPaiId);
 
-            // Configuração para ItensCombo - ATUALIZADA
+            // Configuração para ItensCombo
             modelBuilder.Entity<ItensCombo>()
                 .HasOne(ic => ic.Produto)
                 .WithMany()
                 .HasForeignKey(ic => ic.ProdutoId)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            // CupomId agora é nullable e não obrigatório
-            modelBuilder.Entity<ItensCombo>()
-                .HasOne(ic => ic.Cupom)
-                .WithMany()
-                .HasForeignKey(ic => ic.CupomId)
-                .OnDelete(DeleteBehavior.SetNull)
-                .IsRequired(false); // Permite null
+            // Configuração da entidade Cupom
+            modelBuilder.Entity<Cupom>(entity =>
+            {
+                entity.HasKey(e => e.CupomId);
+
+                entity.Property(e => e.Codigo)
+                    .IsRequired()
+                    .HasMaxLength(50);
+
+                entity.HasIndex(e => e.Codigo)
+                    .IsUnique(); // Código único
+
+                entity.Property(e => e.Desconto)
+                    .IsRequired()
+                    .HasColumnType("decimal(5,2)");
+
+                entity.Property(e => e.Validade)
+                    .IsRequired();
+
+                entity.Property(e => e.ProdutoId)
+                    .IsRequired(false);
+
+                entity.Property(e => e.AdministradorId)
+                    .IsRequired();
+
+                // Relacionamento: Cupom -> Administrador (Obrigatório)
+                entity.HasOne(c => c.Administrador)
+                    .WithMany(a => a.Cupons) // Adicione isso no modelo se ainda não tiver
+                    .HasForeignKey(c => c.AdministradorId)
+                    .OnDelete(DeleteBehavior.Restrict);
+
+                // Relacionamento: Cupom -> Produto (Opcional)
+                entity.HasOne(c => c.Produto)
+                    .WithMany(p => p.Cupons) // Adicione no modelo se necessário
+                    .HasForeignKey(c => c.ProdutoId)
+                    .OnDelete(DeleteBehavior.SetNull)
+                    .IsRequired(false);
+            });
         }
     }
 }

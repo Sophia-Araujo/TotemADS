@@ -6,22 +6,22 @@ namespace TotemPWA.Models
     {
         [Key]
         public int ProdutoId { get; set; }
-        
-       
+
+
         public byte[]? Imagem { get; set; }
         [Required]
         public string Nome { get; set; }
         [Required(ErrorMessage = "A descrição é obrigatória")]
         [Display(Name = "Descrição")]
-        
-        
+
+
         public string Descricao { get; set; }
-        
+
         [Required(ErrorMessage = "O valor é obrigatório")]
         [Display(Name = "Valor")]
         [Range(0.01, double.MaxValue, ErrorMessage = "O valor deve ser maior que zero")]
         public float Valor { get; set; }
-        
+
         [Required(ErrorMessage = "Informe se é combo ou não")]
         [Display(Name = "É Combo?")]
         public int IsCombo { get; set; }
@@ -46,5 +46,9 @@ namespace TotemPWA.Models
 
         //Coleção de Itens Combo
         public List<ItensCombo>? ItensCombo { get; set; }
+
+        public virtual ICollection<Cupom>? Cupons { get; set; }
+
     }
+
 }

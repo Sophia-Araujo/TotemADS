@@ -22,7 +22,6 @@
                             <th>Código</th>
                             <th>Desconto</th>
                             <th>Validade</th>
-                            <th>Produto ID</th>
                             <th>Administrador</th>
                             <th>Ações</th>
                         </tr>
@@ -34,7 +33,6 @@
                                 <td><strong>@item.Codigo</strong></td>
                                 <td><span style="color: #FF6B1A; font-weight: 700;">@item.Desconto%</span></td>
                                 <td>@item.Validade.ToString("dd/MM/yyyy")</td>
-                                <td>@item.ProdutoId</td>
                                 <td>@(item.Administrador?.CPF ?? "N/A")</td>
                                 <td>
                                     <div class="actions-cell">
