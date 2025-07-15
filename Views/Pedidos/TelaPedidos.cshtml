@@ -70,15 +70,26 @@
                         }
                         else
                         {
-                            <img src="/image/produtos/default.png"
-                                 alt="@produto.Descricao" class="produto-img" />
+                            <img src="~/image/produtos/default.png"
+                                 alt="@produto.Descricao" class="produto-img" 
+                                 onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMCAwIDIwMCAyMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIyMDAiIGhlaWdodD0iMjAwIiBmaWxsPSIjRjNGNEY2Ii8+CjxwYXRoIGQ9Ik0xMDAgNzVMMTI1IDEwMEgxMTJWMTI1SDg4VjEwMEg3NUwxMDAgNzVaIiBmaWxsPSIjOUM5Qzk3Ii8+CjxwYXRoIGQ9Ik02MiAxMjVIMTM4VjE1MEg2MlYxMjVaIiBmaWxsPSIjOUM5Qzk3Ii8+CjwvU3ZnPgo='; this.onerror=null;" />
                         }
 
                         <h3>@produto.Nome</h3>
                         <p>R$ @produto.Valor.ToString("F2")</p>
                         <span class="produto-descricao">@produto.Descricao</span>
 
-                        <button class="add-to-cart" onclick="adicionarProduto(@produto.ProdutoId, '@produto.Nome.Replace("'", "\\'").Replace("\"", "&quot;")', '@produto.Descricao.Replace("'", "\\'").Replace("\"", "&quot;")', @produto.Valor, '@(produto.Imagem != null ? Convert.ToBase64String(produto.Imagem) : "")', @produto.IsCombo)">Adicionar</button>
+                        <!-- SOLUÇÃO ROBUSTA: Usando data attributes -->
+                        <button class="add-to-cart"
+                                data-produto-id="@produto.ProdutoId"
+                                data-produto-nome="@produto.Nome"
+                                data-produto-descricao="@produto.Descricao"
+                                data-produto-valor="@produto.Valor.ToString("F2", System.Globalization.CultureInfo.InvariantCulture)"
+                                data-produto-imagem="@(produto.Imagem != null ? Convert.ToBase64String(produto.Imagem) : "")"
+                                data-produto-combo="@produto.IsCombo"
+                                onclick="adicionarProdutoSeguro(this)">
+                            Adicionar
+                        </button>
                     </div>
                 }
             </div>
@@ -92,7 +103,8 @@
             <p class="descricao-burguer" id="modal-produto-descricao">Descrição do produto</p>
 
             <div class="popup-main">
-                <img id="modal-produto-imagem" src="/image/produtos/default.png" alt="Produto" class="popup-img" />
+                <img id="modal-produto-imagem" src="~/image/produtos/default.png" alt="Produto" class="popup-img" 
+                     onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMCAwIDIwMCAyMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIyMDAiIGhlaWdodD0iMjAwIiBmaWxsPSIjRjNGNEY2Ii8+CjxwYXRoIGQ9Ik0xMDAgNzVMMTI1IDEwMEgxMTJWMTI1SDg4VjEwMEg3NUwxMDAgNzVaIiBmaWxsPSIjOUM5Qzk3Ii8+CjxwYXRoIGQ9Ik02MiAxMjVIMTM4VjE1MEg2MlYxMjVaIiBmaWxsPSIjOUM5Qzk3Ii8+CjwvU3ZnPgo='; this.onerror=null;" />
 
                 <div class="ingredientes" id="ingredientes-container">
                     <div class="ingrediente quantidade-produto">
@@ -148,4 +160,49 @@
 @section Scripts {
     <link rel="stylesheet" href="~/css/TelaPedidos.css" asp-append-version="true" />
     <script src="~/js/TelaPedidos.js" asp-append-version="true"></script>
+    
+    <script>
+        // Função segura para adicionar produto (evita problemas de localização)
+        function adicionarProdutoSeguro(button) {
+            const produtoId = parseInt(button.getAttribute('data-produto-id'));
+            const nome = button.getAttribute('data-produto-nome');
+            const descricao = button.getAttribute('data-produto-descricao');
+            const valorStr = button.getAttribute('data-produto-valor');
+            const valor = parseFloat(valorStr); // Valor já está em formato americano (ponto como decimal)
+            const imagem = button.getAttribute('data-produto-imagem');
+            const isCombo = button.getAttribute('data-produto-combo') === 'True';
+            
+            console.log('Dados do produto:', { produtoId, nome, descricao, valor, imagem, isCombo });
+            
+            if (isNaN(valor)) {
+                console.error('Erro: Valor do produto inválido', valorStr);
+                mostrarNotificacao('Erro ao adicionar produto: valor inválido', 'error');
+                return;
+            }
+            
+            // Chama a função original com os dados seguros
+            adicionarProduto(produtoId, nome, descricao, valor, imagem, isCombo);
+        }
+        
+        // Função para mostrar notificação (caso não exista no seu JS)
+        function mostrarNotificacao(mensagem, tipo = 'info') {
+            const notificacao = document.createElement('div');
+            notificacao.className = `notificacao ${tipo}`;
+            notificacao.textContent = mensagem;
+            notificacao.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                padding: 10px 20px;
+                border-radius: 5px;
+                color: white;
+                z-index: 10000;
+                ${tipo === 'error' ? 'background-color: #e74c3c;' : 'background-color: #2ecc71;'}
+            `;
+            document.body.appendChild(notificacao);
+            setTimeout(() => {
+                notificacao.remove();
+            }, 3000);
+        }
+    </script>
 }
