@@ -13,7 +13,7 @@
             </div>
             <a asp-action="Create" class="btn btn-primary">
                 <span class="icon-plus"></span>
-                + Novo Ingrediente
+                + Adicionar Ingrediente
             </a>
         </div>
 
@@ -26,51 +26,41 @@
 
         @if (Model != null && Model.Any())
         {
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>Imagem</th>
-                        <th>Nome</th>
-                        <th>Preço</th>
-                        <th>Ações</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var item in Model)
-                    {
-                        <tr>
-                            <td data-label="Imagem">
-                                @if (item.Imagem != null)
-                                {
-                                    <img src="@Url.Action("GetImagem", "Ingrediente", new { id = item.IgredienteId })"
-                                         alt="@item.Nome"
-                                         class="ingrediente-imagem" />
-                                }
-                                else
-                                {
-                                    <div class="sem-imagem">
-                                        Sem imagem
-                                    </div>
-                                }
-                            </td>
-                            <td data-label="Nome">
-                                <h3 class="ingrediente-nome">@Html.DisplayFor(modelItem => item.Nome)</h3>
-                            </td>
-                            <td data-label="Preço">
-                                <span class="ingrediente-valor">R$ @Html.DisplayFor(modelItem => item.Valor)</span>
-                            </td>
-                            <td data-label="Ações">
-                                <a asp-action="Edit" asp-route-id="@item.IgredienteId" class="btn-action btn-edit btn-sm">
-                                    Editar
-                                </a>
-                                <a asp-action="Delete" asp-route-id="@item.IgredienteId" class="btn-action btn-delete btn-sm">
-                                    Excluir
-                                </a>
-                            </td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
+            <div class="ingredientes-grid">
+                @foreach (var item in Model)
+                {
+                    <div class="ingrediente-card">
+                        <div class="ingrediente-header">
+                            <h3 class="ingrediente-nome">@Html.DisplayFor(modelItem => item.Nome)</h3>
+                            <span class="ingrediente-valor">R$ @Html.DisplayFor(modelItem => item.Valor)</span>
+                        </div>
+
+                        <div class="ingrediente-body">
+                            @if (item.Imagem != null)
+                            {
+                                <img src="@Url.Action("GetImagem", "Ingrediente", new { id = item.IgredienteId })" 
+                                     alt="@item.Nome" 
+                                     class="ingrediente-imagem" />
+                            }
+                            else
+                            {
+                                <div class="sem-imagem">
+                                    Sem imagem
+                                </div>
+                            }
+                        </div>
+
+                        <div class="ingrediente-actions">
+                            <a asp-action="Edit" asp-route-id="@item.IgredienteId" class="btn-action btn-edit">
+                                Editar
+                            </a>
+                            <a asp-action="Delete" asp-route-id="@item.IgredienteId" class="btn-action btn-delete">
+                                Excluir
+                            </a>
+                        </div>
+                    </div>
+                }
+            </div>
         }
         else
         {

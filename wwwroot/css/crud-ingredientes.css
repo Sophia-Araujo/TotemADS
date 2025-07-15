@@ -10,81 +10,61 @@
 .content-area {
     padding: 20px 40px;
     background-color: #f8f9fa;
-    min-height: calc(100vh - 60px);
-    /* Ajuste para considerar o layout do menu */
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
+    min-height: 100vh;
 }
 
 .ingredientes-section {
-    /* Renomeado de admin-section para ingrediente-section */
     background-color: #ffffff;
     border-radius: 12px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
     padding: 30px;
-    max-width: 1200px;
-    width: 100%;
-    /* Garante que ocupe a largura total disponível */
-    margin: 0 auto;
-    animation: fadeInUp 0.6s ease-out;
-    /* Adiciona a animação */
 }
 
 .section-header {
     display: flex;
-    flex-wrap: wrap;
-    align-items: center;
     justify-content: space-between;
+    align-items: flex-start;
     margin-bottom: 30px;
-    border-bottom: 2px solid #f0f0f0;
     padding-bottom: 20px;
+    border-bottom: 2px solid #f0f0f0;
 }
 
-.header-content {
-    display: flex;
-    align-items: center;
-    flex-grow: 1;
-}
-
-.section-header h1 {
+.header-content h1 {
     color: #333333;
     font-size: 32px;
     font-weight: 700;
+    margin: 0 0 5px 0;
     text-transform: uppercase;
     letter-spacing: 1px;
-    margin-bottom: 0;
 }
 
 .section-subtitle {
     color: #666666;
     font-size: 16px;
-    margin-left: 15px;
-    margin-bottom: 0;
+    margin: 0;
 }
 
 /* Botões */
 .btn {
-    padding: 8px 16px;
-    border-radius: 20px;
-    font-size: 12px;
+    padding: 12px 24px;
+    border-radius: 25px;
+    font-size: 16px;
     font-weight: 600;
     cursor: pointer;
-    text-decoration: none;
-    color: white;
-    border: none;
-    text-align: center;
     transition: all 0.3s ease;
-    display: inline-block;
-    min-width: 70px;
+    border: none;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
 .btn-primary {
     background: linear-gradient(135deg, #FF8C42, #FF6B1A);
     color: white;
     box-shadow: 0 4px 15px rgba(255, 140, 66, 0.3);
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
 }
 
 .btn-primary:hover {
@@ -113,6 +93,136 @@
     font-weight: 600;
 }
 
+/* Grid de ingredientes */
+.ingredientes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+/* Card do ingrediente */
+.ingrediente-card {
+    background: #ffffff;
+    border: 2px solid #FF8C42;
+    border-radius: 15px;
+    padding: 20px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.ingrediente-card:hover {
+    box-shadow: 0 8px 25px rgba(255, 140, 66, 0.2);
+    border-color: #FF6B1A;
+    transform: translateY(-2px);
+}
+
+/* Cabeçalho do card */
+.ingrediente-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+/* Nome do ingrediente */
+.ingrediente-nome {
+    font-size: 18px;
+    font-weight: 700;
+    color: #333333;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    word-break: break-word;
+}
+
+/* Valor do ingrediente */
+.ingrediente-valor {
+    font-size: 20px;
+    font-weight: 900;
+    color: #FF6B1A;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* Imagem do ingrediente */
+.ingrediente-imagem {
+    width: 100%;
+    max-height: 150px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    border: 2px solid #f0f0f0;
+}
+
+.sem-imagem {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 150px;
+    background-color: #f8f9fa;
+    border: 2px dashed #ddd;
+    border-radius: 8px;
+    color: #666666;
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 15px;
+}
+
+.sem-imagem::before {
+    content: "📷";
+    font-size: 24px;
+    margin-right: 10px;
+}
+
+/* Ações do card */
+.ingrediente-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    border-top: 1px solid #f0f0f0;
+    padding-top: 15px;
+}
+
+.btn-action {
+    padding: 8px 16px;
+    border-radius: 8px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+    flex: 1;
+    min-width: 0;
+}
+
+.btn-edit {
+    background-color: #FF8C42;
+    color: white;
+}
+
+.btn-edit:hover {
+    background-color: #FF6B1A;
+    transform: translateY(-2px);
+    color: white;
+    text-decoration: none;
+}
+
+.btn-delete {
+    background-color: #FF8C42;
+    color: white;
+}
+
+.btn-delete:hover {
+    background-color: #FF6B1A;
+    transform: translateY(-2px);
+    color: white;
+    text-decoration: none;
+}
+
 /* Estado vazio */
 .empty-state {
     text-align: center;
@@ -136,294 +246,109 @@
     margin-bottom: 30px;
 }
 
-/* Tabela de Ingredientes - Estilo Administradores */
+/* Fallback para tabela (caso necessário) */
 .table {
-    /* A classe já é 'table' no CSHTML */
     width: 100%;
     border-collapse: collapse;
-    /* Usar collapse para o estilo de administradores */
-    font-size: 15px;
-    min-width: 700px;
-    /* Mantém a largura mínima para tabelas maiores */
+    margin-top: 20px;
+    background-color: #ffffff;
     border-radius: 8px;
     overflow: hidden;
-    /* Para garantir que o border-radius funcione */
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    margin-top: 20px;
-    /* Adiciona um espaço superior */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.table thead {
-    background: linear-gradient(135deg, #FF8C42, #FF6B1A);
-    color: white;
-    text-transform: uppercase;
+.table th,
+.table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #f0f0f0;
 }
 
 .table th {
-    padding: 15px;
+    background-color: #FF8C42;
+    color: white;
     font-weight: 600;
-    text-align: left;
-    border: none;
-    /* Remove bordas internas no cabeçalho */
-    font-size: 14px;
+    text-transform: uppercase;
     letter-spacing: 0.5px;
 }
 
-/* Arredonda os cantos do cabeçalho */
-.table thead th:first-child {
-    border-top-left-radius: 8px;
+.table tr:hover {
+    background-color: #f8f9fa;
 }
 
-.table thead td:second-child {
-    font-weight: 600;
-}
-
-.table thead th:last-child {
-    border-top-right-radius: 8px;
-}
-
-.table td {
-    padding: 12px 15px;
-    border-bottom: 1px solid #eee;
-    text-align: left;
-    vertical-align: middle;
-    color: #555;
-    font-weight: 400;
-}
-
-.table tbody tr:nth-child(even) {
-    background-color: #f9f9f9;
-    /* Cor de fundo para linhas pares */
-}
-
-.table tbody tr {
-    background-color: #ffffff;
-    /* Cor de fundo padrão para linhas ímpares */
-    transition: all 0.3s ease;
-    animation: fadeInUp 0.4s ease-out;
-    /* Animação para as linhas */
-}
-
-/* Remove a borda inferior da última linha */
-.table tbody tr:last-child td {
-    border-bottom: none;
-}
-
-/* Estilos para a imagem na tabela */
-.table .ingrediente-imagem {
-    width: 30px;
-    height: 30px;
-    object-fit: cover;
-    border-radius: 8px;
+.table img {
+    border-radius: 4px;
     border: 1px solid #ddd;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
 }
 
-.table .sem-imagem {
-    width: 60px;
-    height: 60px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #f0f0f0;
-    color: #999;
-    font-size: 12px;
-    text-align: center;
-    border-radius: 8px;
-    border: 1px dashed #ccc;
-}
-
-/* Estilos para nome e preço na tabela */
-.table .ingrediente-nome {
-    font-size: 16px;
-    /* Ajustado para um tamanho mais comum em tabelas */
-    font-weight: 600;
-    color: #333333;
-    margin: 0;
-}
-
-.table .ingrediente-valor {
-    font-size: 16px;
-    /* Ajustado para um tamanho mais comum em tabelas */
-    font-weight: 400;
-    white-space: nowrap;
-}
-
-/* Estilos para os botões de ação na tabela */
-.actions-cell {
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
-    align-items: center;
-}
-
-.btn-action {
-    /* Mantém a classe base para os botões de ação */
-    padding: 8px 15px;
-    border-radius: 20px;
-    font-size: 14px;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    border: none;
+.table a {
+    color: #FF6B1A;
     text-decoration: none;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 5px;
-    min-width: 80px;
+    font-weight: 500;
 }
 
-.btn-sm {
-    padding: 6px 12px;
-    font-size: 12px;
-    min-width: 60px;
-}
-
-/* Cores dos botões de ação inspiradas nos administradores */
-.btn-edit {
-    background: linear-gradient(135deg, #FF8C42, #FF6B1A);
-    color: white;
-    box-shadow: 0 2px 8px rgba(76, 175, 80, 0.2);
-}
-
-.btn-edit:hover {
-    background: linear-gradient(135deg, #FF6B1A, #E55A15);
-    transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
-}
-
-.btn-info {
-    background: linear-gradient(135deg, #6c757d, #495057);
-    color: white;
-    box-shadow: 0 2px 8px rgba(76, 175, 80, 0.2);
-}
-
-.btn-info:hover {
-    background: linear-gradient(135deg, #495057, #343a40);
-    transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
-}
-
-.btn-delete {
-    background: linear-gradient(135deg, #dc3545, #c82333);
-    color: white;
-    box-shadow: 0 2px 8px rgba(220, 53, 69, 0.2);
-}
-
-.btn-delete:hover {
-    background: linear-gradient(135deg, #c82333, #bd2130);
-    transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(220, 53, 69, 0.3);
+.table a:hover {
+    color: #E55A15;
+    text-decoration: underline;
 }
 
 /* Responsividade */
-@media (max-width: 1280px) {
+@media (max-width: 768px) {
     .content-area {
-        padding: 20px;
-    }
-
-    .ingredientes-section {
-        padding: 25px;
-        max-width: 100%;
-    }
-
-    .table {
-        min-width: 600px;
-    }
-}
-
-@media (max-width: 800px) {
-    .content-area {
-        padding: 15px;
-    }
-
-    .ingredientes-section {
-        padding: 20px;
+        padding: 15px 20px;
     }
 
     .section-header {
         flex-direction: column;
-        align-items: flex-start;
         gap: 15px;
+        align-items: stretch;
     }
 
-    .header-content {
-        flex-direction: column;
-        align-items: flex-start;
+    .ingredientes-grid {
+        grid-template-columns: 1fr;
     }
 
-    .section-header h1 {
+    .header-content h1 {
         font-size: 24px;
     }
 
-    .section-subtitle {
-        margin-left: 0;
-        margin-top: 5px;
-    }
-
-    .table {
-        min-width: 0;
-        /* Permite que a tabela encolha */
-        font-size: 13px;
-    }
-
-    .table th,
-    .table td {
-        padding: 8px 6px;
-    }
-
-    .actions-cell {
+    .ingrediente-header {
         flex-direction: column;
-        gap: 4px;
-        min-width: 80px;
+        gap: 10px;
+        text-align: center;
+    }
+
+    .ingrediente-actions {
+        flex-wrap: wrap;
+        gap: 8px;
     }
 
     .btn-action {
-        width: 100%;
-        min-width: auto;
         font-size: 11px;
-        padding: 6px 10px;
+        padding: 6px 12px;
     }
 }
 
 @media (max-width: 480px) {
-    .content-area {
-        padding: 10px;
-    }
-
-    .ingredientes-section {
+    .ingrediente-card {
         padding: 15px;
     }
 
-    .section-header h1 {
-        font-size: 20px;
+    .ingrediente-nome {
+        font-size: 16px;
     }
 
-    .table {
-        font-size: 12px;
+    .ingrediente-valor {
+        font-size: 18px;
     }
 
-    .table th,
-    .table td {
-        padding: 6px 4px;
+    .ingrediente-imagem,
+    .sem-imagem {
+        max-height: 120px;
     }
 
     .btn-action {
         font-size: 10px;
-        padding: 5px 8px;
-    }
-}
-
-/* Animações */
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
+        padding: 5px 10px;
     }
 }
