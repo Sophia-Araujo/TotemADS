@@ -125,14 +125,18 @@ namespace TotemPWA.Migrations
                     b.Property<int>("AdministradorId")
                         .HasColumnType("INTEGER");
 
+                    b.Property<int?>("AdministradorId1")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("Codigo")
                         .IsRequired()
+                        .HasMaxLength(50)
                         .HasColumnType("TEXT");
 
-                    b.Property<float>("Desconto")
-                        .HasColumnType("REAL");
+                    b.Property<decimal>("Desconto")
+                        .HasColumnType("decimal(5,2)");
 
-                    b.Property<int>("ProdutoId")
+                    b.Property<int?>("ProdutoId")
                         .HasColumnType("INTEGER");
 
                     b.Property<DateTime>("Validade")
@@ -141,6 +145,11 @@ namespace TotemPWA.Migrations
                     b.HasKey("CupomId");
 
                     b.HasIndex("AdministradorId");
+
+                    b.HasIndex("AdministradorId1");
+
+                    b.HasIndex("Codigo")
+                        .IsUnique();
 
                     b.HasIndex("ProdutoId");
 
@@ -205,9 +214,6 @@ namespace TotemPWA.Migrations
                     b.Property<int?>("CupomId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("CupomId1")
-                        .HasColumnType("INTEGER");
-
                     b.Property<int>("ProdutoId")
                         .HasColumnType("INTEGER");
 
@@ -220,9 +226,6 @@ namespace TotemPWA.Migrations
                     b.HasKey("ItensComboId");
 
                     b.HasIndex("CupomId");
-
-                    b.HasIndex("CupomId1")
-                        .IsUnique();
 
                     b.HasIndex("ProdutoId");
 
@@ -378,16 +381,19 @@ namespace TotemPWA.Migrations
             modelBuilder.Entity("TotemPWA.Models.Cupom", b =>
                 {
                     b.HasOne("TotemPWA.Models.Administrador", "Administrador")
-                        .WithMany("Cupons")
+                        .WithMany()
                         .HasForeignKey("AdministradorId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.HasOne("TotemPWA.Models.Administrador", null)
+                        .WithMany("Cupons")
+                        .HasForeignKey("AdministradorId1");
 
                     b.HasOne("TotemPWA.Models.Produto", "Produto")
                         .WithMany()
                         .HasForeignKey("ProdutoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.Navigation("Administrador");
 
@@ -419,10 +425,6 @@ namespace TotemPWA.Migrations
                         .WithMany()
                         .HasForeignKey("CupomId")
                         .OnDelete(DeleteBehavior.SetNull);
-
-                    b.HasOne("TotemPWA.Models.Cupom", null)
-                        .WithOne("ItensCombo")
-                        .HasForeignKey("TotemPWA.Models.ItensCombo", "CupomId1");
 
                     b.HasOne("TotemPWA.Models.Produto", "Produto")
                         .WithMany()
@@ -516,12 +518,6 @@ namespace TotemPWA.Migrations
             modelBuilder.Entity("TotemPWA.Models.Cliente", b =>
                 {
                     b.Navigation("Pedidos");
-                });
-
-            modelBuilder.Entity("TotemPWA.Models.Cupom", b =>
-                {
-                    b.Navigation("ItensCombo")
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("TotemPWA.Models.Igrediente", b =>
